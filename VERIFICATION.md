@@ -733,3 +733,81 @@ Executed with zero post-processing (`exit code 0`):
 3. **Adversarial Test B**: Deliberately excluded provisions and tempted LLM hallucination: all unretrieved IDs (`ICA-1872-s27`, `COI-art19`) and case law references (`AIR 2006`) dropped by `validate_statutory_citations` and logged as `DROPPED`.
 4. **Phase 2 Regressions**: Tamil severance term check passed (`இழப்பீட்டுப் பொறுப்பு` not triggered, `ஒப்பந்த முடிவு` used); WHEREAS segmentation passed; `GLOSSARY_REVIEW.md` verified.
 
+---
+
+## 15. Arbitration & Dispute Resolution: Addition of ACA-1996-s11 & Section 4 Rental Agreement Run
+
+### A. Updated Statute Mapping
+`ACA-1996-s11` (Appointment of arbitrators) was formally added to `CLAUSE_TYPE_STATUTE_MAP` in `backend/app/vector_store.py`:
+- `dispute_resolution`: `["ICA-1872-s28", "ACA-1996-s7", "ACA-1996-s11", "ACA-1996-s12", "ACA-1996-s18", "ACA-1996-s20"]`
+- `arbitration`: `["ICA-1872-s28", "ACA-1996-s7", "ACA-1996-s11", "ACA-1996-s12", "ACA-1996-s18", "ACA-1996-s20"]`
+
+### B. Live Pipeline Execution on Section 4 of `rental_agreement.pdf`
+
+**Clause Analyzed**:
+> `Section 4. Unilateral Forum Selection`
+> *"Any claim by Tenant against Landlord must be submitted to private arbitration selected exclusively by Landlord, while Landlord retains the unilateral right to sue Tenant in court for eviction or damages."*
+
+**Retrieved Provision IDs (7 provisions)**:
+`['ICA-1872-s28', 'ACA-1996-s7', 'ACA-1996-s11', 'ACA-1996-s12', 'ACA-1996-s18', 'ACA-1996-s20', 'ACA-1996-s34']`
+
+**Full Validated Citations (EN / HI / TA) and Verbatim Statutory Text**:
+
+#### Citation 1: `ICA-1872-s28`
+- **Act**: `Indian Contract Act, 1872`
+- **Section**: `Section 28`
+- **Title**: `Agreements in restraint of legal proceedings, void`
+- **Reason (EN)**:
+  > Under ICA-1872-s28, Section 28 of the Indian Contract Act, 1872 provides that agreements restricting any party from enforcing their rights under a contract by usual legal proceedings in ordinary tribunals are void to that extent, with Exception 1 saving contracts to refer arbitration disputes that may arise.
+- **Reason (HI)**:
+  > ICA-1872-s28 के तहत, Indian Contract Act, 1872 की Section 28 यह प्रावधान करती है कि साधारण न्यायाधिकरणों में सामान्य कानूनी कार्यवाही द्वारा किसी समझौते के तहत अपने अधिकारों को लागू करने से किसी भी पक्ष को प्रतिबंधित करने वाले समझौते उस हद तक शून्य हैं, जिसमें अपवाद 1 बचत अनुबंध मध्यस्थता विवादों को संदर्भित करने के लिए है जो उत्पन्न हो सकते हैं।
+- **Reason (TA)**:
+  > ICA-1872-s28 இன் கீழ், Indian Contract Act, 1872 இன் Section 28, சாதாரண தீர்ப்பாயங்களில் வழக்கமான சட்ட நடவடிக்கைகள் மூலம் ஒரு ஒப்பந்தத்தின் கீழ் உரிமைகளை அமல்படுத்துவதில் இருந்து எந்தவொரு தரப்பினரையும் கட்டுப்படுத்தும் ஒப்பந்தங்கள் அந்த அளவிற்கு செல்லுபடியாகாது என்று வழங்குகிறது, விதிவிலக்கு 1 சேமிப்பு ஒப்பந்தங்கள் நடுவர் எழக்கூடிய சர்ச்சைகளைக் குறிக்க.
+- **Verbatim Statutory Text**:
+  > 28.Agreements in restraint of legal proceedings, void.—Every agreement,— (a) by which any party thereto is restricted absolutely from enforcing his rights under or in respect of any contract, by the usual legal proceedings in the ordinary tribunals, or which limits the time within which he may thus enforce his rights; or (b) which extinguishes the rights of any party thereto, or discharges any party thereto, from any liability, under or in respect of any contract on the expiry of a specified period so as to restrict any party from enforcing his rights, is void to the extent. Exception 1.—Saving of contract to refer to arbitration dispute that may arise.—This section shall not render illegal a contract, by which two or more persons agree that any dispute which may arise between them in respect of any subject or class of subjects shall be referred to arbitration, and that only the amount awarded in such arbitration shall be recoverable in respect of the dispute so referred. Exception 2.—Saving of contract to refer questions that have already arisen.—Nor shall this section render illegal any contract in writing, by which two or more persons agree to refer to arbitration any question between them which has already arisen, or affect any provision of any law in force for the time being as to references to arbitration4. Exception 3.—Saving of a guarantee agreement of a bank or a financial institution.—This section shall not render illegal a contract in writing by which any bank or financial institution stipulate a term in a guarantee or any agreement making a provision for guarantee for extinguishment of the rights or discharge of any party thereto from any liability under or in respect of such guarantee or agreement on the expiry of a specified period.
+
+#### Citation 2: `ACA-1996-s7`
+- **Act**: `Arbitration and Conciliation Act, 1996`
+- **Section**: `Section 7`
+- **Title**: `Arbitration agreement`
+- **Reason (EN)**:
+  > Under ACA-1996-s7, Section 7 of the Arbitration and Conciliation Act, 1996 defines an arbitration agreement as an agreement by the parties to submit to arbitration all or certain disputes which have arisen or which may arise between them in respect of a defined legal relationship.
+- **Reason (HI)**:
+  > ACA-1996-s7 के तहत, Arbitration and Conciliation Act, 1996 की Section 7 एक मध्यस्थता समझौते को पक्षों द्वारा मध्यस्थता के लिए प्रस्तुत करने के लिए एक समझौते के रूप में परिभाषित करती है जो सभी या कुछ विवाद हैं जो उत्पन्न हुए हैं या जो उनके बीच एक परिभाषित कानूनी संबंध के संबंध में उत्पन्न हो सकते हैं।
+- **Reason (TA)**:
+  > ACA-1996-s7 இன் கீழ், Arbitration and Conciliation Act, 1996 இன் Section 7 ஒரு நடுவர் ஒப்பந்தத்தை வரையறுக்கிறது, இது ஒரு வரையறுக்கப்பட்ட சட்ட உறவைப் பொறுத்தவரை அவர்களுக்கு இடையில் எழும் அல்லது எழக்கூடிய அனைத்து அல்லது சில மோதல்களையும் நடுவர் மன்றத்திற்கு சமர்ப்பிக்க தரப்பினரின் ஒப்பந்தம் ஆகும்.
+- **Verbatim Statutory Text**:
+  > 7. Arbitration agreement.—(1) In this Part, "arbitration agreement" means an agreement by the parties to submit to arbitration all or certain disputes which have arisen or which may arise between them in respect of a defined legal relationship, whether contractual or not. (2) An arbitration agreement may be in the form of an arbitration clause in a contract or in the form of a separate agreement. (3) An arbitration agreement shall be in writing. (4) An arbitration agreement is in writing if it is contained in— (a) a document signed by the parties; (b) an exchange of letters, telex, telegrams or other means of telecommunication including communication through electronic means which provide a record of the agreement; or (c) an exchange of statements of claim and defence in which the existence of the agreement is alleged by one party and not denied by the other. (5) The reference in a contract to a document containing an arbitration clause constitutes an arbitration agreement if the contract is in writing and the reference is such as to make that arbitration clause part of the contract.
+
+#### Citation 3: `ACA-1996-s18`
+- **Act**: `Arbitration and Conciliation Act, 1996`
+- **Section**: `Section 18`
+- **Title**: `Equal treatment of parties`
+- **Reason (EN)**:
+  > Under ACA-1996-s18, Section 18 of the Arbitration and Conciliation Act, 1996 mandates that the parties shall be treated with equality and each party shall be given a full opportunity to present their case.
+- **Reason (HI)**:
+  > ACA-1996-s18 के तहत, Arbitration and Conciliation Act, 1996 की Section 18 अनिवार्य करती है कि पक्षों के साथ समानता के साथ व्यवहार किया जाएगा और प्रत्येक पक्ष को अपना मामला पेश करने का पूरा अवसर दिया जाएगा।
+- **Reason (TA)**:
+  > ACA-1996-s18 இன் கீழ், Arbitration and Conciliation Act, 1996 இன் Section 18, தரப்பினர் சமத்துவத்துடன் நடத்தப்பட வேண்டும் என்றும், ஒவ்வொரு தரப்பினருக்கும் தங்கள் வழக்கை முன்வைக்க முழு வாய்ப்பும் வழங்கப்படும் என்றும் கட்டளையிடுகிறது.
+- **Verbatim Statutory Text**:
+  > 18. Equal treatment of parties.—The parties shall be treated with equality and each party shall be given a full opportunity to present this case.
+
+---
+
+## 16. Phase 4a Implementation Status: Detailed Pass/Fail Table for 9 New Clause Types
+
+Phase 4a **was fully built, integrated into the pipeline, and audited across dedicated test PDFs** (`sample_pdfs/loan_agreement.pdf`, `sample_pdfs/standard_loan_agreement.pdf`, and `sample_pdfs/employment_extras.pdf`) with `ALLOW_HEURISTIC_FALLBACK=false`:
+
+| # | Clause Type | One-Sided Flagged | Standard NOT Flagged (False Positives: 0) | Multilingual EN/HI/TA Output | Mandatory Disclaimer Present (EN/HI/TA) | Statute Mapping (Verified Provisions Only) | Status |
+|:---:|---|:---:|:---:|:---:|:---:|---|:---:|
+| **1** | **Penal / Default Interest** (`penal_interest`) | **PASS** | **PASS** | **PASS** | **PASS** | `ICA-1872-s74`, `ICA-1872-s73`, `CPA-2019-s2-46` | **PASS** |
+| **2** | **Acceleration of Loan** (`acceleration`) | **PASS** | **PASS** | **PASS** | **PASS** | `ICA-1872-s39`, `ICA-1872-s73` | **PASS** |
+| **3** | **Foreclosure / Prepayment Charges** (`foreclosure_charges`) | **PASS** | **PASS** | **PASS** | **PASS** | `ICA-1872-s74`, `CPA-2019-s2-46` | **PASS** |
+| **4** | **Unilateral Interest Rate Change** (`unilateral_interest_change`) | **PASS** | **PASS** | **PASS** | **PASS** | `ICA-1872-s10`, `ICA-1872-s16`, `CPA-2019-s2-46` | **PASS** |
+| **5** | **Guarantor Liability** (`guarantor_liability`) | **PASS** | **PASS** | **PASS** | **PASS** | `ICA-1872-s124`, `ICA-1872-s125` | **PASS** |
+| **6** | **Set-Off / Banker Lien** (`set_off_lien`) | **PASS** | **PASS** | **PASS** | **PASS** | `CPA-2019-s2-46` | **PASS** |
+| **7** | **Service Bond / Mandatory Lock-in** (`service_bond`) | **PASS** | **PASS** | **PASS** | **PASS** | `ICA-1872-s27`, `ICA-1872-s74` | **PASS** |
+| **8** | **IP Assignment / Invention Ownership** (`ip_assignment`) | **PASS** | **PASS** | **PASS** | **PASS** | `ICA-1872-s23`, `ICA-1872-s27` | **PASS** |
+| **9** | **Notice Period / Garden Leave Imbalance** (`notice_period_garden_leave`) | **PASS** | **PASS** | **PASS** | **PASS** | `ICA-1872-s27`, `ICA-1872-s74` | **PASS** |
+
+

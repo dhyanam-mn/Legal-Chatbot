@@ -86,3 +86,12 @@ The following terms have been added for the new loan agreement and employment ex
 | **invention ownership** | `आविष्कार स्वामित्व` | `கண்டுபிடிப்பு உரிமை` | *needs native review* |
 | **garden leave** | `गार्डन लीव` | `கார்டன் லீவ் (கட்டாய விடுப்பு)` | *needs native review* |
 
+---
+
+## 6. Open Items for Native-Speaker Validation
+
+- **Tamil term for "severance pay" (`பிரிப்பு ஊதியம்` / `பிரிவினை ஊதியம்`)**:
+  - The automated regression test (`test_phase3_citations_adversarial.py`) confirmed that the contractual termination term (`ஒப்பந்த முடிவு`) is correctly applied and that the earlier bug where "severance pay" falsely triggered indemnity (`இழப்பீட்டுப் பொறுப்பு`) is fully eliminated.
+  - However, the specific colloquial vs statutory phrasing for "severance pay" (`பிரிப்பு ஊதியம்` vs `பிரிவினை ஊதியம்` vs `பணிநீக்க இழப்பீட்டுத் தொகை`) remains open for final native-speaker sign-off.
+
+

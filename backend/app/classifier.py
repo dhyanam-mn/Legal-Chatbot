@@ -357,6 +357,7 @@ def generate_statutory_citations(
     clause_text: str,
     retrieved_provisions: List[StatutoryProvision],
     translate: bool = True,
+    model_name: Optional[str] = None,
 ) -> Tuple[List[StatutoryCitation], str, List[Dict[str, Any]], Optional[str]]:
     """
     Passes ONLY the retrieved statutory provisions to Gemini, requires output as a list
@@ -407,7 +408,7 @@ Return ONLY a JSON object with this exact structure:
 }}
 """
 
-    strongest_model = GEMINI_MODELS[0] if GEMINI_MODELS else "gemini-3.7-flash"
+    strongest_model = model_name or (GEMINI_MODELS[0] if GEMINI_MODELS else "gemini-3.8-flash")
     try:
         res = call_gemini_json(prompt, model_name=strongest_model, allow_rotation=False)
         citation_model_used = res.get("_model_used", strongest_model) if res else strongest_model

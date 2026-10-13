@@ -13,8 +13,15 @@ A multilingual AI-assisted legal document analysis system that inspects contract
    - Vector store powered by ChromaDB with `BAAI/bge-small-en-v1.5` embeddings.
    - Separate ChromaDB collection `legal_statutes` storing verified statutory provisions (1 provision = 1 chunk).
    - Deterministic clause-to-statute mapping to bias retrieval for high-risk clause types.
-3. **Statutory Citations**:
-   - Pinned strictly to the strongest configured Gemini model (`gemini-3.8-flash`).
+3. **Statutory Citations & Model Hierarchy**:
+   - Pinned strictly to the strongest configured Gemini model (`GEMINI_MODELS[0]`), which is verified to be a stable GA model (`gemini-3.8-flash`, not preview/experimental).
+   - Full ordered model hierarchy for classification quota rotation:
+     1. `gemini-3.8-flash` (Stable GA) — Citation engine pinned here
+     2. `gemini-3.7-flash` (Stable GA)
+     3. `gemini-3.6-flash` (Stable GA)
+     4. `gemini-3.5-flash` (Stable GA)
+     5. `gemini-3.5-flash-lite` (Stable GA)
+     6. `gemini-3.1-flash-lite` (Stable GA)
    - Generates single-sentence descriptive reasons and attaches verbatim statutory provision text in English.
    - Falls back safely to `"Legal basis unavailable right now"` if the strongest model is unavailable (rotation to lite models is prohibited).
    - Closed-world citation validation: drops and logs any hallucination attempts (no case law or outside sections).

@@ -13,8 +13,8 @@ CLAUSE_TYPE_STATUTE_MAP: Dict[str, List[str]] = {
     "non_compete": ["ICA-1872-s27", "COI-art19"],
     "penalty": ["ICA-1872-s74", "ICA-1872-s73", "CPA-2019-s2-46"],
     "indemnity": ["ICA-1872-s124", "ICA-1872-s125"],
-    "dispute_resolution": ["ICA-1872-s28", "ACA-1996-s7", "ACA-1996-s12", "ACA-1996-s18", "ACA-1996-s20"],
-    "arbitration": ["ICA-1872-s28", "ACA-1996-s7", "ACA-1996-s12", "ACA-1996-s18", "ACA-1996-s20"],
+    "dispute_resolution": ["ICA-1872-s28", "ACA-1996-s7", "ACA-1996-s11", "ACA-1996-s12", "ACA-1996-s18", "ACA-1996-s20"],
+    "arbitration": ["ICA-1872-s28", "ACA-1996-s7", "ACA-1996-s11", "ACA-1996-s12", "ACA-1996-s18", "ACA-1996-s20"],
     "termination": ["ICA-1872-s39", "ICA-1872-s75", "ICA-1872-s23", "CPA-2019-s2-46"],
     # Loan agreement clause types
     "penal_interest": ["ICA-1872-s74", "ICA-1872-s73", "CPA-2019-s2-46"],
