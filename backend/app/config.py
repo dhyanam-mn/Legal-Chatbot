@@ -23,9 +23,21 @@ EMBEDDING_MODEL_NAME = os.getenv("EMBEDDING_MODEL_NAME", "BAAI/bge-small-en-v1.5
 INDICTRANS2_MODEL_NAME = os.getenv("INDICTRANS2_MODEL_NAME", "ai4bharat/indictrans2-en-indic-dist-200M")
 ALLOW_HEURISTIC_FALLBACK = os.getenv("ALLOW_HEURISTIC_FALLBACK", "false").lower() in ("true", "1", "yes")
 
-# Mandatory legal disclaimer strings required by specification (English and Hindi)
+# Ordered list of Gemini models for quota rotation (never falls back to heuristic classifier)
+GEMINI_MODELS = [
+    m.strip()
+    for m in os.getenv(
+        "GEMINI_MODELS",
+        "gemini-3.8-flash,gemini-3.7-flash,gemini-3.5-flash,gemini-3.6-flash,gemini-3.5-flash-lite,gemini-3.1-flash-lite",
+    ).split(",")
+    if m.strip()
+]
+
+
+# Mandatory legal disclaimer strings required by specification (English, Hindi, and Tamil)
 MANDATORY_DISCLAIMER = "This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this."
 MANDATORY_DISCLAIMER_HI = "यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।"
+MANDATORY_DISCLAIMER_TA = "இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்."
 
 
 # Fail-loud check at startup unless explicitly opted into heuristic dev mode

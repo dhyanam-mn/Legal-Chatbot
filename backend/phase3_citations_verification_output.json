@@ -1,0 +1,211 @@
+{
+  "fully_cited_clause": {
+    "clause_id": "Clause 2",
+    "clause_type": "non_compete",
+    "title": "Non-Compete / Restraint of Trade",
+    "original_text": "Clause 2. Non-Compete and Restraint of Trade: Upon termination or expiration of employment for any reason, the Employee shall be perpetually restrained and prohibited from engaging in, working for, advising, or investing in any business or profession in the software, technology, or consulting sector anywhere in the world for a period of five (5) years.",
+    "classification": "flag-worthy",
+    "explanation": "The clause prohibits the employee from engaging in, working for, advising, or investing in the software, technology, or consulting sector anywhere in the world for five years following the termination of employment. It imposes a multi-year, global restriction on professional activities across broad industry sectors.",
+    "risk_reason": "The clause is overly broad due to its worldwide geographic scope, lengthy five-year duration, and inclusion of multiple extensive industry sectors. This creates significant risk by severely limiting future employment and earning opportunities for the individual.",
+    "explanation_hi": "यह खंड कर्मचारी को रोजगार की समाप्ति के बाद पांच वर्षों के लिए दुनिया में कहीं भी सॉफ्टवेयर, प्रौद्योगिकी या परामर्श क्षेत्र में शामिल होने, काम करने, सलाह देने या निवेश करने से रोकता है। यह व्यापक उद्योग क्षेत्रों में पेशेवर गतिविधियों पर बहु-वर्षीय, वैश्विक प्रतिबंध लगाता है।",
+    "risk_reason_hi": "यह खंड अपने विश्वव्यापी भौगोलिक दायरे, लंबी पाँच साल की अवधि और कई व्यापक उद्योग क्षेत्रों के समावेश के कारण अत्यधिक व्यापक है। यह व्यक्ति के लिए भविष्य में रोजगार और कमाई के अवसरों को गंभीर रूप से सीमित करके महत्वपूर्ण जोखिम पैदा करता है।",
+    "explanation_ta": "இந்த பிரிவு ஊழியர் வேலை நிறுத்தப்பட்டதைத் தொடர்ந்து ஐந்து ஆண்டுகளுக்கு உலகின் எந்த இடத்திலும் மென்பொருள், தொழில்நுட்பம் அல்லது ஆலோசனைத் துறையில் ஈடுபடுவதையோ, பணியாற்றுவதையோ, ஆலோசனை வழங்குவதையோ அல்லது முதலீடு செய்வதையோ தடைசெய்கிறது. இது பரந்த தொழில்துறை துறைகளில் தொழில்முறை நடவடிக்கைகளுக்கு பல ஆண்டு, உலகளாவிய கட்டுப்பாட்டை விதிக்கிறது.",
+    "risk_reason_ta": "உலகளாவிய புவியியல் நோக்கம், நீண்ட ஐந்தாண்டு காலம் மற்றும் பல விரிவான தொழில்துறை துறைகளை உள்ளடக்கியது காரணமாக இந்த பிரிவு மிகவும் பரந்துள்ளது. இது எதிர்கால வேலைவாய்ப்பு மற்றும் தனிநபருக்கு சம்பாதிக்கும் வாய்ப்புகளை கடுமையாக மட்டுப்படுத்துவதன் மூலம் குறிப்பிடத்தக்க ஆபத்தை உருவாக்குகிறது.",
+    "severity": "High",
+    "priority_score": 0.0,
+    "model_used": "gemini-3.5-flash-lite",
+    "citation_model_used": "gemini-3.7-flash",
+    "grounding_examples": [
+      {
+        "category": "one_sided",
+        "clause_type": "non_compete",
+        "text": "Employee agrees that for a period of 3 years following termination for any reason, Employee shall not engage in, work for, consult with, invest in, or start any business operating in the technology or business sector anywhere in the country.",
+        "distance": 0.20887494087219238
+      },
+      {
+        "category": "one_sided",
+        "clause_type": "non_compete",
+        "text": "Employee shall not, directly or indirectly, work for any client, prospective client, competitor, vendor, or partner of the Company for 24 months post-employment, without geographic limitation.",
+        "distance": 0.27982085943222046
+      },
+      {
+        "category": "one_sided",
+        "clause_type": "termination",
+        "text": "Employer may terminate Employee's employment at any time without prior notice or severance pay, whereas Employee must provide 90 days prior written notice and pay a replacement fee.",
+        "distance": 0.2935132384300232
+      },
+      {
+        "category": "one_sided",
+        "clause_type": "penalty",
+        "text": "In the event Employee terminates employment prior to completing 24 months of service for any reason, Employee shall pay Company an immediate punitive penalty of $50,000 as reimbursement for training and onboarding costs without proof of actual cost.",
+        "distance": 0.3131105899810791
+      }
+    ],
+    "statutory_provisions": [
+      {
+        "id": "ICA-1872-s27",
+        "act": "Indian Contract Act, 1872",
+        "section": "Section 27",
+        "title": "Agreement in restraint of trade, void",
+        "text": "27. Agreement in restraint of trade, void.—Every agreement by which any one is restrained from exercising a lawful profession, trade or business of any kind, is to that extent void. Exception 1.—Saving of agreement not to carry on business of which good-will is sold.—One who sells the good-will of a business may agree with the buyer to refrain from carrying on a similar business, within specified local limits, so long as the buyer, or any person deriving title to the good-will from him, carries on a like business therein, provided that such limits appear to the Court reasonable, regard being had to the nature of the business.",
+        "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+        "distance": 0.23445934057235718,
+        "retrieval_source": "mapped+semantic"
+      },
+      {
+        "id": "COI-art19",
+        "act": "Constitution of India",
+        "section": "Article 19",
+        "title": "Protection of certain rights regarding freedom of speech, etc.",
+        "text": "19. Protection of certain rights regarding freedom of speech, etc.— (1) All citizens shall have the right— (a) to freedom of speech and expression; (b) to assemble peaceably and without arms; (c) to form associations or unions or co-operative societies; (d) to move freely throughout the territory of India; (w.e.f. 14-1-2019). (e) to reside and settle in any part of the territory of India; and (f)* * * * * (g) to practise any profession, or to carry on any occupation, trade or business. (2) Nothing in sub-clause (a) of clause (1) shall affect the operation of any existing law, or prevent the State from making any law, in so far as such law imposes reasonable restrictions on the exercise of the right conferred by the said sub-clause in the interests of the sovereignty and integrity of India, the security of the State, friendly relations with foreign States, public order, decency or morality, or in relation to contempt of court, defamation or incitement to an offence. (3) Nothing in sub-clause (b) of the said clause shall affect the operation of any existing law in so far as it imposes, or prevent the State from making any law imposing, in the interests of the sovereignty and integrity of India or public order, reasonable restrictions on the exercise of the right conferred by the said sub-clause. (4) Nothing in sub-clause (c) of the said clause shall affect the operation of any existing law in so far as it imposes, or prevent the State from making any law imposing, in the interests of the sovereignty and integrity of India or public order or morality, reasonable restrictions on the exercise of the right conferred by the said sub-clause. (5) Nothing in sub-clauses (d) and (e) of the said clause shall affect the operation of any existing law in so far as it imposes, or prevent the State from making any law imposing, reasonable restrictions on the exercise of any of the rights conferred by the said sub-clauses either in the interests of the general public or for the protection of the interests of any Scheduled Tribe. 2. Sub-clause (f) omitted by s.2, ibid. (w.e.f. 20-6-1979). effect). (d), (e) and (f)\" (w.e.f. 20-6-1979). (6) Nothing in sub-clause (g) of the said clause shall affect the operation of any existing law in so far as it imposes, or prevent the State from making any law imposing, in the interests of the general public, reasonable restrictions on the exercise of the right conferred by the said sub-clause, and, in particular, nothing in the said sub-clause shall affect the operation of any existing law in so far as it relates to, or prevent the State from making any law relating to,— (i) the professional or technical qualifications necessary for practising any profession or carrying on any occupation, trade or business; or (ii) the carrying on by the State, or by a corporation owned or c",
+        "source_url": "https://www.legislative.gov.in/static/uploads/2025/07/c9fe9c9b6840524844316f74bb1c556c.pdf",
+        "distance": null,
+        "retrieval_source": "mapped"
+      },
+      {
+        "id": "ICA-1872-s28",
+        "act": "Indian Contract Act, 1872",
+        "section": "Section 28",
+        "title": "Agreements in restraint of legal proceedings, void",
+        "text": "28.Agreements in restraint of legal proceedings, void.—Every agreement,— (a) by which any party thereto is restricted absolutely from enforcing his rights under or in respect of any contract, by the usual legal proceedings in the ordinary tribunals, or which limits the time within which he may thus enforce his rights; or (b) which extinguishes the rights of any party thereto, or discharges any party thereto, from any liability, under or in respect of any contract on the expiry of a specified period so as to restrict any party from enforcing his rights, is void to the extent. Exception 1.—Saving of contract to refer to arbitration dispute that may arise.—This section shall not render illegal a contract, by which two or more persons agree that any dispute which may arise between them in respect of any subject or class of subjects shall be referred to arbitration, and that only the amount awarded in such arbitration shall be recoverable in respect of the dispute so referred. Exception 2.—Saving of contract to refer questions that have already arisen.—Nor shall this section render illegal any contract in writing, by which two or more persons agree to refer to arbitration any question between them which has already arisen, or affect any provision of any law in force for the time being as to references to arbitration4. 1. Exceptions 2 and 3 rep. by Act 9 of 1932, s. 73 and the Second Schedule. 3. The second clause of Exception 1 to section 28 rep. by Act 1 of 1877, s. 2 and Sch. 4. Cf. the Arbitration Act, 1940 (10 of 1940) and the Companies Act, 1956 (1 of 1956), s. 389. Exception 3.—Saving of a guarantee agreement of a bank or a financial institution.—This section shall not render illegal a contract in writing by which any bank or financial institution stipulate a term in a guarantee or any agreement making a provision for guarantee for extinguishment of the rights or discharge of any party thereto from any liabil",
+        "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+        "distance": 0.3315228223800659,
+        "retrieval_source": "semantic"
+      },
+      {
+        "id": "ICA-1872-s23",
+        "act": "Indian Contract Act, 1872",
+        "section": "Section 23",
+        "title": "What considerations and objects are lawful, and what not",
+        "text": "23. What considerations and objects are lawful, and what not.—The consideration or object of an agreement is lawful, unless— it is forbidden by law4; or is of such a nature that if permitted, it would defeat the provisions of any law; or is fraudulent ; or involves or implies injury to the person or property of another; or the Court regards it as immoral, or opposed to public policy. 1. The original words 'British India\" have successively been amended by the A.O. 1948 and the A.O. 1950 to read as above. 2. Paragraph 2, ins. by the A.O. 1937, an",
+        "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+        "distance": 0.35594993829727173,
+        "retrieval_source": "semantic"
+      }
+    ],
+    "statutory_citations": [
+      {
+        "provision_id": "ICA-1872-s27",
+        "act": "Indian Contract Act, 1872",
+        "section": "Section 27",
+        "title": "Agreement in restraint of trade, void",
+        "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+        "reason": "Under ICA-1872-s27, Section 27 of the Indian Contract Act, 1872 provides that every agreement by which anyone is restrained from exercising a lawful profession, trade, or business of any kind is to that extent void, subject to Exception 1 saving agreements not to carry on a business within reasonable specified local limits where goodwill is sold.",
+        "reason_hi": "ICA-1872-s27, Indian Contract Act, 1872 की Section 27 के तहत यह प्रावधान किया गया है कि प्रत्येक समझौता जिसके द्वारा किसी को भी किसी भी प्रकार के वैध पेशे, व्यापार या व्यवसाय का प्रयोग करने से रोका जाता है, उस हद तक शून्य है, अपवाद 1 बचत समझौतों के अधीन है कि उचित निर्दिष्ट स्थानीय सीमाओं के भीतर एक व्यवसाय नहीं किया जाए जहां सद्भावना बेची जाती है।",
+        "reason_ta": "ICA-1872-s27 இன் கீழ், Indian Contract Act, 1872 இன் Section 27, எந்தவொரு சட்டபூர்வமான தொழில், வர்த்தகம் அல்லது எந்தவொரு வகையான வணிகத்தையும் பயன்படுத்துவதைத் தடுக்கும் ஒவ்வொரு ஒப்பந்தமும் அந்த அளவிற்கு செல்லுபடியாகாது என்று வழங்குகிறது, விதிவிலக்கு 1 சேமிப்பு ஒப்பந்தங்களுக்கு உட்பட்டு நல்லெண்ணம் விற்கப்படும் இடத்தில் நியாயமான குறிப்பிட்ட உள்ளூர் வரம்புகளுக்குள் ஒரு வணிகத்தை நடத்த வேண்டாம்.",
+        "model_used": "gemini-3.7-flash"
+      }
+    ],
+    "legal_basis_message": "",
+    "legal_basis_message_hi": "",
+    "legal_basis_message_ta": "",
+    "typical_phrasing_header": "How this is typically written",
+    "typical_phrasing_disclaimer": "This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this.",
+    "typical_phrasing_disclaimer_hi": "यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।",
+    "typical_phrasing_disclaimer_ta": "இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்.",
+    "standard_alternatives": [
+      "During the term of employment and for a period of 6 months thereafter, Employee shall not directly solicit the active clients of the Company with whom Employee had direct business dealings in the preceding 12 months.",
+      "For 1 year following termination, Contractor agrees not to perform identical services for the specific key competitors of Client explicitly listed in Schedule A within the city of operation.",
+      "Employee agrees not to misuse or disclose confidential trade secrets or proprietary customer lists of the Employer following separation.",
+      "The Founder agrees for 12 months after departure not to recruit or solicit any current key executive of the Company."
+    ]
+  },
+  "adversarial_no_statute": {
+    "clause_text": "Clause 9. Office Dress Code and Parking Badge: Employee shall wear formal business attire on Mondays and return the laminated magnetic parking pass to the reception desk before taking annual leave.",
+    "retrieved_ids": [],
+    "surviving_citations": [],
+    "legal_basis_message": "No statutory provision retrieved"
+  },
+  "adversarial_excluded_obvious": {
+    "clause_text": "Clause 2. Non-Compete and Restraint of Trade: Upon termination or expiration of employment for any reason, the Employee shall be perpetually restrained and prohibited from engaging in, working for, advising, or investing in any business or profession in the software, technology, or consulting sector anywhere in the world for a period of five (5) years.",
+    "excluded_ids": [
+      "ICA-1872-s27",
+      "COI-art19"
+    ],
+    "retrieved_ids_passed": [
+      "ICA-1872-s124",
+      "COI-art300A"
+    ],
+    "constrained_pipeline_model_used": "gemini-3.7-flash",
+    "constrained_pipeline_surviving_citations": [],
+    "constrained_pipeline_message": "No statutory provision retrieved",
+    "tempted_model_used": "gemini-3.7-flash",
+    "tempted_raw_citations": [
+      {
+        "provision_id": "ICA-1872-s27",
+        "reason": "Section 27 of the Indian Contract Act, 1872 renders agreements in restraint of trade void. Post-termination non-compete covenants in employment contracts, such as this perpetual or 5-year global restraint, are impermissible and void under this provision."
+      },
+      {
+        "provision_id": "COI-art19",
+        "reason": "Article 19(1)(g) of the Constitution of India guarantees the fundamental right to practice any profession, or to carry on any occupation, trade, or business, which informs public policy against oppressive post-employment restraints."
+      },
+      {
+        "provision_id": "ICA-1872-s124",
+        "reason": "While Section 124 of the Indian Contract Act defines contracts of indemnity, enforcement of indemnity or forfeiture mechanisms linked to restraint of trade conflicts with the Supreme Court ruling in Percept D'Mark (India) (P) Ltd. v. Zaheer Khan (AIR 2006 SC 3426), which reaffirmed that any post-contractual non-compete restriction violates Section 27."
+      }
+    ],
+    "tempted_surviving_citations": [],
+    "hallucination_log": [
+      {
+        "timestamp": "2026-10-13T06:53:21Z",
+        "clause_id": "Adversarial-Excluded-Obvious-Provision",
+        "attempted_provision_id": "ICA-1872-s27",
+        "attempted_reason": "Section 27 of the Indian Contract Act, 1872 renders agreements in restraint of trade void. Post-termination non-compete covenants in employment contracts, such as this perpetual or 5-year global restraint, are impermissible and void under this provision.",
+        "allowed_retrieved_ids": [
+          "ICA-1872-s124",
+          "COI-art300A"
+        ],
+        "violation_type": "UNRETRIEVED_PROVISION_ID",
+        "detail": "Provision ID 'ICA-1872-s27' is not in the retrieved set ['ICA-1872-s124', 'COI-art300A'].",
+        "action": "DROPPED"
+      },
+      {
+        "timestamp": "2026-10-13T06:53:21Z",
+        "clause_id": "Adversarial-Excluded-Obvious-Provision",
+        "attempted_provision_id": "COI-art19",
+        "attempted_reason": "Article 19(1)(g) of the Constitution of India guarantees the fundamental right to practice any profession, or to carry on any occupation, trade, or business, which informs public policy against oppressive post-employment restraints.",
+        "allowed_retrieved_ids": [
+          "ICA-1872-s124",
+          "COI-art300A"
+        ],
+        "violation_type": "UNRETRIEVED_PROVISION_ID",
+        "detail": "Provision ID 'COI-art19' is not in the retrieved set ['ICA-1872-s124', 'COI-art300A'].",
+        "action": "DROPPED"
+      },
+      {
+        "timestamp": "2026-10-13T06:53:21Z",
+        "clause_id": "Adversarial-Excluded-Obvious-Provision",
+        "attempted_provision_id": "ICA-1872-s124",
+        "attempted_reason": "While Section 124 of the Indian Contract Act defines contracts of indemnity, enforcement of indemnity or forfeiture mechanisms linked to restraint of trade conflicts with the Supreme Court ruling in Percept D'Mark (India) (P) Ltd. v. Zaheer Khan (AIR 2006 SC 3426), which reaffirmed that any post-contractual non-compete restriction violates Section 27.",
+        "allowed_retrieved_ids": [
+          "ICA-1872-s124",
+          "COI-art300A"
+        ],
+        "violation_type": "CASE_LAW_PROHIBITED",
+        "detail": "Case law reference 'AIR 2006' detected in citation reason.",
+        "action": "DROPPED"
+      }
+    ]
+  },
+  "phase2_regressions": {
+    "tamil_severance_regression": {
+      "status": "DONE",
+      "input_en": "The employer may terminate the employee at any time without prior notice or severance pay.",
+      "output_ta": "முதலாளி எந்த நேரத்திலும் முன் அறிவிப்பு அல்லது பிரிப்பு ஊதியம் இல்லாமல் ஊழியரை ஒப்பந்த முடிவு செய்யலாம்."
+    },
+    "whereas_segmentation_fix": {
+      "status": "DONE",
+      "segmented_clause_ids": [
+        "WHEREAS",
+        "Clause 4.",
+        "Clause 5."
+      ],
+      "clause_4_intact": true
+    },
+    "glossary_review_md": {
+      "status": "DONE",
+      "path": "C:\\Users\\dhyan\\OneDrive\\Desktop\\Projects\\Legal-Chatbot\\GLOSSARY_REVIEW.md",
+      "size_bytes": 7560
+    }
+  }
+}

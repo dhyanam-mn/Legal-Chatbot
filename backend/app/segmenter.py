@@ -3,14 +3,15 @@ from typing import List
 from .schemas import ClauseItem
 
 CLAUSE_BOUNDARY_REGEX = re.compile(
-    r'(?=\b(?:CLAUSE|SECTION|ARTICLE|ARTICLE\s+\d+|SECTION\s+\d+|CLAUSE\s+\d+|WHEREAS|IN WITNESS WHEREOF)\b|^\s*\d+(?:\.\d+)+\.?\s+|^\s*\d+\.\s+|^\s*\(?[a-z0-9]+\)\s+)',
+    r'(?=^\s*(?:(?:CLAUSE|SECTION|ARTICLE)\s+[\dA-Za-z.]+|WHEREAS\b|IN\s+WITNESS\s+WHEREOF\b)|^\s*\d+(?:\.\d+)+\.?\s+|^\s*\d+\.\s+|^\s*\([a-z0-9]+\)\s+)',
     re.MULTILINE | re.IGNORECASE
 )
 
 def segment_text_into_clauses(text: str) -> List[ClauseItem]:
     """
     Splits legal document text into clauses using regex patterns matching standard numbering
-    and headers (e.g. '1.', '1.1', 'Clause 3', 'WHEREAS', 'Section X').
+    and line-start headers (e.g. '1.', '1.1', 'Clause 3', line-start 'WHEREAS', 'Section X').
+    Does NOT split on mid-sentence conjunctions such as lowercase ', whereas '.
     """
     if not text or not text.strip():
         return []
@@ -30,7 +31,7 @@ def segment_text_into_clauses(text: str) -> List[ClauseItem]:
             continue
 
         header_match = re.match(
-            r'^(?:CLAUSE|SECTION|ARTICLE)\s+[\dA-Z.]+|^\d+(?:\.\d+)+\.?|^\d+\.|^WHEREAS|^IN WITNESS WHEREOF',
+            r'^(?:CLAUSE|SECTION|ARTICLE)\s+[\dA-Z.]+|^\d+(?:\.\d+)+\.?|^\d+\.|^WHEREAS\b|^IN\s+WITNESS\s+WHEREOF\b',
             chunk, re.IGNORECASE
         )
         

@@ -6,7 +6,13 @@ from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 
-from .config import MANDATORY_DISCLAIMER, MANDATORY_DISCLAIMER_HI, GEMINI_API_KEY, ALLOW_HEURISTIC_FALLBACK
+from .config import (
+    MANDATORY_DISCLAIMER,
+    MANDATORY_DISCLAIMER_HI,
+    MANDATORY_DISCLAIMER_TA,
+    GEMINI_API_KEY,
+    ALLOW_HEURISTIC_FALLBACK
+)
 from .schemas import (
     ClientIntakeContext, AnalysisResponse, ChatRequest, ChatResponse
 )
@@ -17,15 +23,15 @@ from .classifier import (
     classify_and_explain_clause, generate_document_summary, call_gemini_json, genai_client
 )
 from .ranker import rank_flagged_clauses
-from .translator import translate_text_to_hindi, get_translator_engine
+from .translator import translate_text_to_hindi, translate_text_to_tamil, get_translator_engine
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("legal-chatbot")
 
 app = FastAPI(
     title="Legal Document Chatbot Backend",
-    description="Phase 1 MVP API for legal document analysis, clause segmentation, vector similarity retrieval, and grounded classification with Hindi translation.",
-    version="1.0.0"
+    description="Multilingual Legal Document Chatbot API with clause segmentation, vector grounding, and local IndicTrans2 (Hindi & Tamil) translation.",
+    version="2.0.0"
 )
 
 app.add_middleware(
@@ -36,7 +42,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Exception Handlers: Attach mandatory disclaimer (EN & HI) to all error responses (400, 422, 500)
+# Exception Handlers: Attach mandatory disclaimer (EN, HI, TA) to all error responses (400, 422, 500)
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request: Request, exc: HTTPException):
     return JSONResponse(
@@ -44,7 +50,8 @@ async def http_exception_handler(request: Request, exc: HTTPException):
         content={
             "detail": exc.detail,
             "disclaimer": MANDATORY_DISCLAIMER,
-            "disclaimer_hi": MANDATORY_DISCLAIMER_HI
+            "disclaimer_hi": MANDATORY_DISCLAIMER_HI,
+            "disclaimer_ta": MANDATORY_DISCLAIMER_TA
         }
     )
 
@@ -55,7 +62,8 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
         content={
             "detail": exc.errors(),
             "disclaimer": MANDATORY_DISCLAIMER,
-            "disclaimer_hi": MANDATORY_DISCLAIMER_HI
+            "disclaimer_hi": MANDATORY_DISCLAIMER_HI,
+            "disclaimer_ta": MANDATORY_DISCLAIMER_TA
         }
     )
 
@@ -67,7 +75,8 @@ async def generic_exception_handler(request: Request, exc: Exception):
         content={
             "detail": "Internal server error occurred.",
             "disclaimer": MANDATORY_DISCLAIMER,
-            "disclaimer_hi": MANDATORY_DISCLAIMER_HI
+            "disclaimer_hi": MANDATORY_DISCLAIMER_HI,
+            "disclaimer_ta": MANDATORY_DISCLAIMER_TA
         }
     )
 
@@ -104,7 +113,8 @@ def health_check():
         "translation_model": engine.model_name,
         "translation_device": engine.device,
         "disclaimer": MANDATORY_DISCLAIMER,
-        "disclaimer_hi": MANDATORY_DISCLAIMER_HI
+        "disclaimer_hi": MANDATORY_DISCLAIMER_HI,
+        "disclaimer_ta": MANDATORY_DISCLAIMER_TA
     }
 
 @app.post("/api/upload", response_model=AnalysisResponse)
@@ -150,18 +160,20 @@ async def upload_document(
     )
     
     ranked_flags = rank_flagged_clauses(flagged_clauses, intake_context)
-    summary_en, summary_hi = generate_document_summary(text, len(clauses), len(ranked_flags))
+    summary_en, summary_hi, summary_ta = generate_document_summary(text, len(clauses), len(ranked_flags))
 
     return AnalysisResponse(
         document_summary=summary_en,
         document_summary_hi=summary_hi,
+        document_summary_ta=summary_ta,
         parsed_method=parse_method,
         total_clauses=len(clauses),
         flagged_clauses=ranked_flags,
         all_clauses=clauses,
         intake_context=intake_context,
         disclaimer=MANDATORY_DISCLAIMER,
-        disclaimer_hi=MANDATORY_DISCLAIMER_HI
+        disclaimer_hi=MANDATORY_DISCLAIMER_HI,
+        disclaimer_ta=MANDATORY_DISCLAIMER_TA
     )
 
 @app.post("/api/chat", response_model=ChatResponse)
@@ -213,11 +225,14 @@ Be concise (2-3 paragraphs max).
         )
 
     reply_hi = translate_text_to_hindi(reply)
+    reply_ta = translate_text_to_tamil(reply)
 
     return ChatResponse(
         reply=reply,
         reply_hi=reply_hi,
+        reply_ta=reply_ta,
         disclaimer=MANDATORY_DISCLAIMER,
-        disclaimer_hi=MANDATORY_DISCLAIMER_HI
+        disclaimer_hi=MANDATORY_DISCLAIMER_HI,
+        disclaimer_ta=MANDATORY_DISCLAIMER_TA
     )
 

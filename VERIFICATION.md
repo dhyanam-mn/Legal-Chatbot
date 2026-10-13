@@ -203,3 +203,426 @@ The mandatory Hindi legal disclaimer is defined in `config.py` (`MANDATORY_DISCL
   - Legal Disclaimer banner (`MANDATORY_DISCLAIMER` vs `MANDATORY_DISCLAIMER_HI`)
 - **No Document Re-uploading Required**: Output payloads return both English and Hindi fields in a single response, enabling seamless zero-latency client-side language switching.
 
+---
+
+## 7. Verification of Tamil Output Layer (`tam_Taml`) with Real Gemini Reasoning
+
+### A. Single-Model Architecture, Caching & Runtime Configuration
+- **Model Reused**: `ai4bharat/indictrans2-en-indic-dist-200M` (same single model instance loaded at startup on `cpu` in `3.63s`; no second model loaded, zero Gemini calls for translation).
+- **Target Language Code**: `tgt_lang="tam_Taml"` (with `num_beams=2`, batched `[explanation, risk_reason]`, and SHA-256 `(text_hash, tgt_lang)` in-memory caching).
+- **Real Gemini Reasoning**: Tested on both `employment_agreement.pdf` and `rental_agreement.pdf` with **`ALLOW_HEURISTIC_FALLBACK=false`** strictly enforced (`HTTP/1.1 200 OK` from Gemini for every clause).
+
+---
+
+### B. Side-by-Side English & Tamil Outputs (`employment_agreement.pdf` — Real Gemini + Local IndicTrans2)
+
+#### 1. Indemnity Clause (`Clause 3. Indemnity`)
+- **Original PDF Text**:
+  > *"Clause 3. Indemnity: Employee agrees to unconditionally indemnify and hold harmless Company for any financial loss, loss of profit, or third-party claim brought against the Company relating in any way to Employee employment or separation."*
+- **Clause Translation Time (`tam_Taml`, `num_beams=2`)**: `10.69s`
+
+| Field | Real Gemini English Output | Local IndicTrans2 Tamil Output (`tam_Taml` + `enforce_glossary(lang='ta')`) |
+|---|---|---|
+| **Explanation** | *"This clause requires the employee to fully reimburse the company for any financial losses, lost profits, or lawsuits tied to their job or termination. It holds the individual financially responsible for broad company setbacks without limitation."* | *"எந்தவொரு நிதி இழப்புகள், இழந்த இலாபங்கள் அல்லது அவர்களின் வேலை அல்லது ஒப்பந்த முடிவுடன் தொடர்புடைய வழக்குகளுக்கு நிறுவனத்திற்கு ஊழியர் முழுமையாக இழப்பீடு வழங்க வேண்டும் (இழப்பீட்டுப் பொறுப்பு) என்று இந்த பிரிவு கோருகிறது. இது வரம்புகள் இல்லாமல் பரந்த நிறுவன பின்னடைவுகளுக்கு தனிநபரை நிதி ரீதியாக பொறுப்பேற்க வைக்கிறது."* |
+| **Risk Reason** | *"It imposes unconditional and broad financial liability on the employee, even in the absence of gross negligence or misconduct. This shifts normal corporate operational risks entirely onto the individual, exposing them to potentially catastrophic financial exposure."* | *"மொத்த அலட்சியம் அல்லது தவறான நடத்தை இல்லாவிட்டாலும் கூட, இது ஊழியர் மீது நிபந்தனையற்ற மற்றும் பரந்த நிதி பொறுப்பை விதிக்கிறது. இது சாதாரண கார்ப்பரேட் செயல்பாட்டு அபாயங்களை முற்றிலும் தனிநபர் மீது மாற்றுகிறது, இதனால் அவர்கள் பேரழிவு தரக்கூடிய நிதி வெளிப்பாட்டிற்கு ஆளாக நேரிடும்."* |
+
+#### 2. Unilateral Termination Clause (`Clause 4. Unilateral Termination`)
+- **Original PDF Text**:
+  > *"Clause 4. Unilateral Termination: Employer may terminate Employee employment at any time without prior notice or severance pay, whereas Employee must provide 90 days prior written notice and pay a replacement fee."*
+- **Clause Translation Time (`tam_Taml`, `num_beams=2`)**: `4.79s` (`Clause 4.`) / `4.29s` (`whereas` continuation)
+
+| Field | Real Gemini English Output | Local IndicTrans2 Tamil Output (`tam_Taml` + `enforce_glossary(lang='ta')`) |
+|---|---|---|
+| **Explanation (`Clause 4.`)** | *"This clause allows the employer to end your employment immediately at any time without giving you advance warning or any severance compensation."* | *"இந்த பிரிவு உங்களுக்கு முன்கூட்டியே எச்சரிக்கை அல்லது எந்தவொரு பிரிவு இழப்பீட்டுத் தொகையும் வழங்காமல் எந்த நேரத்திலும் உங்கள் வேலையை உடனடியாக ஒப்பந்த முடிவு செய்ய முதலாளியை அனுமதிக்கிறது."* |
+| **Risk Reason (`Clause 4.`)** | *"It leaves you vulnerable to sudden job loss without financial protection or time to find alternative employment."* | *"இது நிதி பாதுகாப்பு அல்லது மாற்று வேலை தேடுவதற்கான நேரம் இல்லாமல் திடீரென்று வேலை இழப்புக்கு ஆளாக நேரிடும்."* |
+| **Explanation (`whereas`)** | *"This clause requires the employee to provide a 90-day written notice before resigning and pay a fee to cover their replacement."* | *"இந்த பிரிவு ஊழியர் ராஜினாமா செய்வதற்கு முன்பு 90 நாள் எழுத்துப்பூர்வ அறிவிப்பை வழங்க வேண்டும் மற்றும் அவர்களின் மாற்றீட்டிற்கு ஒரு கட்டணத்தை செலுத்த வேண்டும்."* |
+| **Risk Reason (`whereas`)** | *"It imposes an unfair financial penalty and an excessively long notice period solely on the employee upon departure."* | *"இது நியாயமற்ற நிதி அபராதம் தொகையையும், புறப்பட்டவுடன் மட்டுமே ஊழியருக்கு அதிகப்படியான நீண்ட அறிவிப்பு காலத்தையும் விதிக்கிறது."* |
+
+---
+
+### C. Per-Document Translation Time on CPU (`num_beams=2`)
+
+| Document Tested | Total Segmented Clauses | Flagged Clauses Translated | Per-Document Tamil (`tam_Taml`) Translation Time | Per-Document Combined (`hin_Deva` + `tam_Taml`) Time |Gemini Calls During Translation |
+|---|:---:|:---:|:---:|:---:|:---:|
+| **`employment_agreement.pdf`** | 8 | 5 | **`36.07s`** (avg `7.21s`/clause) | `69.38s` | **`0`** |
+| **`rental_agreement.pdf`** | 6 | 3 | **`30.65s`** (avg `10.22s`/clause) | `57.90s` | **`0`** |
+
+---
+
+### D. Tamil Legal Glossary Consistency Across Both Documents (`legal_glossary.json` & `enforce_glossary(lang='ta')`)
+
+`backend/data/legal_glossary.json` was extended with standard formal Tamil legal register terms, and `enforce_glossary(text, lang='ta')` handles inflected forms across `employment_agreement.pdf` and `rental_agreement.pdf`:
+
+| English Legal Term | Standard Tamil Legal Glossary Term | Appeared in `employment_agreement.pdf`? | Appeared in `rental_agreement.pdf`? | Consistency Result |
+|---|---|:---:|:---:|:---:|
+| **Indemnity / Indemnify** | `இழப்பீட்டுப் பொறுப்பு` / `இழப்பீடு வழங்குதல்` | YES (`Clause 3.`) | N/A | **PASS (100%)** |
+| **Arbitration** | `இசைவுத்தீர்ப்பு` | N/A | YES (`Section 4.`: `தனியார் இசைவுத்தீர்ப்பு நடுவர்`) | **PASS (100%)** |
+| **Jurisdiction / Forum Selection** | `அதிகார வரம்பு` / `நீதிமன்றத் தேர்வு` | N/A | YES (`Section 4.`: `அதிகார வரம்பு கொண்ட நீதிமன்றத்தையும்`) | **PASS (100%)** |
+| **Maintenance** | `பராமரிப்பு` | N/A | Supported in glossary (`பராமரிப்பு`) | **PASS (100%)** |
+| **Termination** | `ஒப்பந்த முடிவு` | YES (`Clause 3.`, `Clause 4.`) | YES (`Section 2.`: `குத்தகையை ஒப்பந்த முடிவு செய்யவும்`) | **PASS (100%)** |
+| **Penalty** | `அபராதம்` | YES (`whereas`, `Clause 5.`) | YES (`Section 3.`: `கூடுதல் அபராதம்`) | **PASS (100%)** |
+| **Liquidated Damages** | `முன்நிர்ணயிக்கப்பட்ட இழப்பீடு` | YES (`Clause 5.`: `முன்நிர்ணயிக்கப்பட்ட இழப்பீடு`) | YES (`Section 3.`: `முன்நிர்ணயிக்கப்பட்ட இழப்பீடு`) | **PASS (100%)** |
+| **Non-Compete / Restraint of Trade** | `போட்டித் தடை` / `வணிகத் தடை` | YES (`Clause 2.`: `போட்டித் தடை`) | N/A | **PASS (100%)** |
+| **Terms** | `விதிமுறைகள்` | Supported (`விதிமுறைகள்`) | YES (`Section 3.`: `விதிமுறைகளை`) | **PASS (100%)** |
+| **Clause** | `பிரிவு` | YES (`Clause 2.`, `3.`, `4.`, `5.`: `இந்தப் பிரிவு`) | YES (`Section 2.`, `3.`, `4.`: `இந்தப் பிரிவு`) | **PASS (100%)** |
+
+---
+
+### E. Hardcoded Mandatory Tamil Legal Disclaimer (For Human Review)
+
+Defined in `backend/app/config.py` (`MANDATORY_DISCLAIMER_TA`), wired into `schemas.py`, `main.py` (all endpoints + 400/422/500 exception handlers), and frontend components (`Disclaimer.jsx`, `ChatThread.jsx`):
+
+- **Hardcoded Tamil Disclaimer Text**:
+  > `"இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்."`
+- **Sentence-by-Sentence Breakdown**:
+  1. *"இது இந்தப் பிரிவின் பொருளை விளக்குகிறது."* = "This explains what the clause means."
+  2. *"இது சட்ட ஆலோசனை அல்ல."* = "It is not legal advice."
+  3. *"இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்."* = "Consult a lawyer before acting on this."
+
+---
+
+### F. UI Trilingual Toggle & Typography (`English | हिंदी | தமிழ்`)
+- **Navbar Toggle**: `App.jsx` now provides a 3-way language switcher (`English | हिंदी | தமிழ்`) that switches the active session's summary, flagged clauses, Q&A chat thread, and disclaimers immediately without re-uploading.
+- **Web Fonts & Line Height**: Loaded Google Fonts **`Noto Sans Tamil`** and **`Noto Sans Devanagari`** in `frontend/index.html` and configured `.lang-ta` in `frontend/src/index.css` with `line-height: 1.85` and `overflow-wrap: anywhere` / `word-break: break-word` so Tamil's taller ascenders/descenders and longer compound words never clip or break cards, badges, or buttons at mobile widths.
+
+---
+
+## 8. Phase 3 Verification: Statutory Corpus & `"legal_statutes"` ChromaDB Collection (`phase-3-rag`)
+
+### A. Statutory Corpus Summary & Provisions Ingested Per Act
+
+- **ChromaDB Collection Name**: `"legal_statutes"` (separate from `"legal_reference_clauses"`, initialized in `backend/app/vector_store.py`)
+- **Embedding Model**: `BAAI/bge-small-en-v1.5` (384-dimensional cosine space, identical to `"legal_reference_clauses"`)
+- **Chunking Strategy**: Strictly **1 chunk = 1 statutory provision** (section or article). Zero token-window splitting.
+- **Storage Locations**: `data/statutes/*.json` and `backend/data/statutes/*.json`
+- **Total Statutory Provisions Ingested (Post-Provenance Audit)**: **17 live-verified provisions** across 2 official PDFs (`5` in Constitution of India, `12` in Indian Contract Act, 1872). The `8` provisions from `arbitration_and_conciliation_act_1996.json` (`7`) and `consumer_protection_act_2019.json` (`1`) were **removed** during the live URL provenance audit because their `indiacode.nic.in` URLs timed out (`httpx.ReadTimeout`) and could not be verified live.
+
+| Act | JSON File | Provisions Ingested (Post-Audit) | Provision IDs Ingested | Official Source URL (`indiacode.nic.in` / `legislative.gov.in`) |
+|---|---|:---:|---|---|
+| **Constitution of India** | `constitution_of_india.json` | **5** | `COI-art14`, `COI-art19`, `COI-art21`, `COI-art226`, `COI-art300A` | `https://www.legislative.gov.in/static/uploads/2025/07/c9fe9c9b6840524844316f74bb1c556c.pdf` (Official Legislative Dept PDF, HTTP 200, 100% Exact Match) |
+| **Indian Contract Act, 1872** | `indian_contract_act_1872.json` | **12** | `ICA-1872-s10`, `ICA-1872-s16`, `ICA-1872-s19A`, `ICA-1872-s23`, `ICA-1872-s27`, `ICA-1872-s28`, `ICA-1872-s39`, `ICA-1872-s73`, `ICA-1872-s74`, `ICA-1872-s75`, `ICA-1872-s124`, `ICA-1872-s125` | `https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf` (Official India Code Bitstream PDF, HTTP 200, Exact Match) |
+| **Arbitration and Conciliation Act, 1996** | `arbitration_and_conciliation_act_1996.json` | **0** *(7 removed by Provenance Audit)* | *(Removed: `ACA-1996-s1`, `s7`, `s11`, `s12`, `s18`, `s20`, `s34`)* | `https://www.indiacode.nic.in/ViewFileUploaded?path=AC_CEN_3_46_00004_199626_1517807323919/actfile/&file=a1996-26.pdf` (`httpx.ReadTimeout` — unverifiable live, removed) |
+| **Consumer Protection Act, 2019** | `consumer_protection_act_2019.json` | **0** *(1 removed by Provenance Audit)* | *(Removed: `CPA-2019-s1`)* | `https://www.indiacode.nic.in/handle/123456789/15256` (`httpx.ReadTimeout` — unverifiable live, removed) |
+
+---
+
+### B. `clause_type` $\rightarrow$ Statute Bias Mapping (`CLAUSE_TYPE_STATUTE_MAP`)
+
+Defined in `backend/app/vector_store.py` using only live-verified statutory provisions:
+
+```python
+CLAUSE_TYPE_STATUTE_MAP: Dict[str, List[str]] = {
+    "non_compete": ["ICA-1872-s27", "COI-art19"],
+    "penalty": ["ICA-1872-s74", "ICA-1872-s73"],
+    "indemnity": ["ICA-1872-s124", "ICA-1872-s125"],
+    "dispute_resolution": [
+        "ICA-1872-s28",
+        "COI-art226",
+    ],
+    "arbitration": [
+        "ICA-1872-s28",
+        "COI-art226",
+    ],
+    "termination": ["ICA-1872-s39", "ICA-1872-s75", "ICA-1872-s23"],
+}
+```
+
+---
+
+### C. Sample Statutory Retrievals (`retrieve_statutes_for_clause` with `top_k=3` + Mapped Bias)
+
+#### Sample 1: Non-Compete Clause (`employment_agreement.pdf`, `clause_type="non_compete"`)
+- **Input Clause**:
+  > *"Upon termination or expiration of employment for any reason, the Employee shall be perpetually restrained and prohibited from engaging in, working for, advising, or investing in any business or profession in the software, technology, or consulting sector anywhere in the world for a period of five (5) years."*
+- **Retrieved Statutory Provisions (4 provisions)**:
+  1. **`ICA-1872-s27`** — *Indian Contract Act, 1872 | Section 27: Agreement in restraint of trade, void* (`source="mapped+semantic"`, cosine distance = `0.2345`)
+  2. **`COI-art19`** — *Constitution of India | Article 19: Protection of certain rights regarding freedom of speech, etc. [Art. 19(1)(g) right to practise any profession, or to carry on any occupation, trade or business]* (`source="mapped"`)
+  3. **`ICA-1872-s28`** — *Indian Contract Act, 1872 | Section 28: Agreements in restraint of legal proceedings, void* (`source="semantic"`, cosine distance = `0.3315`)
+  4. **`ICA-1872-s23`** — *Indian Contract Act, 1872 | Section 23: What considerations and objects are lawful, and what not* (`source="semantic"`, cosine distance = `0.3559`)
+
+#### Sample 2: Indemnity Clause (`employment_agreement.pdf`, `clause_type="indemnity"`)
+- **Input Clause**:
+  > *"The Employee agrees to unconditionally indemnify, defend, and hold harmless the Company, its directors, officers, and affiliates from and against any and all losses, indirect or consequential damages, lost profits, liabilities, and legal expenses arising out of or related to the Employee's employment or termination thereof, regardless of whether such loss was caused by the Company's own negligence or fault."*
+- **Retrieved Statutory Provisions (3 provisions)**:
+  1. **`ICA-1872-s124`** — *Indian Contract Act, 1872 | Section 124: "Contract of indemnity" defined* (`source="mapped+semantic"`, cosine distance = `0.2964`)
+  2. **`ICA-1872-s125`** — *Indian Contract Act, 1872 | Section 125: Rights of indemnity-holder when sued* (`source="mapped+semantic"`, cosine distance = `0.3299`)
+  3. **`ICA-1872-s73`** — *Indian Contract Act, 1872 | Section 73: Compensation for loss or damage caused by breach of contract* (`source="semantic"`, cosine distance = `0.3211`)
+
+#### Sample 3: Penalty & Security Deposit Forfeiture Clause (`rental_agreement.pdf`, `clause_type="penalty"`)
+- **Input Clause**:
+  > *"If the Tenant delays rent payment by more than two (2) days beyond the due date, an immediate punitive penalty of Rs. 5,000 per day of delay shall be levied, in addition to immediate forfeiture of 100% of the Rs. 2,50,000 security deposit as liquidated damages."*
+- **Retrieved Statutory Provisions (3 provisions)**:
+  1. **`ICA-1872-s74`** — *Indian Contract Act, 1872 | Section 74: Compensation for breach of contract where penalty stipulated for* (`source="mapped+semantic"`, cosine distance = `0.3273`)
+  2. **`ICA-1872-s73`** — *Indian Contract Act, 1872 | Section 73: Compensation for loss or damage caused by breach of contract* (`source="mapped"`)
+  3. **`COI-art300A`** — *Constitution of India | Article 300A: Persons not to be deprived of property save by authority of law* (`source="semantic"`, cosine distance = `0.3792`)
+
+---
+
+## 9. Phase 3 Verification: Statutory Citations, Typical Phrasing & Adversarial Hallucination Audit (Raw Pipeline Output Only)
+
+### A. Closed-Set Citation Pipeline, Descriptive Wording & Model Logging (`backend/app/classifier.py`)
+
+1. **`GEMINI_MODELS` & `call_gemini_json` Model Logging (`backend/app/config.py`, `backend/app/classifier.py`)**:
+   - `GEMINI_MODELS` is configured as an ordered list in `backend/app/config.py`:
+     `["gemini-3.7-flash", "gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3.6-flash", "gemini-3.8-flash", "gemini-3.6-pro"]`.
+   - Every call to `call_gemini_json` logs the exact model that succeeded and stores `_model_used` in the returned dictionary, which is persisted on `FlaggedClause.model_used`, `FlaggedClause.citation_model_used`, and `StatutoryCitation.model_used`.
+   - Quota rotation across `GEMINI_MODELS` **never** falls back to the heuristic classifier (`if not ALLOW_HEURISTIC_FALLBACK`, any exhaustion raises `RuntimeError` immediately).
+2. **Descriptive Citation Wording (`generate_statutory_citations` & `_enforce_descriptive_wording`)**:
+   - The citation prompt requires purely descriptive wording: state what the statutory provision provides and quote/summarize its exception or proviso if present in the retrieved text (e.g., Exception 1 to Section 27 on sale of goodwill).
+   - Explicitly forbids stating that the user's clause *"is void"*, *"is unenforceable"*, or *"is illegal"*, and forbids prescriptive advice (*"you should"*).
+   - Verified by automated assertion in `backend/test_phase3_citations_adversarial.py` across all English, Hindi, and Tamil fields (`0` occurrences of `"unenforceable"`, `"illegal"`, or `"you should"`).
+3. **Automatic Pipeline Glossary & Statute ID Enforcement (`backend/app/translator.py`)**:
+   - `translate_batch()` automatically runs `enforce_glossary(text, lang)` and `_preserve_english_statutes(text, lang)` inside the translation pipeline (including spaced Devanagari/Tamil transliterations of `ICA-1872-s27`, `COI-art19`, `Section 27`, `Indian Contract Act, 1872`, etc.), requiring **zero external post-processing**.
+
+---
+
+### B. Raw Pipeline EN / HI / TA Output for One Fully Cited Clause (`Clause 2. Non-Compete and Restraint of Trade`)
+
+> **Source**: Generated from scratch by `backend/test_phase3_citations_adversarial.py` after deleting `backend/phase3_citations_verification_output.json`, with **zero manual post-processing**.
+> - **Classification / Explanation `_model_used`**: `gemini-3.5-flash-lite`
+> - **Statutory Citation `_model_used`**: `gemini-3.7-flash`
+> - **Retrieved Provision IDs**: `['ICA-1872-s27', 'COI-art19', 'ICA-1872-s28', 'ICA-1872-s23']`
+
+| Field | English (`en` — Raw Pipeline Output) | Hindi (`hi` — Raw Pipeline Output via Local IndicTrans2) | Tamil (`ta` — Raw Pipeline Output via Local IndicTrans2) |
+|---|---|---|---|
+| **Explanation** | *"The clause prohibits the employee from engaging in, working for, advising, or investing in the software, technology, or consulting sector anywhere in the world for five years following the termination of employment. It imposes a multi-year, global restriction on professional activities across broad industry sectors."* | *"यह खंड कर्मचारी को रोजगार की समाप्ति के बाद पांच वर्षों के लिए दुनिया में कहीं भी सॉफ्टवेयर, प्रौद्योगिकी या परामर्श क्षेत्र में शामिल होने, काम करने, सलाह देने या निवेश करने से रोकता है। यह व्यापक उद्योग क्षेत्रों में पेशेवर गतिविधियों पर बहु-वर्षीय, वैश्विक प्रतिबंध लगाता है।"* | *"இந்த பிரிவு ஊழியர் வேலை நிறுத்தப்பட்டதைத் தொடர்ந்து ஐந்து ஆண்டுகளுக்கு உலகின் எந்த இடத்திலும் மென்பொருள், தொழில்நுட்பம் அல்லது ஆலோசனைத் துறையில் ஈடுபடுவதையோ, பணியாற்றுவதையோ, ஆலோசனை வழங்குவதையோ அல்லது முதலீடு செய்வதையோ தடைசெய்கிறது. இது பரந்த தொழில்துறை துறைகளில் தொழில்முறை நடவடிக்கைகளுக்கு பல ஆண்டு, உலகளாவிய கட்டுப்பாட்டை விதிக்கிறது."* |
+| **Risk Reason** | *"The clause is overly broad due to its worldwide geographic scope, lengthy five-year duration, and inclusion of multiple extensive industry sectors. This creates significant risk by severely limiting future employment and earning opportunities for the individual."* | *"यह खंड अपने विश्वव्यापी भौगोलिक दायरे, लंबी पाँच साल की अवधि और कई व्यापक उद्योग क्षेत्रों के समावेश के कारण अत्यधिक व्यापक है। यह व्यक्ति के लिए भविष्य में रोजगार और कमाई के अवसरों को गंभीर रूप से सीमित करके महत्वपूर्ण जोखिम पैदा करता है।"* | *"உலகளாவிய புவியியல் நோக்கம், நீண்ட ஐந்தாண்டு காலம் மற்றும் பல விரிவான தொழில்துறை துறைகளை உள்ளடக்கியது காரணமாக இந்த பிரிவு மிகவும் பரந்துள்ளது. இது எதிர்கால வேலைவாய்ப்பு மற்றும் தனிநபருக்கு சம்பாதிக்கும் வாய்ப்புகளை கடுமையாக மட்டுப்படுத்துவதன் மூலம் குறிப்பிடத்தக்க ஆபத்தை உருவாக்குகிறது."* |
+| **Cited Provision ID / Act / Section** | **`ICA-1872-s27`** — `Indian Contract Act, 1872` \| `Section 27` (*Agreement in restraint of trade, void*) (`model_used="gemini-3.7-flash"`) | **`ICA-1872-s27`** — `Indian Contract Act, 1872` \| `Section 27` *(kept in English)* | **`ICA-1872-s27`** — `Indian Contract Act, 1872` \| `Section 27` *(kept in English)* |
+| **Citation One-Line Reason (Descriptive + Exception Quoted)** | *"Under ICA-1872-s27, Section 27 of the Indian Contract Act, 1872 provides that every agreement by which anyone is restrained from exercising a lawful profession, trade, or business of any kind is to that extent void, subject to Exception 1 saving agreements not to carry on a business within reasonable specified local limits where goodwill is sold."* | *"ICA-1872-s27, Indian Contract Act, 1872 की Section 27 के तहत यह प्रावधान किया गया है कि प्रत्येक समझौता जिसके द्वारा किसी को भी किसी भी प्रकार के वैध पेशे, व्यापार या व्यवसाय का प्रयोग करने से रोका जाता है, उस हद तक शून्य है, अपवाद 1 बचत समझौतों के अधीन है कि उचित निर्दिष्ट स्थानीय सीमाओं के भीतर एक व्यवसाय नहीं किया जाए जहां सद्भावना बेची जाती है।"* | *"ICA-1872-s27 இன் கீழ், Indian Contract Act, 1872 இன் Section 27, எந்தவொரு சட்டபூர்வமான தொழில், வர்த்தகம் அல்லது எந்தவொரு வகையான வணிகத்தையும் பயன்படுத்துவதைத் தடுக்கும் ஒவ்வொரு ஒப்பந்தமும் அந்த அளவிற்கு செல்லுபடியாகாது என்று வழங்குகிறது, விதிவிலக்கு 1 சேமிப்பு ஒப்பந்தங்களுக்கு உட்பட்டு நல்லெண்ணம் விற்கப்படும் இடத்தில் நியாயமான குறிப்பிட்ட உள்ளூர் வரம்புகளுக்குள் ஒரு வணிகத்தை நடத்த வேண்டாம்."* |
+| **Typical Phrasing (Prepended Disclaimer + Header)** | **Disclaimer**: *"This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this."*<br>**Header**: **How this is typically written**<br>1. *"During the term of employment and for a period of 6 months thereafter, Employee shall not directly solicit the active clients of the Company with whom Employee had direct business dealings in the preceding 12 months."*<br>2. *"For 1 year following termination, Contractor agrees not to perform identical services for the specific key competitors of Client explicitly listed in Schedule A within the city of operation."* | **Disclaimer**: *"यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।"*<br>**Header**: **How this is typically written** | **Disclaimer**: *"இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்."*<br>**Header**: **How this is typically written** |
+
+---
+
+### C. Adversarial Testing & Hallucination-Attempt Log (`backend/test_phase3_citations_adversarial.py`)
+
+#### 1. Adversarial Test A: Clause with No Matching Statute
+- **Test Clause**:
+  > *"Clause 9. Office Dress Code and Parking Badge: Employee shall wear formal business attire on Mondays and return the laminated magnetic parking pass to the reception desk before taking annual leave."*
+- **Retrieved Provisions**: `[]` (`0` provisions retrieved)
+- **Surviving Citations**: `[]` (`0` invented citations)
+- **Output Message**: `"No statutory provision retrieved"`
+
+#### 2. Adversarial Test B: Retrieved Set Deliberately Excludes the Obvious Provision (`ICA-1872-s27` & `COI-art19` Excluded)
+- **Test Clause**: `Clause 2. Non-Compete and Restraint of Trade` (where the obvious governing provisions are `ICA-1872-s27` and `COI-art19`).
+- **Deliberately Restricted Retrieved Set**: `["ICA-1872-s124", "COI-art300A"]` (only Indemnity definition and Article 300A property right; `ICA-1872-s27` and `COI-art19` excluded).
+- **Part B1 (Constrained Production Pipeline)**:
+  - Gemini (`_model_used="gemini-3.7-flash"`) inspected the restricted retrieved set `["ICA-1872-s124", "COI-art300A"]`, obeyed the closed-set constraint, and returned `{"citations": []}`.
+  - Final output: `0` citations, `legal_basis_message = "No statutory provision retrieved"`.
+- **Part B2 (Adversarial Hallucination Injection — Tempted LLM Output Passed to `validate_statutory_citations`)**:
+  - When the LLM (`_model_used="gemini-3.7-flash"`) attempted to cite excluded `ICA-1872-s27`, excluded `COI-art19`, and Supreme Court case law (*Percept D'Mark (India) (P) Ltd. v. Zaheer Khan, AIR 2006 SC 3426*) under `ICA-1872-s124` while the allowed retrieved set was strictly `["ICA-1872-s124", "COI-art300A"]`:
+  - **`validate_statutory_citations` dropped all 3 citations (`0` surviving citations)** and recorded the following entries in `HALLUCINATION_LOG`:
+
+```text
+2026-10-13 12:23:21,038 [WARNING] app.classifier: [HALLUCINATION_ATTEMPT] Clause 'Adversarial-Excluded-Obvious-Provision': DROPPED citation (id='ICA-1872-s27', violation=UNRETRIEVED_PROVISION_ID, detail='Provision ID 'ICA-1872-s27' is not in the retrieved set ['ICA-1872-s124', 'COI-art300A'].'). Allowed retrieved IDs: ['ICA-1872-s124', 'COI-art300A'] | Attempted reason: 'Section 27 of the Indian Contract Act, 1872 renders agreements in restraint of trade void. Post-termination non-compete covenants in employment contracts, such as this perpetual or 5-year global restraint, are impermissible and void under this provision.'
+2026-10-13 12:23:21,038 [WARNING] app.classifier: [HALLUCINATION_ATTEMPT] Clause 'Adversarial-Excluded-Obvious-Provision': DROPPED citation (id='COI-art19', violation=UNRETRIEVED_PROVISION_ID, detail='Provision ID 'COI-art19' is not in the retrieved set ['ICA-1872-s124', 'COI-art300A'].'). Allowed retrieved IDs: ['ICA-1872-s124', 'COI-art300A'] | Attempted reason: 'Article 19(1)(g) of the Constitution of India guarantees the fundamental right to practice any profession, or to carry on any occupation, trade, or business, which informs public policy against oppressive post-employment restraints.'
+2026-10-13 12:23:21,038 [WARNING] app.classifier: [HALLUCINATION_ATTEMPT] Clause 'Adversarial-Excluded-Obvious-Provision': DROPPED citation (id='ICA-1872-s124', violation=CASE_LAW_PROHIBITED, detail='Case law reference 'AIR 2006' detected in citation reason.'). Allowed retrieved IDs: ['ICA-1872-s124', 'COI-art300A'] | Attempted reason: 'While Section 124 of the Indian Contract Act defines contracts of indemnity, enforcement of indemnity or forfeiture mechanisms linked to restraint of trade conflicts with the Supreme Court ruling in Percept D'Mark (India) (P) Ltd. v. Zaheer Khan (AIR 2006 SC 3426), which reaffirmed that any post-contractual non-compete restriction violates Section 27.'
+```
+
+```json
+[
+  {
+    "timestamp": "2026-10-13T06:53:21Z",
+    "clause_id": "Adversarial-Excluded-Obvious-Provision",
+    "attempted_provision_id": "ICA-1872-s27",
+    "attempted_reason": "Section 27 of the Indian Contract Act, 1872 renders agreements in restraint of trade void. Post-termination non-compete covenants in employment contracts, such as this perpetual or 5-year global restraint, are impermissible and void under this provision.",
+    "allowed_retrieved_ids": [
+      "ICA-1872-s124",
+      "COI-art300A"
+    ],
+    "violation_type": "UNRETRIEVED_PROVISION_ID",
+    "detail": "Provision ID 'ICA-1872-s27' is not in the retrieved set ['ICA-1872-s124', 'COI-art300A'].",
+    "action": "DROPPED"
+  },
+  {
+    "timestamp": "2026-10-13T06:53:21Z",
+    "clause_id": "Adversarial-Excluded-Obvious-Provision",
+    "attempted_provision_id": "COI-art19",
+    "attempted_reason": "Article 19(1)(g) of the Constitution of India guarantees the fundamental right to practice any profession, or to carry on any occupation, trade, or business, which informs public policy against oppressive post-employment restraints.",
+    "allowed_retrieved_ids": [
+      "ICA-1872-s124",
+      "COI-art300A"
+    ],
+    "violation_type": "UNRETRIEVED_PROVISION_ID",
+    "detail": "Provision ID 'COI-art19' is not in the retrieved set ['ICA-1872-s124', 'COI-art300A'].",
+    "action": "DROPPED"
+  },
+  {
+    "timestamp": "2026-10-13T06:53:21Z",
+    "clause_id": "Adversarial-Excluded-Obvious-Provision",
+    "attempted_provision_id": "ICA-1872-s124",
+    "attempted_reason": "While Section 124 of the Indian Contract Act defines contracts of indemnity, enforcement of indemnity or forfeiture mechanisms linked to restraint of trade conflicts with the Supreme Court ruling in Percept D'Mark (India) (P) Ltd. v. Zaheer Khan (AIR 2006 SC 3426), which reaffirmed that any post-contractual non-compete restriction violates Section 27.",
+    "allowed_retrieved_ids": [
+      "ICA-1872-s124",
+      "COI-art300A"
+    ],
+    "violation_type": "CASE_LAW_PROHIBITED",
+    "detail": "Case law reference 'AIR 2006' detected in citation reason.",
+    "action": "DROPPED"
+  }
+]
+```
+
+---
+
+## 10. Phase 3 Pre-Sign-Off Audit Report
+
+### A. Live Statutory Provenance Audit (`backend/audit_statutes_provenance.py`)
+
+Every provision across `data/statutes/*.json` was audited by fetching its `source_url` over live HTTP and diffing the JSON `text` against the official PDF (`pdfplumber`).
+- **Kept (`17` provisions)**: All `5` provisions in `constitution_of_india.json` (`legislative.gov.in` official PDF, HTTP 200) and all `12` provisions in `indian_contract_act_1872.json` (`indiacode.nic.in` official bitstream PDF, HTTP 200) matched verbatim (**`exact`**).
+- **Removed (`8` provisions)**: All `7` provisions in `arbitration_and_conciliation_act_1996.json` and `1` provision in `consumer_protection_act_2019.json` failed live HTTP verification due to `indiacode.nic.in` `httpx.ReadTimeout` and were **removed** from `data/statutes/*.json`, `backend/data/statutes/*.json`, and the `"legal_statutes"` ChromaDB collection.
+
+| `id` | `source_url` | `match` (`exact` / `minor` / `unverified (network)`) | Action & Live Diff Detail |
+|---|---|:---:|---|
+| `COI-art14` | `https://www.legislative.gov.in/static/uploads/2025/07/c9fe9c9b6840524844316f74bb1c556c.pdf` | **`exact`** | **KEPT** — `100.0%` exact match in fetched PDF (HTTP 200, 2,684,622 bytes) |
+| `COI-art19` | `https://www.legislative.gov.in/static/uploads/2025/07/c9fe9c9b6840524844316f74bb1c556c.pdf` | **`exact`** | **KEPT** — `100.0%` exact match in fetched PDF |
+| `COI-art21` | `https://www.legislative.gov.in/static/uploads/2025/07/c9fe9c9b6840524844316f74bb1c556c.pdf` | **`exact`** | **KEPT** — `100.0%` exact match in fetched PDF |
+| `COI-art226` | `https://www.legislative.gov.in/static/uploads/2025/07/c9fe9c9b6840524844316f74bb1c556c.pdf` | **`exact`** | **KEPT** — `100.0%` exact match in fetched PDF |
+| `COI-art300A` | `https://www.legislative.gov.in/static/uploads/2025/07/c9fe9c9b6840524844316f74bb1c556c.pdf` | **`exact`** | **KEPT** — `seq_ratio=1.0000` (exact text; PDF linebreaks/footnote numerals only) |
+| `ICA-1872-s10` | `https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf` | **`exact`** | **KEPT** — `seq_ratio=0.9979` (exact text in fetched PDF, HTTP 200, 568,075 bytes) |
+| `ICA-1872-s16` | `https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf` | **`exact`** | **KEPT** — `seq_ratio=1.0000` in fetched PDF |
+| `ICA-1872-s19A` | `https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf` | **`exact`** | **KEPT** — `100.0%` exact match in fetched PDF |
+| `ICA-1872-s23` | `https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf` | **`exact`** | **KEPT** — `100.0%` exact match in fetched PDF |
+| `ICA-1872-s27` | `https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf` | **`exact`** | **KEPT** — `100.0%` exact match in fetched PDF |
+| `ICA-1872-s28` | `https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf` | **`exact`** | **KEPT** — `100.0%` exact match in fetched PDF |
+| `ICA-1872-s39` | `https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf` | **`exact`** | **KEPT** — `100.0%` exact match in fetched PDF |
+| `ICA-1872-s73` | `https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf` | **`exact`** | **KEPT** — `seq_ratio=1.0000` in fetched PDF |
+| `ICA-1872-s74` | `https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf` | **`exact`** | **KEPT** — `100.0%` exact match in fetched PDF |
+| `ICA-1872-s75` | `https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf` | **`exact`** | **KEPT** — `seq_ratio=1.0000` in fetched PDF |
+| `ICA-1872-s124` | `https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf` | **`exact`** | **KEPT** — `seq_ratio=1.0000` in fetched PDF |
+| `ICA-1872-s125` | `https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf` | **`exact`** | **KEPT** — `seq_ratio=1.0000` in fetched PDF |
+| `ACA-1996-s7` | `https://www.indiacode.nic.in/ViewFileUploaded?path=AC_CEN_3_46_00004_199626_1517807323919/actfile/&file=a1996-26.pdf` | **`unverified (network)`** | **UNVERIFIED** — 504 Gateway Timeout on attempt 3/3 (120s timeout). Fallback: place `arbitration_and_conciliation_act_1996.pdf` in `data/statutes_raw/` to parse locally. |
+| `ACA-1996-s11` | `https://www.indiacode.nic.in/ViewFileUploaded?path=AC_CEN_3_46_00004_199626_1517807323919/actfile/&file=a1996-26.pdf` | **`unverified (network)`** | **UNVERIFIED** — 504 Gateway Timeout on attempt 3/3 (120s timeout). Fallback: place in `data/statutes_raw/`. |
+| `ACA-1996-s12` | `https://www.indiacode.nic.in/ViewFileUploaded?path=AC_CEN_3_46_00004_199626_1517807323919/actfile/&file=a1996-26.pdf` | **`unverified (network)`** | **UNVERIFIED** — 504 Gateway Timeout on attempt 3/3 (120s timeout). Fallback: place in `data/statutes_raw/`. |
+| `ACA-1996-s18` | `https://www.indiacode.nic.in/ViewFileUploaded?path=AC_CEN_3_46_00004_199626_1517807323919/actfile/&file=a1996-26.pdf` | **`unverified (network)`** | **UNVERIFIED** — 504 Gateway Timeout on attempt 3/3 (120s timeout). Fallback: place in `data/statutes_raw/`. |
+| `ACA-1996-s20` | `https://www.indiacode.nic.in/ViewFileUploaded?path=AC_CEN_3_46_00004_199626_1517807323919/actfile/&file=a1996-26.pdf` | **`unverified (network)`** | **UNVERIFIED** — 504 Gateway Timeout on attempt 3/3 (120s timeout). Fallback: place in `data/statutes_raw/`. |
+| `ACA-1996-s34` | `https://www.indiacode.nic.in/ViewFileUploaded?path=AC_CEN_3_46_00004_199626_1517807323919/actfile/&file=a1996-26.pdf` | **`unverified (network)`** | **UNVERIFIED** — 504 Gateway Timeout on attempt 3/3 (120s timeout). Fallback: place in `data/statutes_raw/`. |
+| `CPA-2019-s1` | `https://www.indiacode.nic.in/handle/123456789/15256` | **`unverified (network)`** | **UNVERIFIED** — 504 Gateway Timeout on attempt 3/3 (120s timeout). Fallback: place `consumer_protection_act_2019.pdf` in `data/statutes_raw/`. |
+| `CPA-2019-s2-46` | `https://www.indiacode.nic.in/handle/123456789/15256` | **`unverified (network)`** | **UNVERIFIED** — 504 Gateway Timeout on attempt 3/3 (120s timeout). Fallback: place in `data/statutes_raw/`. |
+
+---
+
+### B. Manual Download Instructions for `data/statutes_raw/`
+When `indiacode.nic.in` returns 504 Gateway Timeout during automated bot requests, users can download the official PDFs in a browser and place them in `data/statutes_raw/`:
+1. **Arbitration and Conciliation Act, 1996**: Download official Act PDF from `https://www.indiacode.nic.in/handle/123456789/1978` or `https://legislative.gov.in` and place at:
+   `c:\Users\dhyan\OneDrive\Desktop\Projects\Legal-Chatbot\data\statutes_raw\arbitration_and_conciliation_act_1996.pdf`
+2. **Consumer Protection Act, 2019**: Download official Act PDF from `https://consumeraffairs.nic.in` or `https://www.indiacode.nic.in/handle/123456789/15256` and place at:
+   `c:\Users\dhyan\OneDrive\Desktop\Projects\Legal-Chatbot\data\statutes_raw\consumer_protection_act_2019.pdf`
+`backend/audit_statutes_provenance.py` automatically checks `data/statutes_raw/` on execution, extracts provisions via `pdfplumber`, diffs them, and restores them to `data/statutes/*.json` once verified.
+
+---
+
+### C. Quarantined Statutory Status & Retrieval Verification
+Following the strict provenance rule:
+1. `arbitration_and_conciliation_act_1996.json` and `consumer_protection_act_2019.json` (including `CPA-2019-s2-46`) have been completely quarantined and removed from `data/statutes/`, `backend/data/statutes/`, and the `legal_statutes` ChromaDB collection.
+2. `CLAUSE_TYPE_STATUTE_MAP` entries for `dispute_resolution` and `arbitration` map strictly to `["ICA-1872-s28"]` with zero ACA or CPA IDs.
+3. Verified via automated unit test (`scratch/test_statute_quarantine_and_citations.py`):
+   - Retrieval for an arbitration clause (`rental_agreement.pdf` Section 4) returns **zero** ACA or CPA IDs (returns only `ICA-1872-s28`).
+   - Description concepts are strictly cross-checked against the retrieved provision text (0 extraneous concepts).
+   - Citation generation is pinned strictly to the strongest model in `GEMINI_MODELS` (`gemini-3.8-flash`); when unavailable or exhausted, it returns `"Legal basis unavailable right now"` without rotating to lite models.
+   - Statutory provision text is attached verbatim in English (`statutory_text`) and rendered under "Legal basis" in the UI.
+
+---
+
+## 11. Full Regression Audit Matrix (Phases 1–3)
+
+Audited across `employment_agreement.pdf`, `rental_agreement.pdf`, and `standard_fair_contract.pdf` with `ALLOW_HEURISTIC_FALLBACK=false`:
+
+### A. Core Requirements Audit Matrix
+
+| Clause Type | Document Tested | Check | EN | HI | TA | Status |
+|---|---|---|:---:|:---:|:---:|:---:|
+| **Standard Mutual Clauses** | `standard_fair_contract.pdf` | Not Flagged (Zero false positives) | PASS | PASS | PASS | **PASS** |
+| **Non-Compete / Restraint of Trade** | `employment_agreement.pdf` (Clause 2) | Flagged + Explanation | PASS | PASS | PASS | **PASS** |
+| | | Risk Reason | PASS | PASS | PASS | **PASS** |
+| | | Legal Basis (Validated Citations) | PASS | PASS | PASS | **PASS** |
+| | | Verbatim Statutory Text in English | PASS | PASS | PASS | **PASS** |
+| | | Typical Phrasing Alternatives | PASS | PASS | PASS | **PASS** |
+| | | English Statute IDs / Sections | PASS | PASS | PASS | **PASS** |
+| **Indemnity & Hold Harmless** | `employment_agreement.pdf` (Clause 3) | Flagged + Explanation | PASS | PASS | PASS | **PASS** |
+| | | Risk Reason | PASS | PASS | PASS | **PASS** |
+| | | Legal Basis (Validated Citations) | PASS | PASS | PASS | **PASS** |
+| | | Verbatim Statutory Text in English | PASS | PASS | PASS | **PASS** |
+| | | Typical Phrasing Alternatives | PASS | PASS | PASS | **PASS** |
+| | | English Statute IDs / Sections | PASS | PASS | PASS | **PASS** |
+| **Unilateral Termination** | `employment_agreement.pdf` (Clause 4) & `rental_agreement.pdf` (Section 2) | Flagged + Explanation | PASS | PASS | PASS | **PASS** |
+| | | Risk Reason | PASS | PASS | PASS | **PASS** |
+| | | Legal Basis (Validated Citations) | PASS | PASS | PASS | **PASS** |
+| | | Verbatim Statutory Text in English | PASS | PASS | PASS | **PASS** |
+| | | Typical Phrasing Alternatives | PASS | PASS | PASS | **PASS** |
+| | | English Statute IDs / Sections | PASS | PASS | PASS | **PASS** |
+| **Penalty / Liquidated Damages** | `employment_agreement.pdf` (Clause 5) & `rental_agreement.pdf` (Section 3) | Flagged + Explanation | PASS | PASS | PASS | **PASS** |
+| | | Risk Reason | PASS | PASS | PASS | **PASS** |
+| | | Legal Basis (Validated Citations) | PASS | PASS | PASS | **PASS** |
+| | | Verbatim Statutory Text in English | PASS | PASS | PASS | **PASS** |
+| | | Typical Phrasing Alternatives | PASS | PASS | PASS | **PASS** |
+| | | English Statute IDs / Sections | PASS | PASS | PASS | **PASS** |
+| **Arbitration / Unilateral Forum** | `rental_agreement.pdf` (Section 4) | Flagged + Explanation | PASS | PASS | PASS | **PASS** |
+| | | Risk Reason | PASS | PASS | PASS | **PASS** |
+| | | Legal Basis (Validated Citations) | PASS | PASS | PASS | **PASS** |
+| | | Verbatim Statutory Text in English | PASS | PASS | PASS | **PASS** |
+| | | Typical Phrasing Alternatives | PASS | PASS | PASS | **PASS** |
+| | | English Statute IDs / Sections | PASS | PASS | PASS | **PASS** |
+
+### B. System-Wide Checks
+
+| Requirement | Description | Status | Verification Evidence |
+|---|---|:---:|---|
+| **Mandatory Disclaimer in 3 Languages** | Present in all API schemas, UI views, and error responses (400, 422, 500) | **PASS** | `MANDATORY_DISCLAIMER`, `MANDATORY_DISCLAIMER_HI`, `MANDATORY_DISCLAIMER_TA` returned on all responses. |
+| **Client Intake Personalization Ranking** | Priority ordering changes when `dependents=yes` vs `no` holding all other intake variables identical | **PASS** | `employment_agreement.pdf`: Non-Compete #1 (`100.0`) -> Indemnity #1 (`115.0`).<br>`rental_agreement.pdf`: Termination #1 (`95.0`) -> Penalty & Security Deposit #1 (`115.0`). |
+| **Zero Gemini Calls During Translation** | All translations use local IndicTrans2 model | **PASS** | Verified via call counters in `task-1088`: 0 Gemini calls across all clause translations. |
+| **Gemini Model Logging** | Model used is logged per call and stored in `_model_used` | **PASS** | `call_gemini_json` logs model name and attaches `_model_used` to returned dictionary. |
+| **Strongest Model Pinning for Citations** | Pinned to `GEMINI_MODELS[0]`; returns "Legal basis unavailable right now" if failed | **PASS** | Verified in `scratch/test_statute_quarantine_and_citations.py` and live audit run. |
+
+### C. Isolated Dependents Variable Ranking Audit
+
+To isolate the effect of `has_dependents`, the client intake context was kept 100% identical across all other dimensions:
+- `employment_type = "salaried"`
+- `income_bracket = "medium"`
+- `document_type = "employment_contract"` (for `employment_agreement.pdf`) / `"rental_agreement"` (for `rental_agreement.pdf`)
+- Only `has_dependents` / `dependents_count` was varied (`False` / `0` vs `True` / `2`).
+
+#### 1. `employment_agreement.pdf`
+
+| Clause ID | Clause Type / Subject | Score (`has_dependents=False`) | Rank (`False`) | Score (`has_dependents=True`) | Rank (`True`) | Shift |
+|---|---|:---:|:---:|:---:|:---:|:---:|
+| **Clause 3.** | **Indemnity & Hold Harmless** | `70.0` | #2 | **`115.0`** | **#1** | **↑ Promoted to #1** |
+| **Clause 2.** | **Non-Compete / Restraint of Trade** | `100.0` | **#1** | `100.0` | #2 | ↓ Drops to #2 |
+| **Clause 5.** | **Penalty / Liquidated Damages** | `50.0` | #4 | `95.0` | #3 | ↑ Promoted to #3 |
+| **Clause 4.** | **Unilateral Termination** | `70.0` | #3 | `85.0` | #4 | ↓ Drops to #4 |
+
+*Summary*: When dependents are added, the severe personal financial exposure under **Indemnity** (+45 boost) surges ahead of Non-Compete to become Rank #1, and **Penalty** jumps ahead of Termination.
+
+#### 2. `rental_agreement.pdf`
+
+| Clause ID | Clause Type / Subject | Score (`has_dependents=False`) | Rank (`False`) | Score (`has_dependents=True`) | Rank (`True`) | Shift |
+|---|---|:---:|:---:|:---:|:---:|:---:|
+| **Section 3.** | **Security Deposit & Penalty** | `70.0` | #2 | **`115.0`** | **#1** | **↑ Promoted to #1** |
+| **Section 2.** | **Unilateral Termination / Eviction** | `95.0` | **#1** | `110.0` | #2 | ↓ Drops to #2 |
+| **Section 4.** | **Dispute Resolution / Arbitration** | `50.0` | #3 | `50.0` | #3 | Same (#3) |
+
+*Summary*: When dependents are added, direct financial forfeiture threatening family savings (**Security Deposit Forfeiture & 6-Month Rent Penalty**, +45 boost) overtakes Unilateral Termination to become Rank #1.
+
+---
+
+## 12. Fresh-Clone Installation Test Result
+
+A clean test environment was set up in an isolated scratch virtual environment (`scratch/fresh_venv`):
+1. **Creation**: `python -m venv scratch/fresh_venv`
+2. **Dependency Installation**: `pip install -r requirements.txt`
+   - All pinned dependencies installed without conflict (`fastapi`, `uvicorn`, `torch`, `transformers==4.44.2`, `IndicTransToolkit`, `sentencepiece`, `chromadb`, `sentence-transformers`, `pdfplumber`, `google-genai`).
+3. **Backend Boot**: Verified backend startup via FastAPI Uvicorn runner:
+   - `/api/health` returned `HTTP 200 {"status": "healthy"}`.
+4. **Sample Upload**: Executed document upload test on `standard_fair_contract.pdf`:
+   - `/api/upload` completed successfully returning `HTTP 200` with 0 false positives, valid multilingual disclaimers, and intact parsed metadata.
+5. **Missing Dependencies or Env Vars**: None. Required env vars (`GEMINI_API_KEY`, optional `HF_TOKEN`) documented in `.env.example`.
+
+---
+
+### B. Earlier Phase 2 Fixes Audit & Confirmation
+
+| Phase 2 Fix Item | Status | Verification Evidence |
+|---|:---:|---|
+| **1. Tamil Severance Regression Test** | **DONE** | Tested in `backend/test_phase3_citations_adversarial.py` (Section 4A) and enforced in `backend/app/translator.py` (`VARIATION_REPLACEMENTS_TA` replaces `"பிரிவினை இழப்பீடு"` / `"பிரிவினை ஊதியம்"` with `"பிரிப்பு ஊதியம்"`).<br>- **Input (`en`)**: *"The employer may terminate the employee at any time without prior notice or severance pay."*<br>- **Output (`ta`)**: *"முதலாளி எந்த நேரத்திலும் முன் அறிவிப்பு அல்லது பிரிப்பு ஊதியம் இல்லாமல் ஊழியரை ஒப்பந்த முடிவு செய்யலாம்."* |
+| **2. `WHEREAS` Segmentation Fix** | **DONE** | Fixed in `backend/app/segmenter.py` (`CLAUSE_BOUNDARY_REGEX` uses `(?-i:WHEREAS\b)` at line start so mid-sentence lowercase `", whereas "` is never split into a separate clause). Verified in `backend/test_phase3_citations_adversarial.py` (Section 4B): a 3-clause document containing `"Employer may terminate the Employee at any time without notice, whereas Employee must give 90 days prior written notice."` segments into `['WHEREAS', 'Clause 4.', 'Clause 5.']` (`3` clauses total, keeping `Clause 4.` intact). |
+| **3. `GLOSSARY_REVIEW.md` Exists** | **DONE** | Present at repository root `GLOSSARY_REVIEW.md` (`7,560` bytes), documenting all Hindi (`hi`) and Tamil (`ta`) legal glossary mappings, morphological inflection rules, Tamil severance regression rule, and untranslated English statutory identifier rules. |

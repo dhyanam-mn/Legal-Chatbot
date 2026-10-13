@@ -23,10 +23,15 @@ def rank_flagged_clauses(
         c_type = clause.clause_type
 
         if intake.has_dependents or intake.dependents_count > 0:
+            # Substantial boost for direct financial liabilities threatening household stability
+            is_sec_deposit_or_maintenance = any(
+                term in (clause.title or "").lower() or term in (clause.original_text or "").lower()
+                for term in ["security deposit", "maintenance", "forfeiture"]
+            )
             if c_type in ["indemnity"]:
-                score += 25.0
-            elif c_type in ["penalty"]:
-                score += 20.0
+                score += 45.0
+            elif c_type in ["penalty"] or is_sec_deposit_or_maintenance:
+                score += 45.0
             elif c_type in ["termination"]:
                 score += 15.0
 
