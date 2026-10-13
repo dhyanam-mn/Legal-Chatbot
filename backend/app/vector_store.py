@@ -16,6 +16,17 @@ CLAUSE_TYPE_STATUTE_MAP: Dict[str, List[str]] = {
     "dispute_resolution": ["ICA-1872-s28"],
     "arbitration": ["ICA-1872-s28"],
     "termination": ["ICA-1872-s39", "ICA-1872-s75", "ICA-1872-s23"],
+    # Loan agreement clause types
+    "penal_interest": ["ICA-1872-s74", "ICA-1872-s73"],
+    "acceleration": ["ICA-1872-s39", "ICA-1872-s73"],
+    "foreclosure_charges": ["ICA-1872-s74"],
+    "unilateral_interest_change": ["ICA-1872-s10", "ICA-1872-s16"],
+    "guarantor_liability": ["ICA-1872-s124", "ICA-1872-s125"],
+    "set_off_lien": [],
+    # Employment extra clause types
+    "service_bond": ["ICA-1872-s27", "ICA-1872-s74"],
+    "ip_assignment": ["ICA-1872-s23", "ICA-1872-s27"],
+    "notice_period_garden_leave": ["ICA-1872-s27", "ICA-1872-s74"],
 }
 
 

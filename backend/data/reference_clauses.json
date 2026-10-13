@@ -78,5 +78,149 @@
       "Employer may terminate Employee's employment at any time without prior notice or severance pay, whereas Employee must provide 90 days prior written notice and pay a replacement fee.",
       "Lender may accelerate the full loan balance and demand immediate payment in full at any time at Lender's sole discretion without notice or cause."
     ]
+  },
+  "penal_interest": {
+    "clause_type": "penal_interest",
+    "title": "Penal / Default Interest",
+    "standard_examples": [
+      "In the event of payment default, default interest shall accrue on the overdue installment at a rate of 2% per annum above the applicable interest rate until paid.",
+      "Overdue amounts shall bear simple interest at the rate of 1.5% per month starting 10 business days after the scheduled due date.",
+      "If Borrower fails to pay any scheduled monthly installment within a 15-day grace period, Lender may assess default interest of 2% per annum on the delinquent amount only.",
+      "Any overdue payment under this facility will be subject to a late interest charge of 18% per annum calculated strictly on the unpaid balance for the actual delay period."
+    ],
+    "one_sided_examples": [
+      "Upon any payment delay exceeding 24 hours, compound penal interest of 36% per annum shall apply retroactively to the entire original principal loan amount.",
+      "Lender may levy default penal interest at 5% per month compounded weekly on the entire loan facility from the original date of disbursement upon any minor breach.",
+      "Failure to pay any charge on the exact due date will immediately subject the borrower to an arbitrary penal rate determined solely by Lender up to 50% compounded monthly.",
+      "Any administrative or technical payment delay shall entitle Lender to charge retroactive penal interest of 30% per annum on all historical advances regardless of cure."
+    ]
+  },
+  "acceleration": {
+    "clause_type": "acceleration",
+    "title": "Acceleration of Loan",
+    "standard_examples": [
+      "If Borrower fails to cure a payment default within 30 days of receiving written notice, Lender may declare the outstanding principal and accrued interest immediately due and payable.",
+      "Lender may accelerate maturity of the loan only upon an uncured material default, bankruptcy, or insolvency event following 21 days formal cure notice.",
+      "Upon the occurrence of an Event of Default and failure to cure within 14 business days, Lender may accelerate repayment of all remaining scheduled installments.",
+      "In case of repeated non-payment following written warning and a 30-day remedy period, Lender may call for immediate repayment of outstanding principal."
+    ],
+    "one_sided_examples": [
+      "Lender may at its sole and unfettered discretion, without notice, cause, or cure period, declare the entire outstanding loan balance immediately due and payable in full.",
+      "Any subjective feeling of insecurity by Lender regarding Borrower financial condition shall entitle Lender to accelerate the entire facility with immediate 24-hour demand.",
+      "Upon any trivial technical non-compliance with any loan guideline, the total loan balance shall automatically accelerate without demand, presentment, or notice.",
+      "Lender reserves the unrestricted right to accelerate repayment in full at any time by issuing same-day written demand irrespective of payment history."
+    ]
+  },
+  "foreclosure_charges": {
+    "clause_type": "foreclosure_charges",
+    "title": "Foreclosure / Prepayment Charges",
+    "standard_examples": [
+      "Borrower may prepay the loan in whole or in part at any time without penalty or foreclosure fees upon 15 days written notice.",
+      "Prepayment of floating rate advances shall incur zero foreclosure charges in accordance with regulatory banking standards.",
+      "Borrower may prepay fixed-rate installments subject to a reasonable administrative cost recovery fee not exceeding 1% of the prepaid principal amount.",
+      "No prepayment premium or foreclosure fee shall be assessed if the facility is repaid using Borrower own legitimate financial savings."
+    ],
+    "one_sided_examples": [
+      "Borrower is strictly prohibited from prepaying or foreclosing the loan prior to maturity without paying an exorbitant exit penalty of 15% of the total original sanctioned facility.",
+      "Any full or partial prepayment shall incur a mandatory foreclosure fee equal to 10% of the entire loan value plus all unearned future interest through the final loan term.",
+      "Lender reserves the unilateral right to refuse early closure, and if allowed, assess a minimum foreclosure fee of six months gross interest regardless of early payment date.",
+      "Early foreclosure for any reason requires payment of an unliquidated penalty of 12% of sanctioned limits regardless of whether floating or fixed interest applies."
+    ]
+  },
+  "unilateral_interest_change": {
+    "clause_type": "unilateral_interest_change",
+    "title": "Unilateral Interest Rate Change",
+    "standard_examples": [
+      "Interest rates shall vary strictly in accordance with published changes in the Reserve Bank of India repo rate or external benchmark benchmarked transparently.",
+      "Any modification to the floating benchmark rate shall be notified to Borrower 30 days in advance with the option to prepay the loan without penalty if unaccepted.",
+      "The applicable interest rate shall be pegged to the standard Marginal Cost of Funds Based Lending Rate (MCLR) published quarterly by the banking regulator.",
+      "Changes to the margin spread shall require mutual written consent, while the benchmark rate shall adjust automatically to regulatory market movements."
+    ],
+    "one_sided_examples": [
+      "Lender reserves the absolute right to increase the interest rate at any time at its sole discretion without prior notice, justification, or reference to any external index.",
+      "The interest rate may be revised upward unilaterally by Lender at any time, and Borrower shall have no right to object or exit the facility without penalty.",
+      "Lender may retroactively alter the spread margin and increase interest charges at will whenever Lender deems its internal cost of funds to have changed.",
+      "Borrower agrees that Lender can change the fixed or floating rate at any time without notice, and continued use of the facility constitutes irrevocable acceptance."
+    ]
+  },
+  "guarantor_liability": {
+    "clause_type": "guarantor_liability",
+    "title": "Guarantor Liability",
+    "standard_examples": [
+      "The Guarantor liability shall be co-extensive with Borrower for the specific facility up to the maximum capped principal amount of 500,000.",
+      "Lender shall exhaust reasonable collection remedies against Borrower primary assets before initiating recovery demands against Guarantor personal assets.",
+      "The guarantee shall terminate automatically upon full repayment and discharge of the principal loan balance and issuance of a no-dues certificate.",
+      "Guarantor obligations shall be limited strictly to the actual outstanding balance and shall not extend to any future or separate credit facilities without fresh consent."
+    ],
+    "one_sided_examples": [
+      "The Guarantor agrees to an unlimited, continuing, and irrevocable guarantee covering all present, past, and future indebtedness of Borrower and all its affiliates forever.",
+      "Guarantor waives all legal rights under contract law, including right to notice of variance, right of subrogation, and right to require Lender to proceed against Borrower first.",
+      "Lender may proceed directly against Guarantor personal home and assets immediately without making any demand or claim against Borrower.",
+      "Guarantor remains perpetually liable for any increased credit limits, new facilities, or extensions granted by Lender to Borrower without Guarantor knowledge or signature."
+    ]
+  },
+  "set_off_lien": {
+    "clause_type": "set_off_lien",
+    "title": "Set-Off / Banker Lien",
+    "standard_examples": [
+      "Lender may exercise a right of set-off against Borrower designated deposit accounts held with Lender strictly upon the occurrence of an uncured payment default.",
+      "Prior to exercising banker lien over Borrower accounts, Lender shall provide 14 business days advance written notice specifying the overdue amount.",
+      "Set-off rights shall apply solely to undisputed overdue amounts under this Agreement and shall not extend to third-party trust accounts or joint spousal accounts.",
+      "Lender agrees to release its lien over auxiliary deposit accounts once the overdue loan installment has been settled in full."
+    ],
+    "one_sided_examples": [
+      "Lender shall have an immediate general lien and unrestricted right of set-off over all bank accounts, securities, salary deposits, and assets of Borrower and immediate family members at any time without notice.",
+      "Lender may debit any account of Borrower or Guarantor across any banking institution without notice or court order, whether or not a default has occurred.",
+      "Borrower grants Lender an absolute right to freeze and confiscate all personal and business funds across any affiliated entities immediately upon any suspected delay.",
+      "Lender may arbitrarily seize any assets, deposits, or receivables belonging to Borrower to satisfy any disputed or unaccrued future obligation at Lender convenience."
+    ]
+  },
+  "service_bond": {
+    "clause_type": "service_bond",
+    "title": "Service Bond / Mandatory Lock-in",
+    "standard_examples": [
+      "If Employee voluntarily resigns within 12 months after receiving specialized external certification funded by Company, Employee shall reimburse actual verifiable training fees on a prorated basis.",
+      "Employee agrees that documented third-party training expenses exceeding 50,000 incurred in the prior 6 months shall be reimbursed prorata upon early departure.",
+      "Any training cost reimbursement shall be capped strictly at actual direct tuition receipts paid by Employer, reducing by one-twelfth for each completed month of service.",
+      "Company may recover only verifiable out-of-pocket training fees if Employee resigns within 6 months of specialized skill training."
+    ],
+    "one_sided_examples": [
+      "Employee must execute a mandatory 3-year service bond and agrees that leaving for any reason prior to 36 months requires an immediate forfeiture of 1,000,000 as liquidated damages without proof of training cost.",
+      "Employee agrees to a strict 2-year lock-in period and surrenders original academic degree certificates to Employer until completion of the service bond.",
+      "Any resignation before completing the 24-month mandatory lock-in period shall obligate Employee to pay two full years of gross salary as a punitive departure penalty.",
+      "Employee agrees not to resign under any circumstances for 3 years, and any attempt to terminate employment shall incur an unnegotiable penalty of 500,000 plus attorney fees."
+    ]
+  },
+  "ip_assignment": {
+    "clause_type": "ip_assignment",
+    "title": "IP Assignment / Invention Ownership",
+    "standard_examples": [
+      "Employee assigns to Employer all intellectual property and inventions conceived or developed during working hours directly relating to the Company business.",
+      "All proprietary software created by Employee specifically using Company equipment and resources for Company projects shall belong exclusively to Company.",
+      "Inventions created by Employee during the term of employment within the scope of assigned duties shall be the sole property of Employer.",
+      "Employee retains full rights and ownership over pre-existing intellectual property and personal inventions created entirely on personal time without Company confidential data."
+    ],
+    "one_sided_examples": [
+      "Employee irrevocably assigns to Company all inventions, ideas, concepts, patents, writings, and creations developed at any time in life, including outside work hours, on personal devices, or after termination.",
+      "Company shall own all intellectual property created by Employee forever, including unrelated hobbies, personal projects, and works created prior to joining Company.",
+      "Employee waives all moral rights and assigns all future creative output developed during the 5 years following separation from Company in any field of endeavor.",
+      "Any invention conceived by Employee or family members during the employment term shall automatically vest in Employer without compensation or attribution."
+    ]
+  },
+  "notice_period_garden_leave": {
+    "clause_type": "notice_period_garden_leave",
+    "title": "Notice Period / Garden Leave Imbalance",
+    "standard_examples": [
+      "Either party may terminate the employment by providing 30 days prior written notice or basic salary in lieu of notice.",
+      "Company may place Employee on paid garden leave during the contractual 30-day notice period while maintaining full salary and contractual benefits.",
+      "Both Employer and Employee agree to a reciprocal 60-day notice period, with option for mutual waiver in writing upon agreement.",
+      "During any garden leave period not exceeding 30 days, Employee shall continue to receive full remuneration and employment perks."
+    ],
+    "one_sided_examples": [
+      "Employer may terminate Employee instantly with zero notice or severance, whereas Employee is bound to serve a mandatory 180-day notice period and pay 6 months salary if requesting early release.",
+      "Company reserves the right to place Employee on unpaid garden leave for up to 12 months at Company sole discretion while prohibiting Employee from working elsewhere.",
+      "Employee must provide 90 days notice to resign, during which Company may unilaterally suspend pay, withhold incentives, and enforce restrictive covenant extensions.",
+      "Employer may dismiss Employee with 24 hours notice without pay, while Employee must give 6 months advance notice and obtain written board approval to separate."
+    ]
   }
 }

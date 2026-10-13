@@ -58,7 +58,22 @@
     "ACA-1996-s18": "ACA-1996-s18",
     "ACA-1996-s20": "ACA-1996-s20",
     "ACA-1996-s34": "ACA-1996-s34",
-    "CPA-2019-s1": "CPA-2019-s1"
+    "CPA-2019-s1": "CPA-2019-s1",
+    "penal interest": "दंडात्मक ब्याज",
+    "default interest": "डिफ़ॉल्ट ब्याज",
+    "acceleration": "ऋण की शीघ्र अदायगी (एक्सेलेरेशन)",
+    "foreclosure charges": "ऋण पूर्व-समाप्ति शुल्क (फोरक्लोज़र शुल्क)",
+    "prepayment charges": "पूर्व-भुगतान शुल्क",
+    "unilateral interest rate change": "एकतरफा ब्याज दर परिवर्तन",
+    "guarantor liability": "गारंटीकर्ता का दायित्व",
+    "continuing guarantee": "निरंतर गारंटी",
+    "set-off": "मुजराई (सेट-ऑफ)",
+    "banker lien": "बैंकर धारणाधिकार (बैंकर लियन)",
+    "service bond": "सेवा बांड",
+    "lock-in period": "लॉक-इन अवधि",
+    "ip assignment": "बौद्धिक संपदा समनुदेशन",
+    "invention ownership": "आविष्कार स्वामित्व",
+    "garden leave": "गार्डन लीव"
   },
   "ta": {
     "indemnity": "இழப்பீட்டுப் பொறுப்பு",
@@ -119,6 +134,21 @@
     "ACA-1996-s18": "ACA-1996-s18",
     "ACA-1996-s20": "ACA-1996-s20",
     "ACA-1996-s34": "ACA-1996-s34",
-    "CPA-2019-s1": "CPA-2019-s1"
+    "CPA-2019-s1": "CPA-2019-s1",
+    "penal interest": "அபராத வட்டி",
+    "default interest": "தவணை தவறியதற்கான வட்டி",
+    "acceleration": "முன்கூட்டியே முழு கடன் கோருதல்",
+    "foreclosure charges": "கடன் முன்கூட்டியே முடிக்கும் கட்டணம்",
+    "prepayment charges": "முன்செலுத்துதல் கட்டணம்",
+    "unilateral interest rate change": "ஒருதலைப்பட்ச வட்டி விகித மாற்றம்",
+    "guarantor liability": "பிணையாளரின் பொறுப்பு",
+    "continuing guarantee": "தொடர் உத்தரவாதம்",
+    "set-off": "ஈடுசெய்தல் (செட்-ஆஃப்)",
+    "banker lien": "வங்கியாளர் பற்றுரிமை (லியன்)",
+    "service bond": "சேவை பத்திரம் (சர்வீஸ் பாண்ட்)",
+    "lock-in period": "கட்டாய பணிக்காலம்",
+    "ip assignment": "அறிவுசார் சொத்து உரிமை மாற்றம்",
+    "invention ownership": "கண்டுபிடிப்பு உரிமை",
+    "garden leave": "கார்டன் லீவ் (கட்டாய விடுப்பு)"
   }
 }

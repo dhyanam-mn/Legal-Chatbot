@@ -61,3 +61,28 @@ These disclaimers are hardcoded in `backend/app/config.py` and are **never** gen
   > `"यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।"`
 - **Tamil (`MANDATORY_DISCLAIMER_TA`)**:
   > `"இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்."`
+
+---
+
+## 5. Phase 4 Expanded Terms (Marked: *needs native review*)
+
+The following terms have been added for the new loan agreement and employment extras clause types. These initial translations use standard dictionary and legal registers but are marked for formal native review:
+
+| English Term | Proposed Hindi (`hi`) | Proposed Tamil (`ta`) | Status / Usage |
+|---|---|---|:---:|
+| **penal interest** | `दंडात्मक ब्याज` | `அபராத வட்டி` | *needs native review* |
+| **default interest** | `डिफ़ॉल्ट ब्याज` | `தவணை தவறியதற்கான வட்டி` | *needs native review* |
+| **acceleration** | `ऋण की शीघ्र अदायगी (एक्सेलेरेशन)` | `முன்கூட்டியே முழு கடன் கோருதல்` | *needs native review* |
+| **foreclosure charges** | `ऋण पूर्व-समाप्ति शुल्क (फोरक्लोज़र शुल्क)` | `கடன் முன்கூட்டியே முடிக்கும் கட்டணம்` | *needs native review* |
+| **prepayment charges** | `पूर्व-भुगतान शुल्क` | `முன்செலுத்துதல் கட்டணம்` | *needs native review* |
+| **unilateral interest rate change** | `एकतरफा ब्याज दर परिवर्तन` | `ஒருதலைப்பட்ச வட்டி விகித மாற்றம்` | *needs native review* |
+| **guarantor liability** | `गारंटीकर्ता का दायित्व` | `பிணையாளரின் பொறுப்பு` | *needs native review* |
+| **continuing guarantee** | `निरंतर गारंटी` | `தொடர் உத்தரவாதம்` | *needs native review* |
+| **set-off** | `मुजराई (सेट-ऑफ)` | `ஈடுசெய்தல் (செட்-ஆஃப்)` | *needs native review* |
+| **banker lien** | `बैंकर धारणाधिकार (बैंकर लियन)` | `வங்கியாளர் பற்றுரிமை (லியன்)` | *needs native review* |
+| **service bond** | `सेवा बांड` | `சேவை பத்திரம் (சர்வீஸ் பாண்ட்)` | *needs native review* |
+| **lock-in period** | `लॉक-इन अवधि` | `கட்டாய பணிக்காலம்` | *needs native review* |
+| **ip assignment** | `बौद्धिक संपदा समनुदेशन` | `அறிவுசார் சொத்து உரிமை மாற்றம்` | *needs native review* |
+| **invention ownership** | `आविष्कार स्वामित्व` | `கண்டுபிடிப்பு உரிமை` | *needs native review* |
+| **garden leave** | `गार्डन लीव` | `கார்டன் லீவ் (கட்டாய விடுப்பு)` | *needs native review* |
+

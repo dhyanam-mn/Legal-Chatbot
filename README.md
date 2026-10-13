@@ -26,6 +26,45 @@ A multilingual AI-assisted legal document analysis system that inspects contract
 
 ---
 
+## Supported Document & Clause Types
+
+### Supported Document Types
+- `employment_contract`: Employment agreements, appointment letters, service bonds, supplemental agreements.
+- `rental_agreement`: Residential leases, commercial tenancy contracts.
+- `loan_agreement`: Credit facilities, personal and commercial loan agreements, promissory terms.
+
+### Supported Clause Types (14 Total)
+1. **Indemnity & Hold Harmless** (`indemnity`): Unilateral third-party or broad indemnity liabilities.
+2. **Non-Compete / Restraint of Trade** (`non_compete`): Post-termination employment or commercial restrictions.
+3. **Arbitration & Dispute Resolution** (`dispute_resolution` / `arbitration`): Unilateral forum selection or skewed dispute procedures.
+4. **Penalty & Liquidated Damages** (`penalty`): Disproportionate breach damages or deposit forfeitures.
+5. **Unilateral Termination** (`termination`): Asymmetric termination notice or termination without cause.
+6. **Penal / Default Interest** (`penal_interest`): Retroactive or compounded punitive default interest rates.
+7. **Acceleration of Loan** (`acceleration`): Immediate demand for full principal on technical or uncurable default.
+8. **Foreclosure / Prepayment Charges** (`foreclosure_charges`): Excessive exit penalties or locks on early loan prepayment.
+9. **Unilateral Interest Rate Change** (`unilateral_interest_change`): Floating or discretionary interest rate revisions without benchmark indexing.
+10. **Guarantor Liability** (`guarantor_liability`): Unlimited, continuing personal guarantees and asset seizure rights.
+11. **Set-Off / Banker Lien** (`set_off_lien`): General lien and set-off across borrower and family accounts without notice.
+12. **Service Bond / Mandatory Lock-in** (`service_bond`): Unliquidated damages or certificates retention for leaving before lock-in terms.
+13. **IP Assignment / Invention Ownership** (`ip_assignment`): Overbroad assignment of personal inventions, creations, or post-separation output.
+14. **Notice Period / Garden Leave Imbalance** (`notice_period_garden_leave`): Extreme notice period disparity or unilateral unpaid garden leave.
+
+### Client Intake Ranking Boosts
+- **Dependents Boost (`has_dependents=True`)**:
+  - High financial liability clauses threatening family stability receive priority boosts:
+    - `indemnity`: **+45.0**
+    - `penalty` / Security Deposit Forfeiture: **+45.0**
+    - `guarantor_liability` & `acceleration`: **+45.0**
+    - `set_off_lien`, `penal_interest`, `foreclosure_charges`: **+35.0**
+    - `service_bond`: **+30.0**
+    - `termination`: **+15.0**
+- **Document Type Prioritization**:
+  - `loan_agreement`: Prioritizes `acceleration`, `guarantor_liability`, `penal_interest` (+30.0), `set_off_lien`, `foreclosure_charges`, `unilateral_interest_change` (+25.0).
+  - `employment_contract`: Prioritizes `non_compete`, `service_bond` (+25.0), `indemnity`, `ip_assignment`, `notice_period_garden_leave` (+20.0).
+  - `rental_agreement`: Prioritizes `termination` (+25.0) and `penalty` / Security Deposit (+20.0).
+
+---
+
 ## Known Limitations
 
 1. **Statute Ingestion & Provenance Verification**:

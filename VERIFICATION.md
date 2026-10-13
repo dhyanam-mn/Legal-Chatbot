@@ -619,10 +619,61 @@ A clean test environment was set up in an isolated scratch virtual environment (
 
 ---
 
-### B. Earlier Phase 2 Fixes Audit & Confirmation
+## 13. Phase 4 Clause Expansion & Loan Agreement Audit Report
 
-| Phase 2 Fix Item | Status | Verification Evidence |
-|---|:---:|---|
-| **1. Tamil Severance Regression Test** | **DONE** | Tested in `backend/test_phase3_citations_adversarial.py` (Section 4A) and enforced in `backend/app/translator.py` (`VARIATION_REPLACEMENTS_TA` replaces `"பிரிவினை இழப்பீடு"` / `"பிரிவினை ஊதியம்"` with `"பிரிப்பு ஊதியம்"`).<br>- **Input (`en`)**: *"The employer may terminate the employee at any time without prior notice or severance pay."*<br>- **Output (`ta`)**: *"முதலாளி எந்த நேரத்திலும் முன் அறிவிப்பு அல்லது பிரிப்பு ஊதியம் இல்லாமல் ஊழியரை ஒப்பந்த முடிவு செய்யலாம்."* |
-| **2. `WHEREAS` Segmentation Fix** | **DONE** | Fixed in `backend/app/segmenter.py` (`CLAUSE_BOUNDARY_REGEX` uses `(?-i:WHEREAS\b)` at line start so mid-sentence lowercase `", whereas "` is never split into a separate clause). Verified in `backend/test_phase3_citations_adversarial.py` (Section 4B): a 3-clause document containing `"Employer may terminate the Employee at any time without notice, whereas Employee must give 90 days prior written notice."` segments into `['WHEREAS', 'Clause 4.', 'Clause 5.']` (`3` clauses total, keeping `Clause 4.` intact). |
-| **3. `GLOSSARY_REVIEW.md` Exists** | **DONE** | Present at repository root `GLOSSARY_REVIEW.md` (`7,560` bytes), documenting all Hindi (`hi`) and Tamil (`ta`) legal glossary mappings, morphological inflection rules, Tamil severance regression rule, and untranslated English statutory identifier rules. |
+### A. Phase 4 Pass/Fail Audit Matrix (6 Loan Types + 3 Employment Extras)
+
+Audited with `ALLOW_HEURISTIC_FALLBACK=false` using `sample_pdfs/loan_agreement.pdf`, `sample_pdfs/standard_loan_agreement.pdf`, and `sample_pdfs/employment_extras.pdf`:
+
+| Document Tested | Clause Type | Check | EN | HI | TA | Status |
+|---|---|---|:---:|:---:|:---:|:---:|
+| **`standard_loan_agreement.pdf`** | Clauses 1–7 (Fair / Mutual terms) | Not Flagged (Zero False Positives) | PASS | PASS | PASS | **PASS** |
+| **`loan_agreement.pdf`** | **Penal / Default Interest** (`Clause 2.`) | Flagged + Explanation + Risk Reason | PASS | PASS | PASS | **PASS** |
+| | | Legal Basis (Verified Citations / Unavailable fallback) | PASS | PASS | PASS | **PASS** |
+| | | Typical Phrasing Alternatives (4 items) | PASS | PASS | PASS | **PASS** |
+| | | Mandatory Disclaimer (EN, HI, TA) | PASS | PASS | PASS | **PASS** |
+| | **Acceleration of Loan** (`Clause 3.`) | Flagged + Explanation + Risk Reason | PASS | PASS | PASS | **PASS** |
+| | | Legal Basis (Verified Citations / Unavailable fallback) | PASS | PASS | PASS | **PASS** |
+| | | Typical Phrasing Alternatives (4 items) | PASS | PASS | PASS | **PASS** |
+| | | Mandatory Disclaimer (EN, HI, TA) | PASS | PASS | PASS | **PASS** |
+| | **Foreclosure / Prepayment Charges** (`Clause 4.`) | Flagged + Explanation + Risk Reason | PASS | PASS | PASS | **PASS** |
+| | | Legal Basis (Verified Citations / Unavailable fallback) | PASS | PASS | PASS | **PASS** |
+| | | Typical Phrasing Alternatives (4 items) | PASS | PASS | PASS | **PASS** |
+| | | Mandatory Disclaimer (EN, HI, TA) | PASS | PASS | PASS | **PASS** |
+| | **Unilateral Interest Rate Change** (`Clause 5.`) | Flagged + Explanation + Risk Reason | PASS | PASS | PASS | **PASS** |
+| | | Legal Basis (Verified Citations / Unavailable fallback) | PASS | PASS | PASS | **PASS** |
+| | | Typical Phrasing Alternatives (4 items) | PASS | PASS | PASS | **PASS** |
+| | | Mandatory Disclaimer (EN, HI, TA) | PASS | PASS | PASS | **PASS** |
+| | **Guarantor Liability** (`Clause 6.`) | Flagged + Explanation + Risk Reason | PASS | PASS | PASS | **PASS** |
+| | | Legal Basis (Verified Citations / Unavailable fallback) | PASS | PASS | PASS | **PASS** |
+| | | Typical Phrasing Alternatives (4 items) | PASS | PASS | PASS | **PASS** |
+| | | Mandatory Disclaimer (EN, HI, TA) | PASS | PASS | PASS | **PASS** |
+| | **Set-Off / Banker Lien** (`Clause 7.`) | Flagged + Explanation + Risk Reason | PASS | PASS | PASS | **PASS** |
+| | | Legal Basis (Verified Citations / Unavailable fallback) | PASS | PASS | PASS | **PASS** |
+| | | Typical Phrasing Alternatives (4 items) | PASS | PASS | PASS | **PASS** |
+| | | Mandatory Disclaimer (EN, HI, TA) | PASS | PASS | PASS | **PASS** |
+| **`employment_extras.pdf`** | **Service Bond / Mandatory Lock-in** (`Clause 2.`) | Flagged + Explanation + Risk Reason | PASS | PASS | PASS | **PASS** |
+| | | Legal Basis (Verified Citations / Unavailable fallback) | PASS | PASS | PASS | **PASS** |
+| | | Typical Phrasing Alternatives (4 items) | PASS | PASS | PASS | **PASS** |
+| | | Mandatory Disclaimer (EN, HI, TA) | PASS | PASS | PASS | **PASS** |
+| | **IP Assignment / Invention Ownership** (`Clause 3.`) | Flagged + Explanation + Risk Reason | PASS | PASS | PASS | **PASS** |
+| | | Legal Basis (Verified Citations / Unavailable fallback) | PASS | PASS | PASS | **PASS** |
+| | | Typical Phrasing Alternatives (4 items) | PASS | PASS | PASS | **PASS** |
+| | | Mandatory Disclaimer (EN, HI, TA) | PASS | PASS | PASS | **PASS** |
+| | **Notice Period / Garden Leave Imbalance** (`Clause 4.`) | Flagged + Explanation + Risk Reason | PASS | PASS | PASS | **PASS** |
+| | | Legal Basis (Verified Citations / Unavailable fallback) | PASS | PASS | PASS | **PASS** |
+| | | Typical Phrasing Alternatives (4 items) | PASS | PASS | PASS | **PASS** |
+| | | Mandatory Disclaimer (EN, HI, TA) | PASS | PASS | PASS | **PASS** |
+
+### B. PDF Segmentation Verification
+All 3 new PDFs segment into discrete structural clauses without loss or merge:
+- `loan_agreement.pdf`: 8 clauses isolated (`Clause 1` preamble, `Clause 1.` through `Clause 7.`).
+- `standard_loan_agreement.pdf`: 8 clauses isolated (`Clause 1` preamble, `Clause 1.` through `Clause 7.`).
+- `employment_extras.pdf`: 5 clauses isolated (`Clause 1` preamble, `Clause 1.` through `Clause 4.`).
+
+### C. Phases 1–3 Regression Confirmation
+The full regression suite was re-executed on `standard_fair_contract.pdf`, `employment_agreement.pdf`, and `rental_agreement.pdf`:
+- `standard_fair_contract.pdf`: 0 clauses flagged (zero false positives maintained).
+- `employment_agreement.pdf`: Exactly 4 one-sided clauses flagged (`Clause 2.` non-compete, `Clause 3.` indemnity, `Clause 4.` termination, `Clause 5.` penalty).
+- `rental_agreement.pdf`: Exactly 3 one-sided clauses flagged (`Section 2.` termination, `Section 3.` penalty, `Section 4.` dispute resolution).
+- **All Phase 1–3 functionality remains completely intact with 0 regressions.**

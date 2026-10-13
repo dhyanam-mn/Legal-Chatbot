@@ -68,6 +68,15 @@ CLAUSE_TITLES = {
     "dispute_resolution": "Arbitration & Dispute Resolution",
     "penalty": "Penalty & Liquidated Damages",
     "termination": "Unilateral Termination",
+    "penal_interest": "Penal / Default Interest",
+    "acceleration": "Acceleration of Loan",
+    "foreclosure_charges": "Foreclosure / Prepayment Charges",
+    "unilateral_interest_change": "Unilateral Interest Rate Change",
+    "guarantor_liability": "Guarantor Liability",
+    "set_off_lien": "Set-Off / Banker Lien",
+    "service_bond": "Service Bond / Mandatory Lock-in",
+    "ip_assignment": "IP Assignment / Invention Ownership",
+    "notice_period_garden_leave": "Notice Period / Garden Leave Imbalance",
 }
 
 
@@ -457,12 +466,21 @@ GROUNDING REFERENCE EXAMPLES RETRIEVED FROM VECTOR STORE:
 {examples_str}
 
 TASK:
-1. Determine if the clause matches one of these 5 clause types:
+1. Determine if the clause matches one of these supported clause types:
    - "indemnity"
    - "non_compete"
    - "dispute_resolution"
    - "penalty"
    - "termination"
+   - "penal_interest"
+   - "acceleration"
+   - "foreclosure_charges"
+   - "unilateral_interest_change"
+   - "guarantor_liability"
+   - "set_off_lien"
+   - "service_bond"
+   - "ip_assignment"
+   - "notice_period_garden_leave"
    - "other"
 2. Compare the clause to the grounding reference examples:
    - If it resembles the ONE-SIDED examples or creates one-sided obligations, assign classification = "flag-worthy".
@@ -475,7 +493,7 @@ TASK:
 
 Return ONLY a JSON object with this exact structure:
 {{
-  "clause_type": "indemnity|non_compete|dispute_resolution|penalty|termination|other",
+  "clause_type": "indemnity|non_compete|dispute_resolution|penalty|termination|penal_interest|acceleration|foreclosure_charges|unilateral_interest_change|guarantor_liability|set_off_lien|service_bond|ip_assignment|notice_period_garden_leave|other",
   "classification": "standard|flag-worthy",
   "explanation": "...",
   "risk_reason": "...",
