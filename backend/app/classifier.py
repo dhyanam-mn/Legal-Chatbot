@@ -5,6 +5,7 @@ import time
 from typing import List, Optional, Tuple, Dict, Any
 from .config import GEMINI_API_KEY, ALLOW_HEURISTIC_FALLBACK
 from .schemas import FlaggedClause, GroundingExample, ClauseItem
+from .translator import translate_clause_analysis_to_hindi, translate_text_to_hindi
 
 logger = logging.getLogger(__name__)
 
@@ -67,8 +68,11 @@ def call_gemini_json(prompt: str, model_name: str = "gemini-3.6-flash") -> Optio
             except Exception as e:
                 err_str = str(e)
                 logger.warning(f"Gemini API call attempt {attempt+1} with model '{mod}' failed: {err_str}")
-                if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str:
-                    logger.info("Rate limit reached (429). Pausing 16 seconds before retrying...")
+                if "GenerateRequestsPerDayPerProjectPerModel" in err_str or "limit: 20" in err_str:
+                    logger.info("Daily API quota reached (20 RPD). Falling back immediately.")
+                    break
+                elif "429" in err_str or "503" in err_str or "RESOURCE_EXHAUSTED" in err_str or "UNAVAILABLE" in err_str:
+                    logger.info("Rate limit / service busy (429/503). Pausing 16 seconds before retrying...")
                     time.sleep(16)
                 else:
                     time.sleep(2)
@@ -84,8 +88,9 @@ def classify_and_explain_clause(
     grounding_examples: List[GroundingExample]
 ) -> Optional[FlaggedClause]:
     """
-    Classifies clause using Gemini with ChromaDB retrieved examples as grounding context.
-    If classified as flag-worthy, generates plain-English explanation and risk rationale.
+    Classifies clause using Gemini with ChromaDB retrieved examples as grounding context (English only).
+    Translates the English explanation and risk_reason at the output layer using local IndicTrans2
+    (zero Gemini calls for translation) and enforces fixed legal glossary terms.
     """
     examples_str = "\n".join([
         f"- [{eg.category.upper()}] (Type: {eg.clause_type}): \"{eg.text}\""
@@ -144,21 +149,29 @@ Return ONLY a JSON object with this exact structure:
 
     title = CLAUSE_TITLES.get(clause_type, "Potentially Risky Clause")
 
+    explanation_en = res.get("explanation", "This clause contains terms that may create one-sided obligations.")
+    risk_reason_en = res.get("risk_reason", "It exposes you to disproportionate liability or limits your legal rights.")
+
+    # Translate English output to Hindi via local IndicTrans2 (zero Gemini calls)
+    explanation_hi, risk_reason_hi = translate_clause_analysis_to_hindi(explanation_en, risk_reason_en)
+
     return FlaggedClause(
         clause_id=clause.clause_id,
         clause_type=clause_type,
         title=title,
         original_text=clause.text,
         classification="flag-worthy",
-        explanation=res.get("explanation", "This clause contains terms that may create one-sided obligations."),
-        risk_reason=res.get("risk_reason", "It exposes you to disproportionate liability or limits your legal rights."),
+        explanation=explanation_en,
+        risk_reason=risk_reason_en,
+        explanation_hi=explanation_hi,
+        risk_reason_hi=risk_reason_hi,
         severity=res.get("severity", "Medium"),
         priority_score=0.0,
         grounding_examples=grounding_examples
     )
 
 def fallback_heuristic_classification(clause: ClauseItem, grounding_examples: List[GroundingExample]) -> Dict[str, Any]:
-    """Fallback rule-based classifier when Gemini API is unavailable (Dev Mode Only)."""
+    """Fallback rule-based classifier when Gemini API is unavailable (Dev Mode Only). Returns English only."""
     text_lower = clause.text.lower()
     nearest_one_sided = [eg for eg in grounding_examples if eg.category == "one_sided"]
     
@@ -201,38 +214,63 @@ def fallback_heuristic_classification(clause: ClauseItem, grounding_examples: Li
         "severity": "Low"
     }
 
-def generate_document_summary(full_text: str, total_clauses: int, flagged_count: int) -> str:
-    """Generate high-level executive summary of the document."""
-    if genai_client:
-        prompt = f"""Synthesize a clear, 3-sentence executive summary for the following legal document text:
 
+def generate_document_summary(full_text: str, total_clauses: int, flagged_count: int) -> Tuple[str, str]:
+    """Generate high-level executive summary of the document in English, then translate to Hindi via local IndicTrans2."""
+    summary_en = ""
+    if genai_client:
+        prompt = f"""Synthesize a clear, 3-sentence executive summary for the following legal document text in English.
+
+DOCUMENT TEXT:
 "{full_text[:3000]}"
 
 State:
 1. What type of legal agreement this appears to be.
 2. The core purpose and key obligations.
 3. A brief summary of risk level based on having {flagged_count} flagged clauses out of {total_clauses} total clauses.
+
+Return ONLY a JSON object:
+{{
+  "summary_en": "..."
+}}
 """
         models_to_try = ["gemini-3.6-flash"]
         for mod in models_to_try:
             for attempt in range(4):
                 try:
                     if hasattr(genai_client, 'models'):
-                        res = genai_client.models.generate_content(model=mod, contents=prompt)
-                        return res.text.strip()
+                        res = genai_client.models.generate_content(
+                            model=mod,
+                            contents=prompt,
+                            config={'response_mime_type': 'application/json'}
+                        )
+                        raw_text = res.text
                     else:
                         model = genai_client.GenerativeModel(mod)
                         res = model.generate_content(prompt)
-                        return res.text.strip()
+                        raw_text = res.text
+
+                    cleaned_text = re.sub(r'^```json\s*', '', raw_text.strip(), flags=re.MULTILINE)
+                    cleaned_text = re.sub(r'```$', '', cleaned_text.strip(), flags=re.MULTILINE)
+                    parsed = json.loads(cleaned_text)
+                    summary_en = parsed.get("summary_en", "")
+                    if summary_en:
+                        break
                 except Exception as e:
                     err_str = str(e)
                     logger.warning(f"Document summary generation attempt {attempt+1} with '{mod}' failed: {err_str}")
-                    if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str:
-                        time.sleep(16)
+                    if "429" in err_str or "503" in err_str or "RESOURCE_EXHAUSTED" in err_str or "UNAVAILABLE" in err_str:
+                        time.sleep(10)
                     else:
                         time.sleep(2)
+            if summary_en:
+                break
 
-    if not ALLOW_HEURISTIC_FALLBACK:
-        raise RuntimeError("Gemini API is required for document summary generation but is not configured.")
+    if not summary_en:
+        if not ALLOW_HEURISTIC_FALLBACK:
+            raise RuntimeError("Gemini API is required for document summary generation but is not configured.")
+        summary_en = f"This document contains {total_clauses} segmented clauses with {flagged_count} flagged risk items requiring review. Please inspect the detailed clause breakdown below."
 
-    return f"This document contains {total_clauses} segmented clauses with {flagged_count} flagged risk items requiring review. Please inspect the detailed clause breakdown below."
+    summary_hi = translate_text_to_hindi(summary_en)
+    return summary_en, summary_hi
+

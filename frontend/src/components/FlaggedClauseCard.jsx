@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
 import { AlertOctagon, ChevronDown, ChevronUp, FileText, Info, HelpCircle } from 'lucide-react';
 
-export default function FlaggedClauseCard({ clause, rank }) {
+export default function FlaggedClauseCard({ clause, rank, language = 'en' }) {
   const [showOriginal, setShowOriginal] = useState(false);
   const [showGrounding, setShowGrounding] = useState(false);
+
+  const isHindi = language === 'hi';
+  const explanationText = isHindi && clause.explanation_hi ? clause.explanation_hi : clause.explanation;
+  const riskText = isHindi && clause.risk_reason_hi ? clause.risk_reason_hi : clause.risk_reason;
+
+  const explanationLabel = isHindi ? "इस क्लॉज का क्या अर्थ है:" : "What this clause means:";
+  const riskLabel = isHindi ? "यह जोखिम भरा या एकतरफा क्यों है:" : "Why it's risky or one-sided:";
+  const severitySuffix = isHindi ? "जोखिम प्राथमिकता" : "Risk Priority";
 
   const getSeverityBadge = (severity) => {
     switch (severity) {
@@ -29,29 +37,29 @@ export default function FlaggedClauseCard({ clause, rank }) {
         </div>
 
         <span className={`px-2.5 py-1 rounded-full text-xs font-semibold border ${getSeverityBadge(clause.severity)}`}>
-          {clause.severity} Risk Priority
+          {clause.severity} {severitySuffix}
         </span>
       </div>
 
-      {/* Plain English Explanation */}
+      {/* Explanation Box */}
       <div className="bg-blue-50/70 border border-blue-100 rounded-lg p-3.5 mb-3">
         <div className="flex items-center gap-1.5 font-semibold text-xs text-blue-900 mb-1">
           <Info className="w-4 h-4 text-blue-600" />
-          <span>What this clause means:</span>
+          <span>{explanationLabel}</span>
         </div>
         <p className="text-sm text-slate-800 leading-relaxed font-medium">
-          {clause.explanation}
+          {explanationText}
         </p>
       </div>
 
-      {/* Why it's risky */}
+      {/* Risk Reason Box */}
       <div className="bg-amber-50/70 border border-amber-100 rounded-lg p-3.5 mb-3">
         <div className="flex items-center gap-1.5 font-semibold text-xs text-amber-900 mb-1">
           <AlertOctagon className="w-4 h-4 text-amber-600" />
-          <span>Why it's risky or one-sided:</span>
+          <span>{riskLabel}</span>
         </div>
         <p className="text-sm text-slate-800 leading-relaxed">
-          {clause.risk_reason}
+          {riskText}
         </p>
       </div>
 
@@ -62,7 +70,7 @@ export default function FlaggedClauseCard({ clause, rank }) {
           className="text-slate-600 hover:text-slate-900 font-medium flex items-center gap-1"
         >
           <FileText className="w-3.5 h-3.5" />
-          <span>{showOriginal ? 'Hide Original Clause Text' : 'View Original Clause Text'}</span>
+          <span>{showOriginal ? (isHindi ? 'मूल क्लॉज टेक्स्ट छिपाएं' : 'Hide Original Clause Text') : (isHindi ? 'मूल क्लॉज टेक्स्ट देखें' : 'View Original Clause Text')}</span>
           {showOriginal ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
         </button>
 
@@ -72,7 +80,7 @@ export default function FlaggedClauseCard({ clause, rank }) {
             className="text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1"
           >
             <HelpCircle className="w-3.5 h-3.5" />
-            <span>{showGrounding ? 'Hide Vector Reference Matches' : 'View Vector Grounding Examples'}</span>
+            <span>{showGrounding ? (isHindi ? 'वेक्टर संदर्भ उदाहरण छिपाएं' : 'Hide Vector Reference Matches') : (isHindi ? 'वेक्टर संदर्भ उदाहरण देखें' : 'View Vector Grounding Examples')}</span>
           </button>
         )}
       </div>

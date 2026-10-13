@@ -26,18 +26,22 @@ class FlaggedClause(BaseModel):
     classification: str  # standard or flag-worthy
     explanation: str
     risk_reason: str
+    explanation_hi: Optional[str] = None
+    risk_reason_hi: Optional[str] = None
     severity: str  # High, Medium, Low
     priority_score: float
     grounding_examples: List[GroundingExample] = []
 
 class AnalysisResponse(BaseModel):
     document_summary: str
+    document_summary_hi: Optional[str] = None
     parsed_method: str  # pdfplumber or ocr
     total_clauses: int
     flagged_clauses: List[FlaggedClause]
     all_clauses: List[ClauseItem]
     intake_context: ClientIntakeContext
     disclaimer: str
+    disclaimer_hi: Optional[str] = None
 
 class ChatMessage(BaseModel):
     role: str  # user or assistant
@@ -51,4 +55,7 @@ class ChatRequest(BaseModel):
 
 class ChatResponse(BaseModel):
     reply: str
+    reply_hi: Optional[str] = None
     disclaimer: str
+    disclaimer_hi: Optional[str] = None
+

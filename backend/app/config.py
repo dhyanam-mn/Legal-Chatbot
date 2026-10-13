@@ -18,11 +18,15 @@ DATA_DIR = BASE_DIR / "data"
 CHROMA_PERSIST_DIR = BASE_DIR / "chroma_db"
 
 GEMINI_API_KEY = (os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY") or "").strip()
+HF_TOKEN = (os.getenv("HF_TOKEN") or os.getenv("HUGGINGFACE_TOKEN") or "").strip()
 EMBEDDING_MODEL_NAME = os.getenv("EMBEDDING_MODEL_NAME", "BAAI/bge-small-en-v1.5")
+INDICTRANS2_MODEL_NAME = os.getenv("INDICTRANS2_MODEL_NAME", "ai4bharat/indictrans2-en-indic-dist-200M")
 ALLOW_HEURISTIC_FALLBACK = os.getenv("ALLOW_HEURISTIC_FALLBACK", "false").lower() in ("true", "1", "yes")
 
-# Mandatory legal disclaimer string required by specification
+# Mandatory legal disclaimer strings required by specification (English and Hindi)
 MANDATORY_DISCLAIMER = "This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this."
+MANDATORY_DISCLAIMER_HI = "यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।"
+
 
 # Fail-loud check at startup unless explicitly opted into heuristic dev mode
 if not GEMINI_API_KEY and not ALLOW_HEURISTIC_FALLBACK:

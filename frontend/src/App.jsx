@@ -5,13 +5,16 @@ import SummaryCard from './components/SummaryCard';
 import FlaggedClauseCard from './components/FlaggedClauseCard';
 import ChatThread from './components/ChatThread';
 import Disclaimer from './components/Disclaimer';
-import { Scale, RefreshCw, FileText, CheckCircle2 } from 'lucide-react';
+import { Scale, RefreshCw, FileText, CheckCircle2, Globe } from 'lucide-react';
 
 export default function App() {
   const [step, setStep] = useState(1); // 1: Intake, 2: Upload, 3: Results
   const [intakeContext, setIntakeContext] = useState(null);
   const [analysisResult, setAnalysisResult] = useState(null);
   const [fileName, setFileName] = useState('');
+  const [language, setLanguage] = useState('en'); // 'en' | 'hi'
+
+  const isHindi = language === 'hi';
 
   const handleIntakeSubmit = (context) => {
     setIntakeContext(context);
@@ -46,15 +49,39 @@ export default function App() {
             </div>
           </div>
 
-          {step > 1 && (
-            <button
-              onClick={handleReset}
-              className="text-xs text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg border border-slate-700 flex items-center gap-1.5 transition-colors"
-            >
-              <RefreshCw className="w-3.5 h-3.5" />
-              <span>Start New Document</span>
-            </button>
-          )}
+          {/* Right Controls: Language Toggle + Reset Button */}
+          <div className="flex items-center gap-3">
+            {/* Language Switcher Toggle */}
+            <div className="flex items-center bg-slate-800 rounded-lg p-1 border border-slate-700 gap-1">
+              <Globe className="w-3.5 h-3.5 text-slate-400 ml-1.5 mr-0.5" />
+              <button
+                onClick={() => setLanguage('en')}
+                className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-colors ${
+                  language === 'en' ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                English
+              </button>
+              <button
+                onClick={() => setLanguage('hi')}
+                className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-colors ${
+                  language === 'hi' ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                हिंदी
+              </button>
+            </div>
+
+            {step > 1 && (
+              <button
+                onClick={handleReset}
+                className="text-xs text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg border border-slate-700 flex items-center gap-1.5 transition-colors"
+              >
+                <RefreshCw className="w-3.5 h-3.5" />
+                <span>{isHindi ? "नया दस्तावेज़ शुरू करें" : "Start New Document"}</span>
+              </button>
+            )}
+          </div>
         </div>
       </header>
 
@@ -66,21 +93,21 @@ export default function App() {
             <span className={`w-6 h-6 rounded-full flex items-center justify-center font-bold ${
               step >= 1 ? 'bg-blue-600 text-white' : 'bg-slate-200 text-slate-600'
             }`}>1</span>
-            <span>Intake Profile</span>
+            <span>{isHindi ? "प्रोफ़ाइल संदर्भ" : "Intake Profile"}</span>
           </div>
           <div className="h-0.5 w-10 bg-slate-200"></div>
           <div className={`flex items-center gap-1.5 ${step >= 2 ? 'text-blue-600' : ''}`}>
             <span className={`w-6 h-6 rounded-full flex items-center justify-center font-bold ${
               step >= 2 ? 'bg-blue-600 text-white' : 'bg-slate-200 text-slate-600'
             }`}>2</span>
-            <span>Upload PDF</span>
+            <span>{isHindi ? "पीडीएफ अपलोड" : "Upload PDF"}</span>
           </div>
           <div className="h-0.5 w-10 bg-slate-200"></div>
           <div className={`flex items-center gap-1.5 ${step >= 3 ? 'text-blue-600' : ''}`}>
             <span className={`w-6 h-6 rounded-full flex items-center justify-center font-bold ${
               step >= 3 ? 'bg-blue-600 text-white' : 'bg-slate-200 text-slate-600'
             }`}>3</span>
-            <span>Risk Report & Chat</span>
+            <span>{isHindi ? "जोखिम रिपोर्ट व चैट" : "Risk Report & Chat"}</span>
           </div>
         </div>
 
@@ -102,15 +129,17 @@ export default function App() {
         {step === 3 && analysisResult && (
           <div className="space-y-6">
             {/* Disclaimer Banner */}
-            <Disclaimer />
+            <Disclaimer language={language} />
 
             {/* Document Summary */}
             <SummaryCard
               summary={analysisResult.document_summary}
+              summaryHi={analysisResult.document_summary_hi}
               totalClauses={analysisResult.total_clauses}
               flaggedCount={analysisResult.flagged_clauses.length}
               parseMethod={analysisResult.parsed_method}
               fileName={fileName}
+              language={language}
             />
 
             {/* Content Layout: Flagged Clauses + Interactive Chat */}
@@ -119,20 +148,22 @@ export default function App() {
               <div className="lg:col-span-7 space-y-4">
                 <div className="flex items-center justify-between border-b border-slate-200 pb-2">
                   <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-                    <span>Contextually Ranked Flagged Risks</span>
+                    <span>{isHindi ? "व्यक्तिगत संदर्भ अनुसार प्राथमिकता प्राप्त जोखिम" : "Contextually Ranked Flagged Risks"}</span>
                     <span className="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full font-semibold">
                       {analysisResult.flagged_clauses.length}
                     </span>
                   </h2>
-                  <span className="text-xs text-slate-500">Sorted by personal context priority</span>
+                  <span className="text-xs text-slate-500">{isHindi ? "व्यक्तिगत संदर्भ द्वारा व्यवस्थित" : "Sorted by personal context priority"}</span>
                 </div>
 
                 {analysisResult.flagged_clauses.length === 0 ? (
                   <div className="bg-white border border-slate-200 rounded-xl p-8 text-center text-slate-600">
                     <CheckCircle2 className="w-10 h-10 text-green-500 mx-auto mb-2" />
-                    <h3 className="font-bold text-slate-800">No High-Risk Clauses Flagged</h3>
+                    <h3 className="font-bold text-slate-800">{isHindi ? "कोई उच्च जोखिम वाला क्लॉज नहीं मिला" : "No High-Risk Clauses Flagged"}</h3>
                     <p className="text-sm text-slate-500 mt-1">
-                      No standard one-sided or high-risk clauses were matched against the vector reference dataset.
+                      {isHindi
+                        ? "वेक्टर संदर्भ डेटासेट के विरुद्ध कोई भी एकतरफा या उच्च जोखिम वाला क्लॉज नहीं मिला।"
+                        : "No standard one-sided or high-risk clauses were matched against the vector reference dataset."}
                     </p>
                   </div>
                 ) : (
@@ -141,6 +172,7 @@ export default function App() {
                       key={clause.clause_id + index}
                       clause={clause}
                       rank={index + 1}
+                      language={language}
                     />
                   ))
                 )}
@@ -152,6 +184,7 @@ export default function App() {
                   <ChatThread
                     documentText={analysisResult.all_clauses.map(c => c.text).join('\n\n')}
                     intakeContext={analysisResult.intake_context}
+                    language={language}
                   />
                 </div>
               </div>
@@ -159,7 +192,7 @@ export default function App() {
 
             {/* Bottom Footer Disclaimer */}
             <div className="pt-6 border-t border-slate-200">
-              <Disclaimer compact />
+              <Disclaimer compact language={language} />
             </div>
           </div>
         )}
@@ -168,7 +201,7 @@ export default function App() {
       {/* Footer */}
       <footer className="bg-slate-900 text-slate-400 text-xs py-4 text-center border-t border-slate-800">
         <p className="max-w-4xl mx-auto px-4">
-          LexGuard Legal Chatbot • Phase 1 MVP • Embeddings: bge-small-en • Vector Store: ChromaDB • LLM: Gemini
+          LexGuard Legal Chatbot • Phase 1 MVP • Embeddings: bge-small-en • Vector Store: ChromaDB • LLM: Gemini • Translation: IndicTrans2 Guidelines & Legal Glossary
         </p>
       </footer>
     </div>
