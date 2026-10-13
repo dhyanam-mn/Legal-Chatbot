@@ -88,7 +88,13 @@ VARIATION_REPLACEMENTS_HI = {
     r"धाराओं\s+(\d+[A-Za-z0-9\(\)\-]*)": r"Sections \1",
     r"धारा\s+(\d+[A-Za-z0-9\(\)\-]*)": r"Section \1",
     r"अनुच्छेदों\s+(\d+[A-Za-z0-9\(\)\-]*)": r"Articles \1",
-    r"अनुच्छेद\s+(\d+[A-Za-z0-9\(\)\-]*)": r"Article \1",
+    # Keep Exception wording untranslated in English
+    r"अपवाद\s+(\d+)": r"Exception \1",
+    r"अपवादों\s+(\d+)": r"Exceptions \1",
+    r"अपवाद": "Exception",
+    # Never allow बचत / बचतें in statutory context
+    r"अनुबंध\s+की\s+बचत|ठेके\s+की\s+बचत|संविदा\s+की\s+बचत": "समझौतों का संरक्षण",
+    r"\bबचत\b": "संरक्षण",
     # Legal glossary terms
     r"हर्जाने|हर्जाना": "क्षतिपूर्ति",
     r"नुकसान\s+की\s+भरपाई|नुकसान\s+भरपाई|प्रतिपूर्ति": "क्षतिपूर्ति",
@@ -132,6 +138,14 @@ VARIATION_REPLACEMENTS_TA = {
     r"(\d+[A-Za-z0-9\(\)\-]*)\s*[-]?\s*வது\s*(?:சரத்து|உறுப்பு)": r"Article \1",
     r"(?:பிரிவு|ஷரத்து)\s+(\d+[A-Za-z0-9\(\)\-]*)": r"Section \1",
     r"(\d+[A-Za-z0-9\(\)\-]*)\s*[-]?\s*வது\s*(?:பிரிவு|ஷரத்து)": r"Section \1",
+    # Keep Exception wording untranslated in English
+    r"(?:விதிவிலக்கு|விதிவிலக்காக|விலக்கு)\s+(\d+)": r"Exception \1",
+    r"(\d+)\s*[-]?\s*வது\s*(?:விதிவிலக்கு|விதிவிலக்காக|விலக்கு)": r"Exception \1",
+    r"விதிவிலக்குகள்\s+(\d+)": r"Exceptions \1",
+    r"விதிவிலக்கு|விதிவிலக்காக|விலக்கு": "Exception",
+    # Never allow சேமிப்பு in statutory context
+    r"ஒப்பந்தத்தின்\s+சேமிப்பு|ஒப்பந்தச்?\s+சேமிப்பு": "ஒப்பந்தப் பாதுகாப்பு",
+    r"\bசேமிப்பு\b": "பாதுகாப்பு",
     # Liquidated damages MUST run before termination/damages rules
     r"முடிவு\s+செய்யப்பட்ட\s+சேதங்கள்|ஒப்பந்த\s+முடிவு\s+செய்யப்பட்ட\s+சேதங்கள்|கலைக்கப்பட்ட\s+சேதங்கள்|நிர்ணயிக்கப்பட்ட\s+நஷ்டஈடு|கணக்கிடப்பட்ட\s+இழப்பீடு": "முன்நிர்ணயிக்கப்பட்ட இழப்பீடு",
     # Indemnity & inflected forms (including reimburse / financial liability in indemnity context)
@@ -210,6 +224,15 @@ def _preserve_english_statutes(orig_text: str, translated_text: str) -> str:
         res = re.sub(rf"{re.escape(num_part)}\s*[-]?\s*வது\s*(?:பிரிவு|சரத்து|உறுப்பு|ஷரத்து)", sec_str, res)
         res = re.sub(rf"(?:பிரிவு|ஷரத்து)\s+{re.escape(num_part)}", sec_str, res)
         res = re.sub(rf"धारा\s+{re.escape(num_part)}", sec_str, res)
+
+    for exc_match in re.finditer(r"\b(Exceptions?\s+\d+[A-Za-z0-9\(\)\-]*)", orig_text):
+        exc_str = exc_match.group(1)
+        num_part = re.sub(r"^Exceptions?\s+", "", exc_str)
+        res = re.sub(rf"{re.escape(num_part)}\s*[-]?\s*வது\s*(?:விதிவிலக்கு|விதிவிலக்காக|விலக்கு|अपवाद)", exc_str, res)
+        res = re.sub(rf"(?:விதிவிலக்கு|விதிவிலக்காக|விலக்கு|अपवाद)\s+{re.escape(num_part)}", exc_str, res)
+
+    if re.search(r"\bExceptions?\b", orig_text) and not re.search(r"\bExceptions?\b", res):
+        res = re.sub(r"\b(?:விதிவிலக்கு|விதிவிலக்காக|விலக்கு|अपवाद)\b", "Exception", res)
 
     # Ensure Act names with years match original if year was present in original
     act_years = [

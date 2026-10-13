@@ -17,15 +17,15 @@ CLAUSE_TYPE_STATUTE_MAP: Dict[str, List[str]] = {
     "arbitration": ["ICA-1872-s28", "ACA-1996-s7", "ACA-1996-s11", "ACA-1996-s12", "ACA-1996-s18", "ACA-1996-s20"],
     "termination": ["ICA-1872-s39", "ICA-1872-s75", "ICA-1872-s23", "CPA-2019-s2-46"],
     # Loan agreement clause types
-    "penal_interest": ["ICA-1872-s74", "ICA-1872-s73", "CPA-2019-s2-46"],
-    "acceleration": ["ICA-1872-s39", "ICA-1872-s73"],
-    "foreclosure_charges": ["ICA-1872-s74", "CPA-2019-s2-46"],
-    "unilateral_interest_change": ["ICA-1872-s10", "ICA-1872-s16", "CPA-2019-s2-46"],
-    "guarantor_liability": ["ICA-1872-s124", "ICA-1872-s125"],
-    "set_off_lien": ["CPA-2019-s2-46"],
+    "penal_interest": ["ICA-1872-s74", "CPA-2019-s2-46"],
+    "acceleration": [],
+    "foreclosure_charges": ["CPA-2019-s2-46"],
+    "unilateral_interest_change": ["CPA-2019-s2-46"],
+    "guarantor_liability": [],
+    "set_off_lien": [],
     # Employment extra clause types
-    "service_bond": ["ICA-1872-s27", "ICA-1872-s74"],
-    "ip_assignment": ["ICA-1872-s23", "ICA-1872-s27"],
+    "service_bond": ["ICA-1872-s74", "ICA-1872-s27"],
+    "ip_assignment": [],
     "notice_period_garden_leave": ["ICA-1872-s27", "ICA-1872-s74"],
 }
 
@@ -277,7 +277,12 @@ class ReferenceVectorStore:
             return []
 
         total_statutes = self.statutes_collection.count()
-        if total_statutes == 0:
+        # If clause_type is explicitly mapped to empty list, no verified statutory provisions apply
+        if resolved_type in CLAUSE_TYPE_STATUTE_MAP and len(CLAUSE_TYPE_STATUTE_MAP[resolved_type]) == 0:
+            logger.info(
+                f"Clause type '{resolved_type}' is explicitly mapped to 0 statutory provisions (no verified statute applies). "
+                "Returning empty list."
+            )
             return []
 
         excluded_set = set(exclude_ids or [])

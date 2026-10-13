@@ -103,10 +103,33 @@ def _enforce_descriptive_wording(text: str) -> str:
         flags=re.IGNORECASE,
     )
     out = re.sub(r"\bunenforceable\b", "subject to statutory limits", out, flags=re.IGNORECASE)
-    out = re.sub(r"\billegal\b", "contrary to statutory provisions", out, flags=re.IGNORECASE)
     out = re.sub(r"\byou\s+should\s+demand\b", "standard agreements typically state", out, flags=re.IGNORECASE)
     out = re.sub(r"\byou\s+should\b", "parties typically", out, flags=re.IGNORECASE)
     out = re.sub(r"\bthis\s+clause\s+is\s+void\b", "this provision addresses such terms", out, flags=re.IGNORECASE)
+    return out
+
+
+def _clean_and_rewrite_statutory_reason(text: str) -> str:
+    """
+    Ensures descriptive wording and rewrites archaic statutory phrasing into short plain sentences:
+    - Never uses 'saving/savings' for statutory 'saving of contract' (replaces with 'protects agreements').
+    - Keeps 'Exception' wording in English.
+    - Enforces descriptive non-prescriptive wording.
+    """
+    if not text:
+        return text
+    out = _enforce_descriptive_wording(text)
+    # Remove archaic statutory 'saving of contract' or 'saving' / 'savings'
+    out = re.sub(r"\b(?:saving|savings)\s+of\s+contracts?\s+to\s+refer\s+to\s+arbitration\b", "protects agreements to refer disputes to arbitration", out, flags=re.IGNORECASE)
+    out = re.sub(r"\b(?:saving|savings)\s+of\s+contracts?\s+to\s+refer\b", "protects agreements to refer", out, flags=re.IGNORECASE)
+    out = re.sub(r"\b(?:saving|savings)\s+of\s+contracts?\b", "protects agreements", out, flags=re.IGNORECASE)
+    out = re.sub(r"\b(?:saving|savings)\s+of\s+a\s+guarantee\s+agreement\b", "protects guarantee agreements", out, flags=re.IGNORECASE)
+    out = re.sub(r"\b(?:saving|savings)\s+of\b", "protects", out, flags=re.IGNORECASE)
+    out = re.sub(r"\bproviding\s+a\s+saving\s+for\b", "protecting", out, flags=re.IGNORECASE)
+    out = re.sub(r"\ba\s+saving\s+for\b", "protection for", out, flags=re.IGNORECASE)
+    out = re.sub(r"\bwith\s+a\s+saving\s+clause\b", "with a protective exception", out, flags=re.IGNORECASE)
+    out = re.sub(r"\bsavings?\s+clause\b", "protective exception", out, flags=re.IGNORECASE)
+    out = re.sub(r"\bsavings?\b", "protection", out, flags=re.IGNORECASE)
     return out
 
 
@@ -324,7 +347,7 @@ def validate_statutory_citations(
             continue
 
         prov = retrieved_by_id[pid]
-        one_line_reason = _enforce_descriptive_wording(" ".join(reason.splitlines()).strip())
+        one_line_reason = _clean_and_rewrite_statutory_reason(" ".join(reason.splitlines()).strip())
         if not one_line_reason:
             one_line_reason = (
                 f"Under {prov.id}, {prov.section} of the {prov.act} provides the statutory rule regarding {prov.title.lower()}."
@@ -385,17 +408,27 @@ RETRIEVED STATUTORY PROVISIONS (CLOSED SET — DO NOT USE ANY OUTSIDE PROVISION)
 
 STRICT INSTRUCTIONS:
 1. Pass and cite ONLY provisions from the RETRIEVED STATUTORY PROVISIONS list above that directly address the subject matter of the contract clause.
-2. Output each applicable citation with its exact `provision_id` (e.g., "ICA-1872-s27") and a single-sentence plain-language `reason`.
-3. DESCRIPTIVE WORDING ONLY:
-   - Output a one-line description stating what the provision covers (and summarize any proviso or exception retrieved).
+2. Output each applicable citation with its exact `provision_id` (e.g., "ICA-1872-s27") and a single short plain-English sentence as `reason`.
+3. DESCRIPTIVE WORDING AND PLAIN SENTENCES:
+   - Output a short plain-English sentence stating what the provision covers (and summarize any proviso or exception retrieved).
+   - Write short, clear, simple sentences. Avoid archaic statutory jargon.
+   - NEVER use the word "saving" or "savings" for statutory "saving of contract" (instead state "Exception 1 protects agreements to refer disputes to arbitration" or "Exception 1 allows arbitration agreements").
+   - Keep any "Exception" wording strictly in English (e.g. write "Exception 1", "Exception 2", do NOT alter the word Exception).
    - Base the description STRICTLY on the text and concepts of the retrieved provision. Do NOT introduce external concepts.
    - NEVER state that the user's contract clause "is void", "is unenforceable", or "is illegal".
    - NEVER use the words "unenforceable", "illegal", or "you should".
-   - Example of required descriptive phrasing: "Under ICA-1872-s27, Section 27 of the Indian Contract Act, 1872 provides that agreements restraining a lawful profession, trade, or business are void to that extent; its Exception 1 covers agreements not to carry on a business of which good-will is sold."
-4. Explicitly include the `provision_id`, `Section`/`Article` number, and `Act` name in English in the `reason`.
-5. Do NOT cite any provision ID, section number, article number, or Act that is NOT in the retrieved list above, even if you know another statute exists.
-6. Do NOT cite any case law, court judgments, or external articles.
-7. If NONE of the retrieved provisions in the list above are substantively relevant to the contract clause (for example, if only general short-title/commencement provisions or unrelated statutes were retrieved), return an empty list `"citations": []` rather than guessing.
+   - Example of required descriptive phrasing: "Under ICA-1872-s27, Section 27 of the Indian Contract Act, 1872 provides that agreements restraining a lawful profession, trade, or business are void to that extent; Exception 1 protects agreements not to carry on a business of which good-will is sold."
+4. ARBITRATION / DISPUTE RESOLUTION SPECIFIC DIRECTIVE:
+   When evaluating arbitration or dispute resolution clauses:
+   - Analyze the specific procedural defects in the clause:
+     * UNILATERAL APPOINTMENT OF ARBITRATOR: If the clause gives one party exclusive or unilateral authority to appoint or select the arbitrator (e.g. "arbitration selected exclusively by Landlord" or "sole discretion of Employer to appoint arbitrator"), you MUST prefer and cite ACA-1996-s11 (appointment of arbitrators) and/or ACA-1996-s12 (grounds for challenge: independence and impartiality of the arbitrator).
+     * PROCEDURAL INEQUALITY: If the clause creates one-sided dispute terms (e.g. one party must arbitrate while the other can sue in court), cite ACA-1996-s18 (equal treatment of parties) and/or ICA-1872-s28 (agreements in restraint of legal proceedings, where Exception 1 protects arbitration agreements).
+     * GENERAL ARBITRATION: If it is a balanced arbitration clause, cite ACA-1996-s7 and ICA-1872-s28.
+   - Always prioritize provisions that directly address the clause's specific structural defect (e.g., unilateral appointment -> s.11 / s.12) rather than only generic provisions.
+5. Explicitly include the `provision_id`, `Section`/`Article` number, and `Act` name in English in the `reason`.
+6. Do NOT cite any provision ID, section number, article number, or Act that is NOT in the retrieved list above, even if you know another statute exists.
+7. Do NOT cite any case law, court judgments, or external articles.
+8. If NONE of the retrieved provisions in the list above are substantively relevant to the contract clause (for example, if only general short-title/commencement provisions or unrelated statutes were retrieved), return an empty list `"citations": []` rather than guessing.
 
 Return ONLY a JSON object with this exact structure:
 {{
