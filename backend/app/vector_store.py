@@ -11,18 +11,18 @@ logger = logging.getLogger(__name__)
 # Deterministic clause_type -> statute ID mapping to bias statutory retrieval
 CLAUSE_TYPE_STATUTE_MAP: Dict[str, List[str]] = {
     "non_compete": ["ICA-1872-s27", "COI-art19"],
-    "penalty": ["ICA-1872-s74", "ICA-1872-s73"],
+    "penalty": ["ICA-1872-s74", "ICA-1872-s73", "CPA-2019-s2-46"],
     "indemnity": ["ICA-1872-s124", "ICA-1872-s125"],
-    "dispute_resolution": ["ICA-1872-s28"],
-    "arbitration": ["ICA-1872-s28"],
-    "termination": ["ICA-1872-s39", "ICA-1872-s75", "ICA-1872-s23"],
+    "dispute_resolution": ["ICA-1872-s28", "ACA-1996-s7", "ACA-1996-s12", "ACA-1996-s18", "ACA-1996-s20"],
+    "arbitration": ["ICA-1872-s28", "ACA-1996-s7", "ACA-1996-s12", "ACA-1996-s18", "ACA-1996-s20"],
+    "termination": ["ICA-1872-s39", "ICA-1872-s75", "ICA-1872-s23", "CPA-2019-s2-46"],
     # Loan agreement clause types
-    "penal_interest": ["ICA-1872-s74", "ICA-1872-s73"],
+    "penal_interest": ["ICA-1872-s74", "ICA-1872-s73", "CPA-2019-s2-46"],
     "acceleration": ["ICA-1872-s39", "ICA-1872-s73"],
-    "foreclosure_charges": ["ICA-1872-s74"],
-    "unilateral_interest_change": ["ICA-1872-s10", "ICA-1872-s16"],
+    "foreclosure_charges": ["ICA-1872-s74", "CPA-2019-s2-46"],
+    "unilateral_interest_change": ["ICA-1872-s10", "ICA-1872-s16", "CPA-2019-s2-46"],
     "guarantor_liability": ["ICA-1872-s124", "ICA-1872-s125"],
-    "set_off_lien": [],
+    "set_off_lien": ["CPA-2019-s2-46"],
     # Employment extra clause types
     "service_bond": ["ICA-1872-s27", "ICA-1872-s74"],
     "ip_assignment": ["ICA-1872-s23", "ICA-1872-s27"],

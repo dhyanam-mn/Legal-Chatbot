@@ -1,0 +1,218 @@
+[
+  {
+    "id": "ACA-1996-s7",
+    "file": "arbitration_and_conciliation_act_1996.json",
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "ACA-1996-s11",
+    "file": "arbitration_and_conciliation_act_1996.json",
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "ACA-1996-s12",
+    "file": "arbitration_and_conciliation_act_1996.json",
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "ACA-1996-s18",
+    "file": "arbitration_and_conciliation_act_1996.json",
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "ACA-1996-s20",
+    "file": "arbitration_and_conciliation_act_1996.json",
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "ACA-1996-s34",
+    "file": "arbitration_and_conciliation_act_1996.json",
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "COI-art14",
+    "file": "constitution_of_india.json",
+    "source_url": "https://www.legislative.gov.in/static/uploads/2025/07/c9fe9c9b6840524844316f74bb1c556c.pdf",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "COI-art19",
+    "file": "constitution_of_india.json",
+    "source_url": "https://www.legislative.gov.in/static/uploads/2025/07/c9fe9c9b6840524844316f74bb1c556c.pdf",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "COI-art21",
+    "file": "constitution_of_india.json",
+    "source_url": "https://www.legislative.gov.in/static/uploads/2025/07/c9fe9c9b6840524844316f74bb1c556c.pdf",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "COI-art226",
+    "file": "constitution_of_india.json",
+    "source_url": "https://www.legislative.gov.in/static/uploads/2025/07/c9fe9c9b6840524844316f74bb1c556c.pdf",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "COI-art300A",
+    "file": "constitution_of_india.json",
+    "source_url": "https://www.legislative.gov.in/static/uploads/2025/07/c9fe9c9b6840524844316f74bb1c556c.pdf",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "CPA-2019-s2-46",
+    "file": "consumer_protection_act_2019.json",
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/15256",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "ICA-1872-s10",
+    "file": "indian_contract_act_1872.json",
+    "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "ICA-1872-s16",
+    "file": "indian_contract_act_1872.json",
+    "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "ICA-1872-s19A",
+    "file": "indian_contract_act_1872.json",
+    "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "ICA-1872-s23",
+    "file": "indian_contract_act_1872.json",
+    "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "ICA-1872-s27",
+    "file": "indian_contract_act_1872.json",
+    "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "ICA-1872-s28",
+    "file": "indian_contract_act_1872.json",
+    "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "ICA-1872-s39",
+    "file": "indian_contract_act_1872.json",
+    "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "ICA-1872-s73",
+    "file": "indian_contract_act_1872.json",
+    "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "ICA-1872-s74",
+    "file": "indian_contract_act_1872.json",
+    "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "ICA-1872-s75",
+    "file": "indian_contract_act_1872.json",
+    "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "ICA-1872-s124",
+    "file": "indian_contract_act_1872.json",
+    "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  },
+  {
+    "id": "ICA-1872-s125",
+    "file": "indian_contract_act_1872.json",
+    "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
+  }
+]

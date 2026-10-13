@@ -2,56 +2,56 @@
   {
     "id": "ACA-1996-s7",
     "file": "arbitration_and_conciliation_act_1996.json",
-    "source_url": "https://www.indiacode.nic.in/ViewFileUploaded?path=AC_CEN_3_46_00004_199626_1517807323919/actfile/&file=a1996-26.pdf",
-    "match": "unverified (network)",
-    "ratio": 0.0,
-    "action": "UNVERIFIED",
-    "detail": "504 Gateway Timeout on attempt 3/3 (network timed out after 3 retries; place official PDF in data/statutes_raw/)"
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
   },
   {
     "id": "ACA-1996-s11",
     "file": "arbitration_and_conciliation_act_1996.json",
-    "source_url": "https://www.indiacode.nic.in/ViewFileUploaded?path=AC_CEN_3_46_00004_199626_1517807323919/actfile/&file=a1996-26.pdf",
-    "match": "unverified (network)",
-    "ratio": 0.0,
-    "action": "UNVERIFIED",
-    "detail": "504 Gateway Timeout on attempt 3/3 (network timed out after 3 retries; place official PDF in data/statutes_raw/)"
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
   },
   {
     "id": "ACA-1996-s12",
     "file": "arbitration_and_conciliation_act_1996.json",
-    "source_url": "https://www.indiacode.nic.in/ViewFileUploaded?path=AC_CEN_3_46_00004_199626_1517807323919/actfile/&file=a1996-26.pdf",
-    "match": "unverified (network)",
-    "ratio": 0.0,
-    "action": "UNVERIFIED",
-    "detail": "504 Gateway Timeout on attempt 3/3 (network timed out after 3 retries; place official PDF in data/statutes_raw/)"
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
   },
   {
     "id": "ACA-1996-s18",
     "file": "arbitration_and_conciliation_act_1996.json",
-    "source_url": "https://www.indiacode.nic.in/ViewFileUploaded?path=AC_CEN_3_46_00004_199626_1517807323919/actfile/&file=a1996-26.pdf",
-    "match": "unverified (network)",
-    "ratio": 0.0,
-    "action": "UNVERIFIED",
-    "detail": "504 Gateway Timeout on attempt 3/3 (network timed out after 3 retries; place official PDF in data/statutes_raw/)"
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
   },
   {
     "id": "ACA-1996-s20",
     "file": "arbitration_and_conciliation_act_1996.json",
-    "source_url": "https://www.indiacode.nic.in/ViewFileUploaded?path=AC_CEN_3_46_00004_199626_1517807323919/actfile/&file=a1996-26.pdf",
-    "match": "unverified (network)",
-    "ratio": 0.0,
-    "action": "UNVERIFIED",
-    "detail": "504 Gateway Timeout on attempt 3/3 (network timed out after 3 retries; place official PDF in data/statutes_raw/)"
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
   },
   {
     "id": "ACA-1996-s34",
     "file": "arbitration_and_conciliation_act_1996.json",
-    "source_url": "https://www.indiacode.nic.in/ViewFileUploaded?path=AC_CEN_3_46_00004_199626_1517807323919/actfile/&file=a1996-26.pdf",
-    "match": "unverified (network)",
-    "ratio": 0.0,
-    "action": "UNVERIFIED",
-    "detail": "504 Gateway Timeout on attempt 3/3 (network timed out after 3 retries; place official PDF in data/statutes_raw/)"
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
   },
   {
     "id": "COI-art14",
@@ -96,25 +96,16 @@
     "match": "exact",
     "ratio": 1.0,
     "action": "KEPT",
-    "detail": "100.0% exact match in verified official text."
-  },
-  {
-    "id": "CPA-2019-s1",
-    "file": "consumer_protection_act_2019.json",
-    "source_url": "https://www.indiacode.nic.in/handle/123456789/15256",
-    "match": "unverified (network)",
-    "ratio": 0.0,
-    "action": "UNVERIFIED",
-    "detail": "504 Gateway Timeout on attempt 3/3 (network timed out after 3 retries; place official PDF in data/statutes_raw/)"
+    "detail": "100.0% exact match in official text."
   },
   {
     "id": "CPA-2019-s2-46",
     "file": "consumer_protection_act_2019.json",
     "source_url": "https://www.indiacode.nic.in/handle/123456789/15256",
-    "match": "unverified (network)",
-    "ratio": 0.0,
-    "action": "UNVERIFIED",
-    "detail": "504 Gateway Timeout on attempt 3/3 (network timed out after 3 retries; place official PDF in data/statutes_raw/)"
+    "match": "exact",
+    "ratio": 1.0,
+    "action": "KEPT",
+    "detail": "100.0% exact match in official text."
   },
   {
     "id": "ICA-1872-s10",
@@ -123,7 +114,7 @@
     "match": "exact",
     "ratio": 1.0,
     "action": "KEPT",
-    "detail": "100.0% exact match in verified official text."
+    "detail": "100.0% exact match in official text."
   },
   {
     "id": "ICA-1872-s16",
@@ -132,7 +123,7 @@
     "match": "exact",
     "ratio": 1.0,
     "action": "KEPT",
-    "detail": "100.0% exact match in verified official text."
+    "detail": "100.0% exact match in official text."
   },
   {
     "id": "ICA-1872-s19A",
@@ -186,7 +177,7 @@
     "match": "exact",
     "ratio": 1.0,
     "action": "KEPT",
-    "detail": "100.0% exact match in verified official text."
+    "detail": "100.0% exact match in official text."
   },
   {
     "id": "ICA-1872-s74",
@@ -204,7 +195,7 @@
     "match": "exact",
     "ratio": 1.0,
     "action": "KEPT",
-    "detail": "100.0% exact match in verified official text."
+    "detail": "100.0% exact match in official text."
   },
   {
     "id": "ICA-1872-s124",
@@ -213,7 +204,7 @@
     "match": "exact",
     "ratio": 1.0,
     "action": "KEPT",
-    "detail": "100.0% exact match in verified official text."
+    "detail": "100.0% exact match in official text."
   },
   {
     "id": "ICA-1872-s125",
@@ -222,6 +213,6 @@
     "match": "exact",
     "ratio": 1.0,
     "action": "KEPT",
-    "detail": "100.0% exact match in verified official text."
+    "detail": "100.0% exact match in official text."
   }
 ]

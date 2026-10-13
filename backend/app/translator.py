@@ -116,7 +116,7 @@ VARIATION_REPLACEMENTS_TA = {
     # Keep Act names untranslated in English
     r"இந்திய\s+ஒப்பந்தச்?\s+சட்டம்\s*,\s*1872|இந்திய\s+ஒப்பந்தச்?\s+சட்டம்\s+1872": "Indian Contract Act, 1872",
     r"இந்திய\s+ஒப்பந்தச்?\s+சட்டம்": "Indian Contract Act",
-    r"இந்திய\s+அரசியலமைப்புச்?\s+சட்டம்|இந்திய\s+அரசியலமைப்பு|இந்தியாவின்\s+அரசியலமைப்பு": "Constitution of India",
+    r"இந்திய\s+அரசியலமைப்பு(?:ச்?\s*சட்டம்|ின்|ற்கு|க்கு|இல்)?|இந்தியாவின்\s+அரசியலமைப்பு(?:ச்?\s*சட்டம்|ின்|ற்கு|க்கு|இல்)?": "Constitution of India",
     r"(?:இசைவுத்தீர்ப்பு|மத்தியஸ்தம்|நடுவர்)\s+மற்றும்\s+சமரசச்?\s+சட்டம்\s*,\s*1996|(?:இசைவுத்தீர்ப்பு|மத்தியஸ்தம்|நடுவர்)\s+மற்றும்\s+சமரசச்?\s+சட்டம்\s+1996": "Arbitration and Conciliation Act, 1996",
     r"(?:இசைவுத்தீர்ப்பு|மத்தியஸ்தம்|நடுவர்)\s+மற்றும்\s+சமரசச்?\s+சட்டம்": "Arbitration and Conciliation Act",
     r"நுகர்வோர்\s+பாதுகாப்புச்?\s+சட்டம்\s*,\s*2019|நுகர்வோர்\s+பாதுகாப்புச்?\s+சட்டம்\s+2019": "Consumer Protection Act, 2019",
@@ -129,7 +129,9 @@ VARIATION_REPLACEMENTS_TA = {
 
     # Keep Section and Article numbers untranslated in English
     r"(?:சரத்து|உறுப்பு)\s+(\d+[A-Za-z0-9\(\)\-]*)": r"Article \1",
+    r"(\d+[A-Za-z0-9\(\)\-]*)\s*[-]?\s*வது\s*(?:சரத்து|உறுப்பு)": r"Article \1",
     r"(?:பிரிவு|ஷரத்து)\s+(\d+[A-Za-z0-9\(\)\-]*)": r"Section \1",
+    r"(\d+[A-Za-z0-9\(\)\-]*)\s*[-]?\s*வது\s*(?:பிரிவு|ஷரத்து)": r"Section \1",
     # Liquidated damages MUST run before termination/damages rules
     r"முடிவு\s+செய்யப்பட்ட\s+சேதங்கள்|ஒப்பந்த\s+முடிவு\s+செய்யப்பட்ட\s+சேதங்கள்|கலைக்கப்பட்ட\s+சேதங்கள்|நிர்ணயிக்கப்பட்ட\s+நஷ்டஈடு|கணக்கிடப்பட்ட\s+இழப்பீடு": "முன்நிர்ணயிக்கப்பட்ட இழப்பீடு",
     # Indemnity & inflected forms (including reimburse / financial liability in indemnity context)
@@ -193,11 +195,21 @@ def _preserve_english_statutes(orig_text: str, translated_text: str) -> str:
 
     res = translated_text
 
-    # If original had 'Article <num>', ensure 'Section <num>' in Tamil/Hindi is restored to 'Article <num>'
+    # If original had 'Article <num>', ensure variations in Tamil/Hindi are restored to 'Article <num>'
     for art_match in re.finditer(r"\b(Articles?\s+\d+[A-Za-z0-9\(\)\-]*)", orig_text):
         art_str = art_match.group(1)
         num_part = re.sub(r"^Articles?\s+", "", art_str)
         res = re.sub(rf"\bSections?\s+{re.escape(num_part)}\b", art_str, res)
+        res = re.sub(rf"{re.escape(num_part)}\s*[-]?\s*வது\s*(?:பிரிவு|சரத்து|உறுப்பு|ஷரத்து)", art_str, res)
+        res = re.sub(rf"(?:சரத்து|உறுப்பு|பிரிவு|ஷரத்து)\s+{re.escape(num_part)}", art_str, res)
+        res = re.sub(rf"अनुच्छेद\s+{re.escape(num_part)}", art_str, res)
+
+    for sec_match in re.finditer(r"\b(Sections?\s+\d+[A-Za-z0-9\(\)\-]*)", orig_text):
+        sec_str = sec_match.group(1)
+        num_part = re.sub(r"^Sections?\s+", "", sec_str)
+        res = re.sub(rf"{re.escape(num_part)}\s*[-]?\s*வது\s*(?:பிரிவு|சரத்து|உறுப்பு|ஷரத்து)", sec_str, res)
+        res = re.sub(rf"(?:பிரிவு|ஷரத்து)\s+{re.escape(num_part)}", sec_str, res)
+        res = re.sub(rf"धारा\s+{re.escape(num_part)}", sec_str, res)
 
     # Ensure Act names with years match original if year was present in original
     act_years = [
@@ -208,6 +220,12 @@ def _preserve_english_statutes(orig_text: str, translated_text: str) -> str:
     for full_act, bare_pattern in act_years:
         if full_act in orig_text or full_act.replace(",", "") in orig_text:
             res = re.sub(bare_pattern, full_act, res)
+
+    if "Constitution of India" in orig_text and "Constitution of India" not in res:
+        res = re.sub(r"இந்திய\s+அரசியலமைப்பு[^\s,\.]*|இந்தியாவின்\s+அரசியலமைப்பு[^\s,\.]*", "Constitution of India", res)
+        res = re.sub(r"भारत\s+(?:के|का|की)\s+संविधान|भारतीय\s+संविधान", "Constitution of India", res)
+        if "Constitution of India" not in res:
+            res = f"Constitution of India, {res}"
 
     # Ensure every statute ID present in orig_text appears verbatim in English in res
     statute_ids = re.findall(

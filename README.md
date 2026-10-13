@@ -68,14 +68,18 @@ A multilingual AI-assisted legal document analysis system that inspects contract
 ## Known Limitations
 
 1. **Statute Ingestion & Provenance Verification**:
-   - Only statutory texts matching official government sources (`indiacode.nic.in` / `legislative.gov.in`) with 100% exact provenance are admitted into `data/statutes/`.
-   - Automated fetching from `indiacode.nic.in` is susceptible to `HTTP 504 Gateway Timeout` due to government server rate-limiting/firewalls. In such cases, official PDFs must be manually downloaded and placed in `data/statutes_raw/` (`arbitration_and_conciliation_act_1996.pdf` and `consumer_protection_act_2019.pdf`) for local verification.
+   - Only statutory texts matching official government sources (`indiacode.nic.in` / `legislative.gov.in` or official PDFs in `data/statutes_raw/`) with 100% exact provenance are admitted into `data/statutes/`.
+   - The verified statutory corpus consists of 24 provisions across 4 central Acts:
+     - **Constitution of India**: Articles 14, 19, 21, 226, 300A
+     - **Indian Contract Act, 1872**: Sections 10, 16, 19A, 23, 27, 28, 39, 73, 74, 75, 124, 125
+     - **Arbitration and Conciliation Act, 1996**: Sections 7, 11, 12, 18, 20, 34
+     - **Consumer Protection Act, 2019**: Section 2(46) ("unfair contract")
 2. **Citation Model Pinning & API Free-Tier Quota**:
-   - Citation generation requires deep statutory reasoning and is strictly pinned to the strongest Gemini model (`gemini-3.8-flash`). Under Google's free-tier rate limits (20 requests per day per model), if the strongest model's daily quota is exhausted, citation generation safely returns `"Legal basis unavailable right now"` rather than guessing with lightweight models.
+   - Citation generation requires deep statutory reasoning and is strictly pinned to the strongest configured Gemini model (`GEMINI_MODELS[0]`). Under Google's free-tier rate limits (20 requests per day per model), if the strongest model's daily quota is exhausted, citation generation safely returns `"Legal basis unavailable right now"` rather than guessing with lightweight models.
 3. **Local IndicTrans2 CPU Inference Latency**:
    - IndicTrans2 200M beam search on CPU averages ~5–8 seconds per clause. While translation is fully private and free from LLM API fees, running on CPU introduces noticeable latency compared to GPU acceleration.
 4. **Jurisdictional Scope**:
-   - Current statutory knowledge base covers federal Indian statutes (Constitution of India, Indian Contract Act 1872). State-specific amendments and foreign legal jurisdictions are outside the current corpus scope.
+   - Current statutory knowledge base covers central Indian statutes (Constitution of India, Indian Contract Act 1872, Arbitration and Conciliation Act 1996, Consumer Protection Act 2019). State-specific amendments and foreign legal jurisdictions are outside the current corpus scope.
 
 ---
 

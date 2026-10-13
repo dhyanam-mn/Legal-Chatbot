@@ -32,6 +32,7 @@ LOCAL_PDF_ALIASES = {
         "a1872-09.pdf",
     ],
     "arbitration_and_conciliation_act_1996.json": [
+        "Arbitration-and-Conciliation-Act,1996.pdf",
         "arbitration_and_conciliation_act_1996.pdf",
         "arbitration_act_1996.pdf",
         "a1996-26.pdf",
@@ -39,6 +40,7 @@ LOCAL_PDF_ALIASES = {
         "aca_1996.pdf",
     ],
     "consumer_protection_act_2019.json": [
+        "consumer-protection-act-2019.pdf",
         "consumer_protection_act_2019.pdf",
         "consumer_protection_act.pdf",
         "a2019-35.pdf",
@@ -262,10 +264,11 @@ def main():
                 "detail": detail,
             })
 
-        # Persist verified provisions
-        out_json = json.dumps(verified_provisions, ensure_ascii=False, indent=2)
-        json_file.write_text(out_json, encoding="utf-8")
-        (BACKEND_STATUTES_DIR / json_file.name).write_text(out_json, encoding="utf-8")
+        # Persist verified provisions only if verified_provisions is non-empty or local file verified
+        if verified_provisions:
+            out_json = json.dumps(verified_provisions, ensure_ascii=False, indent=2)
+            json_file.write_text(out_json, encoding="utf-8")
+            (BACKEND_STATUTES_DIR / json_file.name).write_text(out_json, encoding="utf-8")
 
     print("\n=== PROVENANCE AUDIT TABLE ===")
     for r in results:

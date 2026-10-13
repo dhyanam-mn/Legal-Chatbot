@@ -139,7 +139,7 @@ def call_gemini_json(
 
     last_err = None
     for mod in models_to_try:
-        for attempt in range(2):
+        for attempt in range(4):
             try:
                 if hasattr(genai_client, "models"):
                     response = genai_client.models.generate_content(
@@ -180,10 +180,11 @@ def call_gemini_json(
                     or "RESOURCE_EXHAUSTED" in err_str
                     or "UNAVAILABLE" in err_str
                 ):
+                    pause_s = 4 * (attempt + 1)
                     logger.info(
-                        f"Rate limit / service busy (429/503) on '{mod}'. Pausing 3s before retry/rotation..."
+                        f"Rate limit / service busy (429/503) on '{mod}'. Pausing {pause_s}s before retry/rotation..."
                     )
-                    time.sleep(3)
+                    time.sleep(pause_s)
                 else:
                     time.sleep(1)
                 continue
@@ -435,8 +436,26 @@ Return ONLY a JSON object with this exact structure:
         reasons_en = [c.reason for c in validated_citations]
         reasons_hi, reasons_ta = translate_texts_multilingual(reasons_en)
         for idx, c in enumerate(validated_citations):
-            c.reason_hi = reasons_hi[idx] if idx < len(reasons_hi) else c.reason
-            c.reason_ta = reasons_ta[idx] if idx < len(reasons_ta) else c.reason
+            r_hi = reasons_hi[idx] if idx < len(reasons_hi) else c.reason
+            r_ta = reasons_ta[idx] if idx < len(reasons_ta) else c.reason
+
+            # Strict contract guarantee: ensure c.provision_id, c.act, and c.section appear in English
+            if c.provision_id not in r_hi:
+                r_hi = f"{c.provision_id} - {r_hi}"
+            if c.act not in r_hi:
+                r_hi = f"{c.act}, {r_hi}"
+            if c.section not in r_hi:
+                r_hi = f"{c.section}: {r_hi}"
+
+            if c.provision_id not in r_ta:
+                r_ta = f"{c.provision_id} - {r_ta}"
+            if c.act not in r_ta:
+                r_ta = f"{c.act}, {r_ta}"
+            if c.section not in r_ta:
+                r_ta = f"{c.section}: {r_ta}"
+
+            c.reason_hi = r_hi
+            c.reason_ta = r_ta
 
     return validated_citations, "", hallucinations, citation_model_used
 

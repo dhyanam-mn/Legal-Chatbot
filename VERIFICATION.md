@@ -677,3 +677,59 @@ The full regression suite was re-executed on `standard_fair_contract.pdf`, `empl
 - `employment_agreement.pdf`: Exactly 4 one-sided clauses flagged (`Clause 2.` non-compete, `Clause 3.` indemnity, `Clause 4.` termination, `Clause 5.` penalty).
 - `rental_agreement.pdf`: Exactly 3 one-sided clauses flagged (`Section 2.` termination, `Section 3.` penalty, `Section 4.` dispute resolution).
 - **All Phase 1–3 functionality remains completely intact with 0 regressions.**
+
+---
+
+## 14. Official Statute Ingestion & Provenance Re-Verification Report
+
+### A. Gazette/Official PDF Ingestion (Zero Memory/Transcript Reconstruction)
+Official raw PDFs placed in `data/statutes_raw/` (`Arbitration-and-Conciliation-Act,1996.pdf` and `consumer-protection-act-2019.pdf`) were parsed directly via `pdfplumber`:
+- **Arbitration and Conciliation Act, 1996**: Sections 7, 11, 12, 18, 20, 34 extracted with 100% verbatim textual fidelity to official gazette text.
+- **Consumer Protection Act, 2019**: Section 2(46) ("unfair contract") extracted with 100% verbatim textual fidelity.
+- Generated and saved in `data/statutes/` and `backend/data/statutes/`.
+
+### B. Provenance Audit Results (All 24 Provisions)
+`backend/audit_statutes_provenance.py` executed across all active statute files:
+
+| Provision ID | Source URL / Official File | Match Status | Action | Audit Detail |
+|---|---|:---:|:---:|---|
+| **ACA-1996-s7** | `Arbitration-and-Conciliation-Act,1996.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **ACA-1996-s11** | `Arbitration-and-Conciliation-Act,1996.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **ACA-1996-s12** | `Arbitration-and-Conciliation-Act,1996.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **ACA-1996-s18** | `Arbitration-and-Conciliation-Act,1996.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **ACA-1996-s20** | `Arbitration-and-Conciliation-Act,1996.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **ACA-1996-s34** | `Arbitration-and-Conciliation-Act,1996.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **COI-art14** | `Constitution_of_India.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **COI-art19** | `Constitution_of_India.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **COI-art21** | `Constitution_of_India.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **COI-art226** | `Constitution_of_India.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **COI-art300A** | `Constitution_of_India.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **CPA-2019-s2-46** | `consumer-protection-act-2019.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **ICA-1872-s10** | `A187209.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **ICA-1872-s16** | `A187209.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **ICA-1872-s19A** | `A187209.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **ICA-1872-s23** | `A187209.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **ICA-1872-s27** | `A187209.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **ICA-1872-s28** | `A187209.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **ICA-1872-s39** | `A187209.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **ICA-1872-s73** | `A187209.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **ICA-1872-s74** | `A187209.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **ICA-1872-s75** | `A187209.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **ICA-1872-s124** | `A187209.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+| **ICA-1872-s125** | `A187209.pdf` | **exact** | **KEPT** | 100.0% exact match in official text. |
+
+### C. ChromaDB Ingestion & CLAUSE_TYPE_STATUTE_MAP Restoration
+- `ReferenceVectorStore.statutes_collection` verified: exactly **24 statutory provisions** ingested.
+- `CLAUSE_TYPE_STATUTE_MAP` restored for:
+  - `dispute_resolution` / `arbitration`: `["ICA-1872-s28", "ACA-1996-s7", "ACA-1996-s12", "ACA-1996-s18", "ACA-1996-s20"]`
+  - `penalty`: `["ICA-1872-s74", "ICA-1872-s73", "CPA-2019-s2-46"]`
+  - `termination`: `["ICA-1872-s39", "ICA-1872-s75", "ICA-1872-s23", "CPA-2019-s2-46"]`
+  - `penal_interest` / `foreclosure_charges` / `unilateral_interest_change` / `set_off_lien`: mapped to ICA and CPA provisions.
+
+### D. Full Adversarial & Phase 3 Verification (`test_phase3_citations_adversarial.py`)
+Executed with zero post-processing (`exit code 0`):
+1. **Raw Pipeline Test**: Validated citations returned with strictly descriptive language. Act names, Section/Article numbers, and Statute IDs remain verbatim in English in Hindi and Tamil outputs.
+2. **Adversarial Test A**: Non-legal clause retrieves 0 provisions, returns 0 citations, outputs `"No statutory provision retrieved"`.
+3. **Adversarial Test B**: Deliberately excluded provisions and tempted LLM hallucination: all unretrieved IDs (`ICA-1872-s27`, `COI-art19`) and case law references (`AIR 2006`) dropped by `validate_statutory_citations` and logged as `DROPPED`.
+4. **Phase 2 Regressions**: Tamil severance term check passed (`இழப்பீட்டுப் பொறுப்பு` not triggered, `ஒப்பந்த முடிவு` used); WHEREAS segmentation passed; `GLOSSARY_REVIEW.md` verified.
+
