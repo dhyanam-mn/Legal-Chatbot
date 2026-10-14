@@ -20,13 +20,13 @@ CLAUSE_TYPE_STATUTE_MAP: Dict[str, List[str]] = {
     "penal_interest": ["ICA-1872-s74", "CPA-2019-s2-46"],
     "acceleration": [],
     "foreclosure_charges": ["CPA-2019-s2-46"],
-    "unilateral_interest_change": ["CPA-2019-s2-46"],
+    "unilateral_interest_change": [],  # Removed pending lawyer review
     "guarantor_liability": [],
     "set_off_lien": [],
     # Employment extra clause types
     "service_bond": ["ICA-1872-s74", "ICA-1872-s27"],
     "ip_assignment": [],
-    "notice_period_garden_leave": ["ICA-1872-s27", "ICA-1872-s74"],
+    "notice_period_garden_leave": ["ICA-1872-s74"],  # ICA-1872-s27 removed pending lawyer review
 }
 
 
@@ -188,12 +188,7 @@ class ReferenceVectorStore:
             logger.info(f"Removing {len(stale_ids)} unverified/stale provisions from '{self.statutes_collection_name}': {stale_ids}")
             self.statutes_collection.delete(ids=stale_ids)
 
-        if self.statutes_collection.count() == len(provisions) and not stale_ids:
-            logger.info(
-                f"ChromaDB collection '{self.statutes_collection_name}' already contains {len(provisions)} statutory provisions."
-            )
-            return
-
+        # Always upsert to ensure updated provision text and embeddings are synchronized
         documents = []
         metadatas = []
         ids = []

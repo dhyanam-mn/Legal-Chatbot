@@ -65,8 +65,9 @@ def clean_pdf_page_text(raw_page: str) -> str:
         if re.match(r"^_{3,}", s):
             break
         if re.match(
-            r"^\d+\.\s+(?:Subs\.|Ins\.|The words|Omitted|Rep\.|Added|See\b|Came into force|S\.\s*\d+|Art\.\s*\d+|Cl\.\s*\(\d+\))",
+            r"^\d+\.\s+(?:Exceptions?|Cf\.|The second|Subs\.|Ins\.|The words|Omitted|Rep\.|Added|See\b|Came into force|S\.\s*\d+|Art\.\s*\d+|Cl\.\s*\(\d+\))",
             s,
+            re.IGNORECASE,
         ):
             continue
         kept.append(s)

@@ -13,12 +13,12 @@ Case-law references in this document are included strictly for lawyer verificati
 | 1 | `penal_interest` | Loan Agreement | `ICA-1872-s74`, `CPA-2019-s2-46` | **ICA s.74 Explanation**: *"A stipulation for increased interest from the date of default may be a stipulation by way of penalty."*<br>**CPA s.2(46)(ii)**: *"(ii) imposing any penalty on the consumer, for the breach of contract thereof which is wholly disproportionate to the loss occurred due to such breach to the other party to the contract;"* | Validated citations |
 | 2 | `acceleration` | Loan Agreement | *None* (`[]`) | Neither ICA s.39, s.73, nor any verified provision governs loan acceleration; regulated under RBI Master Directions (unverified). Removed. | "No statutory provision retrieved" |
 | 3 | `foreclosure_charges` | Loan Agreement | `CPA-2019-s2-46` | **CPA s.2(46)(iii)**: *"(iii) refusing to accept early repayment of debts on payment of applicable penalty;"* and **s.2(46)(vi)**: *"(vi) imposing on the consumer any unreasonable charge, obligation or condition which puts such consumer to disadvantage;"* | Validated citations |
-| 4 | `unilateral_interest_change` | Loan Agreement | `CPA-2019-s2-46` | **CPA s.2(46)(vi)**: *"(vi) imposing on the consumer any unreasonable charge, obligation or condition which puts such consumer to disadvantage;"* (discretionary floating rate hikes impose unilateral disadvantageous charges). | Validated citations |
+| 4 | `unilateral_interest_change` | Loan Agreement | *None* (`[]`) *[pending lawyer review]* | **CPA s.2(46)(vi)** removed pending lawyer review. | "No statutory provision retrieved" |
 | 5 | `guarantor_liability` | Loan Agreement | *None* (`[]`) | Guarantee is governed by ICA ss. 126 & 128 (unverified in corpus); indemnity sections (ICA ss. 124–125) are legally distinct and excluded. Removed. | "No statutory provision retrieved" |
 | 6 | `set_off_lien` | Loan Agreement | *None* (`[]`) | Banker's general lien is codified under ICA s.171 (unverified in corpus); general consumer terms cannot substitute for governing lien law. Removed. | "No statutory provision retrieved" |
 | 7 | `service_bond` | Employment Contract | `ICA-1872-s74`, `ICA-1872-s27` | **ICA s.74**: *"party complaining of the breach is entitled... to receive... reasonable compensation not exceeding the amount so named or... the penalty stipulated for."*<br>**ICA s.27**: *"Every agreement by which any one is restrained from exercising a lawful profession, trade or business of any kind, is to that extent void."* | Validated citations |
 | 8 | `ip_assignment` | Employment Contract | *None* (`[]`) | Employee IP rights are governed by Copyright Act 1957 s.17 and Patents Act 1970 s.39 (unverified); general contract sections do not apply. Removed. | "No statutory provision retrieved" |
-| 9 | `notice_period_garden_leave` | Employment Contract | `ICA-1872-s27`, `ICA-1872-s74` | **ICA s.27**: *"Every agreement by which any one is restrained from exercising a lawful profession, trade or business of any kind, is to that extent void."*<br>**ICA s.74**: *"reasonable compensation not exceeding the amount so named or... the penalty stipulated for."* | Validated citations |
+| 9 | `notice_period_garden_leave` | Employment Contract | `ICA-1872-s74` *[ICA-1872-s27 pending lawyer review]* | **ICA s.74**: *"reasonable compensation not exceeding the amount so named or... the penalty stipulated for."* (ICA s.27 removed pending lawyer review). | Validated citations |
 
 ---
 
@@ -55,14 +55,11 @@ Case-law references in this document are included strictly for lawyer verificati
 - **Action Taken**: Retained solely `CPA-2019-s2-46`.
 
 ### 4. Unilateral Interest Rate Change (`unilateral_interest_change`)
-- **Verified Mapping**: `["CPA-2019-s2-46"]`
-- **Exact Quotes from Verified JSON**:
-  - **Consumer Protection Act, 2019 — Section 2(46), Sub-clause (vi)**:
+- **Verified Mapping**: `[]` *(Removed pending lawyer review)*
+- **Statutory Provisions Considered**:
+- **Consumer Protection Act, 2019 — Section 2(46), Sub-clause (vi)**:
     > *"(vi) imposing on the consumer any unreasonable charge, obligation or condition which puts such consumer to disadvantage;"*
-- **Statutory Provisions Excluded**:
-  - *ICA Sections 10 & 16*: Generic contract formation and undue influence; do not directly govern unilateral rate alterations during execution.
-- **Legal Justification**: A contractual term permitting a lender to unilaterally increase floating interest rates without objective benchmarking or counterparty concurrence constitutes an unreasonable charge and condition putting the consumer at disadvantage under Section 2(46)(vi).
-- **Action Taken**: Retained solely `CPA-2019-s2-46`.
+- **Legal Justification & Status**: While Section 2(46)(vi) characterizes disadvantageous unilateral obligations as unfair contract terms, whether floating benchmark rate adjustment clauses directly fall under consumer unfairness without financial regulatory context is marked **pending lawyer review**. Removed from active mapping; outputs `"No statutory provision retrieved"`.
 
 ### 5. Guarantor Liability (`guarantor_liability`)
 - **Verified Mapping**: `[]` *(Removed)*
@@ -99,15 +96,14 @@ Case-law references in this document are included strictly for lawyer verificati
 - **Action Taken**: Removed all mappings. System reliably outputs `"No statutory provision retrieved"`.
 
 ### 9. Notice Period / Garden Leave Imbalance (`notice_period_garden_leave`)
-- **Verified Mapping**: `["ICA-1872-s27", "ICA-1872-s74"]`
+- **Verified Mapping**: `["ICA-1872-s74"]` *(ICA-1872-s27 removed pending lawyer review)*
 - **Exact Quotes from Verified JSON**:
-  - **Indian Contract Act, 1872 — Section 27**:
-    > *"Every agreement by which any one is restrained from exercising a lawful profession, trade or business of any kind, is to that extent void."*
   - **Indian Contract Act, 1872 — Section 74**:
     > *"When a contract has been broken, if a sum is named in the contract as the amount to be paid in case of such breach, or if the contract contains any other stipulation by way of penalty, the party complaining of the breach is entitled, whether or not actual damage or loss is proved to have been caused thereby, to receive from the party who has broken the contract reasonable compensation not exceeding the amount so named or, as the case may be, the penalty stipulated for."*
+- **Provisions Under Review**:
+  - *Indian Contract Act, 1872 — Section 27*: Application of Section 27 (restraint of trade) to notice-period garden leave prior to contract termination vs post-employment covenants is marked **pending lawyer review** and removed from active mappings.
 - **Legal Justification**:
-  - Section 27 voids garden leave covenants that extend past the effective cessation of employment, operating as post-service restraints on trade. *(For lawyer verification only: Percept D'Mark v. Zaheer Khan, AIR 2006 SC 3426. Strictly excluded from user-facing output).*
-  - Section 74 limits employer liquidated damages or notice-pay forfeiture demands for early employee resignation strictly to reasonable compensation.
+  - Section 74 limits employer liquidated damages or notice-pay forfeiture demands for early employee resignation strictly to reasonable compensation. Validated citations cite Section 74.
 
 ---
 
