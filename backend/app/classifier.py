@@ -380,13 +380,16 @@ def generate_statutory_citations(
     clause_text: str,
     retrieved_provisions: List[StatutoryProvision],
     translate: bool = True,
-    model_name: Optional[str] = None,
 ) -> Tuple[List[StatutoryCitation], str, List[Dict[str, Any]], Optional[str]]:
     """
     Passes ONLY the retrieved statutory provisions to Gemini, requires output as a list
     of provision_ids + one-line descriptive plain-language reasons, validates every cited ID
     against the retrieved set, drops and logs any hallucination attempts, and translates valid
     reasons into Hindi and Tamil while keeping statute IDs, section numbers, and Act names in English.
+
+    STRICT PINNING: Only ever uses GEMINI_MODELS[0]. Rotation to lite or alternative models
+    is strictly prohibited. On failure or quota exhaustion of GEMINI_MODELS[0], returns
+    LEGAL_BASIS_UNAVAILABLE_MESSAGE ('Legal basis unavailable right now') and logs _model_used=None.
     """
     if not retrieved_provisions:
         logger.info(f"Clause '{clause_id}': 0 statutory provisions retrieved -> '{NO_STATUTE_MESSAGE}'.")
@@ -441,14 +444,15 @@ Return ONLY a JSON object with this exact structure:
 }}
 """
 
-    strongest_model = model_name or (GEMINI_MODELS[0] if GEMINI_MODELS else "gemini-3.8-flash")
+    strongest_model = GEMINI_MODELS[0] if GEMINI_MODELS else "gemini-3.8-flash"
     try:
         res = call_gemini_json(prompt, model_name=strongest_model, allow_rotation=False)
         citation_model_used = res.get("_model_used", strongest_model) if res else strongest_model
     except Exception as e:
         logger.warning(
-            f"Strongest model '{strongest_model}' failed for citation generation: {e}. "
-            "Returning 'Legal basis unavailable right now' (rotation to lite models is prohibited)."
+            f"Pinning enforcement: strongest model '{strongest_model}' failed for citation generation: {e}. "
+            f"Returning '{LEGAL_BASIS_UNAVAILABLE_MESSAGE}' and logging _model_used=None. "
+            "Rotation to lite or alternative models is strictly prohibited."
         )
         return [], LEGAL_BASIS_UNAVAILABLE_MESSAGE, [], None
 

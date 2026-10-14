@@ -120,7 +120,7 @@ def find_local_raw_pdf(json_filename: str) -> Path | None:
     return None
 
 
-def fetch_official_url_with_retries(url: str, timeout: float = 120.0, max_retries: int = 3):
+def fetch_official_url_with_retries(url: str, timeout: float = 10.0, max_retries: int = 2):
     """Fetch URL with specified timeout and retries."""
     last_err = ""
     for attempt in range(1, max_retries + 1):
@@ -178,8 +178,8 @@ def main():
                 status = "OK_LOCAL"
             else:
                 if url not in url_cache:
-                    print(f"Fetching {url} (timeout=120s, 3 retries) ...")
-                    status_type, code, size, payload = fetch_official_url_with_retries(url, timeout=120.0, max_retries=3)
+                    print(f"Fetching {url} (timeout=10s, 2 retries) ...")
+                    status_type, code, size, payload = fetch_official_url_with_retries(url, timeout=10.0, max_retries=2)
                     if status_type == "OK_PDF":
                         tmp_pdf = SCRATCH_PDF_DIR / f"audit_fetched_{len(url_cache)}.pdf"
                         tmp_pdf.write_bytes(payload)
@@ -213,8 +213,8 @@ def main():
                 match_label = "exact"
                 detail = "100.0% exact match in official text."
             else:
-                sec_num = re.sub(r"^(?:Section|Article)\s+", "", prov["section"]).strip()
-                title_prefix = normalize_provision_text(prov["title"])[:18]
+                sec_num = re.sub(r"^(?:Section|Article)\s+", "", prov.get("section", "")).strip()
+                title_prefix = normalize_provision_text(prov.get("title", ""))[:18]
                 pattern = re.compile(
                     rf"\b{re.escape(sec_num)}\.\s*{re.escape(title_prefix[:10])}",
                     re.IGNORECASE,

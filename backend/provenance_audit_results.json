@@ -40,9 +40,9 @@
     "file": "arbitration_and_conciliation_act_1996.json",
     "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
     "match": "exact",
-    "ratio": 1.0,
+    "ratio": 0.9192,
     "action": "KEPT",
-    "detail": "100.0% exact match in official text."
+    "detail": "seq_ratio=0.9192 (exact text; PDF linebreaks/footnote numerals only)"
   },
   {
     "id": "ACA-1996-s34",
@@ -84,10 +84,10 @@
     "id": "COI-art226",
     "file": "constitution_of_india.json",
     "source_url": "https://www.legislative.gov.in/static/uploads/2025/07/c9fe9c9b6840524844316f74bb1c556c.pdf",
-    "match": "exact",
-    "ratio": 1.0,
+    "match": "minor",
+    "ratio": 0.7462,
     "action": "KEPT",
-    "detail": "100.0% exact match in official text."
+    "detail": "seq_ratio=0.7462 (minor difference)"
   },
   {
     "id": "COI-art300A",
@@ -114,7 +114,7 @@
     "match": "exact",
     "ratio": 1.0,
     "action": "KEPT",
-    "detail": "100.0% exact match in official text."
+    "detail": "100.0% exact match in verified official text."
   },
   {
     "id": "ICA-1872-s16",
@@ -141,7 +141,7 @@
     "match": "exact",
     "ratio": 1.0,
     "action": "KEPT",
-    "detail": "100.0% exact match in official text."
+    "detail": "100.0% exact match in verified official text."
   },
   {
     "id": "ICA-1872-s27",
@@ -156,10 +156,10 @@
     "id": "ICA-1872-s28",
     "file": "indian_contract_act_1872.json",
     "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
-    "match": "exact",
-    "ratio": 1.0,
+    "match": "minor",
+    "ratio": 0.8462,
     "action": "KEPT",
-    "detail": "100.0% exact match in official text."
+    "detail": "seq_ratio=0.8462 (minor difference)"
   },
   {
     "id": "ICA-1872-s39",
