@@ -1,0 +1,21 @@
+{
+  "generation_date": "2026-10-18 17:44:24 UTC",
+  "filename": "demo_rental_fair.pdf",
+  "document_type": "rental_agreement",
+  "title": "Synthetic Residential Lease (Standard / Fair)",
+  "expected_category": "fair",
+  "parse_method": "pdfplumber",
+  "total_clauses": 7,
+  "flagged_count": 0,
+  "summary_en": "This document represents a standard residential lease agreement established between Harmony Housing Trust and a resident tenant for an apartment in Bengaluru. Its core purpose is to formalize the residential tenancy, outlining key obligations such as monthly rental payments of INR 30,000, a refundable security deposit, divided repair duties, and a thirty-day termination notice. With zero flagged clauses out of seven total provisions, the contract presents a low risk level characterized by balanced terms and standard dispute resolution procedures.",
+  "summary_hi": "यह दस्तावेज़ बैंगलोर में एक अपार्टमेंट के लिए हार्मनी हाउसिंग ट्रस्ट और एक निवासी किरायेदार के बीच स्थापित एक मानक आवासीय पट्टा समझौते का प्रतिनिधित्व करता है। इसका मुख्य उद्देश्य आवासीय किरायेदारी को औपचारिक बनाना है, जिसमें 30,000 रुपये के मासिक किराये के भुगतान, एक वापसी योग्य सुरक्षा जमा, विभाजित मरम्मत शुल्क और तीस दिन की समाप्ति सूचना जैसे प्रमुख दायित्वों को रेखांकित किया गया है। कुल सात प्रावधानों में से शून्य चिह्नित खंडों के साथ, अनुबंध एक कम जोखिम स्तर प्रस्तुत करता है जिसकी विशेषता संतुलित शर्तें और मानक विवाद समाधान प्रक्रियाएं हैं।",
+  "summary_ta": "இந்த ஆவணம் ஹார்மனி ஹவுசிங் டிரஸ்ட் மற்றும் பெங்களூரில் உள்ள ஒரு அடுக்குமாடி குடியிருப்பாளருக்கு இடையே நிறுவப்பட்ட ஒரு நிலையான குடியிருப்பு குத்தகை ஒப்பந்தத்தை பிரதிநிதித்துவப்படுத்துகிறது. அதன் முக்கிய நோக்கம் குடியிருப்பு குத்தகைக்கு முறைப்படுத்துவதாகும், மாதாந்திர வாடகை கொடுப்பனவுகள் 30,000 ரூபாய், திருப்பிச் செலுத்தக்கூடிய பாதுகாப்பு வைப்பு, பிரிக்கப்பட்ட பழுதுபார்க்கும் கடமைகள் மற்றும் முப்பது நாள் ஒப்பந்த முடிவு அறிவிப்பு போன்ற முக்கிய கடமைகளை கோடிட்டுக் காட்டுகிறது. மொத்தம் ஏழு விதிகளில் பூஜ்ஜியக் குறிக்கப்பட்ட பிரிவுகளுடன், ஒப்பந்தம் சமநிலையான விதிமுறைகள் மற்றும் நிலையான தகராறு தீர்வு நடைமுறைகளால் வகைப்படுத்தப்படும் குறைந்த ஆபத்து அளவை வழங்குகிறது.",
+  "client_intake": {
+    "employment_type": "salaried",
+    "has_dependents": true,
+    "dependents_count": 2,
+    "income_bracket": "medium",
+    "document_type": "rental_agreement"
+  },
+  "flagged_clauses": []
+}

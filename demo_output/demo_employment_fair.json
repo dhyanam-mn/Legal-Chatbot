@@ -1,0 +1,21 @@
+{
+  "generation_date": "2026-10-18 17:44:24 UTC",
+  "filename": "demo_employment_fair.pdf",
+  "document_type": "employment_contract",
+  "title": "Synthetic Employment Agreement (Standard / Fair)",
+  "expected_category": "fair",
+  "parse_method": "pdfplumber",
+  "total_clauses": 6,
+  "flagged_count": 0,
+  "summary_en": "This document appears to be a standard employment agreement between Horizon Innovations Ltd and an individual appointed as a Software Engineer. It establishes a monthly compensation of INR 85,000 alongside core obligations including maintaining technical confidentiality, providing thirty days of mutual notice for termination, and abiding by a six-month non-solicitation restriction following separation. With zero flagged clauses out of six total clauses, the contract presents a well-balanced structure and a low overall risk profile.",
+  "summary_hi": "यह दस्तावेज़ होराइजन इनोवेशन लिमिटेड और सॉफ्टवेयर इंजीनियर के रूप में नियुक्त व्यक्ति के बीच एक मानक रोजगार समझौता प्रतीत होता है। यह तकनीकी गोपनीयता बनाए रखने, समाप्ति के लिए तीस दिनों की आपसी सूचना प्रदान करने और अलगाव के बाद छह महीने के गैर-अनुरोध प्रतिबंध का पालन करने सहित मुख्य दायित्वों के साथ-साथ 85,000 रुपये का मासिक क्षतिपूर्ति स्थापित करता है। कुल छह खंडों में से शून्य चिह्नित खंडों के साथ, अनुबंध एक अच्छी तरह से संतुलित संरचना और कम समग्र जोखिम प्रोफ़ाइल प्रस्तुत करता है।",
+  "summary_ta": "இந்த ஆவணம் ஹொரைசன் இன்னோவேஷன்ஸ் லிமிடெட் நிறுவனத்திற்கும் மென்பொருள் பொறியாளராக நியமிக்கப்பட்ட ஒரு தனிநபருக்கும் இடையிலான ஒரு நிலையான வேலைவாய்ப்பு ஒப்பந்தமாகத் தெரிகிறது. இது தொழில்நுட்ப ரகசியத்தன்மையைப் பராமரிப்பது, பணிநீக்கத்திற்கான முப்பது நாட்கள் பரஸ்பர அறிவிப்பை வழங்குவது மற்றும் பிரிவினைக்குப் பிறகு ஆறு மாத கோரிக்கை அல்லாத கட்டுப்பாட்டிற்குக் கட்டுப்படுதல் உள்ளிட்ட முக்கிய கடமைகளுடன் மாதாந்திர இழப்பீடாக 85,000 ரூபாயை நிறுவுகிறது. மொத்தம் உள்ள ஆறு பிரிவுகளில் பூஜ்ஜியக் குறிக்கப்பட்ட பிரிவுகளுடன், ஒப்பந்தம் நன்கு சமநிலையான கட்டமைப்பையும் குறைந்த ஒட்டுமொத்த இடர் சுயவிவரத்தையும் வழங்குகிறது.",
+  "client_intake": {
+    "employment_type": "salaried",
+    "has_dependents": true,
+    "dependents_count": 2,
+    "income_bracket": "medium",
+    "document_type": "employment_contract"
+  },
+  "flagged_clauses": []
+}
