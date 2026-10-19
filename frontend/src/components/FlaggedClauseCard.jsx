@@ -142,6 +142,36 @@ export default function FlaggedClauseCard({ clause, rank, language = 'en' }) {
         <p className={`text-sm text-slate-800 break-words ${langClass}`}>{riskText}</p>
       </div>
 
+      {/* Bilingual Display for Machine-Translated Indic Documents */}
+      {clause.english_translation && (
+        <div className="mb-3 space-y-2.5 bg-slate-50 border border-slate-200 rounded-lg p-3">
+          <div>
+            <div className="text-[11px] font-semibold text-slate-600 uppercase tracking-wider mb-1">
+              {isTamil
+                ? "மூலப் பிரிவு உரை (தமிழ்):"
+                : isHindi
+                ? "मूल खंड टेक्स्ट (हिंदी):"
+                : `Original Clause Text (${clause.detected_language === 'ta' ? 'Tamil' : clause.detected_language === 'hi' ? 'Hindi' : 'Original'}):`}
+            </div>
+            <p className="text-xs sm:text-sm font-serif text-slate-900 leading-relaxed break-words bg-white border border-slate-200 rounded p-2.5">
+              {clause.original_text}
+            </p>
+          </div>
+          <div>
+            <div className="text-[11px] font-semibold text-blue-800 uppercase tracking-wider mb-1">
+              {isTamil
+                ? "ஆங்கில மொழிபெயர்ப்பு (பகுப்பாய்வு செய்யப்பட்டது):"
+                : isHindi
+                ? "अंग्रेजी अनुवाद (विश्लेषण हेतु):"
+                : "English Translation (Analyzed):"}
+            </div>
+            <p className="text-xs sm:text-sm font-serif text-slate-800 leading-relaxed break-words bg-blue-50/60 border border-blue-200 rounded p-2.5">
+              {clause.english_translation}
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Collapsible Controls: Legal basis | Typical phrasing | Original Clause Text | Vector Grounding */}
       <div className="flex flex-wrap items-center gap-2 sm:gap-3 border-t border-slate-100 pt-3 text-xs">
         <button
@@ -363,8 +393,21 @@ export default function FlaggedClauseCard({ clause, rank, language = 'en' }) {
 
       {/* Original Clause Text Box */}
       {showOriginal && (
-        <div className="mt-3 bg-slate-900 text-slate-100 p-3.5 rounded-lg text-xs font-mono leading-relaxed overflow-x-auto break-words">
-          {clause.original_text}
+        <div className="mt-3 space-y-2">
+          <div className="bg-slate-900 text-slate-100 p-3.5 rounded-lg text-xs font-mono leading-relaxed overflow-x-auto break-words">
+            <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+              Original Document Text:
+            </div>
+            {clause.original_text}
+          </div>
+          {clause.english_translation && (
+            <div className="bg-slate-800 text-slate-100 p-3.5 rounded-lg text-xs font-mono leading-relaxed overflow-x-auto break-words">
+              <div className="text-[10px] font-bold uppercase tracking-wider text-blue-300 mb-1.5">
+                Machine Translation (English):
+              </div>
+              {clause.english_translation}
+            </div>
+          )}
         </div>
       )}
 

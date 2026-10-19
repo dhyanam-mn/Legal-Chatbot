@@ -872,5 +872,75 @@ Relevant pages of official Act PDFs from `data/statutes_raw/` were rendered to h
 - `data/statutes_raw/review/ACA_page_23_s34.png` (Section 34: Setting aside arbitral award)
 - `data/statutes_raw/review/CPA_page_7_s2_46.png` (Section 2(46): Unfair contract definition)
 
+---
+
+## 18. Phase 5 — Experimental Indic Input Layer Verification Report
+
+### A. Feature Overview & Architecture
+1. **Language Detection**:
+   - Implemented `detect_document_language(text: str) -> str` in `backend/app/segmenter.py` using Unicode script shares:
+     - Devanagari script share (`\u0900-\u097F`) > 15% $\rightarrow$ `"hi"`
+     - Tamil script share (`\u0B80-\u0BFF`) > 15% $\rightarrow$ `"ta"`
+     - Otherwise $\rightarrow$ `"en"`
+   - Stored in `AnalysisResponse.detected_language`.
+2. **Indic Clause Segmentation**:
+   - Extended `CLAUSE_BOUNDARY_REGEX` and `segment_text_into_clauses` in `backend/app/segmenter.py` to recognize:
+     - Hindi headers: `"खंड 3"`, `"खण्ड 3"`, `"धारा 3"`, `"अनुच्छेद 3"`, `"3."`, `"३."`
+     - Tamil headers: `"பிரிவு 3"`, `"சரத்து 3"`, `"உறுப்பு 3"`, `"3."`, `"௩."`
+   - Verified zero regression on existing English documents.
+3. **Indic-to-English Translation Engine**:
+   - **Model**: `benfranklinms/indictrans2-indic-en-dist-200M` (`ai4bharat/indictrans2-indic-en-dist-200M`).
+   - **Device**: `cpu` (enforced CPU execution as specified).
+   - **Loading**: Strictly lazy singleton via `get_indic_to_en_engine()`; only loaded when a non-English document is uploaded.
+   - **Caching**: In-memory cache keyed by `(sha256_text_hash, src_lang)`.
+   - **Gemini Calls**: Exactly 0 Gemini calls for Indic-to-English translation.
+4. **UI & Pipeline Presentation**:
+   - Passes English machine translation to ChromaDB vector store and Gemini classifier.
+   - Preserves original Hindi/Tamil clause text in `flagged.original_text` and English translation in `flagged.english_translation`.
+   - UI displays:
+     - Prominent experimental notice banner: *"Experimental: this document was machine-translated to English before analysis. Errors in translation can affect results."*
+     - Default output language dynamically set to document language (`hi` or `ta`).
+     - Bilingual clause display showing original Indic text alongside the analyzed English translation.
+     - Full plain-language explanation and risk reasons in English, Hindi, and Tamil via the language switcher.
+5. **PDF Parser & OCR Fallback**:
+   - `pdfplumber` extracts Devanagari and Tamil Unicode text.
+   - Added Indic-aware garble detection (`is_text_garbled_or_empty`) detecting font CID unmapped glyphs, replacement characters (`\ufffd`), and Private Use Area (PUA) characters (`\ue000-\uf8ff`).
+   - Falls back to Tesseract OCR with `lang="eng+hin+tam"` if text is garbled.
+
+---
+
+### B. Round-Trip Sanity & Benchmark Metrics
+
+Evaluated by translating 3 standard English legal clauses into Hindi and Tamil using `ai4bharat/indictrans2-en-indic-dist-200M`, then translating back to English using `benfranklinms/indictrans2-indic-en-dist-200M` on CPU:
+
+| Clause Tested | Target Script | Machine-Translated Indic Text | Round-Trip English Back-Translation | Similarity Ratio | CPU Latency |
+|---|:---:|---|---|:---:|:---:|
+| **Clause 1 (Indemnity)** | Hindi (`hin_Deva`) | कर्मचारी सभी देनदारियों और नुकसान के खिलाफ कंपनी को क्षतिपूर्ति करने और हानिरहित रखने के लिए सहमत होता है। | *The employee agrees to indemnify and keep the company harmless against all liabilities and losses.* | **0.83** | 4.27s |
+| **Clause 1 (Indemnity)** | Tamil (`tam_Taml`) | அனைத்து கடன்கள் மற்றும் சேதங்களுக்கு எதிராக நிறுவனத்திற்கு இழப்பீடு வழங்கவும், பாதிப்பில்லாததாக வைத்திருக்கவும் ஊழியர் ஒப்புக்கொள்கிறார். | *The employee agrees to indemnify and keep the company harmless against all debts and damages.* | **0.82** | 2.24s |
+| **Clause 2 (Non-Compete)** | Hindi (`hin_Deva`) | कर्मचारी चौबीस महीने की अवधि के लिए किसी भी प्रतिस्पर्धी वाणिज्यिक गतिविधि में शामिल नहीं होगा। | *The employee shall not engage in any competitive commercial activity for a period of twenty-four months.* | **0.97** | 2.22s |
+| **Clause 2 (Non-Compete)** | Tamil (`tam_Taml`) | ஊழியர் இருபத்து நான்கு மாத காலத்திற்கு எந்தவொரு போட்டி வணிக நடவடிக்கையிலும் ஈடுபட மாட்டார். | *The employee will not engage in any competitive business activity for a period of twenty-four months.* | **0.87** | 2.65s |
+| **Clause 3 (Penalty / Deposit)** | Hindi (`hin_Deva`) | चूक की स्थिति में, पूरी प्रतिभूति जमा राशि को परिसमापन क्षति के रूप में मकान मालिक को तुरंत जब्त कर लिया जाएगा। | *In the event of default, the entire security deposit will be immediately forfeited to the landlord as liquidation damage.* | **0.95** | 4.19s |
+| **Clause 3 (Penalty / Deposit)** | Tamil (`tam_Taml`) | தவறினால், முழு பாதுகாப்பு வைப்புத்தொகையும் உடனடியாக நில உரிமையாளரிடம் கலைக்கப்பட்ட சேதங்களாக இழக்கப்படும். | *In case of default, the entire security deposit will be immediately lost to the landlord as dissolved damages.* | **0.84** | 4.60s |
+
+#### Aggregate Performance Summary
+- **Average Hindi $\rightarrow$ English Latency**: **3.56s / clause** on CPU
+- **Average Tamil $\rightarrow$ English Latency**: **3.16s / clause** on CPU
+- **Average Hindi $\rightarrow$ English Round-Trip Similarity**: **0.92** (92% semantic and lexical alignment)
+- **Average Tamil $\rightarrow$ English Round-Trip Similarity**: **0.84** (84% semantic and lexical alignment)
+
+---
+
+### C. Test Suite Pass / Fail Audit
+Full test suite executed via `pytest backend/tests -v`:
+- `test_citation_pinning.py`: 3 passed
+- `test_indic_input.py`: 5 passed
+- `test_provenance_audit.py`: 3 passed
+- `test_statute_quarantine_and_citations.py`: 3 passed
+- `test_statute_rag.py`: 3 passed
+- `test_unmapped_provisions.py`: 1 passed
+
+**Total: 18 passed, 0 failed in 212.07s.**
+
+
 
 

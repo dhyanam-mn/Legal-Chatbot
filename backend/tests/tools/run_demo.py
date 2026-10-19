@@ -5,6 +5,14 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
+# Configure utf-8 stdout/stderr for Windows console
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 # Enforce strict zero-heuristic fallback
 os.environ["ALLOW_HEURISTIC_FALLBACK"] = "false"
 
@@ -20,7 +28,7 @@ from app.config import (
     MANDATORY_DISCLAIMER_TA,
 )
 from app.parser import parse_pdf
-from app.segmenter import segment_text_into_clauses
+from app.segmenter import segment_text_into_clauses, detect_document_language
 from app.vector_store import get_vector_store
 from app.classifier import (
     classify_and_explain_clause,
@@ -30,39 +38,40 @@ from app.classifier import (
     NO_STATUTE_MESSAGE_TA,
 )
 from app.ranker import rank_flagged_clauses
-from app.schemas import ClientIntakeContext
+from app.schemas import ClientIntakeContext, ClauseItem
+from app.translator import translate_indic_to_en
 
 
 DEMO_DOCUMENTS = [
     {
-        "filename": "demo_rental_one_sided.pdf",
+        "filename": "demo_rental_en.pdf",
         "doc_type": "rental_agreement",
-        "title": "Synthetic Residential Lease (One-Sided)",
-        "expected_category": "one_sided",
+        "title": "Synthetic Residential Lease (English - One-Sided)",
+        "pair_role": "en_rental",
     },
     {
-        "filename": "demo_employment_one_sided.pdf",
+        "filename": "demo_rental_hi.pdf",
+        "doc_type": "rental_agreement",
+        "title": "आवासीय पट्टा समझौता (Hindi - One-Sided Residential Lease)",
+        "pair_role": "hi_rental",
+    },
+    {
+        "filename": "demo_employment_en.pdf",
         "doc_type": "employment_contract",
-        "title": "Synthetic Executive Employment Agreement (One-Sided)",
-        "expected_category": "one_sided",
+        "title": "Synthetic Executive Employment Agreement (English - One-Sided)",
+        "pair_role": "en_employment",
     },
     {
-        "filename": "demo_loan_one_sided.pdf",
+        "filename": "demo_employment_ta.pdf",
+        "doc_type": "employment_contract",
+        "title": "நிர்வாக வேலைவாய்ப்பு ஒப்பந்தம் (Tamil - One-Sided Employment Agreement)",
+        "pair_role": "ta_employment",
+    },
+    {
+        "filename": "demo_loan_en.pdf",
         "doc_type": "loan_agreement",
-        "title": "Synthetic Commercial Loan Agreement (One-Sided)",
-        "expected_category": "one_sided",
-    },
-    {
-        "filename": "demo_rental_fair.pdf",
-        "doc_type": "rental_agreement",
-        "title": "Synthetic Residential Lease (Standard / Fair)",
-        "expected_category": "fair",
-    },
-    {
-        "filename": "demo_employment_fair.pdf",
-        "doc_type": "employment_contract",
-        "title": "Synthetic Employment Agreement (Standard / Fair)",
-        "expected_category": "fair",
+        "title": "Synthetic Commercial Loan Agreement (English - One-Sided)",
+        "pair_role": "en_loan",
     },
 ]
 
@@ -88,7 +97,6 @@ def run_demo():
     output_dir = BASE_DIR / "demo_output"
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    summary_table_rows = []
     all_demo_results = {}
 
     for doc_meta in DEMO_DOCUMENTS:
@@ -96,30 +104,65 @@ def run_demo():
         pdf_path = demo_dir / fname
         doc_type = doc_meta["doc_type"]
         title = doc_meta["title"]
-        expected_cat = doc_meta["expected_category"]
+        pair_role = doc_meta["pair_role"]
 
         print(f"\n>>> Processing {fname} ({title}) ...")
+        json_out_path = output_dir / f"{Path(fname).stem}.json"
+        if json_out_path.exists():
+            try:
+                with open(json_out_path, "r", encoding="utf-8") as f:
+                    saved_doc = json.load(f)
+                    if saved_doc.get("flagged_clauses"):
+                        print(f"    [CACHED] Reusing completed document output from: {json_out_path}")
+                        all_demo_results[fname] = saved_doc
+                        continue
+            except Exception:
+                pass
+
         if not pdf_path.exists():
             raise FileNotFoundError(f"Missing demo PDF: {pdf_path}")
 
         pdf_bytes = pdf_path.read_bytes()
         raw_text, parse_method = parse_pdf(pdf_bytes)
-        clauses = segment_text_into_clauses(raw_text)
-        print(f"    Segmented {len(clauses)} clauses (method: {parse_method})")
+        doc_lang = detect_document_language(raw_text)
+        print(f"    Detected Document Language: '{doc_lang}' (Parse Method: {parse_method})")
+
+        clauses = segment_text_into_clauses(raw_text, detected_language=doc_lang)
+        print(f"    Segmented {len(clauses)} clauses")
+
+        # Non-English documents: machine translate each clause to English for analysis
+        if doc_lang != "en":
+            print(f"    Machine-translating {len(clauses)} {doc_lang.upper()} clauses to English...")
+            src_code = "tam_Taml" if doc_lang == "ta" else "hin_Deva"
+            for c in clauses:
+                c.english_translation = translate_indic_to_en(c.text, src_lang=src_code)
+                c.detected_language = doc_lang
 
         flagged_clauses = []
         for idx, clause in enumerate(clauses, start=1):
+            analysis_text = clause.english_translation if (doc_lang != "en" and clause.english_translation) else clause.text
             print(f"    Evaluating Clause {idx}/{len(clauses)}: {clause.clause_id} ...")
-            grounding = store.query_nearest_references(clause.text, top_k=4)
-            flagged = classify_and_explain_clause(clause, grounding)
+
+            clause_for_classifier = ClauseItem(
+                clause_id=clause.clause_id,
+                text=analysis_text,
+                english_translation=clause.english_translation,
+                detected_language=doc_lang,
+            )
+
+            grounding = store.query_nearest_references(analysis_text, top_k=4)
+            flagged = classify_and_explain_clause(clause_for_classifier, grounding)
             if flagged:
+                flagged.original_text = clause.text  # Preserve original Indic / English text
+                flagged.english_translation = clause.english_translation
+                flagged.detected_language = doc_lang
                 flagged_clauses.append(flagged)
                 print(f"      -> FLAGGED: {flagged.clause_type} ({flagged.title}) [Severity: {flagged.severity}]")
             else:
                 print(f"      -> STANDARD: Not flagged")
-            time.sleep(1.0)  # gentle pacing against free-tier rate limits
+            time.sleep(1.0)  # Gentle pacing against rate limits
 
-        # Client Intake: Salaried, Dependents=Yes, Medium Income
+        # Client Intake: Salaried, Dependents=Yes (count=2), Medium Income
         intake = ClientIntakeContext(
             employment_type="salaried",
             has_dependents=True,
@@ -131,16 +174,21 @@ def run_demo():
         ranked_clauses = rank_flagged_clauses(flagged_clauses, intake)
 
         print(f"    Generating document executive summary...")
+        summary_input = "\n\n".join(
+            (c.english_translation if (doc_lang != "en" and c.english_translation) else c.text)
+            for c in clauses
+        )
         summary_en, summary_hi, summary_ta = generate_document_summary(
-            raw_text, len(clauses), len(ranked_clauses)
+            summary_input, len(clauses), len(ranked_clauses)
         )
 
         doc_result = {
             "generation_date": generation_date,
             "filename": fname,
             "document_type": doc_type,
+            "document_language": doc_lang,
             "title": title,
-            "expected_category": expected_cat,
+            "pair_role": pair_role,
             "parse_method": parse_method,
             "total_clauses": len(clauses),
             "flagged_count": len(ranked_clauses),
@@ -159,18 +207,46 @@ def run_demo():
             json.dump(doc_result, f, indent=2, ensure_ascii=False)
         print(f"    Saved individual document output to: {json_out_path}")
 
-        # Summary Table entry
-        false_positive_status = "N/A (One-sided)"
-        if expected_cat == "fair":
-            false_positive_status = f"PASS (0 flags)" if len(ranked_clauses) == 0 else f"{len(ranked_clauses)} flags (check)"
+    # Build Cross-Language Consistency Matrix
+    consistency_rows = []
 
-        summary_table_rows.append({
-            "document": fname,
-            "title": title,
-            "clauses": len(clauses),
-            "flagged": len(ranked_clauses),
-            "fp_check": false_positive_status,
-        })
+    # 1. Rental: demo_rental_en.pdf vs demo_rental_hi.pdf
+    rental_en = all_demo_results.get("demo_rental_en.pdf")
+    rental_hi = all_demo_results.get("demo_rental_hi.pdf")
+    if rental_en and rental_hi:
+        en_types = set(c["clause_type"] for c in rental_en["flagged_clauses"])
+        hi_types = set(c["clause_type"] for c in rental_hi["flagged_clauses"])
+        all_rental_types = sorted(list(en_types | hi_types))
+        for ct in all_rental_types:
+            in_en = ct in en_types
+            in_hi = ct in hi_types
+            status = "MATCHED" if (in_en and in_hi) else ("MISSED in Hindi" if in_en else "EXTRA in Hindi")
+            consistency_rows.append({
+                "pair": "Rental (EN vs HI)",
+                "clause_type": ct,
+                "in_en": "Yes" if in_en else "No",
+                "in_indic": "Yes" if in_hi else "No",
+                "status": status
+            })
+
+    # 2. Employment: demo_employment_en.pdf vs demo_employment_ta.pdf
+    emp_en = all_demo_results.get("demo_employment_en.pdf")
+    emp_ta = all_demo_results.get("demo_employment_ta.pdf")
+    if emp_en and emp_ta:
+        en_types = set(c["clause_type"] for c in emp_en["flagged_clauses"])
+        ta_types = set(c["clause_type"] for c in emp_ta["flagged_clauses"])
+        all_emp_types = sorted(list(en_types | ta_types))
+        for ct in all_emp_types:
+            in_en = ct in en_types
+            in_ta = ct in ta_types
+            status = "MATCHED" if (in_en and in_ta) else ("MISSED in Tamil" if in_en else "EXTRA in Tamil")
+            consistency_rows.append({
+                "pair": "Employment (EN vs TA)",
+                "clause_type": ct,
+                "in_en": "Yes" if in_en else "No",
+                "in_indic": "Yes" if in_ta else "No",
+                "status": status
+            })
 
     # Save aggregated summary JSON
     summary_json_path = output_dir / "demo_results_summary.json"
@@ -178,8 +254,8 @@ def run_demo():
         json.dump(
             {
                 "generation_date": generation_date,
-                "summary_table": summary_table_rows,
                 "documents": all_demo_results,
+                "cross_language_consistency": consistency_rows,
             },
             f,
             indent=2,
@@ -188,104 +264,185 @@ def run_demo():
     print(f"\nSaved aggregated demo summary to: {summary_json_path}")
 
     # Build Markdown Report
-    md_lines = []
-    md_lines.append(f"# Legal Document Chatbot — Demonstration Audit Report")
-    md_lines.append(f"**Generated:** {generation_date}")
-    md_lines.append(f"**Configuration:** `ALLOW_HEURISTIC_FALLBACK=false` | Client Intake: `salaried`, `has_dependents=True (count=2)`, `income_bracket=medium`\n")
+    md_lines = [
+        f"# Legal Document Chatbot — Multilingual Demonstration & Audit Report",
+        f"**Generated:** {generation_date}",
+        f"**Configuration:** `ALLOW_HEURISTIC_FALLBACK=false` | Client Intake: `salaried`, `has_dependents=True (count=2)`, `income_bracket=medium`\n",
+        f"## 1. Document Execution Summary Matrix",
+        f"| Document | Language | Title | Total Clauses | Flagged Clauses | Parse Method |",
+        f"| :--- | :---: | :--- | :---: | :---: | :---: |",
+    ]
 
-    md_lines.append(f"## 1. Summary Matrix & False-Positive Audit")
-    md_lines.append(f"| Document | Title | Total Clauses | Flagged Clauses | False-Positive Check (Fair Docs) |")
-    md_lines.append(f"| :--- | :--- | :---: | :---: | :---: |")
-    for row in summary_table_rows:
-        md_lines.append(f"| `{row['document']}` | {row['title']} | {row['clauses']} | **{row['flagged']}** | {row['fp_check']} |")
-    md_lines.append("\n---\n")
+    for fname, d in all_demo_results.items():
+        lang_str = d["document_language"].upper()
+        md_lines.append(
+            f"| `{fname}` | **{lang_str}** | {d['title']} | {d['total_clauses']} | **{d['flagged_count']}** | {d['parse_method']} |"
+        )
 
-    md_lines.append(f"## 2. Document-by-Document Detailed Findings\n")
+    md_lines.extend([
+        "",
+        "---",
+        "",
+        "## 2. Cross-Language Consistency Audit Matrix",
+        "This table evaluates consistency in clause flagging when the exact same underlying contract is submitted in English versus Hindi or Tamil:",
+        "",
+        "| Document Pair | Clause Type | English Flagged? | Indic Flagged? | Consistency Status |",
+        "| :--- | :--- | :---: | :---: | :---: |",
+    ])
 
-    for doc_meta in DEMO_DOCUMENTS:
-        fname = doc_meta["filename"]
-        res = all_demo_results[fname]
-        md_lines.append(f"### {res['title']} (`{fname}`)")
-        md_lines.append(f"- **Document Type:** `{res['document_type']}` | **Clauses Segmented:** {res['total_clauses']} | **Risk Items Flagged:** {res['flagged_count']}")
-        md_lines.append(f"\n#### Executive Summary")
-        md_lines.append(f"- **English:** {res['summary_en']}")
-        md_lines.append(f"- **Hindi (हिंदी):** {res['summary_hi']}")
-        md_lines.append(f"- **Tamil (தமிழ்):** {res['summary_ta']}\n")
+    for row in consistency_rows:
+        status_badge = f"**{row['status']}**" if "MATCHED" in row['status'] else f"*{row['status']}*"
+        md_lines.append(
+            f"| {row['pair']} | `{row['clause_type']}` | {row['in_en']} | {row['in_indic']} | {status_badge} |"
+        )
 
-        if not res["flagged_clauses"]:
-            md_lines.append(f"> [!NOTE]\n> **Balanced / Fair Contract Result:** Zero clauses flagged. The agreement contains standard, mutual, and non-exploitative covenants. All covenants adhere to typical balanced standards.\n")
-        else:
-            md_lines.append(f"#### Ranked Flagged Clauses ({len(res['flagged_clauses'])} items)")
-            for idx, c in enumerate(res["flagged_clauses"], start=1):
-                md_lines.append(f"##### {idx}. [{c['clause_id']}] {c['title']} — Severity: `{c['severity']}` (Priority Score: {c['priority_score']:.1f})")
-                md_lines.append(f"**Original Clause Text:**")
-                md_lines.append(f"> *\"{c['original_text']}\"*\n")
+    md_lines.extend([
+        "",
+        "---",
+        "",
+        "## 3. Document-by-Document Detailed Findings",
+        "",
+    ])
 
-                md_lines.append(f"**Plain-Language Explanation & Risk Reason:**")
-                md_lines.append(f"- **English Explanation:** {c['explanation']}")
-                md_lines.append(f"- **English Risk Reason:** {c['risk_reason']}")
-                md_lines.append(f"- **Hindi Explanation (हिंदी व्याख्या):** {c.get('explanation_hi', '')}")
-                md_lines.append(f"- **Hindi Risk Reason (हिंदी जोखिम कारण):** {c.get('risk_reason_hi', '')}")
-                md_lines.append(f"- **Tamil Explanation (தமிழ் விளக்கம்):** {c.get('explanation_ta', '')}")
-                md_lines.append(f"- **Tamil Risk Reason (தமிழ் ஆபத்து காரணம்):** {c.get('risk_reason_ta', '')}\n")
+    for fname, d in all_demo_results.items():
+        doc_lang = d["document_language"]
+        md_lines.extend([
+            f"### {d['title']} (`{fname}`)",
+            f"- **Document Language:** `{doc_lang.upper()}` | **Document Type:** `{d['document_type']}` | **Clauses Segmented:** {d['total_clauses']} | **Risk Items Flagged:** {d['flagged_count']}",
+            "",
+            f"#### Executive Summary",
+            f"- **English:** {d['summary_en']}",
+            f"- **Hindi (हिंदी):** {d['summary_hi']}",
+            f"- **Tamil (தமிழ்):** {d['summary_ta']}",
+            "",
+        ])
 
-                md_lines.append(f"**Legal Basis:**")
-                cits = c.get("statutory_citations", [])
-                if cits:
-                    for cit in cits:
-                        md_lines.append(f"- **[{cit['provision_id']}] {cit['act']} — {cit['section']} ({cit['title']})**")
-                        md_lines.append(f"  - *Reason (EN):* {cit['reason']}")
-                        if cit.get("reason_hi"):
-                            md_lines.append(f"  - *Reason (HI):* {cit['reason_hi']}")
-                        if cit.get("reason_ta"):
-                            md_lines.append(f"  - *Reason (TA):* {cit['reason_ta']}")
-                        if cit.get("statutory_text"):
-                            md_lines.append(f"  - *Verbatim Statutory Text (English):*")
-                            md_lines.append(f"    > \"{cit['statutory_text'][:380]}...\"")
-                else:
-                    msg = c.get("legal_basis_message") or NO_STATUTE_MESSAGE
-                    msg_hi = c.get("legal_basis_message_hi") or NO_STATUTE_MESSAGE_HI
-                    msg_ta = c.get("legal_basis_message_ta") or NO_STATUTE_MESSAGE_TA
-                    md_lines.append(f"- **Status:** {msg}")
-                    md_lines.append(f"- *Hindi (हिंदी):* {msg_hi}")
-                    md_lines.append(f"- *Tamil (தமிழ்):* {msg_ta}\n")
+        flagged_items = d["flagged_clauses"]
+        if not flagged_items:
+            md_lines.extend([
+                "> [!NOTE]",
+                "> **Balanced Contract Result:** Zero clauses flagged. The agreement contains standard, mutual, and non-exploitative covenants.",
+                "",
+                "---",
+                "",
+            ])
+            continue
 
-                alts = c.get("standard_alternatives", [])
-                if alts:
-                    md_lines.append(f"**How this is typically written (Typical Balanced Phrasing):**")
-                    for a_idx, alt in enumerate(alts, start=1):
-                        md_lines.append(f"{a_idx}. \"{alt}\"")
-                    md_lines.append("")
+        md_lines.append(f"#### Ranked Flagged Clauses ({len(flagged_items)} items)")
+        for idx, fc in enumerate(flagged_items, start=1):
+            c_type = fc.get("clause_type", "Unknown")
+            c_title = fc.get("title", c_type)
+            cid = fc.get("clause_id", f"Clause {idx}")
+            sev = fc.get("severity", "Medium")
+            score = fc.get("priority_score", 0.0)
 
-                md_lines.append(f"**Mandatory Legal Disclaimer:**")
-                md_lines.append(f"- **EN:** {c.get('typical_phrasing_disclaimer') or MANDATORY_DISCLAIMER}")
-                md_lines.append(f"- **HI:** {c.get('typical_phrasing_disclaimer_hi') or MANDATORY_DISCLAIMER_HI}")
-                md_lines.append(f"- **TA:** {c.get('typical_phrasing_disclaimer_ta') or MANDATORY_DISCLAIMER_TA}\n")
+            orig_text = (fc.get("original_text") or "").strip()
+            en_trans = (fc.get("english_translation") or "").strip()
 
-        md_lines.append("\n---\n")
+            md_lines.extend([
+                f"##### {idx}. [{cid}] {c_title} — Severity: `{sev}` (Priority Score: {score:.1f})",
+                f"**Original Clause Text ({doc_lang.upper()}):**",
+                f"> *\"{orig_text}\"*",
+                "",
+            ])
 
-    md_lines.append(f"## 3. Limitations & Disclaimers")
-    md_lines.append(f"- **Synthetic Test Documents:** The analyzed documents are synthetic demonstrative contracts crafted for automated testing and software demonstration; they do not represent real-world legal agreements or actual persons.")
-    md_lines.append(f"- **English Input Only:** The document parsing, segmentation, and semantic grounding pipeline accepts and processes contracts written in English.")
-    md_lines.append(f"- **Automated Translations (Hindi and Tamil):** Explanations, risk reasons, summaries, and citations in Hindi and Tamil are generated using local neural machine translation (IndicTrans2) and reviewed solely by automated glossary rules. They are intended for linguistic accessibility and have not undergone individual manual native-speaker legal certification.")
-    md_lines.append(f"- **Not Legal Advice:** The explanations, risk ratings, priority scores, and statutory references provided by this software are for educational and informational purposes only. This tool does not constitute legal advice and cannot substitute for qualified legal counsel.")
+            if doc_lang != "en" and en_trans:
+                md_lines.extend([
+                    f"**English Translation (Machine-Translated for Analysis):**",
+                    f"> *\"{en_trans}\"*",
+                    "",
+                ])
 
-    full_md_report = "\n".join(md_lines)
+            md_lines.extend([
+                f"**Plain-Language Explanation & Risk Reason:**",
+                f"- **English Explanation:** {fc.get('explanation', '')}",
+                f"- **English Risk Reason:** {fc.get('risk_reason', '')}",
+                f"- **Hindi Explanation (हिंदी व्याख्या):** {fc.get('explanation_hi', '')}",
+                f"- **Hindi Risk Reason (हिंदी जोखिम कारण):** {fc.get('risk_reason_hi', '')}",
+                f"- **Tamil Explanation (தமிழ் விளக்கம்):** {fc.get('explanation_ta', '')}",
+                f"- **Tamil Risk Reason (தமிழ் ஆபத்து காரணம்):** {fc.get('risk_reason_ta', '')}",
+                "",
+                f"**Legal Basis:**",
+            ])
 
-    # Save to demo_output/demo_report.md
-    report_out_path = output_dir / "demo_report.md"
-    report_out_path.write_text(full_md_report, encoding="utf-8")
-    print(f"Saved demo report to: {report_out_path}")
+            citations = fc.get("statutory_citations", [])
+            if not citations:
+                lb_msg = fc.get("legal_basis_message") or NO_STATUTE_MESSAGE
+                lb_msg_hi = fc.get("legal_basis_message_hi") or NO_STATUTE_MESSAGE_HI
+                lb_msg_ta = fc.get("legal_basis_message_ta") or NO_STATUTE_MESSAGE_TA
+                md_lines.extend([
+                    f"- **Status:** {lb_msg}",
+                    f"- *Hindi (हिंदी):* {lb_msg_hi}",
+                    f"- *Tamil (தமிழ்):* {lb_msg_ta}",
+                    "",
+                ])
+            else:
+                for cit in citations:
+                    pid = cit.get("provision_id", "")
+                    act = cit.get("act", "")
+                    sec = cit.get("section", "")
+                    title_part = f" ({cit.get('title')})" if cit.get("title") else ""
+                    reason_en = cit.get("reason", "")
+                    reason_hi = cit.get("reason_hi") or reason_en
+                    reason_ta = cit.get("reason_ta") or reason_en
+                    stat_text = cit.get("statutory_text", "").strip()
 
-    # Also save a copy at project root for direct convenience
+                    md_lines.extend([
+                        f"- **[{pid}] {act} — {sec}{title_part}**",
+                        f"  - *Reason (EN):* {reason_en}",
+                        f"- *Reason (HI):* {reason_hi}",
+                        f"- *Reason (TA):* {reason_ta}",
+                    ])
+                    if stat_text:
+                        short_stat = (stat_text[:350] + "...") if len(stat_text) > 350 else stat_text
+                        md_lines.extend([
+                            f"  - *Verbatim Statutory Text (English):*",
+                            f"    > \"{short_stat}\"",
+                        ])
+                md_lines.append("")
+
+            alts = fc.get("standard_alternatives", [])
+            md_lines.append(f"**How this is typically written (Typical Balanced Phrasing):**")
+            if alts:
+                for a_idx, alt in enumerate(alts, start=1):
+                    md_lines.append(f"{a_idx}. \"{alt}\"")
+            else:
+                md_lines.append("*(No standard reference phrasing available)*")
+            md_lines.append("")
+
+            md_lines.extend([
+                f"**Mandatory Legal Disclaimer:**",
+                f"- **EN:** {MANDATORY_DISCLAIMER}",
+                f"- **HI:** {MANDATORY_DISCLAIMER_HI}",
+                f"- **TA:** {MANDATORY_DISCLAIMER_TA}",
+                "",
+            ])
+
+        md_lines.extend(["", "---", ""])
+
+    md_lines.extend([
+        "## 4. Limitations & Disclaimers",
+        "- **Synthetic Test Documents:** The analyzed documents are synthetic demonstrative contracts crafted for automated testing and software demonstration; they do not represent real-world legal agreements or actual persons.",
+        "- **Experimental Indic Input Layer:** Hindi and Tamil document analysis is experimental. Documents are machine-translated to English via local IndicTrans2 models prior to vector grounding and clause classification. Nuances, idioms, or errors in machine translation can affect classification.",
+        "- **Translations Not Native-Reviewed:** Hindi and Tamil contract texts and output translations are generated by automated neural machine translation and enforced via dictionary glossary rules; they have not undergone individual manual certification by native legal counsel.",
+        "- **Not Legal Advice:** The explanations, risk ratings, priority scores, and statutory references provided by this software are for educational and informational purposes only. This tool does not constitute legal advice and cannot substitute for qualified legal counsel enrolled with the Bar Council of India.",
+        "",
+    ])
+
+    report_content = "\n".join(md_lines)
+    report_path = output_dir / "demo_report.md"
     root_report_path = BASE_DIR / "demo_report.md"
-    root_report_path.write_text(full_md_report, encoding="utf-8")
-    print(f"Saved demo report to: {root_report_path}")
 
-    print("\n=======================================================")
-    print("DEMO EXECUTION COMPLETE!")
-    print("=======================================================\n")
-    return all_demo_results
+    with open(report_path, "w", encoding="utf-8") as f:
+        f.write(report_content)
+    with open(root_report_path, "w", encoding="utf-8") as f:
+        f.write(report_content)
+
+    print(f"Saved demo report to: {report_path}")
+    print(f"Saved demo report to: {root_report_path}")
+    print(f"\n=======================================================")
+    print(f"DEMO EXECUTION COMPLETE!")
+    print(f"=======================================================\n")
 
 
 if __name__ == "__main__":

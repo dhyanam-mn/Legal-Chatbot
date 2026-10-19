@@ -21,6 +21,7 @@ GEMINI_API_KEY = (os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY") or 
 HF_TOKEN = (os.getenv("HF_TOKEN") or os.getenv("HUGGINGFACE_TOKEN") or "").strip()
 EMBEDDING_MODEL_NAME = os.getenv("EMBEDDING_MODEL_NAME", "BAAI/bge-small-en-v1.5")
 INDICTRANS2_MODEL_NAME = os.getenv("INDICTRANS2_MODEL_NAME", "ai4bharat/indictrans2-en-indic-dist-200M")
+INDICTRANS2_INDIC_EN_MODEL_NAME = os.getenv("INDICTRANS2_INDIC_EN_MODEL_NAME", "benfranklinms/indictrans2-indic-en-dist-200M")
 ALLOW_HEURISTIC_FALLBACK = os.getenv("ALLOW_HEURISTIC_FALLBACK", "false").lower() in ("true", "1", "yes")
 
 # Ordered list of Gemini models for quota rotation (never falls back to heuristic classifier)

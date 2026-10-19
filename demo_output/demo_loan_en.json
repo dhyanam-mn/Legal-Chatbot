@@ -1,0 +1,385 @@
+{
+  "generation_date": "2026-10-18 19:25:09 UTC",
+  "filename": "demo_loan_en.pdf",
+  "document_type": "loan_agreement",
+  "document_language": "en",
+  "title": "Synthetic Commercial Loan Agreement (English - One-Sided)",
+  "pair_role": "en_loan",
+  "parse_method": "pdfplumber",
+  "total_clauses": 7,
+  "flagged_count": 5,
+  "summary_en": "This legal document is a commercial loan and credit facility agreement established between Capital Growth Lending Services and a borrower on October 10, 2026. The core purpose is to extend a term loan of INR 1,500,000 for business expansion and capital equipment, while imposing strict repayment obligations, penalties, and guarantor liabilities. Based on the presence of five heavily restrictive clauses, the agreement carries an extremely high risk level for the borrower and guarantor due to provisions like retroactive penal interest, immediate loan acceleration without notice, mandatory prepayment penalties, unilateral rate adjustments, and direct personal asset seizure.",
+  "summary_hi": "यह कानूनी दस्तावेज 10 अक्टूबर, 2026 को पूंजी विकास ऋण सेवाओं और एक उधारकर्ता के बीच स्थापित एक वाणिज्यिक ऋण और ऋण सुविधा समझौता है। इसका मुख्य उद्देश्य व्यापार विस्तार और पूंजी उपकरणों के लिए आई. एन. आर. 1,500,000 के सावधि ऋण का विस्तार करना है, साथ ही सख्त पुनर्भुगतान दायित्वों, शास्ति और गारंटर देनदारियों को लागू करना है। पांच भारी प्रतिबंधात्मक खंडों की उपस्थिति के आधार पर, समझौते में पूर्वव्यापी शास्ति संबंधी ब्याज, बिना सूचना के तत्काल ऋण त्वरण, अनिवार्य पूर्व भुगतान शास्ति, एकतरफा दर समायोजन और प्रत्यक्ष व्यक्तिगत संपत्ति जब्ती जैसे प्रावधानों के कारण उधारकर्ता और गारंटर के लिए एक अत्यधिक उच्च जोखिम स्तर है।",
+  "summary_ta": "இந்த சட்ட ஆவணம் அக்டோபர் 10,2026 அன்று மூலதன வளர்ச்சி கடன் சேவைகள் மற்றும் ஒரு கடன் வாங்குபவருக்கு இடையே நிறுவப்பட்ட ஒரு வணிகக் கடன் மற்றும் கடன் வசதி ஒப்பந்தமாகும். வணிக விரிவாக்கம் மற்றும் மூலதன உபகரணங்களுக்கு ஐ. என். ஆர் 1,500,000 என்ற காலக் கடனை நீட்டிக்க வேண்டும், அதே நேரத்தில் கடுமையான திருப்பிச் செலுத்தும் கடமைகள், அபராதங்கள் மற்றும் உத்தரவாதக் கடன்களை விதிக்க வேண்டும். ஐந்து கடுமையான கட்டுப்பாட்டு பிரிவுகள் இருப்பதால், இந்த ஒப்பந்தம் கடன் வாங்குபவருக்கும் உத்தரவாதம் அளிப்பவருக்கும் மிகவும் அதிக ஆபத்து அளவைக் கொண்டுள்ளது, ஏனெனில் முந்தையகால தண்டனை வட்டி, அறிவிப்பு இல்லாமல் உடனடி கடன் முடுக்கம், கட்டாய முன்கூட்டிய செலுத்துதல் அபராதம், ஒருதலைப்பட்ச விகித மாற்றங்கள் மற்றும் நேரடி தனிப்பட்ட சொத்துக்களை பறிமுதல் செய்தல் போன்ற விதிமுறைகள் உள்ளன.",
+  "client_intake": {
+    "employment_type": "salaried",
+    "has_dependents": true,
+    "dependents_count": 2,
+    "income_bracket": "medium",
+    "document_type": "loan_agreement"
+  },
+  "flagged_clauses": [
+    {
+      "clause_id": "Clause 3.",
+      "clause_type": "acceleration",
+      "title": "Acceleration of Loan",
+      "original_text": "Clause 3. Immediate Loan Acceleration Without Cure\nUpon the occurrence of any technical breach or delay, the Lender shall have the unconditional right to declare all future\nunmatured principal and interest immediately accelerated, due, and payable in full without providing any prior cure period,\nformal demand, or legal notice.",
+      "english_translation": null,
+      "detected_language": "en",
+      "classification": "flag-worthy",
+      "explanation": "The clause grants the lender the unconditional right to immediately accelerate all future principal and interest upon any technical breach or delay. This occurs without providing any prior cure period, formal demand, or legal notice.",
+      "risk_reason": "This provision is heavily one-sided because it allows for immediate loan acceleration for minor or technical infractions without offering the borrower any opportunity to correct the issue. It exposes the borrower to severe financial risk and sudden default without warning.",
+      "explanation_hi": "खंड ऋणदाता को किसी भी तकनीकी उल्लंघन या देरी पर भविष्य के सभी मूलधन और ब्याज में तुरंत तेजी लाने का बिना शर्त अधिकार देता है। यह किसी भी पूर्व उपचार अवधि, औपचारिक मांग या कानूनी सूचना प्रदान किए बिना होता है।",
+      "risk_reason_hi": "यह प्रावधान काफी हद तक एकतरफा है क्योंकि यह उधारकर्ता को समस्या को ठीक करने का कोई अवसर दिए बिना छोटे या तकनीकी उल्लंघनों के लिए तत्काल ऋण त्वरण की अनुमति देता है। यह उधारकर्ता को गंभीर वित्तीय जोखिम और बिना चेतावनी के अचानक चूक के लिए उजागर करता है।",
+      "explanation_ta": "எந்தவொரு தொழில்நுட்ப மீறல் அல்லது தாமதத்தின் மீதும் எதிர்கால அசல் மற்றும் வட்டியை உடனடியாக விரைவுபடுத்த நிபந்தனையற்ற உரிமையை இந்த பிரிவு கடன் வழங்குபவருக்கு வழங்குகிறது. இது எந்தவொரு முன் சிகிச்சை காலம், முறையான கோரிக்கை அல்லது சட்ட அறிவிப்பை வழங்காமல் நிகழ்கிறது.",
+      "risk_reason_ta": "இந்த விதி பெரிதும் ஒருதலைப்பட்சமானது, ஏனெனில் இது சிறிய அல்லது தொழில்நுட்ப மீறல்களுக்கு உடனடி கடன் முடுக்கத்தை அனுமதிக்கிறது, ஏனெனில் கடன் வாங்குபவருக்கு சிக்கலை சரிசெய்ய எந்த வாய்ப்பும் வழங்குவதில்லை. இது கடன் வாங்குபவருக்கு கடுமையான நிதி ஆபத்து மற்றும் எச்சரிக்கை இல்லாமல் திடீரென்று தவறியதை அம்பலப்படுத்துகிறது.",
+      "severity": "High",
+      "priority_score": 125.0,
+      "model_used": "gemini-3.5-flash-lite",
+      "citation_model_used": null,
+      "grounding_examples": [
+        {
+          "category": "standard",
+          "clause_type": "acceleration",
+          "text": "Lender may accelerate maturity of the loan only upon an uncured material default, bankruptcy, or insolvency event following 21 days formal cure notice.",
+          "distance": 0.24307996034622192
+        },
+        {
+          "category": "standard",
+          "clause_type": "acceleration",
+          "text": "If Borrower fails to cure a payment default within 30 days of receiving written notice, Lender may declare the outstanding principal and accrued interest immediately due and payable.",
+          "distance": 0.24525552988052368
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "acceleration",
+          "text": "Upon any trivial technical non-compliance with any loan guideline, the total loan balance shall automatically accelerate without demand, presentment, or notice.",
+          "distance": 0.2586674690246582
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "termination",
+          "text": "Lender may accelerate the full loan balance and demand immediate payment in full at any time at Lender's sole discretion without notice or cause.",
+          "distance": 0.2654057741165161
+        }
+      ],
+      "statutory_provisions": [],
+      "statutory_citations": [],
+      "legal_basis_message": "No statutory provision retrieved",
+      "legal_basis_message_hi": "कोई वैधानिक प्रावधान प्राप्त नहीं हुआ (No statutory provision retrieved)",
+      "legal_basis_message_ta": "சட்ட விதி எதுவும் கண்டறியப்படவில்லை (No statutory provision retrieved)",
+      "typical_phrasing_header": "How this is typically written",
+      "typical_phrasing_disclaimer": "This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this.",
+      "typical_phrasing_disclaimer_hi": "यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।",
+      "typical_phrasing_disclaimer_ta": "இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்.",
+      "standard_alternatives": [
+        "If Borrower fails to cure a payment default within 30 days of receiving written notice, Lender may declare the outstanding principal and accrued interest immediately due and payable.",
+        "Lender may accelerate maturity of the loan only upon an uncured material default, bankruptcy, or insolvency event following 21 days formal cure notice.",
+        "Upon the occurrence of an Event of Default and failure to cure within 14 business days, Lender may accelerate repayment of all remaining scheduled installments.",
+        "In case of repeated non-payment following written warning and a 30-day remedy period, Lender may call for immediate repayment of outstanding principal."
+      ]
+    },
+    {
+      "clause_id": "Clause 6.",
+      "clause_type": "guarantor_liability",
+      "title": "Guarantor Liability",
+      "original_text": "Clause 6. Unlimited Continuing Guarantor Liability\nThe Guarantor undertakes an unlimited, irrevocable, and continuing personal guarantee for all present and future\nobligations of the Borrower, authorizing the Lender to seize, attach, and liquidate the personal and family assets of the\nGuarantor immediately upon default without first initiating recovery proceedings against the primary Borrower.\nSYNTHETIC DEMO DOCUMENT - NOT A REAL CONTRACT",
+      "english_translation": null,
+      "detected_language": "en",
+      "classification": "flag-worthy",
+      "explanation": "The clause establishes an unlimited, irrevocable, and continuing personal guarantee for all present and future obligations of the borrower. It permits the lender to immediately seize, attach, and liquidate the guarantor's personal and family assets upon default without first pursuing the primary borrower.",
+      "risk_reason": "This clause is one-sided because it eliminates the requirement for the lender to exhaust recovery options against the primary borrower before targeting the guarantor's personal assets. It exposes the guarantor to immediate and unlimited financial liability without procedural protections.",
+      "explanation_hi": "खंड उधारकर्ता के सभी वर्तमान और भविष्य के दायित्वों के लिए एक असीमित, अपरिवर्तनीय और निरंतर व्यक्तिगत गारंटी स्थापित करता है। यह ऋणदाता को पहले ऋणकर्ता का पीछा किए बिना चूक पर गारंटर की व्यक्तिगत और पारिवारिक संपत्तियों को तुरंत जब्त करने, कुर्क करने और परिसमापन करने की अनुमति देता है।",
+      "risk_reason_hi": "यह खंड एकतरफा है क्योंकि यह ऋणदाता के लिए गारंटर की व्यक्तिगत संपत्ति को लक्षित करने से पहले प्राथमिक उधारकर्ता के खिलाफ वसूली विकल्पों को समाप्त करने की आवश्यकता को समाप्त करता है। यह गारंटर को बिना प्रक्रियात्मक सुरक्षा के तत्काल और असीमित वित्तीय दायित्व के लिए उजागर करता है।",
+      "explanation_ta": "இந்த பிரிவு கடன் வாங்குபவரின் தற்போதைய மற்றும் எதிர்கால கடமைகள் அனைத்திற்கும் வரம்பற்ற, மாற்ற முடியாத மற்றும் தொடர்ச்சியான தனிப்பட்ட உத்தரவாதத்தை நிறுவுகிறது. இது கடன் வழங்குபவரை முதலில் கடன் வாங்குபவரைப் பின்தொடராமல் உத்தரவாதம் அளிப்பவரின் தனிப்பட்ட மற்றும் குடும்ப சொத்துக்களை உடனடியாக பறிமுதல் செய்ய, இணைக்க மற்றும் கலைக்க அனுமதிக்கிறது.",
+      "risk_reason_ta": "இந்த விதி ஒருதலைப்பட்சமானது, ஏனெனில் இது உத்தரவாதம் அளிப்பவரின் தனிப்பட்ட சொத்துக்களை குறிவைப்பதற்கு முன்பு கடன் வழங்குபவர் முதன்மை கடன் வாங்குபவருக்கு எதிரான மீட்பு விருப்பங்களை நிறுத்த வேண்டிய தேவையை நீக்குகிறது. இது உத்தரவாதம் அளிப்பவருக்கு நடைமுறை பாதுகாப்புகள் இல்லாமல் உடனடி மற்றும் வரம்பற்ற நிதி பொறுப்பை வெளிப்படுத்துகிறது.",
+      "severity": "High",
+      "priority_score": 125.0,
+      "model_used": "gemini-3.5-flash-lite",
+      "citation_model_used": null,
+      "grounding_examples": [
+        {
+          "category": "one_sided",
+          "clause_type": "guarantor_liability",
+          "text": "The Guarantor agrees to an unlimited, continuing, and irrevocable guarantee covering all present, past, and future indebtedness of Borrower and all its affiliates forever.",
+          "distance": 0.21006888151168823
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "guarantor_liability",
+          "text": "Guarantor remains perpetually liable for any increased credit limits, new facilities, or extensions granted by Lender to Borrower without Guarantor knowledge or signature.",
+          "distance": 0.22933393716812134
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "guarantor_liability",
+          "text": "Lender may proceed directly against Guarantor personal home and assets immediately without making any demand or claim against Borrower.",
+          "distance": 0.2946789860725403
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "guarantor_liability",
+          "text": "Guarantor waives all legal rights under contract law, including right to notice of variance, right of subrogation, and right to require Lender to proceed against Borrower first.",
+          "distance": 0.31748121976852417
+        }
+      ],
+      "statutory_provisions": [],
+      "statutory_citations": [],
+      "legal_basis_message": "No statutory provision retrieved",
+      "legal_basis_message_hi": "कोई वैधानिक प्रावधान प्राप्त नहीं हुआ (No statutory provision retrieved)",
+      "legal_basis_message_ta": "சட்ட விதி எதுவும் கண்டறியப்படவில்லை (No statutory provision retrieved)",
+      "typical_phrasing_header": "How this is typically written",
+      "typical_phrasing_disclaimer": "This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this.",
+      "typical_phrasing_disclaimer_hi": "यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।",
+      "typical_phrasing_disclaimer_ta": "இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்.",
+      "standard_alternatives": [
+        "The Guarantor liability shall be co-extensive with Borrower for the specific facility up to the maximum capped principal amount of 500,000.",
+        "Lender shall exhaust reasonable collection remedies against Borrower primary assets before initiating recovery demands against Guarantor personal assets.",
+        "The guarantee shall terminate automatically upon full repayment and discharge of the principal loan balance and issuance of a no-dues certificate.",
+        "Guarantor obligations shall be limited strictly to the actual outstanding balance and shall not extend to any future or separate credit facilities without fresh consent."
+      ]
+    },
+    {
+      "clause_id": "Clause 2.",
+      "clause_type": "penal_interest",
+      "title": "Penal / Default Interest",
+      "original_text": "Clause 2. Compound Penal and Default Interest\nIf any scheduled installment or interest payment remains unpaid for more than twenty-four (24) hours following its due date,\na compound penal interest rate of 36% per annum shall be applied retroactively to the entire original principal facility sum\nfrom the date of initial disbursement until complete settlement.",
+      "english_translation": null,
+      "detected_language": "en",
+      "classification": "flag-worthy",
+      "explanation": "The clause imposes a compound penal interest rate of 36% per annum if any payment is delayed by more than 24 hours. Furthermore, this penalty applies retroactively to the entire original principal sum from the date of initial disbursement.",
+      "risk_reason": "This provision is one-sided because a short 24-hour grace period triggers an extreme penal rate applied retroactively to the entire principal rather than just the overdue amount. This creates disproportionate financial exposure for a minor or brief payment delay.",
+      "explanation_hi": "यह खंड प्रति वर्ष 36 प्रतिशत की चक्रवृद्धि शास्ति संबंधी ब्याज दर लागू करता है यदि किसी भी भुगतान में 24 घंटे से अधिक की देरी होती है। इसके अलावा, यह शास्ति प्रारंभिक संवितरण की तारीख से पूरी मूल मूल राशि पर पूर्वव्यापी रूप से लागू होता है।",
+      "risk_reason_hi": "यह प्रावधान एकतरफा है क्योंकि एक छोटी 24 घंटे की छूट अवधि केवल बकाया राशि के बजाय पूरे मूलधन पर पूर्वव्यापी रूप से लागू एक अत्यधिक शास्ति दर को ट्रिगर करती है। यह एक मामूली या संक्षिप्त भुगतान देरी के लिए असमान वित्तीय जोखिम पैदा करता है।",
+      "explanation_ta": "எந்தவொரு கொடுப்பனவும் 24 மணி நேரத்திற்கும் மேலாக தாமதமாக இருந்தால் இந்த பிரிவு ஆண்டுக்கு 36 சதவீதம் கூட்டு அபராத வட்டி விகிதத்தை விதிக்கிறது. மேலும், இந்த அபராதம் ஆரம்ப கொடுப்பனவு தேதியிலிருந்து முழு அசல் தொகைக்கும் முந்தைய காலத்திற்கு பொருந்தும்.",
+      "risk_reason_ta": "இந்த விதி ஒருதலைப்பட்சமானது, ஏனெனில் ஒரு குறுகிய 24 மணி நேர சலுகைக் காலம், காலாவதியான தொகையை விட முழு அசல் தொகையிலும் முந்தைய காலத்தில் பயன்படுத்தப்படும் தீவிர தண்டனை விகிதத்தைத் தூண்டுகிறது. இது ஒரு சிறிய அல்லது குறுகிய கட்டண தாமதத்திற்கு விகிதாசாரமான நிதி வெளிப்பாட்டை உருவாக்குகிறது.",
+      "severity": "High",
+      "priority_score": 115.0,
+      "model_used": "gemini-3.5-flash-lite",
+      "citation_model_used": null,
+      "grounding_examples": [
+        {
+          "category": "one_sided",
+          "clause_type": "penal_interest",
+          "text": "Upon any payment delay exceeding 24 hours, compound penal interest of 36% per annum shall apply retroactively to the entire original principal loan amount.",
+          "distance": 0.18343454599380493
+        },
+        {
+          "category": "standard",
+          "clause_type": "penal_interest",
+          "text": "In the event of payment default, default interest shall accrue on the overdue installment at a rate of 2% per annum above the applicable interest rate until paid.",
+          "distance": 0.2227734923362732
+        },
+        {
+          "category": "standard",
+          "clause_type": "acceleration",
+          "text": "If Borrower fails to cure a payment default within 30 days of receiving written notice, Lender may declare the outstanding principal and accrued interest immediately due and payable.",
+          "distance": 0.24250447750091553
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "penal_interest",
+          "text": "Lender may levy default penal interest at 5% per month compounded weekly on the entire loan facility from the original date of disbursement upon any minor breach.",
+          "distance": 0.27878546714782715
+        }
+      ],
+      "statutory_provisions": [
+        {
+          "id": "ICA-1872-s74",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 74",
+          "title": "Compensation for breach of contract where penalty stipulated for",
+          "text": "74. Compensation for breach of contract where penalty stipulated for.—When a contract has been broken, if a sum is named in the contract as the amount to be paid in case of such breach, or if the contract contains any other stipulation by way of penalty, the party complaining of the breach is entitled, whether or not actual damage or loss is proved to have been caused thereby, to receive from the party who has broken the contract reasonable compensation not exceeding the amount so named or, as the case may be, the penalty stipulated for. Explanation.—A stipulation for increased interest from the date of default may be a stipulation by way of penalty. Exception.—When any person enters into any bail-bond, recognizance or other instrument of the same nature, or, under the provisions of any law, or under the orders of the Central Government or of any State Government, gives any bond for the performance of any public duty or act in which the public are interested, he shall be liable, upon breach of the condition of any such instrument, to pay the whole sum mentioned therein. Explanation.—A person who enters into a contract with Government does not necessarily thereby undertake any public duty, or promise to do an act in which the public are interested.",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": 0.35056638717651367,
+          "retrieval_source": "mapped+semantic"
+        },
+        {
+          "id": "CPA-2019-s2-46",
+          "act": "Consumer Protection Act, 2019",
+          "section": "Section 2(46)",
+          "title": "Definition of \"unfair contract\"",
+          "text": "(46) \"unfair contract\" means a contract between a manufacturer or trader or service provider on one hand, and a consumer on the other, having such terms which cause significant change in the rights of such consumer, including the following, namely:— (i) requiring manifestly excessive security deposits to be given by a consumer for the performance of contractual obligations; or (ii) imposing any penalty on the consumer, for the breach of contract thereof which is wholly disproportionate to the loss occurred due to such breach to the other party to the contract; or (iii) refusing to accept early repayment of debts on payment of applicable penalty; or (iv) entitling a party to the contract to terminate such contract unilaterally, without reasonable cause; or (v) permitting or has the effect of permitting one party to assign the contract to the detriment of the other party who is a consumer, without his consent; or (vi) imposing on the consumer any unreasonable charge, obligation or condition which puts such consumer to disadvantage;",
+          "source_url": "https://www.indiacode.nic.in/handle/123456789/15256",
+          "distance": null,
+          "retrieval_source": "mapped"
+        }
+      ],
+      "statutory_citations": [],
+      "legal_basis_message": "Legal basis unavailable right now",
+      "legal_basis_message_hi": "कानूनी आधार अभी उपलब्ध नहीं है (Legal basis unavailable right now)",
+      "legal_basis_message_ta": "சட்ட அடிப்படை இப்போது கிடைக்கவில்லை (Legal basis unavailable right now)",
+      "typical_phrasing_header": "How this is typically written",
+      "typical_phrasing_disclaimer": "This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this.",
+      "typical_phrasing_disclaimer_hi": "यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।",
+      "typical_phrasing_disclaimer_ta": "இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்.",
+      "standard_alternatives": [
+        "In the event of payment default, default interest shall accrue on the overdue installment at a rate of 2% per annum above the applicable interest rate until paid.",
+        "Overdue amounts shall bear simple interest at the rate of 1.5% per month starting 10 business days after the scheduled due date.",
+        "If Borrower fails to pay any scheduled monthly installment within a 15-day grace period, Lender may assess default interest of 2% per annum on the delinquent amount only.",
+        "Any overdue payment under this facility will be subject to a late interest charge of 18% per annum calculated strictly on the unpaid balance for the actual delay period."
+      ]
+    },
+    {
+      "clause_id": "Clause 4.",
+      "clause_type": "foreclosure_charges",
+      "title": "Foreclosure / Prepayment Charges",
+      "original_text": "Clause 4. Foreclosure and Prepayment Penalty\nThe Borrower shall not prepay, foreclose, or refinance the outstanding loan prior to scheduled maturity without paying an\nmandatory exit penalty of 12% of the original sanctioned loan facility, in addition to all unaccrued interest projected through\nthe full original tenure.",
+      "english_translation": null,
+      "detected_language": "en",
+      "classification": "flag-worthy",
+      "explanation": "The clause prohibits the borrower from prepaying, foreclosing, or refinancing the loan before maturity without paying a mandatory 12% exit penalty on the original loan amount. Additionally, it requires the payment of all unaccrued interest projected through the full original tenure.",
+      "risk_reason": "This imposes severe financial burdens on the borrower by charging an excessive exit fee alongside interest that has not yet accrued. Such terms significantly restrict the borrower's ability to exit or refinance the loan without incurring substantial costs.",
+      "explanation_hi": "यह खंड उधारकर्ता को मूल ऋण राशि पर अनिवार्य 12 प्रतिशत निकास शास्ति का भुगतान किए बिना परिपक्वता से पहले ऋण का पूर्व भुगतान, पूर्व-समापन या पुनर्वित्त करने से रोकता है। इसके अतिरिक्त, इसके लिए पूर्ण मूल अवधि के दौरान अनुमानित सभी गैर-अर्जित ब्याज का भुगतान करने की आवश्यकता होती है।",
+      "risk_reason_hi": "इससे उधारकर्ता पर अत्यधिक निकास शुल्क के साथ-साथ ब्याज भी लगता है जो अभी तक अर्जित नहीं हुआ है। इस तरह की शर्तें उधारकर्ता की पर्याप्त लागत के बिना ऋण से बाहर निकलने या पुनर्वित्त करने की क्षमता को काफी सीमित करती हैं।",
+      "explanation_ta": "இந்த விதி, அசல் கடன் தொகையில் 12 சதவீதம் கட்டாய வெளியேறும் அபராதத்தை செலுத்தாமல் முதிர்வுக் காலத்திற்கு முன் கடனை முன்கூட்டியே செலுத்துவதையோ, முன்கூட்டியே மூடுவதையோ அல்லது மறுநிதியளிப்பதையோ தடைசெய்கிறது. கூடுதலாக, முழு அசல் காலத்திற்குள் திட்டமிடப்பட்ட அனைத்து வசூலிக்கப்படாத வட்டியையும் செலுத்த வேண்டும்.",
+      "risk_reason_ta": "இது இன்னும் திரட்டப்படாத வட்டியுடன் அதிகப்படியான வெளியேறும் கட்டணத்தையும் வசூலிப்பதன் மூலம் கடன் வாங்குபவருக்கு கடுமையான நிதிச் சுமைகளை ஏற்படுத்துகிறது. இத்தகைய விதிமுறைகள் கணிசமான செலவுகள் இல்லாமல் கடனில் இருந்து வெளியேறவோ அல்லது மறுநிதியளிக்கவோ கடன் வாங்குபவரின் திறனை கணிசமாகக் கட்டுப்படுத்துகின்றன.",
+      "severity": "High",
+      "priority_score": 110.0,
+      "model_used": "gemini-3.5-flash-lite",
+      "citation_model_used": null,
+      "grounding_examples": [
+        {
+          "category": "one_sided",
+          "clause_type": "foreclosure_charges",
+          "text": "Borrower is strictly prohibited from prepaying or foreclosing the loan prior to maturity without paying an exorbitant exit penalty of 15% of the total original sanctioned facility.",
+          "distance": 0.2371898889541626
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "foreclosure_charges",
+          "text": "Any full or partial prepayment shall incur a mandatory foreclosure fee equal to 10% of the entire loan value plus all unearned future interest through the final loan term.",
+          "distance": 0.26844823360443115
+        },
+        {
+          "category": "standard",
+          "clause_type": "foreclosure_charges",
+          "text": "Borrower may prepay the loan in whole or in part at any time without penalty or foreclosure fees upon 15 days written notice.",
+          "distance": 0.27665984630584717
+        },
+        {
+          "category": "standard",
+          "clause_type": "acceleration",
+          "text": "If Borrower fails to cure a payment default within 30 days of receiving written notice, Lender may declare the outstanding principal and accrued interest immediately due and payable.",
+          "distance": 0.280620813369751
+        }
+      ],
+      "statutory_provisions": [
+        {
+          "id": "CPA-2019-s2-46",
+          "act": "Consumer Protection Act, 2019",
+          "section": "Section 2(46)",
+          "title": "Definition of \"unfair contract\"",
+          "text": "(46) \"unfair contract\" means a contract between a manufacturer or trader or service provider on one hand, and a consumer on the other, having such terms which cause significant change in the rights of such consumer, including the following, namely:— (i) requiring manifestly excessive security deposits to be given by a consumer for the performance of contractual obligations; or (ii) imposing any penalty on the consumer, for the breach of contract thereof which is wholly disproportionate to the loss occurred due to such breach to the other party to the contract; or (iii) refusing to accept early repayment of debts on payment of applicable penalty; or (iv) entitling a party to the contract to terminate such contract unilaterally, without reasonable cause; or (v) permitting or has the effect of permitting one party to assign the contract to the detriment of the other party who is a consumer, without his consent; or (vi) imposing on the consumer any unreasonable charge, obligation or condition which puts such consumer to disadvantage;",
+          "source_url": "https://www.indiacode.nic.in/handle/123456789/15256",
+          "distance": null,
+          "retrieval_source": "mapped"
+        },
+        {
+          "id": "ICA-1872-s74",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 74",
+          "title": "Compensation for breach of contract where penalty stipulated for",
+          "text": "74. Compensation for breach of contract where penalty stipulated for.—When a contract has been broken, if a sum is named in the contract as the amount to be paid in case of such breach, or if the contract contains any other stipulation by way of penalty, the party complaining of the breach is entitled, whether or not actual damage or loss is proved to have been caused thereby, to receive from the party who has broken the contract reasonable compensation not exceeding the amount so named or, as the case may be, the penalty stipulated for. Explanation.—A stipulation for increased interest from the date of default may be a stipulation by way of penalty. Exception.—When any person enters into any bail-bond, recognizance or other instrument of the same nature, or, under the provisions of any law, or under the orders of the Central Government or of any State Government, gives any bond for the performance of any public duty or act in which the public are interested, he shall be liable, upon breach of the condition of any such instrument, to pay the whole sum mentioned therein. Explanation.—A person who enters into a contract with Government does not necessarily thereby undertake any public duty, or promise to do an act in which the public are interested.",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": 0.36734795570373535,
+          "retrieval_source": "semantic"
+        },
+        {
+          "id": "ICA-1872-s28",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 28",
+          "title": "",
+          "text": "28.Agreements in restraint of legal proceedings, void.—Every agreement,— (a) by which any party thereto is restricted absolutely from enforcing his rights under or in respect of any contract, by the usual legal proceedings in the ordinary tribunals, or which limits the time within which he may thus enforce his rights; or (b) which extinguishes the rights of any party thereto, or discharges any party thereto, from any liability, under or in respect of any contract on the expiry of a specified period so as to restrict any party from enforcing his rights, is void to the extent. Exception 1.—Saving of contract to refer to arbitration dispute that may arise.—This section shall not render illegal a contract, by which two or more persons agree that any dispute which may arise between them in respect of any subject or class of subjects shall be referred to arbitration, and that only the amount awarded in such arbitration shall be recoverable in respect of the dispute so referred. Exception 2.—Saving of contract to refer questions that have already arisen.—Nor shall this section render illegal any contract in writing, by which two or more persons agree to refer to arbitration any question between them which has already arisen, or affect any provision of any law in force for the time being as to references to arbitration4. Exception 3.—Saving of a guarantee agreement of a bank or a financial institution.—This section shall not render illegal a contract in writing by which any bank or financial institution stipulate a term in a guarantee or any agreement making a provision for guarantee for extinguishment of the rights or discharge of any party thereto from any liability under or in respect of such guarantee or agreement on the expiry of a specified period which is not less than one year from the date of occurring or non-occurring of a specified event for extinguishment or discharge of such party from the said liability. Explanation.—(i) In Exception 3, the expression \"bank\" means— (a) a \"banking company\" as defined in clause (c) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (b) \"a corresponding new bank\" as defined in clause (da) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (c) \"State Bank of India\" constituted under section 3 of the State Bank of India Act, 1955 (23 of 1955); (d) \"a subsidiary bank\" as defined in clause (k) of section 2 of the State Bank of India (Subsidiary Banks) Act, 1959(38 of 1959); (e) \"a Regional Rural Bank\" established under section 3 of the Regional Rural Banks Act, 1976(21 of 1976); (f) \"a Co-operative Bank\" as defined in clause (cci) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (g) \"a multi-State co-operative bank\" as defined in clause (cciiia) of section 5 of the Banking Regulation Act, 1949(10 of 1949); and (ii) In Exception 3, the expression \"a financial institution\" means any public financial institution within the meaning of section 4A of the Companies Act, 1956(1 of 1956).",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": 0.3859306573867798,
+          "retrieval_source": "semantic"
+        },
+        {
+          "id": "ICA-1872-s19A",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 19A",
+          "title": "Power to set aside contract induced by undue influence",
+          "text": "19A. Power to set aside contract induced by undue influence.—When consent to an agreement is caused by undue influence, the agreement is a contract voidable at the option of the party whose consent was so caused. Any such contract may be set aside either absolutely or, if the party who was entitled to avoid it has received any benefit thereunder, upon such terms and conditions as to the Court may seem just.",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": 0.39405083656311035,
+          "retrieval_source": "semantic"
+        }
+      ],
+      "statutory_citations": [],
+      "legal_basis_message": "Legal basis unavailable right now",
+      "legal_basis_message_hi": "कानूनी आधार अभी उपलब्ध नहीं है (Legal basis unavailable right now)",
+      "legal_basis_message_ta": "சட்ட அடிப்படை இப்போது கிடைக்கவில்லை (Legal basis unavailable right now)",
+      "typical_phrasing_header": "How this is typically written",
+      "typical_phrasing_disclaimer": "This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this.",
+      "typical_phrasing_disclaimer_hi": "यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।",
+      "typical_phrasing_disclaimer_ta": "இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்.",
+      "standard_alternatives": [
+        "Borrower may prepay the loan in whole or in part at any time without penalty or foreclosure fees upon 15 days written notice.",
+        "Prepayment of floating rate advances shall incur zero foreclosure charges in accordance with regulatory banking standards.",
+        "Borrower may prepay fixed-rate installments subject to a reasonable administrative cost recovery fee not exceeding 1% of the prepaid principal amount.",
+        "No prepayment premium or foreclosure fee shall be assessed if the facility is repaid using Borrower own legitimate financial savings."
+      ]
+    },
+    {
+      "clause_id": "Clause 5.",
+      "clause_type": "unilateral_interest_change",
+      "title": "Unilateral Interest Rate Change",
+      "original_text": "Clause 5. Unilateral Interest Rate Adjustment\nThe Lender reserves the sole, unilateral, and unreviewable authority to increase or alter the interest rate at any time at its\ndiscretion, without benchmark linkage or advance notification, and the Borrower waives all rights to contest or challenge any\nrevised repayment schedule.",
+      "english_translation": null,
+      "detected_language": "en",
+      "classification": "flag-worthy",
+      "explanation": "The clause grants the lender sole authority to alter or increase the interest rate at any time without advance notice or benchmark linkage. Additionally, the borrower waives all rights to contest any resulting changes to the repayment schedule.",
+      "risk_reason": "This provision is one-sided because it exposes the borrower to unpredictable financial obligations without providing any mechanism for notification, negotiation, or defense. The complete waiver of contest rights removes borrower protections against arbitrary rate increases.",
+      "explanation_hi": "खंड ऋणदाता को बिना किसी अग्रिम सूचना या बेंचमार्क लिंकेज के किसी भी समय ब्याज दर में बदलाव या वृद्धि करने का एकमात्र अधिकार देता है। इसके अतिरिक्त, उधारकर्ता पुनर्भुगतान अनुसूची में किसी भी परिणामी परिवर्तन को चुनौती देने के सभी अधिकारों को माफ कर देता है।",
+      "risk_reason_hi": "यह प्रावधान एकतरफा है क्योंकि यह ऋणकर्ता को अधिसूचना, बातचीत या बचाव के लिए कोई तंत्र प्रदान किए बिना अप्रत्याशित वित्तीय दायित्वों के लिए उजागर करता है। प्रतिस्पर्धा अधिकारों की पूरी छूट मनमाने ढंग से दर में वृद्धि के खिलाफ ऋणकर्ता सुरक्षा को हटा देती है।",
+      "explanation_ta": "முன்கூட்டியே அறிவிப்பு அல்லது அளவுகோல் இணைப்பு இல்லாமல் எந்த நேரத்திலும் வட்டி விகிதத்தை மாற்றவோ அல்லது அதிகரிக்கவோ கடன் வழங்குநருக்கு இந்த பிரிவு ஒரே அதிகாரத்தை வழங்குகிறது. கூடுதலாக, திருப்பிச் செலுத்தும் அட்டவணையில் ஏற்படும் எந்தவொரு மாற்றங்களையும் எதிர்த்து போட்டியிடுவதற்கான அனைத்து உரிமைகளையும் கடன் வாங்குபவர் தள்ளுபடி செய்கிறார்.",
+      "risk_reason_ta": "இந்த விதி ஒருதலைப்பட்சமானது, ஏனெனில் இது அறிவிப்பு, பேச்சுவார்த்தை அல்லது பாதுகாப்புக்கான எந்த பொறிமுறையையும் வழங்காமல் கணிக்க முடியாத நிதிக் கடமைகளுக்கு கடன் வாங்குபவரை அம்பலப்படுத்துகிறது. போட்டி உரிமைகளின் முழுமையான தள்ளுபடி தன்னிச்சையான விகித உயர்வுகளுக்கு எதிரான கடன் வாங்குபவரின் பாதுகாப்புகளை நீக்குகிறது.",
+      "severity": "High",
+      "priority_score": 75.0,
+      "model_used": "gemini-3.5-flash-lite",
+      "citation_model_used": null,
+      "grounding_examples": [
+        {
+          "category": "one_sided",
+          "clause_type": "unilateral_interest_change",
+          "text": "Lender reserves the absolute right to increase the interest rate at any time at its sole discretion without prior notice, justification, or reference to any external index.",
+          "distance": 0.2084273099899292
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "unilateral_interest_change",
+          "text": "The interest rate may be revised upward unilaterally by Lender at any time, and Borrower shall have no right to object or exit the facility without penalty.",
+          "distance": 0.22635948657989502
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "foreclosure_charges",
+          "text": "Lender reserves the unilateral right to refuse early closure, and if allowed, assess a minimum foreclosure fee of six months gross interest regardless of early payment date.",
+          "distance": 0.3150979280471802
+        },
+        {
+          "category": "standard",
+          "clause_type": "set_off_lien",
+          "text": "Lender may exercise a right of set-off against Borrower designated deposit accounts held with Lender strictly upon the occurrence of an uncured payment default.",
+          "distance": 0.31533151865005493
+        }
+      ],
+      "statutory_provisions": [],
+      "statutory_citations": [],
+      "legal_basis_message": "No statutory provision retrieved",
+      "legal_basis_message_hi": "कोई वैधानिक प्रावधान प्राप्त नहीं हुआ (No statutory provision retrieved)",
+      "legal_basis_message_ta": "சட்ட விதி எதுவும் கண்டறியப்படவில்லை (No statutory provision retrieved)",
+      "typical_phrasing_header": "How this is typically written",
+      "typical_phrasing_disclaimer": "This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this.",
+      "typical_phrasing_disclaimer_hi": "यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।",
+      "typical_phrasing_disclaimer_ta": "இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்.",
+      "standard_alternatives": [
+        "Interest rates shall vary strictly in accordance with published changes in the Reserve Bank of India repo rate or external benchmark benchmarked transparently.",
+        "Any modification to the floating benchmark rate shall be notified to Borrower 30 days in advance with the option to prepay the loan without penalty if unaccepted.",
+        "The applicable interest rate shall be pegged to the standard Marginal Cost of Funds Based Lending Rate (MCLR) published quarterly by the banking regulator.",
+        "Changes to the margin spread shall require mutual written consent, while the benchmark rate shall adjust automatically to regulatory market movements."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,407 @@
+{
+  "generation_date": "2026-10-18 19:25:09 UTC",
+  "filename": "demo_employment_en.pdf",
+  "document_type": "employment_contract",
+  "document_language": "en",
+  "title": "Synthetic Executive Employment Agreement (English - One-Sided)",
+  "pair_role": "en_employment",
+  "parse_method": "pdfplumber",
+  "total_clauses": 6,
+  "flagged_count": 4,
+  "summary_en": "This legal document is an Executive Employment Agreement established between Vertex Software Technologies Pvt Ltd and an employee for a Senior Software Engineer position. Its core purpose is to define the terms of employment, requiring a 36-month mandatory service bond, a three-year global non-compete restriction post-termination, and a six-month employee resignation notice period alongside immediate termination rights for the company. The risk level is extremely high due to multiple heavily skewed provisions, including unlimited employee indemnity regardless of company negligence, severe financial penalties for early departure, asymmetric notice terms, and perpetual industry-wide trade restraints.",
+  "summary_hi": "यह कानूनी दस्तावेज वर्टेक्स सॉफ्टवेयर टेक्नोलॉजीज प्राइवेट लिमिटेड और एक वरिष्ठ सॉफ्टवेयर इंजीनियर पद के लिए एक कर्मचारी के बीच स्थापित एक कार्यकारी रोजगार समझौता है। इसका मुख्य उद्देश्य रोजगार की शर्तों को परिभाषित करना है, जिसमें 36 महीने के अनिवार्य सेवा बांड, समाप्ति के बाद तीन साल के वैश्विक गैर-प्रतिस्पर्धा प्रतिबंध और कंपनी के लिए तत्काल समाप्ति अधिकारों के साथ-साथ छह महीने के कर्मचारी इस्तीफे के नोटिस की अवधि की आवश्यकता होती है। कंपनी की लापरवाही, जल्द प्रस्थान के लिए गंभीर वित्तीय शास्ति, असममित नोटिस की शर्तों और निरंतर उद्योग-व्यापी व्यापार प्रतिबंधों की परवाह किए बिना असीमित कर्मचारी क्षतिपूर्ति सहित कई भारी तिरछे प्रावधानों के कारण जोखिम का स्तर बेहद अधिक है।",
+  "summary_ta": "இந்த சட்ட ஆவணம் வெர்டெக்ஸ் சாஃப்ட்வேர் டெக்னாலஜிஸ் பிரைவேட் லிமிடெட் மற்றும் ஒரு மூத்த சாஃப்ட்வேர் இன்ஜினியர் பதவிக்கு ஒரு ஊழியருக்கு இடையே நிறுவப்பட்ட ஒரு நிர்வாக வேலைவாய்ப்பு ஒப்பந்தமாகும். அதன் முக்கிய நோக்கம் 36 மாத கட்டாய சேவை பத்திரம், மூன்று ஆண்டு உலகளாவிய போட்டித் தடை கட்டுப்பாடு மற்றும் ஆறு மாத ஊழியர் ராஜினாமா அறிவிப்பு காலம் ஆகியவை நிறுவனத்திற்கு உடனடி ஒப்பந்த முடிவு உரிமைகளுடன் தேவைப்படுகிறது. நிறுவனத்தின் அலட்சியம், முன்கூட்டியே புறப்படுவதற்கான கடுமையான நிதி அபராதங்கள், சமச்சீரற்ற அறிவிப்பு விதிமுறைகள் மற்றும் நிரந்தர தொழில்துறை அளவிலான வர்த்தக கட்டுப்பாடுகள் ஆகியவற்றைப் பொருட்படுத்தாமல் வரம்பற்ற ஊழியர் இழப்பீடு உள்ளிட்ட பல பெரிதும் வளைந்த விதிமுறைகள் காரணமாக ஆபத்து நிலை மிகவும் அதிகமாக உள்ளது.",
+  "client_intake": {
+    "employment_type": "salaried",
+    "has_dependents": true,
+    "dependents_count": 2,
+    "income_bracket": "medium",
+    "document_type": "employment_contract"
+  },
+  "flagged_clauses": [
+    {
+      "clause_id": "Clause 5.",
+      "clause_type": "notice_period_garden_leave",
+      "title": "Notice Period / Garden Leave Imbalance",
+      "original_text": "Clause 5. Asymmetric Notice Period and Forfeiture\nThe Employee must serve a mandatory six (6) months' prior written notice to resign, failing which six months of gross salary\nshall be forfeited. Conversely, the Company reserves the unilateral right to terminate the Employee's employment\nimmediately with zero days' prior notice and without severance payment or assigned reason.\nSYNTHETIC DEMO DOCUMENT - NOT A REAL CONTRACT",
+      "english_translation": null,
+      "detected_language": "en",
+      "classification": "flag-worthy",
+      "explanation": "The clause requires the employee to provide a mandatory six-month written notice prior to resigning, with a penalty of six months' gross salary forfeited upon failure to do so. Conversely, it permits the company to terminate employment immediately with zero notice, no severance, and no assigned reason.",
+      "risk_reason": "This provision imposes a heavy, asymmetric burden on the employee by enforcing a long notice period and severe financial forfeiture for early departure, while granting the employer the right to terminate instantly without any severance or prior notice.",
+      "explanation_hi": "खंड के अनुसार कर्मचारी को इस्तीफा देने से पहले छह महीने का एक अनिवार्य लिखित नोटिस देना होता है, जिसमें ऐसा करने में विफल रहने पर छह महीने के सकल वेतन का शास्ति जब्त कर लिया जाता है। इसके विपरीत, यह कंपनी को शून्य नोटिस, कोई अलगाव और बिना किसी निर्धारित कारण के तुरंत नौकरी समाप्त करने की अनुमति देता है।",
+      "risk_reason_hi": "यह प्रावधान कर्मचारी पर एक लंबी सूचना अवधि और जल्दी प्रस्थान के लिए गंभीर वित्तीय ज़ब्ती लागू करके एक भारी, असममित बोझ लगाता है, जबकि नियोक्ता को बिना किसी अलगाव या पूर्व सूचना के तुरंत बर्खास्त करने का अधिकार देता है।",
+      "explanation_ta": "இந்த பிரிவு ஊழியர் ராஜினாமா செய்வதற்கு முன் கட்டாயமாக ஆறு மாத எழுத்துப்பூர்வ அறிவிப்பை வழங்க வேண்டும், அவ்வாறு செய்யத் தவறியால் ஆறு மாத மொத்த சம்பளம் அபராதமாக இழக்கப்பட வேண்டும். மாறாக, இது நிறுவனத்தை பூஜ்ஜிய அறிவிப்பு, பிரிவினை மற்றும் எந்த குறிப்பிட்ட காரணமும் இல்லாமல் உடனடியாக வேலையை நிறுத்த அனுமதிக்கிறது.",
+      "risk_reason_ta": "இந்த விதி ஒரு நீண்ட அறிவிப்பு காலத்தை அமல்படுத்துவதன் மூலமும், முன்கூட்டியே புறப்படுவதற்கு கடுமையான நிதி பறிமுதல் செய்வதன் மூலமும் ஊழியர் மீது ஒரு கனமான, சமச்சீரற்ற சுமையை விதிக்கிறது, அதே நேரத்தில் முதலாளிக்கு எந்த பிரிவினை அல்லது முன் அறிவிப்பு இல்லாமல் உடனடியாக ஒப்பந்த முடிவு செய்வதற்கான உரிமையை வழங்குகிறது.",
+      "severity": "High",
+      "priority_score": 135.0,
+      "model_used": "gemini-3.5-flash-lite",
+      "citation_model_used": null,
+      "grounding_examples": [
+        {
+          "category": "one_sided",
+          "clause_type": "termination",
+          "text": "Employer may terminate Employee's employment at any time without prior notice or severance pay, whereas Employee must provide 90 days prior written notice and pay a replacement fee.",
+          "distance": 0.19978535175323486
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "notice_period_garden_leave",
+          "text": "Employer may terminate Employee instantly with zero notice or severance, whereas Employee is bound to serve a mandatory 180-day notice period and pay 6 months salary if requesting early release.",
+          "distance": 0.22171294689178467
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "service_bond",
+          "text": "Employee must execute a mandatory 3-year service bond and agrees that leaving for any reason prior to 36 months requires an immediate forfeiture of 1,000,000 as liquidated damages without proof of training cost.",
+          "distance": 0.24693983793258667
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "notice_period_garden_leave",
+          "text": "Employer may dismiss Employee with 24 hours notice without pay, while Employee must give 6 months advance notice and obtain written board approval to separate.",
+          "distance": 0.25185269117355347
+        }
+      ],
+      "statutory_provisions": [
+        {
+          "id": "ICA-1872-s74",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 74",
+          "title": "Compensation for breach of contract where penalty stipulated for",
+          "text": "74. Compensation for breach of contract where penalty stipulated for.—When a contract has been broken, if a sum is named in the contract as the amount to be paid in case of such breach, or if the contract contains any other stipulation by way of penalty, the party complaining of the breach is entitled, whether or not actual damage or loss is proved to have been caused thereby, to receive from the party who has broken the contract reasonable compensation not exceeding the amount so named or, as the case may be, the penalty stipulated for. Explanation.—A stipulation for increased interest from the date of default may be a stipulation by way of penalty. Exception.—When any person enters into any bail-bond, recognizance or other instrument of the same nature, or, under the provisions of any law, or under the orders of the Central Government or of any State Government, gives any bond for the performance of any public duty or act in which the public are interested, he shall be liable, upon breach of the condition of any such instrument, to pay the whole sum mentioned therein. Explanation.—A person who enters into a contract with Government does not necessarily thereby undertake any public duty, or promise to do an act in which the public are interested.",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": null,
+          "retrieval_source": "mapped"
+        },
+        {
+          "id": "ACA-1996-s12",
+          "act": "Arbitration and Conciliation Act, 1996",
+          "section": "Section 12",
+          "title": "Grounds for challenge",
+          "text": "12. Grounds for challenge.—(1) When a person is approached in connection with his possible appointment as an arbitrator, he shall disclose in writing any circumstances,— (a) such as the existence either direct or indirect, of any past or present relationship with or interest in any of the parties or in relation to the subject-matter in dispute, whether financial, business, professional or other kind, which is likely to give rise to justifiable doubts as to his independence or impartiality; and (b) which are likely to affect his ability to devote sufficient time to the arbitration and in particular his ability to complete the entire arbitration within a period of twelve months. Explanation 1.—The grounds stated in the Fifth Schedule shall guide in determining whether circumstances exist which give rise to justifiable doubts as to the independence or impartiality of an arbitrator. Explanation 2.—The disclosure shall be made by such person in the form specified in the Sixth Schedule. (2) An arbitrator, from the time of his appointment and throughout the arbitral proceedings, shall, without delay, disclose to the parties in writing any circumstances referred to in sub-section (1) unless they have already been informed of them by him. (3) An arbitrator may be challenged only if— (a) circumstances exist that give rise to justifiable doubts as to his independence or impartiality, or (b) he does not possess the qualifications agreed to by the parties. (4) A party may challenge an arbitrator appointed by him, or in whose appointment he has participated, only for reasons of which he becomes aware after the appointment has been made. (5) Notwithstanding any prior agreement to the contrary, any person whose relationship, with the parties or counsel or the subject-matter of the dispute, falls under any of the categories specified in the Seventh Schedule shall be ineligible to be appointed as an arbitrator: Provided that parties may, subsequent to disputes having arisen between them, waive the applicability of this sub-section by an express agreement in writing.",
+          "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
+          "distance": 0.3327294588088989,
+          "retrieval_source": "semantic"
+        },
+        {
+          "id": "ICA-1872-s39",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 39",
+          "title": "Effect of refusal of party to perform promise wholly",
+          "text": "39. Effect of refusal of party to perform promise wholly.—When a party to a contract has refused to perform, or disabled himself from performing, his promise in its entirety, the promisee may put an end to the contract, unless he has signified, by words or conduct, his acquiescence in its continuance.",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": 0.35525232553482056,
+          "retrieval_source": "semantic"
+        },
+        {
+          "id": "ICA-1872-s28",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 28",
+          "title": "",
+          "text": "28.Agreements in restraint of legal proceedings, void.—Every agreement,— (a) by which any party thereto is restricted absolutely from enforcing his rights under or in respect of any contract, by the usual legal proceedings in the ordinary tribunals, or which limits the time within which he may thus enforce his rights; or (b) which extinguishes the rights of any party thereto, or discharges any party thereto, from any liability, under or in respect of any contract on the expiry of a specified period so as to restrict any party from enforcing his rights, is void to the extent. Exception 1.—Saving of contract to refer to arbitration dispute that may arise.—This section shall not render illegal a contract, by which two or more persons agree that any dispute which may arise between them in respect of any subject or class of subjects shall be referred to arbitration, and that only the amount awarded in such arbitration shall be recoverable in respect of the dispute so referred. Exception 2.—Saving of contract to refer questions that have already arisen.—Nor shall this section render illegal any contract in writing, by which two or more persons agree to refer to arbitration any question between them which has already arisen, or affect any provision of any law in force for the time being as to references to arbitration4. Exception 3.—Saving of a guarantee agreement of a bank or a financial institution.—This section shall not render illegal a contract in writing by which any bank or financial institution stipulate a term in a guarantee or any agreement making a provision for guarantee for extinguishment of the rights or discharge of any party thereto from any liability under or in respect of such guarantee or agreement on the expiry of a specified period which is not less than one year from the date of occurring or non-occurring of a specified event for extinguishment or discharge of such party from the said liability. Explanation.—(i) In Exception 3, the expression \"bank\" means— (a) a \"banking company\" as defined in clause (c) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (b) \"a corresponding new bank\" as defined in clause (da) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (c) \"State Bank of India\" constituted under section 3 of the State Bank of India Act, 1955 (23 of 1955); (d) \"a subsidiary bank\" as defined in clause (k) of section 2 of the State Bank of India (Subsidiary Banks) Act, 1959(38 of 1959); (e) \"a Regional Rural Bank\" established under section 3 of the Regional Rural Banks Act, 1976(21 of 1976); (f) \"a Co-operative Bank\" as defined in clause (cci) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (g) \"a multi-State co-operative bank\" as defined in clause (cciiia) of section 5 of the Banking Regulation Act, 1949(10 of 1949); and (ii) In Exception 3, the expression \"a financial institution\" means any public financial institution within the meaning of section 4A of the Companies Act, 1956(1 of 1956).",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": 0.3605402112007141,
+          "retrieval_source": "semantic"
+        }
+      ],
+      "statutory_citations": [],
+      "legal_basis_message": "Legal basis unavailable right now",
+      "legal_basis_message_hi": "कानूनी आधार अभी उपलब्ध नहीं है (Legal basis unavailable right now)",
+      "legal_basis_message_ta": "சட்ட அடிப்படை இப்போது கிடைக்கவில்லை (Legal basis unavailable right now)",
+      "typical_phrasing_header": "How this is typically written",
+      "typical_phrasing_disclaimer": "This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this.",
+      "typical_phrasing_disclaimer_hi": "यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।",
+      "typical_phrasing_disclaimer_ta": "இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்.",
+      "standard_alternatives": [
+        "Either party may terminate the employment by providing 30 days prior written notice or basic salary in lieu of notice.",
+        "Company may place Employee on paid garden leave during the contractual 30-day notice period while maintaining full salary and contractual benefits.",
+        "Both Employer and Employee agree to a reciprocal 60-day notice period, with option for mutual waiver in writing upon agreement.",
+        "During any garden leave period not exceeding 30 days, Employee shall continue to receive full remuneration and employment perks."
+      ]
+    },
+    {
+      "clause_id": "Clause 4.",
+      "clause_type": "service_bond",
+      "title": "Service Bond / Mandatory Lock-in",
+      "original_text": "Clause 4. Mandatory Service Bond and Financial Lock-in\nThe Employee covenants to remain in continuous active employment with the Company for an obligatory minimum term of\nthirty-six (36) months. In the event the Employee resigns, separates, or departs prior to completion of this mandatory term,\nthe Employee shall immediately pay the Company a liquidated damages penalty sum of INR 1,000,000, irrespective of\nactual training expenditure.",
+      "english_translation": null,
+      "detected_language": "en",
+      "classification": "flag-worthy",
+      "explanation": "The clause requires the employee to remain in continuous employment for a mandatory minimum term of thirty-six months. It mandates an immediate payment of INR 1,000,000 as liquidated damages if the employee departs before this term, regardless of actual training expenses.",
+      "risk_reason": "This provision imposes a significant financial penalty on the employee for early departure without tying the amount to actual incurred training costs. Such terms heavily restrict an employee's mobility by imposing substantial financial liability upon resignation.",
+      "explanation_hi": "इस खंड में कर्मचारी को अनिवार्य न्यूनतम छत्तीस महीने की अवधि के लिए निरंतर रोजगार में रहने की आवश्यकता है। यह वास्तविक प्रशिक्षण खर्चों की परवाह किए बिना, यदि कर्मचारी इस अवधि से पहले चला जाता है तो परिसमापन क्षति के रूप में आई. एन. आर. 1,000,000 का तत्काल भुगतान अनिवार्य करता है।",
+      "risk_reason_hi": "यह प्रावधान कर्मचारी पर वास्तविक प्रशिक्षण लागत के साथ राशि को जोड़े बिना जल्दी प्रस्थान के लिए एक महत्वपूर्ण वित्तीय शास्ति लगाता है। इस तरह की शर्तें इस्तीफे पर पर्याप्त वित्तीय दायित्व लागू करके एक कर्मचारी की गतिशीलता को बहुत अधिक प्रतिबंधित करती हैं।",
+      "explanation_ta": "இந்த பிரிவு ஊழியர் குறைந்தபட்சம் முப்பத்தாறு மாத காலத்திற்கு தொடர்ச்சியான வேலையில் இருக்க வேண்டும் என்று கோருகிறது. உண்மையான பயிற்சி செலவுகளைப் பொருட்படுத்தாமல், இந்த காலத்திற்கு முன்னர் ஊழியர் வெளியேறினால், உடனடியாக ஐ. என். ஆர் 1,000,000 ஐ ஒப்பந்த முடிவு செய்யப்பட்ட சேதங்களாக செலுத்த வேண்டும்.",
+      "risk_reason_ta": "இந்தப் பிரிவுமுறை ஊழியருக்கு முன்கூட்டியே புறப்பட்டதற்கு ஒரு குறிப்பிடத்தக்க நிதி அபராதத்தை விதிக்கிறது, உண்மையான பயிற்சி செலவுகளுடன் தொகையை இணைக்காமல். அத்தகைய விதிமுறைகள் ராஜினாமா செய்யும் போது கணிசமான நிதி பொறுப்பை விதிப்பதன் மூலம் ஒரு ஊழியரின் நடமாட்டத்தை பெரிதும் கட்டுப்படுத்துகின்றன.",
+      "severity": "High",
+      "priority_score": 130.0,
+      "model_used": "gemini-3.5-flash-lite",
+      "citation_model_used": null,
+      "grounding_examples": [
+        {
+          "category": "one_sided",
+          "clause_type": "service_bond",
+          "text": "Employee must execute a mandatory 3-year service bond and agrees that leaving for any reason prior to 36 months requires an immediate forfeiture of 1,000,000 as liquidated damages without proof of training cost.",
+          "distance": 0.18609052896499634
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "service_bond",
+          "text": "Any resignation before completing the 24-month mandatory lock-in period shall obligate Employee to pay two full years of gross salary as a punitive departure penalty.",
+          "distance": 0.23505926132202148
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "penalty",
+          "text": "In the event Employee terminates employment prior to completing 24 months of service for any reason, Employee shall pay Company an immediate punitive penalty of $50,000 as reimbursement for training and onboarding costs without proof of actual cost.",
+          "distance": 0.24688595533370972
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "notice_period_garden_leave",
+          "text": "Employer may terminate Employee instantly with zero notice or severance, whereas Employee is bound to serve a mandatory 180-day notice period and pay 6 months salary if requesting early release.",
+          "distance": 0.2900804281234741
+        }
+      ],
+      "statutory_provisions": [
+        {
+          "id": "ICA-1872-s74",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 74",
+          "title": "Compensation for breach of contract where penalty stipulated for",
+          "text": "74. Compensation for breach of contract where penalty stipulated for.—When a contract has been broken, if a sum is named in the contract as the amount to be paid in case of such breach, or if the contract contains any other stipulation by way of penalty, the party complaining of the breach is entitled, whether or not actual damage or loss is proved to have been caused thereby, to receive from the party who has broken the contract reasonable compensation not exceeding the amount so named or, as the case may be, the penalty stipulated for. Explanation.—A stipulation for increased interest from the date of default may be a stipulation by way of penalty. Exception.—When any person enters into any bail-bond, recognizance or other instrument of the same nature, or, under the provisions of any law, or under the orders of the Central Government or of any State Government, gives any bond for the performance of any public duty or act in which the public are interested, he shall be liable, upon breach of the condition of any such instrument, to pay the whole sum mentioned therein. Explanation.—A person who enters into a contract with Government does not necessarily thereby undertake any public duty, or promise to do an act in which the public are interested.",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": 0.31201446056365967,
+          "retrieval_source": "mapped+semantic"
+        },
+        {
+          "id": "ICA-1872-s27",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 27",
+          "title": "Agreement in restraint of trade, void",
+          "text": "27. Agreement in restraint of trade, void.—Every agreement by which any one is restrained from exercising a lawful profession, trade or business of any kind, is to that extent void. Exception 1.—Saving of agreement not to carry on business of which good-will is sold.—One who sells the good-will of a business may agree with the buyer to refrain from carrying on a similar business, within specified local limits, so long as the buyer, or any person deriving title to the good-will from him, carries on a like business therein, provided that such limits appear to the Court reasonable, regard being had to the nature of the business.",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": 0.3417423367500305,
+          "retrieval_source": "mapped+semantic"
+        },
+        {
+          "id": "ICA-1872-s28",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 28",
+          "title": "",
+          "text": "28.Agreements in restraint of legal proceedings, void.—Every agreement,— (a) by which any party thereto is restricted absolutely from enforcing his rights under or in respect of any contract, by the usual legal proceedings in the ordinary tribunals, or which limits the time within which he may thus enforce his rights; or (b) which extinguishes the rights of any party thereto, or discharges any party thereto, from any liability, under or in respect of any contract on the expiry of a specified period so as to restrict any party from enforcing his rights, is void to the extent. Exception 1.—Saving of contract to refer to arbitration dispute that may arise.—This section shall not render illegal a contract, by which two or more persons agree that any dispute which may arise between them in respect of any subject or class of subjects shall be referred to arbitration, and that only the amount awarded in such arbitration shall be recoverable in respect of the dispute so referred. Exception 2.—Saving of contract to refer questions that have already arisen.—Nor shall this section render illegal any contract in writing, by which two or more persons agree to refer to arbitration any question between them which has already arisen, or affect any provision of any law in force for the time being as to references to arbitration4. Exception 3.—Saving of a guarantee agreement of a bank or a financial institution.—This section shall not render illegal a contract in writing by which any bank or financial institution stipulate a term in a guarantee or any agreement making a provision for guarantee for extinguishment of the rights or discharge of any party thereto from any liability under or in respect of such guarantee or agreement on the expiry of a specified period which is not less than one year from the date of occurring or non-occurring of a specified event for extinguishment or discharge of such party from the said liability. Explanation.—(i) In Exception 3, the expression \"bank\" means— (a) a \"banking company\" as defined in clause (c) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (b) \"a corresponding new bank\" as defined in clause (da) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (c) \"State Bank of India\" constituted under section 3 of the State Bank of India Act, 1955 (23 of 1955); (d) \"a subsidiary bank\" as defined in clause (k) of section 2 of the State Bank of India (Subsidiary Banks) Act, 1959(38 of 1959); (e) \"a Regional Rural Bank\" established under section 3 of the Regional Rural Banks Act, 1976(21 of 1976); (f) \"a Co-operative Bank\" as defined in clause (cci) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (g) \"a multi-State co-operative bank\" as defined in clause (cciiia) of section 5 of the Banking Regulation Act, 1949(10 of 1949); and (ii) In Exception 3, the expression \"a financial institution\" means any public financial institution within the meaning of section 4A of the Companies Act, 1956(1 of 1956).",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": 0.3298545479774475,
+          "retrieval_source": "semantic"
+        }
+      ],
+      "statutory_citations": [],
+      "legal_basis_message": "Legal basis unavailable right now",
+      "legal_basis_message_hi": "कानूनी आधार अभी उपलब्ध नहीं है (Legal basis unavailable right now)",
+      "legal_basis_message_ta": "சட்ட அடிப்படை இப்போது கிடைக்கவில்லை (Legal basis unavailable right now)",
+      "typical_phrasing_header": "How this is typically written",
+      "typical_phrasing_disclaimer": "This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this.",
+      "typical_phrasing_disclaimer_hi": "यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।",
+      "typical_phrasing_disclaimer_ta": "இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்.",
+      "standard_alternatives": [
+        "If Employee voluntarily resigns within 12 months after receiving specialized external certification funded by Company, Employee shall reimburse actual verifiable training fees on a prorated basis.",
+        "Employee agrees that documented third-party training expenses exceeding 50,000 incurred in the prior 6 months shall be reimbursed prorata upon early departure.",
+        "Any training cost reimbursement shall be capped strictly at actual direct tuition receipts paid by Employer, reducing by one-twelfth for each completed month of service.",
+        "Company may recover only verifiable out-of-pocket training fees if Employee resigns within 6 months of specialized skill training."
+      ]
+    },
+    {
+      "clause_id": "Clause 3.",
+      "clause_type": "indemnity",
+      "title": "Indemnity & Hold Harmless",
+      "original_text": "Clause 3. Unlimited Employee Indemnity\nThe Employee covenants to unconditionally indemnify, defend, and hold harmless the Company, its directors, officers, and\nclients from and against any and all claims, financial liabilities, indirect or consequential damages, commercial losses, and\nlegal fees arising from the Employee's work, regardless of whether such damage was caused by the Company's own\noperational negligence.",
+      "english_translation": null,
+      "detected_language": "en",
+      "classification": "flag-worthy",
+      "explanation": "The clause requires the employee to unconditionally indemnify, defend, and hold harmless the company, its directors, officers, and clients from any claims, financial liabilities, indirect or consequential damages, commercial losses, and legal fees. This obligation applies regardless of whether the damage was caused by the company's own operational negligence.",
+      "risk_reason": "This is one-sided because it shifts broad financial and legal liabilities onto the employee, including indirect damages and commercial losses, even in situations where the company's own operational negligence contributed to the loss.",
+      "explanation_hi": "खंड के अनुसार कर्मचारी को कंपनी, उसके निदेशकों, अधिकारियों और ग्राहकों को किसी भी दावे, वित्तीय देनदारियों, अप्रत्यक्ष या परिणामी नुकसान, वाणिज्यिक नुकसान और कानूनी शुल्क से बिना शर्त क्षतिपूर्ति, बचाव और हानिरहित रखने की आवश्यकता होती है। यह दायित्व इस बात की परवाह किए बिना लागू होता है कि नुकसान कंपनी की अपनी परिचालन लापरवाही के कारण हुआ था या नहीं।",
+      "risk_reason_hi": "यह एकतरफा है क्योंकि यह अप्रत्यक्ष नुकसान और वाणिज्यिक नुकसान सहित व्यापक वित्तीय और कानूनी देनदारियों को कर्मचारी पर स्थानांतरित करता है, यहां तक कि उन स्थितियों में भी जहां कंपनी की अपनी परिचालन लापरवाही ने नुकसान में योगदान दिया।",
+      "explanation_ta": "எந்தவொரு உரிமைகோரல், நிதிக் கடன்கள், மறைமுக அல்லது அதன் விளைவாக ஏற்படும் சேதங்கள், வணிக இழப்புகள் மற்றும் சட்டக் கட்டணங்கள் ஆகியவற்றிலிருந்து நிறுவனம், அதன் இயக்குநர்கள், அதிகாரிகள் மற்றும் வாடிக்கையாளர்களுக்கு நிபந்தனையின்றி இழப்பீடு வழங்கவும், பாதுகாக்கவும், பாதிப்பில்லாதவர்களாக வைத்திருக்கவும் இந்த பிரிவு ஊழியரைக் கோருகிறது. நிறுவனத்தின் சொந்த செயல்பாட்டு அலட்சியத்தால் சேதம் ஏற்பட்டதா என்பதைப் பொருட்படுத்தாமல் இந்த கடமை பொருந்தும்.",
+      "risk_reason_ta": "இது ஒருதலைப்பட்சமானது, ஏனெனில் இது நிறுவனத்தின் சொந்த செயல்பாட்டு அலட்சியம் இழப்புக்கு பங்களித்த சூழ்நிலைகளில் கூட மறைமுக சேதங்கள் மற்றும் வணிக இழப்புகள் உட்பட பரந்த நிதி மற்றும் சட்டக் கடன்களை ஊழியருக்கு மாற்றுகிறது.",
+      "severity": "High",
+      "priority_score": 115.0,
+      "model_used": "gemini-3.5-flash-lite",
+      "citation_model_used": null,
+      "grounding_examples": [
+        {
+          "category": "one_sided",
+          "clause_type": "indemnity",
+          "text": "Employee agrees to unconditionally indemnify and hold harmless Company for any financial loss, loss of profit, or third-party claim brought against the Company relating in any way to Employee's employment or separation.",
+          "distance": 0.1527320146560669
+        },
+        {
+          "category": "standard",
+          "clause_type": "indemnity",
+          "text": "The Employee shall indemnify the Company against direct damages resulting from intentional misconduct or unlawful acts committed during the course of employment.",
+          "distance": 0.22443747520446777
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "indemnity",
+          "text": "Client shall defend, indemnify, and hold harmless Service Provider, its affiliates, directors, officers, employees, and agents from and against any and all claims, costs, losses, damages, liabilities, and legal fees of any kind, whether direct, indirect, consequential, or incidental, regardless of fault or negligence of Service Provider.",
+          "distance": 0.2864975929260254
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "indemnity",
+          "text": "Borrower shall indemnify Lender against any loss, expense, fee, tax, fine, or liability incurred by Lender under any circumstances whatsoever related to this loan.",
+          "distance": 0.29361605644226074
+        }
+      ],
+      "statutory_provisions": [
+        {
+          "id": "ICA-1872-s124",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 124",
+          "title": "\"Contract of indemnity\" defined",
+          "text": "124.\"Contract of indemnity\" defined.—A contract by which one party promises to save the other from loss caused to him by the conduct of the promisor himself, or by the conduct of any other person, is called a \"contract of indemnity\".",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": 0.25720858573913574,
+          "retrieval_source": "mapped+semantic"
+        },
+        {
+          "id": "ICA-1872-s125",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 125",
+          "title": "Rights of indemnity-holder when sued",
+          "text": "125.Rights of indemnity-holder when sued.—The promisee in a contract of indemnity, acting within the scope of his authority, is entitled to recover from the promisor— (1) all damages which he may be compelled to pay in any suit in respect of any matter to which the promise to indemnify applies; (2) all costs which he may be compelled to pay in any such suit if, in bringing or defending it, he did not contravene the orders of the promisor, and acted as it would have been prudent for him to act in the absence of any contract of indemnity, or if the promisor authorized him to bring or defend the suit; (3) all sums which he may have paid under the terms of any compromise of any such suit, if the compromise was not contrary to the orders of the promisor, and was one which it would have been prudent for the promisee to make in the absence of any contract of indemnity, or if the promisor authorized him to compromise the suit.",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": 0.3182353973388672,
+          "retrieval_source": "mapped+semantic"
+        },
+        {
+          "id": "ICA-1872-s19A",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 19A",
+          "title": "Power to set aside contract induced by undue influence",
+          "text": "19A. Power to set aside contract induced by undue influence.—When consent to an agreement is caused by undue influence, the agreement is a contract voidable at the option of the party whose consent was so caused. Any such contract may be set aside either absolutely or, if the party who was entitled to avoid it has received any benefit thereunder, upon such terms and conditions as to the Court may seem just.",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": 0.3420206904411316,
+          "retrieval_source": "semantic"
+        }
+      ],
+      "statutory_citations": [],
+      "legal_basis_message": "Legal basis unavailable right now",
+      "legal_basis_message_hi": "कानूनी आधार अभी उपलब्ध नहीं है (Legal basis unavailable right now)",
+      "legal_basis_message_ta": "சட்ட அடிப்படை இப்போது கிடைக்கவில்லை (Legal basis unavailable right now)",
+      "typical_phrasing_header": "How this is typically written",
+      "typical_phrasing_disclaimer": "This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this.",
+      "typical_phrasing_disclaimer_hi": "यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।",
+      "typical_phrasing_disclaimer_ta": "இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்.",
+      "standard_alternatives": [
+        "Each party agrees to indemnify and hold harmless the other party against any third-party claims arising solely out of a material breach of this Agreement or direct gross negligence.",
+        "The Employee shall indemnify the Company against direct damages resulting from intentional misconduct or unlawful acts committed during the course of employment.",
+        "Landlord and Tenant shall each maintain insurance and indemnify the other for direct physical loss or personal injury caused directly by their own negligent actions on the premises.",
+        "Provider agrees to indemnify Client against any final judgment awarded by a court of competent jurisdiction resulting from infringement of third-party intellectual property rights by Provider's deliverables."
+      ]
+    },
+    {
+      "clause_id": "Clause 2.",
+      "clause_type": "non_compete",
+      "title": "Non-Compete / Restraint of Trade",
+      "original_text": "Clause 2. Non-Compete and Perpetual Trade Restraint\nDuring employment and for an absolute period of three (3) years immediately following termination or resignation of\nemployment for any reason, the Employee shall be perpetually restrained and prohibited from engaging in, working for,\nconsulting, or advising any entity, startup, or enterprise operating in the software, cloud, or digital technology industry\nglobally.",
+      "english_translation": null,
+      "detected_language": "en",
+      "classification": "flag-worthy",
+      "explanation": "This clause prohibits the employee from working for, consulting, or advising any entity in the software, cloud, or digital technology industry globally for three years following the termination of employment. Additionally, the text explicitly introduces a perpetual trade restraint.",
+      "risk_reason": "The clause imposes an extremely broad global geographic scope combined with a lengthy duration and perpetual restriction on working within the tech industry. This heavily restricts the individual's future employment opportunities and ability to earn a livelihood in their field.",
+      "explanation_hi": "यह खंड कर्मचारी को रोजगार की समाप्ति के बाद तीन वर्षों के लिए विश्व स्तर पर सॉफ्टवेयर, क्लाउड या डिजिटल प्रौद्योगिकी उद्योग में किसी भी इकाई के लिए काम करने, परामर्श देने या सलाह देने से रोकता है। इसके अतिरिक्त, पाठ स्पष्ट रूप से एक स्थायी व्यापार प्रतिबंध का परिचय देता है।",
+      "risk_reason_hi": "यह खंड तकनीकी उद्योग के भीतर काम करने पर एक लंबी अवधि और निरंतर प्रतिबंध के साथ एक अत्यंत व्यापक वैश्विक भौगोलिक दायरे को लागू करता है। यह व्यक्ति के भविष्य के रोजगार के अवसरों और अपने क्षेत्र में आजीविका अर्जित करने की क्षमता को बहुत अधिक प्रतिबंधित करता है।",
+      "explanation_ta": "இந்த பிரிவு ஊழியர் வேலை நிறுத்தப்பட்டதைத் தொடர்ந்து மூன்று ஆண்டுகளுக்கு உலகளவில் மென்பொருள், கிளவுட் அல்லது டிஜிட்டல் தொழில்நுட்பத் துறையில் உள்ள எந்தவொரு நிறுவனத்திற்கும் வேலை செய்வதையோ, ஆலோசனை வழங்குவதையோ அல்லது ஆலோசனை வழங்குவதையோ தடைசெய்கிறது. கூடுதலாக, உரை ஒரு நிரந்தர வர்த்தகக் கட்டுப்பாட்டை வெளிப்படையாக அறிமுகப்படுத்துகிறது.",
+      "risk_reason_ta": "இந்த பிரிவு மிகவும் பரந்த உலகளாவிய புவியியல் நோக்கத்தையும், தொழில்நுட்பத் துறையில் நீண்ட காலம் மற்றும் நிரந்தர கட்டுப்பாடுகளையும் விதிக்கிறது. இது தனிநபரின் எதிர்கால வேலை வாய்ப்புகளையும், தங்கள் துறையில் வாழ்வாதாரத்தை சம்பாதிக்கும் திறனையும் பெரிதும் கட்டுப்படுத்துகிறது.",
+      "severity": "High",
+      "priority_score": 100.0,
+      "model_used": "gemini-3.5-flash-lite",
+      "citation_model_used": null,
+      "grounding_examples": [
+        {
+          "category": "one_sided",
+          "clause_type": "non_compete",
+          "text": "Employee agrees that for a period of 3 years following termination for any reason, Employee shall not engage in, work for, consult with, invest in, or start any business operating in the technology or business sector anywhere in the country.",
+          "distance": 0.20245826244354248
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "non_compete",
+          "text": "Employee shall not, directly or indirectly, work for any client, prospective client, competitor, vendor, or partner of the Company for 24 months post-employment, without geographic limitation.",
+          "distance": 0.2699698209762573
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "termination",
+          "text": "Employer may terminate Employee's employment at any time without prior notice or severance pay, whereas Employee must provide 90 days prior written notice and pay a replacement fee.",
+          "distance": 0.2746909260749817
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "non_compete",
+          "text": "Contractor is perpetually restrained from engaging in any business activity or providing any services that compete directly or indirectly with any existing or future line of business of the Company worldwide.",
+          "distance": 0.2953447699546814
+        }
+      ],
+      "statutory_provisions": [
+        {
+          "id": "ICA-1872-s27",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 27",
+          "title": "Agreement in restraint of trade, void",
+          "text": "27. Agreement in restraint of trade, void.—Every agreement by which any one is restrained from exercising a lawful profession, trade or business of any kind, is to that extent void. Exception 1.—Saving of agreement not to carry on business of which good-will is sold.—One who sells the good-will of a business may agree with the buyer to refrain from carrying on a similar business, within specified local limits, so long as the buyer, or any person deriving title to the good-will from him, carries on a like business therein, provided that such limits appear to the Court reasonable, regard being had to the nature of the business.",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": 0.26040512323379517,
+          "retrieval_source": "mapped+semantic"
+        },
+        {
+          "id": "COI-art19",
+          "act": "Constitution of India",
+          "section": "Article 19",
+          "title": "Protection of certain rights regarding freedom of speech, etc.",
+          "text": "19. Protection of certain rights regarding freedom of speech, etc.— (1) All citizens shall have the right— (a) to freedom of speech and expression; (b) to assemble peaceably and without arms; (c) to form associations or unions or co-operative societies; (d) to move freely throughout the territory of India; (w.e.f. 14-1-2019). (e) to reside and settle in any part of the territory of India; and (f)* * * * * (g) to practise any profession, or to carry on any occupation, trade or business. (2) Nothing in sub-clause (a) of clause (1) shall affect the operation of any existing law, or prevent the State from making any law, in so far as such law imposes reasonable restrictions on the exercise of the right conferred by the said sub-clause in the interests of the sovereignty and integrity of India, the security of the State, friendly relations with foreign States, public order, decency or morality, or in relation to contempt of court, defamation or incitement to an offence. (3) Nothing in sub-clause (b) of the said clause shall affect the operation of any existing law in so far as it imposes, or prevent the State from making any law imposing, in the interests of the sovereignty and integrity of India or public order, reasonable restrictions on the exercise of the right conferred by the said sub-clause. (4) Nothing in sub-clause (c) of the said clause shall affect the operation of any existing law in so far as it imposes, or prevent the State from making any law imposing, in the interests of the sovereignty and integrity of India or public order or morality, reasonable restrictions on the exercise of the right conferred by the said sub-clause. (5) Nothing in sub-clauses (d) and (e) of the said clause shall affect the operation of any existing law in so far as it imposes, or prevent the State from making any law imposing, reasonable restrictions on the exercise of any of the rights conferred by the said sub-clauses either in the interests of the general public or for the protection of the interests of any Scheduled Tribe. 2. Sub-clause (f) omitted by s.2, ibid. (w.e.f. 20-6-1979). effect). (d), (e) and (f)\" (w.e.f. 20-6-1979). (6) Nothing in sub-clause (g) of the said clause shall affect the operation of any existing law in so far as it imposes, or prevent the State from making any law imposing, in the interests of the general public, reasonable restrictions on the exercise of the right conferred by the said sub-clause, and, in particular, nothing in the said sub-clause shall affect the operation of any existing law in so far as it relates to, or prevent the State from making any law relating to,— (i) the professional or technical qualifications necessary for practising any pr",
+          "source_url": "https://www.legislative.gov.in/static/uploads/2025/07/c9fe9c9b6840524844316f74bb1c556c.pdf",
+          "distance": null,
+          "retrieval_source": "mapped"
+        },
+        {
+          "id": "ICA-1872-s28",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 28",
+          "title": "",
+          "text": "28.Agreements in restraint of legal proceedings, void.—Every agreement,— (a) by which any party thereto is restricted absolutely from enforcing his rights under or in respect of any contract, by the usual legal proceedings in the ordinary tribunals, or which limits the time within which he may thus enforce his rights; or (b) which extinguishes the rights of any party thereto, or discharges any party thereto, from any liability, under or in respect of any contract on the expiry of a specified period so as to restrict any party from enforcing his rights, is void to the extent. Exception 1.—Saving of contract to refer to arbitration dispute that may arise.—This section shall not render illegal a contract, by which two or more persons agree that any dispute which may arise between them in respect of any subject or class of subjects shall be referred to arbitration, and that only the amount awarded in such arbitration shall be recoverable in respect of the dispute so referred. Exception 2.—Saving of contract to refer questions that have already arisen.—Nor shall this section render illegal any contract in writing, by which two or more persons agree to refer to arbitration any question between them which has already arisen, or affect any provision of any law in force for the time being as to references to arbitration4. Exception 3.—Saving of a guarantee agreement of a bank or a financial institution.—This section shall not render illegal a contract in writing by which any bank or financial institution stipulate a term in a guarantee or any agreement making a provision for guarantee for extinguishment of the rights or discharge of any party thereto from any liability under or in respect of such guarantee or agreement on the expiry of a specified period which is not less than one year from the date of occurring or non-occurring of a specified event for extinguishment or discharge of such party from the said liability. Explanation.—(i) In Exception 3, the expression \"bank\" means— (a) a \"banking company\" as defined in clause (c) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (b) \"a corresponding new bank\" as defined in clause (da) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (c) \"State Bank of India\" constituted under section 3 of the State Bank of India Act, 1955 (23 of 1955); (d) \"a subsidiary bank\" as defined in clause (k) of section 2 of the State Bank of India (Subsidiary Banks) Act, 1959(38 of 1959); (e) \"a Regional Rural Bank\" established under section 3 of the Regional Rural Banks Act, 1976(21 of 1976); (f) \"a Co-operative Bank\" as defined in clause (cci) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (g) \"a multi-State co-operative bank\" as defined in clause (cciiia) of section 5 of the Banking Regulation Act, 1949(10 of 1949); and (ii) In Exception 3, the expression \"a financial institution\" means any public financial institution within the meaning of section 4A of the Companies Act, 1956(1 of 1956).",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": 0.336406409740448,
+          "retrieval_source": "semantic"
+        },
+        {
+          "id": "ICA-1872-s39",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 39",
+          "title": "Effect of refusal of party to perform promise wholly",
+          "text": "39. Effect of refusal of party to perform promise wholly.—When a party to a contract has refused to perform, or disabled himself from performing, his promise in its entirety, the promisee may put an end to the contract, unless he has signified, by words or conduct, his acquiescence in its continuance.",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": 0.35388773679733276,
+          "retrieval_source": "semantic"
+        }
+      ],
+      "statutory_citations": [],
+      "legal_basis_message": "Legal basis unavailable right now",
+      "legal_basis_message_hi": "कानूनी आधार अभी उपलब्ध नहीं है (Legal basis unavailable right now)",
+      "legal_basis_message_ta": "சட்ட அடிப்படை இப்போது கிடைக்கவில்லை (Legal basis unavailable right now)",
+      "typical_phrasing_header": "How this is typically written",
+      "typical_phrasing_disclaimer": "This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this.",
+      "typical_phrasing_disclaimer_hi": "यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।",
+      "typical_phrasing_disclaimer_ta": "இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்.",
+      "standard_alternatives": [
+        "During the term of employment and for a period of 6 months thereafter, Employee shall not directly solicit the active clients of the Company with whom Employee had direct business dealings in the preceding 12 months.",
+        "For 1 year following termination, Contractor agrees not to perform identical services for the specific key competitors of Client explicitly listed in Schedule A within the city of operation.",
+        "Employee agrees not to misuse or disclose confidential trade secrets or proprietary customer lists of the Employer following separation.",
+        "The Founder agrees for 12 months after departure not to recruit or solicit any current key executive of the Company."
+      ]
+    }
+  ]
+}

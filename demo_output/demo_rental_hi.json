@@ -1,0 +1,386 @@
+{
+  "generation_date": "2026-10-18 19:25:09 UTC",
+  "filename": "demo_rental_hi.pdf",
+  "document_type": "rental_agreement",
+  "document_language": "hi",
+  "title": "आवासीय पट्टा समझौता (Hindi - One-Sided Residential Lease)",
+  "pair_role": "hi_rental",
+  "parse_method": "pdfplumber (partial)",
+  "total_clauses": 6,
+  "flagged_count": 3,
+  "summary_en": "This legal document is a residential lease agreement for Apartment 4B in Metro Towers, Bengaluru, established between Prime Real Estate Holdings and a tenant on October 1, 2026. Its core purpose is to outline tenancy terms, requiring a monthly rent of ₹35,000, a security deposit of ₹350,000, and adherence to maintenance rules. The risk level is extremely high due to three heavily one-sided clauses imposing severe penalties, including total deposit forfeiture for minor delays, unrestricted landlord eviction on 24 hours' notice, and mandatory arbitration in Singapore chosen exclusively by the landlord.",
+  "summary_hi": "यह कानूनी दस्तावेज मेट्रो टावर्स, बेंगलुरु में अपार्टमेंट 4बी के लिए एक आवासीय पट्टा समझौता है, जिसे प्राइम रियल एस्टेट होल्डिंग्स और एक किरायेदार के बीच 1 अक्टूबर, 2026 को स्थापित किया गया था। इसका मुख्य उद्देश्य किरायेदारी की शर्तों की रूपरेखा तैयार करना है, जिसमें 35,000 रुपये का मासिक किराया, 350,000 रुपये की प्रतिभूति जमा और रखरखाव शर्तों का पालन करना आवश्यक है। जोखिम का स्तर तीन भारी एकतरफा खंडों के कारण बेहद अधिक है, जिसमें गंभीर शास्ति लगाया गया है, जिसमें मामूली देरी के लिए कुल जमा जब्त करना, 24 घंटे के नोटिस पर अप्रतिबंधित मकान मालिक बेदखली और सिंगापुर में विशेष रूप से मकान मालिक द्वारा चुना गया अनिवार्य मध्यस्थता शामिल है।",
+  "summary_ta": "இந்த சட்ட ஆவணம் பெங்களூரில் உள்ள மெட்ரோ டவர்ஸில் உள்ள அடுக்குமாடி குடியிருப்பு 4பி-க்கான குடியிருப்பு குத்தகை ஒப்பந்தமாகும், இது அக்டோபர் 1,2026 அன்று பிரைம் ரியல் எஸ்டேட் ஹோல்டிங்ஸ் மற்றும் ஒரு குத்தகைதாரருக்கு இடையில் நிறுவப்பட்டது. இதன் முக்கிய நோக்கம் குத்தகைதாரர் விதிமுறைகளை கோடிட்டுக் காட்டுவதாகும், மாத வாடகை ரூ. 35,000, பாதுகாப்பு வைப்பு ரூ. 350,000 மற்றும் பராமரிப்பு விதிமுறைகளை பின்பற்றுதல் தேவைப்படுகிறது. சிறிய தாமதங்களுக்கு மொத்த வைப்பு பறிமுதல், 24 மணி நேர அறிவிப்பில் கட்டுப்பாடற்ற நில உரிமையாளரை வெளியேற்றுதல் மற்றும் சிங்கப்பூரில் நில உரிமையாளரால் பிரத்தியேகமாக தேர்ந்தெடுக்கப்பட்ட கட்டாய நடுவர் உள்ளிட்ட கடுமையான அபராதங்களை விதிக்கும் மூன்று ஒருதலைப்பட்ச பிரிவுகள் காரணமாக ஆபத்து நிலை மிகவும் அதிகமாக உள்ளது.",
+  "client_intake": {
+    "employment_type": "salaried",
+    "has_dependents": true,
+    "dependents_count": 2,
+    "income_bracket": "medium",
+    "document_type": "rental_agreement"
+  },
+  "flagged_clauses": [
+    {
+      "clause_id": "खंड 2.",
+      "clause_type": "penalty",
+      "title": "Penalty & Liquidated Damages",
+      "original_text": "खंड 2. प्रतिभूति जमा और पूर्ण जब्ती\nकिरायेदार ब्याज मुक्त सुरक्षा जमा के रूप में 350,000 रुपये (दस महीने का किराया) जमा करेगा। किसी भी चूक, 48 घंटे से अधिक के किराये में देरी, या चौबीस\nमहीने पूरे होने से पहले पट्टे की समाप्ति की स्थिति में, पूरा 350,000 रुपये का सुरक्षा जमा तुरंत और अपरिवर्तनीय रूप से दंडात्मक परिनिर्धारित क्षतिपूर्ति के रूप\nमें मकान मालिक के पक्ष में जब्त कर लिया जाएगा, जिसमें मकान मालिक को वास्तविक वित्तीय नुकसान साबित करने की कोई आवश्यकता नहीं होगी।",
+      "english_translation": "Clause 2. Security Deposit and Full Forfeiture The tenant shall deposit Rs. 350,000 (ten months rent) as interest-free security deposit. In case of any default, delay in rent of more than 48 hours, or termination of the lease before the completion of twenty-four months, the entire security deposit of Rs. 350,000 shall be immediately and irrevocably forfeited in favour of the landlord as punitive assessed compensation, with no requirement for the landlord to prove actual financial loss.",
+      "detected_language": "hi",
+      "classification": "flag-worthy",
+      "explanation": "The clause requires a large interest-free security deposit that is subject to immediate and irrevocable forfeiture upon any rent delay, lease default, or early termination before twenty-four months. This forfeiture applies as punitive assessed compensation without requiring the landlord to prove actual financial loss.",
+      "risk_reason": "This provision heavily favors the landlord by imposing severe financial penalties for minor delays or early termination while bypassing the need to demonstrate actual damages. It creates significant financial exposure and disproportionate risk for the tenant.",
+      "explanation_hi": "खंड के लिए एक बड़ी ब्याज-मुक्त प्रतिभूति जमा की आवश्यकता होती है जो किसी भी किराए में देरी, पट्टा चूक, या चौबीस महीने से पहले जल्दी समाप्ति पर तत्काल और अपरिवर्तनीय ज़ब्ती के अधीन है। यह ज़ब्ती वास्तविक वित्तीय नुकसान साबित करने के लिए मकान मालिक की आवश्यकता के बिना शास्ति संबंधी मूल्यांकन क्षतिपूर्ति के रूप में लागू होती है।",
+      "risk_reason_hi": "यह प्रावधान वास्तविक नुकसान को प्रदर्शित करने की आवश्यकता को दरकिनार करते हुए मामूली देरी या जल्दी समाप्ति के लिए गंभीर वित्तीय शास्ति लागू करके मकान मालिक का बहुत अधिक समर्थन करता है। यह किरायेदार के लिए महत्वपूर्ण वित्तीय जोखिम और असमान जोखिम पैदा करता है।",
+      "explanation_ta": "இந்த நிபந்தனைக்கு ஒரு பெரிய வட்டியில்லா பாதுகாப்பு வைப்பு தேவைப்படுகிறது, இது எந்தவொரு வாடகை தாமதமும், குத்தகை தவறியது அல்லது இருபத்தி நான்கு மாதங்களுக்கு முன்னர் முன்கூட்டியே நிறுத்தப்பட்டவுடன் உடனடி மற்றும் மாற்ற முடியாத பறிமுதல்க்கு உட்பட்டது. இந்த பறிமுதல் நில உரிமையாளர் உண்மையான நிதி இழப்பை நிரூபிக்க வேண்டிய அவசியமில்லை.",
+      "risk_reason_ta": "இந்த விதி, உண்மையான சேதங்களை நிரூபிக்க வேண்டியதன் அவசியத்தைத் தவிர்த்து, சிறிய தாமதங்கள் அல்லது முன்கூட்டியே ஒப்பந்த முடிவு செய்வதற்காக கடுமையான நிதி அபராதங்களை விதிப்பதன் மூலம் நில உரிமையாளருக்கு பெரிதும் உதவுகிறது. இது கணிசமான நிதி வெளிப்பாடு மற்றும் குத்தகைதாரருக்கு விகிதாசாரமான ஆபத்தை உருவாக்குகிறது.",
+      "severity": "High",
+      "priority_score": 115.0,
+      "model_used": "gemini-3.5-flash-lite",
+      "citation_model_used": null,
+      "grounding_examples": [
+        {
+          "category": "one_sided",
+          "clause_type": "penalty",
+          "text": "Tenant agrees that any breach of any rule in this agreement shall result in immediate forfeiture of the entire security deposit plus a liquidated damage penalty equal to 6 months of rent.",
+          "distance": 0.21372854709625244
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "termination",
+          "text": "Landlord reserves the right to terminate this lease and evict Tenant upon 24 hours notice at Landlord's sole discretion, while Tenant remains bound for the full 3-year term without right of early termination.",
+          "distance": 0.2603647708892822
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "service_bond",
+          "text": "Employee must execute a mandatory 3-year service bond and agrees that leaving for any reason prior to 36 months requires an immediate forfeiture of 1,000,000 as liquidated damages without proof of training cost.",
+          "distance": 0.2947345972061157
+        },
+        {
+          "category": "standard",
+          "clause_type": "termination",
+          "text": "Landlord or Tenant may terminate the lease at the end of the term by providing 60 days advance written notice.",
+          "distance": 0.2989689111709595
+        }
+      ],
+      "statutory_provisions": [
+        {
+          "id": "ICA-1872-s74",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 74",
+          "title": "Compensation for breach of contract where penalty stipulated for",
+          "text": "74. Compensation for breach of contract where penalty stipulated for.—When a contract has been broken, if a sum is named in the contract as the amount to be paid in case of such breach, or if the contract contains any other stipulation by way of penalty, the party complaining of the breach is entitled, whether or not actual damage or loss is proved to have been caused thereby, to receive from the party who has broken the contract reasonable compensation not exceeding the amount so named or, as the case may be, the penalty stipulated for. Explanation.—A stipulation for increased interest from the date of default may be a stipulation by way of penalty. Exception.—When any person enters into any bail-bond, recognizance or other instrument of the same nature, or, under the provisions of any law, or under the orders of the Central Government or of any State Government, gives any bond for the performance of any public duty or act in which the public are interested, he shall be liable, upon breach of the condition of any such instrument, to pay the whole sum mentioned therein. Explanation.—A person who enters into a contract with Government does not necessarily thereby undertake any public duty, or promise to do an act in which the public are interested.",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": 0.3634079694747925,
+          "retrieval_source": "mapped+semantic"
+        },
+        {
+          "id": "ICA-1872-s73",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 73",
+          "title": "Compensation for loss or damage caused by breach of contract",
+          "text": "73.Compensation for loss or damage caused by breach of contract.—When a contract has been broken, the party who suffers by such breach is entitled to receive, from the party who has broken the contract, compensation for any loss or damage caused to him thereby, which naturally arose in the usual course of things from such breach, or which the parties knew, when they made the contract, to be likely to result from the breach of it. Such compensation is not to be given for any remote and indirect loss or damage sustained by reason of the breach. Compensation for failure to discharge obligation resembling those created by contract.—When an obligation resembling those created by contract has been incurred and has not been discharged, any person injured by the failure to discharge it is entitled to receive the same compensation from the party in default, as if such person had contracted to discharge it and had broken his contract. Explanation.—In estimating the loss or damage arising from a breach of contract, the means which existed of remedying the inconvenience caused by the non-performance of the contract must be taken into account.",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": null,
+          "retrieval_source": "mapped"
+        },
+        {
+          "id": "CPA-2019-s2-46",
+          "act": "Consumer Protection Act, 2019",
+          "section": "Section 2(46)",
+          "title": "Definition of \"unfair contract\"",
+          "text": "(46) \"unfair contract\" means a contract between a manufacturer or trader or service provider on one hand, and a consumer on the other, having such terms which cause significant change in the rights of such consumer, including the following, namely:— (i) requiring manifestly excessive security deposits to be given by a consumer for the performance of contractual obligations; or (ii) imposing any penalty on the consumer, for the breach of contract thereof which is wholly disproportionate to the loss occurred due to such breach to the other party to the contract; or (iii) refusing to accept early repayment of debts on payment of applicable penalty; or (iv) entitling a party to the contract to terminate such contract unilaterally, without reasonable cause; or (v) permitting or has the effect of permitting one party to assign the contract to the detriment of the other party who is a consumer, without his consent; or (vi) imposing on the consumer any unreasonable charge, obligation or condition which puts such consumer to disadvantage;",
+          "source_url": "https://www.indiacode.nic.in/handle/123456789/15256",
+          "distance": null,
+          "retrieval_source": "mapped"
+        },
+        {
+          "id": "COI-art300A",
+          "act": "Constitution of India",
+          "section": "Article 300A",
+          "title": "Persons not to be deprived of property save by authority of law",
+          "text": "300A. Persons not to be deprived of property save by authority of law.— No person shall be deprived of his property save by authority of law",
+          "source_url": "https://www.legislative.gov.in/static/uploads/2025/07/c9fe9c9b6840524844316f74bb1c556c.pdf",
+          "distance": 0.3528161644935608,
+          "retrieval_source": "semantic"
+        },
+        {
+          "id": "ICA-1872-s28",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 28",
+          "title": "",
+          "text": "28.Agreements in restraint of legal proceedings, void.—Every agreement,— (a) by which any party thereto is restricted absolutely from enforcing his rights under or in respect of any contract, by the usual legal proceedings in the ordinary tribunals, or which limits the time within which he may thus enforce his rights; or (b) which extinguishes the rights of any party thereto, or discharges any party thereto, from any liability, under or in respect of any contract on the expiry of a specified period so as to restrict any party from enforcing his rights, is void to the extent. Exception 1.—Saving of contract to refer to arbitration dispute that may arise.—This section shall not render illegal a contract, by which two or more persons agree that any dispute which may arise between them in respect of any subject or class of subjects shall be referred to arbitration, and that only the amount awarded in such arbitration shall be recoverable in respect of the dispute so referred. Exception 2.—Saving of contract to refer questions that have already arisen.—Nor shall this section render illegal any contract in writing, by which two or more persons agree to refer to arbitration any question between them which has already arisen, or affect any provision of any law in force for the time being as to references to arbitration4. Exception 3.—Saving of a guarantee agreement of a bank or a financial institution.—This section shall not render illegal a contract in writing by which any bank or financial institution stipulate a term in a guarantee or any agreement making a provision for guarantee for extinguishment of the rights or discharge of any party thereto from any liability under or in respect of such guarantee or agreement on the expiry of a specified period which is not less than one year from the date of occurring or non-occurring of a specified event for extinguishment or discharge of such party from the said liability. Explanation.—(i) In Exception 3, the expression \"bank\" means— (a) a \"banking company\" as defined in clause (c) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (b) \"a corresponding new bank\" as defined in clause (da) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (c) \"State Bank of India\" constituted under section 3 of the State Bank of India Act, 1955 (23 of 1955); (d) \"a subsidiary bank\" as defined in clause (k) of section 2 of the State Bank of India (Subsidiary Banks) Act, 1959(38 of 1959); (e) \"a Regional Rural Bank\" established under section 3 of the Regional Rural Banks Act, 1976(21 of 1976); (f) \"a Co-operative Bank\" as defined in clause (cci) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (g) \"a multi-State co-operative bank\" as defined in clause (cciiia) of section 5 of the Banking Regulation Act, 1949(10 of 1949); and (ii) In Exception 3, the expression \"a financial institution\" means any public financial institution within the meaning of section 4A of the Companies Act, 1956(1 of 1956).",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": 0.38633549213409424,
+          "retrieval_source": "semantic"
+        }
+      ],
+      "statutory_citations": [],
+      "legal_basis_message": "Legal basis unavailable right now",
+      "legal_basis_message_hi": "कानूनी आधार अभी उपलब्ध नहीं है (Legal basis unavailable right now)",
+      "legal_basis_message_ta": "சட்ட அடிப்படை இப்போது கிடைக்கவில்லை (Legal basis unavailable right now)",
+      "typical_phrasing_header": "How this is typically written",
+      "typical_phrasing_disclaimer": "This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this.",
+      "typical_phrasing_disclaimer_hi": "यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।",
+      "typical_phrasing_disclaimer_ta": "இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்.",
+      "standard_alternatives": [
+        "If Contractor fails to complete deliverables by the agreed deadline, Contractor shall pay as liquidated damages a sum equal to 0.5% of the phase fee per week of delay, capped at a maximum of 5% of total contract value.",
+        "Late payments shall accrue interest at the rate of 1% per month or the maximum legal rate allowed, whichever is lower.",
+        "Tenant failure to pay rent within 5 days of due date shall incur a standard late administrative fee of $50.",
+        "If either party breaches the confidentiality obligations, the breaching party shall be liable for actual proven economic damages."
+      ]
+    },
+    {
+      "clause_id": "खंड 3.",
+      "clause_type": "termination",
+      "title": "Unilateral Termination",
+      "original_text": "खंड 3. एकपक्षीय बेदखली और पुनः प्रवेश का अधिकार\nमकान मालिक बिना कोई कारण बताए चौबीस (24) घंटे के लिखित नोटिस पर किरायेदारी को समाप्त करने और परिसर में पुनः प्रवेश करने का पूर्ण एवं निर्बाध\nअधिकार सुरक्षित रखता है। ऐसा नोटिस मिलने पर किरायेदार को तुरंत परिसर खाली करना होगा और वह वैधानिक नोटिस, न्यायिक प्रक्रिया या बेदखली के खिलाफ\nकिसी भी राहत के सभी अधिकारों का त्याग करता है।",
+      "english_translation": "Clause 3. Right of unilateral eviction and re-entry The landlord reserves the absolute and unrestricted right to terminate the tenancy and re-enter the premises on twenty-four (24) hours'notice in writing without giving any reason. On receipt of such notice, the tenant must immediately vacate the premises and renounces all rights of statutory notice, judicial process or any relief against eviction.",
+      "detected_language": "hi",
+      "classification": "flag-worthy",
+      "explanation": "The clause grants the landlord the absolute and unrestricted right to terminate the tenancy and re-enter the premises on twenty-four hours' written notice without providing a reason. Additionally, the tenant must immediately vacate and explicitly renounces all rights to statutory notice, judicial process, or relief against eviction.",
+      "risk_reason": "This clause is heavily one-sided as it permits the landlord to evict the tenant on extremely short notice without cause, while stripping the tenant of standard legal protections and due process rights typically associated with eviction proceedings.",
+      "explanation_hi": "खंड मकान मालिक को बिना कोई कारण बताए चौबीस घंटे के लिखित नोटिस पर किरायेदारी को समाप्त करने और परिसर में फिर से प्रवेश करने का पूर्ण और अप्रतिबंधित अधिकार प्रदान करता है। इसके अतिरिक्त, किरायेदार को तुरंत खाली करना चाहिए और स्पष्ट रूप से वैधानिक नोटिस, न्यायिक प्रक्रिया या बेदखली के खिलाफ राहत के सभी अधिकारों का त्याग करना चाहिए।",
+      "risk_reason_hi": "यह खंड काफी हद तक एकतरफा है क्योंकि यह मकान मालिक को बिना किसी कारण के बहुत कम समय की सूचना पर किरायेदार को बेदखल करने की अनुमति देता है, जबकि किरायेदार से मानक कानूनी सुरक्षा और आमतौर पर बेदखली की कार्यवाही से जुड़े उचित प्रक्रिया के अधिकार छीन लेते हैं।",
+      "explanation_ta": "இந்த பிரிவு நில உரிமையாளருக்கு ஒரு காரணத்தை வழங்காமல் இருபத்தி நான்கு மணி நேர எழுத்துப்பூர்வ அறிவிப்பில் குத்தகையை ரத்து செய்து வளாகத்திற்குள் மீண்டும் நுழைய முழுமையான மற்றும் கட்டுப்பாடற்ற உரிமையை வழங்குகிறது. கூடுதலாக, குத்தகைதாரர் உடனடியாக காலியாக வேண்டும் மற்றும் சட்டரீதியான அறிவிப்பு, நீதித்துறை செயல்முறை அல்லது வெளியேற்றத்திற்கு எதிரான நிவாரணம் ஆகியவற்றிற்கான அனைத்து உரிமைகளையும் வெளிப்படையாக கைவிட வேண்டும்.",
+      "risk_reason_ta": "இந்த பிரிவு பெரிதும் ஒருதலைப்பட்சமானது, ஏனெனில் இது நில உரிமையாளரை மிகக் குறுகிய அறிவிப்பில் குத்தகைதாரரை எந்த காரணமும் இல்லாமல் வெளியேற்ற அனுமதிக்கிறது, அதே நேரத்தில் நிலையான சட்டப் பாதுகாப்புகள் மற்றும் வெளியேற்ற நடவடிக்கைகளுடன் தொடர்புடைய உரிய செயல்முறை உரிமைகளை குத்தகைதாரர் பறிக்கிறார்.",
+      "severity": "High",
+      "priority_score": 110.0,
+      "model_used": "gemini-3.5-flash-lite",
+      "citation_model_used": null,
+      "grounding_examples": [
+        {
+          "category": "one_sided",
+          "clause_type": "termination",
+          "text": "Landlord reserves the right to terminate this lease and evict Tenant upon 24 hours notice at Landlord's sole discretion, while Tenant remains bound for the full 3-year term without right of early termination.",
+          "distance": 0.18131482601165771
+        },
+        {
+          "category": "standard",
+          "clause_type": "termination",
+          "text": "Landlord or Tenant may terminate the lease at the end of the term by providing 60 days advance written notice.",
+          "distance": 0.24601352214813232
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "dispute_resolution",
+          "text": "Any claim by Tenant against Landlord must be submitted to private arbitration selected exclusively by Landlord, while Landlord retains the unilateral right to sue Tenant in court for eviction or damages.",
+          "distance": 0.3039062023162842
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "penalty",
+          "text": "Tenant agrees that any breach of any rule in this agreement shall result in immediate forfeiture of the entire security deposit plus a liquidated damage penalty equal to 6 months of rent.",
+          "distance": 0.315154492855072
+        }
+      ],
+      "statutory_provisions": [
+        {
+          "id": "ICA-1872-s39",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 39",
+          "title": "Effect of refusal of party to perform promise wholly",
+          "text": "39. Effect of refusal of party to perform promise wholly.—When a party to a contract has refused to perform, or disabled himself from performing, his promise in its entirety, the promisee may put an end to the contract, unless he has signified, by words or conduct, his acquiescence in its continuance.",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": null,
+          "retrieval_source": "mapped"
+        },
+        {
+          "id": "ICA-1872-s75",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 75",
+          "title": "Party rightfully rescinding contract, entitled to compensation",
+          "text": "75.Party rightfully rescinding contract, entitled to compensation.—A person who rightfully rescinds a contract is entitled to compensation for any damage which he has sustained through the non-fulfilment of the contract.",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": null,
+          "retrieval_source": "mapped"
+        },
+        {
+          "id": "ICA-1872-s23",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 23",
+          "title": "What considerations and objects are lawful, and what not",
+          "text": "23. What considerations and objects are lawful, and what not.—The consideration or object of an agreement is lawful, unless— it is forbidden by law4; or is of such a nature that if permitted, it would defeat the provisions of any law; or is fraudulent ; or involves or implies injury to the person or property of another; or the Court regards it as immoral, or opposed to public policy",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": null,
+          "retrieval_source": "mapped"
+        },
+        {
+          "id": "CPA-2019-s2-46",
+          "act": "Consumer Protection Act, 2019",
+          "section": "Section 2(46)",
+          "title": "Definition of \"unfair contract\"",
+          "text": "(46) \"unfair contract\" means a contract between a manufacturer or trader or service provider on one hand, and a consumer on the other, having such terms which cause significant change in the rights of such consumer, including the following, namely:— (i) requiring manifestly excessive security deposits to be given by a consumer for the performance of contractual obligations; or (ii) imposing any penalty on the consumer, for the breach of contract thereof which is wholly disproportionate to the loss occurred due to such breach to the other party to the contract; or (iii) refusing to accept early repayment of debts on payment of applicable penalty; or (iv) entitling a party to the contract to terminate such contract unilaterally, without reasonable cause; or (v) permitting or has the effect of permitting one party to assign the contract to the detriment of the other party who is a consumer, without his consent; or (vi) imposing on the consumer any unreasonable charge, obligation or condition which puts such consumer to disadvantage;",
+          "source_url": "https://www.indiacode.nic.in/handle/123456789/15256",
+          "distance": null,
+          "retrieval_source": "mapped"
+        },
+        {
+          "id": "ICA-1872-s28",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 28",
+          "title": "",
+          "text": "28.Agreements in restraint of legal proceedings, void.—Every agreement,— (a) by which any party thereto is restricted absolutely from enforcing his rights under or in respect of any contract, by the usual legal proceedings in the ordinary tribunals, or which limits the time within which he may thus enforce his rights; or (b) which extinguishes the rights of any party thereto, or discharges any party thereto, from any liability, under or in respect of any contract on the expiry of a specified period so as to restrict any party from enforcing his rights, is void to the extent. Exception 1.—Saving of contract to refer to arbitration dispute that may arise.—This section shall not render illegal a contract, by which two or more persons agree that any dispute which may arise between them in respect of any subject or class of subjects shall be referred to arbitration, and that only the amount awarded in such arbitration shall be recoverable in respect of the dispute so referred. Exception 2.—Saving of contract to refer questions that have already arisen.—Nor shall this section render illegal any contract in writing, by which two or more persons agree to refer to arbitration any question between them which has already arisen, or affect any provision of any law in force for the time being as to references to arbitration4. Exception 3.—Saving of a guarantee agreement of a bank or a financial institution.—This section shall not render illegal a contract in writing by which any bank or financial institution stipulate a term in a guarantee or any agreement making a provision for guarantee for extinguishment of the rights or discharge of any party thereto from any liability under or in respect of such guarantee or agreement on the expiry of a specified period which is not less than one year from the date of occurring or non-occurring of a specified event for extinguishment or discharge of such party from the said liability. Explanation.—(i) In Exception 3, the expression \"bank\" means— (a) a \"banking company\" as defined in clause (c) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (b) \"a corresponding new bank\" as defined in clause (da) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (c) \"State Bank of India\" constituted under section 3 of the State Bank of India Act, 1955 (23 of 1955); (d) \"a subsidiary bank\" as defined in clause (k) of section 2 of the State Bank of India (Subsidiary Banks) Act, 1959(38 of 1959); (e) \"a Regional Rural Bank\" established under section 3 of the Regional Rural Banks Act, 1976(21 of 1976); (f) \"a Co-operative Bank\" as defined in clause (cci) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (g) \"a multi-State co-operative bank\" as defined in clause (cciiia) of section 5 of the Banking Regulation Act, 1949(10 of 1949); and (ii) In Exception 3, the expression \"a financial institution\" means any public financial institution within the meaning of section 4A of the Companies Act, 1956(1 of 1956).",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": 0.3753633499145508,
+          "retrieval_source": "semantic"
+        },
+        {
+          "id": "COI-art300A",
+          "act": "Constitution of India",
+          "section": "Article 300A",
+          "title": "Persons not to be deprived of property save by authority of law",
+          "text": "300A. Persons not to be deprived of property save by authority of law.— No person shall be deprived of his property save by authority of law",
+          "source_url": "https://www.legislative.gov.in/static/uploads/2025/07/c9fe9c9b6840524844316f74bb1c556c.pdf",
+          "distance": 0.37536728382110596,
+          "retrieval_source": "semantic"
+        },
+        {
+          "id": "ICA-1872-s125",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 125",
+          "title": "Rights of indemnity-holder when sued",
+          "text": "125.Rights of indemnity-holder when sued.—The promisee in a contract of indemnity, acting within the scope of his authority, is entitled to recover from the promisor— (1) all damages which he may be compelled to pay in any suit in respect of any matter to which the promise to indemnify applies; (2) all costs which he may be compelled to pay in any such suit if, in bringing or defending it, he did not contravene the orders of the promisor, and acted as it would have been prudent for him to act in the absence of any contract of indemnity, or if the promisor authorized him to bring or defend the suit; (3) all sums which he may have paid under the terms of any compromise of any such suit, if the compromise was not contrary to the orders of the promisor, and was one which it would have been prudent for the promisee to make in the absence of any contract of indemnity, or if the promisor authorized him to compromise the suit.",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": 0.39351189136505127,
+          "retrieval_source": "semantic"
+        }
+      ],
+      "statutory_citations": [],
+      "legal_basis_message": "Legal basis unavailable right now",
+      "legal_basis_message_hi": "कानूनी आधार अभी उपलब्ध नहीं है (Legal basis unavailable right now)",
+      "legal_basis_message_ta": "சட்ட அடிப்படை இப்போது கிடைக்கவில்லை (Legal basis unavailable right now)",
+      "typical_phrasing_header": "How this is typically written",
+      "typical_phrasing_disclaimer": "This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this.",
+      "typical_phrasing_disclaimer_hi": "यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।",
+      "typical_phrasing_disclaimer_ta": "இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்.",
+      "standard_alternatives": [
+        "Either party may terminate this Agreement without cause by giving thirty (30) days written notice to the other party.",
+        "This Agreement may be terminated by either party immediately upon written notice if the other party materially breaches any provision and fails to cure such breach within 15 days.",
+        "Landlord or Tenant may terminate the lease at the end of the term by providing 60 days advance written notice.",
+        "In the event of insolvency or bankruptcy of either party, the non-insolvent party may terminate this Agreement immediately upon written notice."
+      ]
+    },
+    {
+      "clause_id": "खंड 4.",
+      "clause_type": "dispute_resolution",
+      "title": "Arbitration & Dispute Resolution",
+      "original_text": "खंड 4. एकपक्षीय विवाद समाधान और मध्यस्थ नियुक्ति\nइस समझौते के तहत या उससे संबंधित सभी विवादों और दावों को विशेष रूप से निजी मध्यस्थता के लिए भेजा जाएगा। मकान मालिक के पास अपनी पसंद के\nएकमात्र मध्यस्थ को चुनने और नियुक्त करने का पूर्ण, अनन्य और अहस्तांतरणीय अधिकार होगा। मध्यस्थता का स्थान सिंगापुर होगा, और किरायेदार भारत में\nकिसी भी सिविल न्यायालय, किराया नियंत्रक या उपभोक्ता मंच के समक्ष वाद दायर करने के सभी अधिकारों को स्पष्ट रूप से त्यागता है।",
+      "english_translation": "Clause 4. Unilateral dispute resolution and arbitration Appointment All disputes and claims under or relating to this Agreement shall be referred exclusively to private arbitration. The landlord shall have the absolute, exclusive and non-transferable right to choose and appoint the sole arbitrator of his choice. The venue of arbitration shall be Singapore, and the tenant expressly waives all rights to sue before any civil court, rent controller or consumer forum in India.",
+      "detected_language": "hi",
+      "classification": "flag-worthy",
+      "explanation": "The clause requires all disputes to be settled through private arbitration in Singapore and explicitly waives the tenant's right to approach Indian courts, rent controllers, or consumer forums. Furthermore, it grants the landlord the exclusive and unilateral right to select and appoint the sole arbitrator.",
+      "risk_reason": "This creates an imbalance of power by denying the tenant any input in selecting the neutral decision-maker and forces dispute resolution in a foreign jurisdiction while restricting local legal remedies.",
+      "explanation_hi": "खंड में सभी विवादों को सिंगापुर में निजी मध्यस्थता के माध्यम से निपटाने की आवश्यकता है और भारतीय अदालतों, किराया नियंत्रकों या उपभोक्ता मंचों से संपर्क करने के किरायेदार के अधिकार को स्पष्ट रूप से माफ कर दिया गया है। इसके अलावा, यह मकान मालिक को एकमात्र मध्यस्थ का चयन करने और नियुक्त करने का अनन्य और एकतरफा अधिकार प्रदान करता है।",
+      "risk_reason_hi": "यह किरायेदार को तटस्थ निर्णय निर्माता के चयन में किसी भी इनपुट से इनकार करके शक्ति का असंतुलन पैदा करता है और स्थानीय कानूनी उपायों को प्रतिबंधित करते हुए विदेशी क्षेत्राधिकार में विवाद समाधान को मजबूर करता है।",
+      "explanation_ta": "இந்த பிரிவு அனைத்து சர்ச்சைகளையும் சிங்கப்பூரில் தனியார் இசைவுத்தீர்ப்பு நடுவர் மூலம் தீர்க்க வேண்டும் என்றும், இந்திய நீதிமன்றங்கள், வாடகைக் கட்டுப்பாட்டாளர்கள் அல்லது நுகர்வோர் மன்றங்களை அணுகுவதற்கான குத்தகைதாரரின் உரிமையை வெளிப்படையாக தள்ளுபடி செய்கிறது. மேலும், இது ஒரே நடுவர் தேர்வு செய்து நியமிக்க நில உரிமையாளருக்கு பிரத்யேக மற்றும் ஒருதலைப்பட்ச உரிமையை வழங்குகிறது.",
+      "risk_reason_ta": "நடுநிலை முடிவெடுப்பவரைத் தேர்ந்தெடுப்பதில் குத்தகைதாரருக்கு எந்த உள்ளீடும் மறுக்கப்படுவதன் மூலம் இது அதிகாரத்தின் சமநிலையின்மையை உருவாக்குகிறது, மேலும் உள்ளூர் சட்ட தீர்வுகளை கட்டுப்படுத்தும்போது வெளிநாட்டு அதிகார வரம்பில் தகராறு தீர்க்க கட்டாயப்படுத்துகிறது.",
+      "severity": "High",
+      "priority_score": 50.0,
+      "model_used": "gemini-3.5-flash-lite",
+      "citation_model_used": null,
+      "grounding_examples": [
+        {
+          "category": "one_sided",
+          "clause_type": "dispute_resolution",
+          "text": "Any claim by Tenant against Landlord must be submitted to private arbitration selected exclusively by Landlord, while Landlord retains the unilateral right to sue Tenant in court for eviction or damages.",
+          "distance": 0.158311665058136
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "dispute_resolution",
+          "text": "Company reserves the exclusive right to choose whether any dispute shall be resolved through arbitration or court litigation in the jurisdiction of Company's sole choice, while Customer waives all rights to court litigation and must submit all claims to mandatory binding arbitration.",
+          "distance": 0.29155802726745605
+        },
+        {
+          "category": "one_sided",
+          "clause_type": "indemnity",
+          "text": "Tenant agrees to indemnify Landlord for all claims, damages, losses, expenses, and attorney fees arising from any occurrence in or about the Leased Premises, regardless of cause or whether caused by Landlord's own negligence.",
+          "distance": 0.3429141044616699
+        },
+        {
+          "category": "standard",
+          "clause_type": "dispute_resolution",
+          "text": "Arbitration proceedings shall be conducted by a single neutral arbitrator agreed upon by both parties, with the prevailing party entitled to reasonable legal fees.",
+          "distance": 0.3475487232208252
+        }
+      ],
+      "statutory_provisions": [
+        {
+          "id": "ICA-1872-s28",
+          "act": "Indian Contract Act, 1872",
+          "section": "Section 28",
+          "title": "",
+          "text": "28.Agreements in restraint of legal proceedings, void.—Every agreement,— (a) by which any party thereto is restricted absolutely from enforcing his rights under or in respect of any contract, by the usual legal proceedings in the ordinary tribunals, or which limits the time within which he may thus enforce his rights; or (b) which extinguishes the rights of any party thereto, or discharges any party thereto, from any liability, under or in respect of any contract on the expiry of a specified period so as to restrict any party from enforcing his rights, is void to the extent. Exception 1.—Saving of contract to refer to arbitration dispute that may arise.—This section shall not render illegal a contract, by which two or more persons agree that any dispute which may arise between them in respect of any subject or class of subjects shall be referred to arbitration, and that only the amount awarded in such arbitration shall be recoverable in respect of the dispute so referred. Exception 2.—Saving of contract to refer questions that have already arisen.—Nor shall this section render illegal any contract in writing, by which two or more persons agree to refer to arbitration any question between them which has already arisen, or affect any provision of any law in force for the time being as to references to arbitration4. Exception 3.—Saving of a guarantee agreement of a bank or a financial institution.—This section shall not render illegal a contract in writing by which any bank or financial institution stipulate a term in a guarantee or any agreement making a provision for guarantee for extinguishment of the rights or discharge of any party thereto from any liability under or in respect of such guarantee or agreement on the expiry of a specified period which is not less than one year from the date of occurring or non-occurring of a specified event for extinguishment or discharge of such party from the said liability. Explanation.—(i) In Exception 3, the expression \"bank\" means— (a) a \"banking company\" as defined in clause (c) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (b) \"a corresponding new bank\" as defined in clause (da) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (c) \"State Bank of India\" constituted under section 3 of the State Bank of India Act, 1955 (23 of 1955); (d) \"a subsidiary bank\" as defined in clause (k) of section 2 of the State Bank of India (Subsidiary Banks) Act, 1959(38 of 1959); (e) \"a Regional Rural Bank\" established under section 3 of the Regional Rural Banks Act, 1976(21 of 1976); (f) \"a Co-operative Bank\" as defined in clause (cci) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (g) \"a multi-State co-operative bank\" as defined in clause (cciiia) of section 5 of the Banking Regulation Act, 1949(10 of 1949); and (ii) In Exception 3, the expression \"a financial institution\" means any public financial institution within the meaning of section 4A of the Companies Act, 1956(1 of 1956).",
+          "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+          "distance": null,
+          "retrieval_source": "mapped"
+        },
+        {
+          "id": "ACA-1996-s7",
+          "act": "Arbitration and Conciliation Act, 1996",
+          "section": "Section 7",
+          "title": "Arbitration agreement",
+          "text": "7. Arbitration agreement.—(1) In this Part, \"arbitration agreement\" means an agreement by the parties to submit to arbitration all or certain disputes which have arisen or which may arise between them in respect of a defined legal relationship, whether contractual or not. (2) An arbitration agreement may be in the form of an arbitration clause in a contract or in the form of a separate agreement. (3) An arbitration agreement shall be in writing. (4) An arbitration agreement is in writing if it is contained in— (a) a document signed by the parties; (b) an exchange of letters, telex, telegrams or other means of telecommunication including communication through electronic means which provide a record of the agreement; or (c) an exchange of statements of claim and defence in which the existence of the agreement is alleged by one party and not denied by the other. (5) The reference in a contract to a document containing an arbitration clause constitutes an arbitration agreement if the contract is in writing and the reference is such as to make that arbitration clause part of the contract.",
+          "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
+          "distance": null,
+          "retrieval_source": "mapped"
+        },
+        {
+          "id": "ACA-1996-s11",
+          "act": "Arbitration and Conciliation Act, 1996",
+          "section": "Section 11",
+          "title": "Appointment of arbitrators",
+          "text": "11. Appointment of arbitrators.—(1) A person of any nationality may be an arbitrator, unless otherwise agreed by the parties. (2) Subject to sub-section (6), the parties are free to agree on a procedure for appointing the arbitrator or arbitrators. (3) Failing any agreement referred to in sub-section (2), in an arbitration with three arbitrators, each party shall appoint one arbitrator, and the two appointed arbitrators shall appoint the third arbitrator who shall act as the presiding arbitrator. (4) If the appointment procedure in sub-section (3) applies and— (a) a party fails to appoint an arbitrator within thirty days from the receipt of a request to do so from the other party; or (b) the two appointed arbitrators fail to agree on the third arbitrator within thirty days from the date of their appointment, the appointment shall be made, upon request of a party, by the Supreme Court or, as the case may be, the High Court or any person or institution designated by such Court; (5) Failing any agreement referred to in sub-section (2), in an arbitration with a sole arbitrator, if the parties fail to agree on the arbitrator within thirty days from receipt of a request by one party from the other party to so agree the appointment shall be made, upon request of a party, by the Supreme Court or, as the case may be, the High Court or any person or institution designated by such Court. (6) Where, under an appointment procedure agreed upon by the parties,— (a) a party fails to act as required under that procedure; or (b) the parties, or the two appointed arbitrators, fail to reach an agreement expected of them under that procedure; or (c) a person, including an institution, fails to perform any function entrusted to him or it under that procedure, a party may request the Supreme Court or, as the case may be, the High Court or any person or institution designated by such Court to take the necessary measure, unless the agreement on the appointment procedure provides other means for securing the appointment. (6A) The Supreme Court or, as the case may be, the High Court, while considering any application e under sub-section (4) or sub-section (5) or sub-section (6), shall, notwithstanding any judgment, decree or d order of any Court, confine to the examination of the existence of an arbitration agreement. o (6B) The designation of any person or institution by tChe Supreme Court or, as the case may be, the High Court, for the purposes of this section shall not bea regarded as a delegation of judicial power by the Supreme Court or the High Court. i d (7) A decision on a matter entrusted by subn-section (4) or sub-section (5) or sub-section (6) to the Supreme Court or, as the case may be, the HiIgh Court or the person or institution designated by such Court is final and no appeal including Letters Patent Appeal shall lie against such decision. (8) The Supreme Court or, as the case may be, the High Court or the person or institution designated by such Court, before appointing an arbitrator, shall seek a disclosure in writing from the prospective arbitrator in terms of sub-section (1) of section 12, and have due regard to— (a) any qualifications required for the arbitrator by the agreement of the parties; and (b) the contents of the disclosure and other considerations as are likely to secure the appointment of an independent and impartial arbitrator. (9) In the case of appointment of sole or third arbitrator in an international commercial arbitration, the Supreme Court or the person or institution designated by that Court may appoint an arbitrator of a nationality other than the nationalities of the parties where the parties belong to different nationalities. (10) The Supreme Court or, as the case may be, the High Court, may make such scheme as the said Court may deem appropriate for dealing with matters entrusted by sub-section (4) or sub-section (5) or sub-section (6), to it. (11) Where more than one request has been made under sub-section (4) or sub-section (5) or sub-section (6) to the Chief Justices of different High Courts or their designates, different High Courts or their designates, the High Court or its designate to whom the request has been first made under the relevant sub-section shall alone be competent to decide on the request. whom the request has been first made\" (w.e.f 23-10-2015). (12) (a) Where the matters referred to in sub-sections (4), (5), (6), (7), (8) and sub-section (10) arise in an international commercial arbitration, the reference to the \"Supreme Court or, as the case may be, the High Court\" in those sub-sections shall be construed as a reference to the \"Supreme Court\"; and (b) where the matters referred to in sub-sections (4), (5), (6), (7), (8) and sub-section (10) arise in any other arbitration, the reference to \"the Supreme Court or, as the case may be, the High Court\" in those sub-sections shall be construed as a reference to the \"High Court\" within whose local limits the principal Civil Court referred to in clause (e) of sub-section (1) of section 2 is situate, and where the High Court itself is the Court referred to in that clause, to that High Court. (13) An application made under this section for appointment of an arbitrator or arbitrators shall be disposed of by the Supreme Court or the High Court or the person or institution designated by such Court, as the case may be, as expeditiously as possible and an endeavour shall be made to dispose of the matter within a period of sixty days from the date of service of notice on the opposite party. (14) For the purpose of determination of the fees of the arbitral tribunal and the manner of its payment to the arbitral tribunal, the High Court may frame such rules as may be necessary, after taking into consideration the rates specified in the Fourth Schedule. Explanation.—For the removal of doubts, it is hereby clarified that this sub-section shall not apply to international commercial arbitration and in arbitrations (other than international commercial arbitration) in case where parties have agree",
+          "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
+          "distance": 0.2628008723258972,
+          "retrieval_source": "mapped+semantic"
+        },
+        {
+          "id": "ACA-1996-s12",
+          "act": "Arbitration and Conciliation Act, 1996",
+          "section": "Section 12",
+          "title": "Grounds for challenge",
+          "text": "12. Grounds for challenge.—(1) When a person is approached in connection with his possible appointment as an arbitrator, he shall disclose in writing any circumstances,— (a) such as the existence either direct or indirect, of any past or present relationship with or interest in any of the parties or in relation to the subject-matter in dispute, whether financial, business, professional or other kind, which is likely to give rise to justifiable doubts as to his independence or impartiality; and (b) which are likely to affect his ability to devote sufficient time to the arbitration and in particular his ability to complete the entire arbitration within a period of twelve months. Explanation 1.—The grounds stated in the Fifth Schedule shall guide in determining whether circumstances exist which give rise to justifiable doubts as to the independence or impartiality of an arbitrator. Explanation 2.—The disclosure shall be made by such person in the form specified in the Sixth Schedule. (2) An arbitrator, from the time of his appointment and throughout the arbitral proceedings, shall, without delay, disclose to the parties in writing any circumstances referred to in sub-section (1) unless they have already been informed of them by him. (3) An arbitrator may be challenged only if— (a) circumstances exist that give rise to justifiable doubts as to his independence or impartiality, or (b) he does not possess the qualifications agreed to by the parties. (4) A party may challenge an arbitrator appointed by him, or in whose appointment he has participated, only for reasons of which he becomes aware after the appointment has been made. (5) Notwithstanding any prior agreement to the contrary, any person whose relationship, with the parties or counsel or the subject-matter of the dispute, falls under any of the categories specified in the Seventh Schedule shall be ineligible to be appointed as an arbitrator: Provided that parties may, subsequent to disputes having arisen between them, waive the applicability of this sub-section by an express agreement in writing.",
+          "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
+          "distance": 0.2804849147796631,
+          "retrieval_source": "mapped+semantic"
+        },
+        {
+          "id": "ACA-1996-s18",
+          "act": "Arbitration and Conciliation Act, 1996",
+          "section": "Section 18",
+          "title": "Equal treatment of parties",
+          "text": "18. Equal treatment of parties.—The parties shall be treated with equality and each party shall be given a full opportunity to present this case.",
+          "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
+          "distance": null,
+          "retrieval_source": "mapped"
+        },
+        {
+          "id": "ACA-1996-s20",
+          "act": "Arbitration and Conciliation Act, 1996",
+          "section": "Section 20",
+          "title": "Place of arbitration",
+          "text": "20. Place of arbitration.—(1) The parties are free to agree on the place of arbitration. (2) Failing any agreement referred to in sub-section (1), the place of arbitration shall be determined by the arbitral tribunal having regard to the circumstances of the case, including the convenience of the parties. (3) Notwithstanding sub-section (1) or sub-section (2), the arbitral tribunal may, unless otherwise i agreed by the parties, meet at any place it considers appropriate for consultation among its members, for hearing witnesses, experts or the parties, or for inspection of documents, goods or other property.",
+          "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
+          "distance": 0.2670854330062866,
+          "retrieval_source": "mapped+semantic"
+        }
+      ],
+      "statutory_citations": [],
+      "legal_basis_message": "Legal basis unavailable right now",
+      "legal_basis_message_hi": "कानूनी आधार अभी उपलब्ध नहीं है (Legal basis unavailable right now)",
+      "legal_basis_message_ta": "சட்ட அடிப்படை இப்போது கிடைக்கவில்லை (Legal basis unavailable right now)",
+      "typical_phrasing_header": "How this is typically written",
+      "typical_phrasing_disclaimer": "This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this.",
+      "typical_phrasing_disclaimer_hi": "यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।",
+      "typical_phrasing_disclaimer_ta": "இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்.",
+      "standard_alternatives": [
+        "Any dispute arising under this Agreement shall be settled by binding arbitration in accordance with the rules of the local Arbitration Association, with costs shared equally by both parties.",
+        "The parties agree that any legal action arising out of this Agreement shall be brought exclusively in the courts of mutual agreed jurisdiction, and both parties submit to such jurisdiction.",
+        "In the event of a dispute, parties agree to negotiate in good faith for 30 days prior to initiating formal litigation or mediation.",
+        "Arbitration proceedings shall be conducted by a single neutral arbitrator agreed upon by both parties, with the prevailing party entitled to reasonable legal fees."
+      ]
+    }
+  ]
+}

@@ -5,7 +5,7 @@ import SummaryCard from './components/SummaryCard';
 import FlaggedClauseCard from './components/FlaggedClauseCard';
 import ChatThread from './components/ChatThread';
 import Disclaimer from './components/Disclaimer';
-import { Scale, RefreshCw, CheckCircle2, Globe } from 'lucide-react';
+import { Scale, RefreshCw, CheckCircle2, Globe, AlertTriangle } from 'lucide-react';
 
 export default function App() {
   const [step, setStep] = useState(1); // 1: Intake, 2: Upload, 3: Results
@@ -26,6 +26,12 @@ export default function App() {
   const handleUploadSuccess = (data, uploadedFileName) => {
     setAnalysisResult(data);
     setFileName(uploadedFileName);
+    // Set default output language = document language if Indic, else en
+    if (data.detected_language && (data.detected_language === 'hi' || data.detected_language === 'ta')) {
+      setLanguage(data.detected_language);
+    } else {
+      setLanguage('en');
+    }
     setStep(3);
   };
 
@@ -155,6 +161,21 @@ export default function App() {
           <div className="space-y-6">
             {/* Disclaimer Banner */}
             <Disclaimer language={language} />
+
+            {/* Experimental Notice for Machine-Translated Indic Documents */}
+            {analysisResult.experimental_notice && (
+              <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl shadow-xs flex items-start gap-3 text-amber-950">
+                <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                <div className="min-w-0">
+                  <h4 className="font-bold text-xs uppercase tracking-wider text-amber-900 mb-0.5">
+                    {language === 'ta' ? "பரிசோதனை நிலை அறிவிப்பு" : language === 'hi' ? "प्रायोगिक सूचना" : "Experimental Notice"}
+                  </h4>
+                  <p className="text-sm font-medium leading-relaxed break-words">
+                    {analysisResult.experimental_notice}
+                  </p>
+                </div>
+              </div>
+            )}
 
             {/* Document Summary */}
             <SummaryCard

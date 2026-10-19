@@ -11,6 +11,8 @@ class ClientIntakeContext(BaseModel):
 class ClauseItem(BaseModel):
     clause_id: str
     text: str
+    english_translation: Optional[str] = None
+    detected_language: str = "en"
 
 class GroundingExample(BaseModel):
     category: str  # standard or one_sided
@@ -45,6 +47,8 @@ class FlaggedClause(BaseModel):
     clause_type: str
     title: str
     original_text: str
+    english_translation: Optional[str] = None
+    detected_language: str = "en"
     classification: str  # standard or flag-worthy
     explanation: str
     risk_reason: str
@@ -76,6 +80,8 @@ class AnalysisResponse(BaseModel):
     document_summary_hi: Optional[str] = None
     document_summary_ta: Optional[str] = None
     parsed_method: str  # pdfplumber or ocr
+    detected_language: str = "en"
+    experimental_notice: Optional[str] = None
     total_clauses: int
     flagged_clauses: List[FlaggedClause]
     all_clauses: List[ClauseItem]

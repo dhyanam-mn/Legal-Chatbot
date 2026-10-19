@@ -25,11 +25,12 @@ A multilingual AI-assisted legal document analysis system that inspects contract
    - Generates single-sentence descriptive reasons and attaches verbatim statutory provision text in English.
    - Falls back safely to `"Legal basis unavailable right now"` if the strongest model is unavailable (rotation to lite models is prohibited).
    - Closed-world citation validation: drops and logs any hallucination attempts (no case law or outside sections).
-4. **Multilingual Translation Layer**:
-   - Local `ai4bharat/indictrans2-en-indic-dist-200M` model runs completely on CPU/CUDA with **zero Gemini API calls**.
+4. **Multilingual Translation Layer (Bidirectional)**:
+   - **English -> Hindi/Tamil**: Local `ai4bharat/indictrans2-en-indic-dist-200M` model runs completely on CPU/CUDA with **zero Gemini API calls**.
    - Language-aware legal glossary enforcement (`hi` and `ta`) preserving statutory identifiers, Section numbers, and Act names in English.
+   - **Indic -> English (Phase 5 Input Layer)**: Lazy CPU engine powered by `ai4bharat/indictrans2-indic-en-dist-200M` (`benfranklinms/indictrans2-indic-en-dist-200M`) translating Hindi and Tamil documents into English for semantic vector grounding and classification, with hash-based caching and zero Gemini calls.
 5. **Interactive UI**:
-   - React + Tailwind CSS interface with trilingual toggle (**English | हिंदी | தமிழ்**), collapsible "Legal basis" (with verbatim statutory text) and "Typical phrasing" panels, and client intake context personalization.
+   - React + Tailwind CSS interface with trilingual toggle (**English | हिंदी | தமிழ்**), collapsible "Legal basis" (with verbatim statutory text) and "Typical phrasing" panels, client intake personalization, and experimental machine-translation notice banners for Indic input documents.
 
 ---
 
@@ -84,9 +85,15 @@ A multilingual AI-assisted legal document analysis system that inspects contract
 2. **Citation Model Pinning & API Free-Tier Quota**:
    - Citation generation requires deep statutory reasoning and is strictly pinned to the strongest configured Gemini model (`GEMINI_MODELS[0]`). Under Google's free-tier rate limits (20 requests per day per model), if the strongest model's daily quota is exhausted, citation generation safely returns `"Legal basis unavailable right now"` rather than guessing with lightweight models.
 3. **Local IndicTrans2 CPU Inference Latency**:
-   - IndicTrans2 200M beam search on CPU averages ~5–8 seconds per clause. While translation is fully private and free from LLM API fees, running on CPU introduces noticeable latency compared to GPU acceleration.
+   - `ai4bharat/indictrans2-en-indic-dist-200M` (English -> Hindi/Tamil): ~5–8 seconds per clause on CPU.
+   - `ai4bharat/indictrans2-indic-en-dist-200M` / `benfranklinms/indictrans2-indic-en-dist-200M` (Indic -> English):
+     - **Hindi -> English**: ~3.56s per clause on CPU (Round-trip similarity: **0.92**)
+     - **Tamil -> English**: ~3.16s per clause on CPU (Round-trip similarity: **0.84**)
+   - Both models run 100% locally on CPU without external API calls or token fees, and are cached in-memory by SHA-256 text hash.
 4. **Jurisdictional Scope**:
    - Current statutory knowledge base covers central Indian statutes (Constitution of India, Indian Contract Act 1872, Arbitration and Conciliation Act 1996, Consumer Protection Act 2019). State-specific amendments and foreign legal jurisdictions are outside the current corpus scope.
+5. **Hindi & Tamil Synthetic Contract Wording**:
+   - The Hindi (`demo_rental_hi.pdf`) and Tamil (`demo_employment_ta.pdf`) demo contract wording, as well as model output translations, are machine-generated via local IndicTrans2 neural translation and enforced via dictionary glossary rules. The Hindi and Tamil wording has **not been reviewed by a native speaker** or certified by legal counsel.
 
 ---
 
@@ -96,6 +103,20 @@ A multilingual AI-assisted legal document analysis system that inspects contract
 - Python 3.10+
 - Node.js 18+
 - Gemini API Key
+- *(Optional for Scanned Indic PDFs)* Tesseract OCR with Hindi and Tamil language packs:
+  - **Linux (Ubuntu/Debian)**:
+    ```bash
+    sudo apt-get update
+    sudo apt-get install tesseract-ocr tesseract-ocr-hin tesseract-ocr-tam
+    ```
+  - **macOS (Homebrew)**:
+    ```bash
+    brew install tesseract tesseract-lang
+    ```
+  - **Windows**:
+    1. Download the installer from the [UB-Mannheim Tesseract repository](https://github.com/UB-Mannheim/tesseract/wiki).
+    2. During installation, expand **Additional language data (download)** and check **Hindi** (`hin`) and **Tamil** (`tam`).
+    3. Ensure Tesseract installation path (`C:\Program Files\Tesseract-OCR`) is added to the system `PATH` environment variable.
 
 ### Backend Setup
 ```bash

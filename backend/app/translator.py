@@ -11,7 +11,7 @@ import torch
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 from IndicTransToolkit.processor import IndicProcessor
 
-from .config import DATA_DIR, HF_TOKEN, INDICTRANS2_MODEL_NAME
+from .config import DATA_DIR, HF_TOKEN, INDICTRANS2_MODEL_NAME, INDICTRANS2_INDIC_EN_MODEL_NAME
 
 logger = logging.getLogger(__name__)
 
@@ -463,4 +463,148 @@ def translate_text_to_tamil(text: str) -> str:
     engine = get_translator_engine()
     translated = engine.translate_batch([text], src_lang="eng_Latn", tgt_lang="tam_Taml", num_beams=2)
     return translated[0]
+
+
+# In-memory translation cache for Indic -> English keyed by (sha256_text_hash, src_lang)
+_INDIC_TO_EN_CACHE: Dict[Tuple[str, str], str] = {}
+
+
+class IndicToEnEngine:
+    """
+    Lazy singleton wrapper for Indic -> English translation
+    (ai4bharat/indictrans2-indic-en-dist-200M / benfranklinms/indictrans2-indic-en-dist-200M).
+    Loaded strictly lazily only when a non-English document is processed.
+    Runs on CPU with IndicProcessor(inference=True), caching by text hash.
+    Makes ZERO Gemini API calls.
+    """
+    def __init__(self, model_name: str = INDICTRANS2_INDIC_EN_MODEL_NAME):
+        self.model_name = model_name
+        self.device = "cpu"  # enforce CPU as specified
+        masked_token = "hf_****" if HF_TOKEN else "None"
+        logger.info(f"Loading Indic-to-English model '{self.model_name}' on device '{self.device}' (token={masked_token})...")
+        t0 = time.time()
+        
+        try:
+            self.tokenizer = AutoTokenizer.from_pretrained(
+                self.model_name,
+                trust_remote_code=True,
+                token=HF_TOKEN if HF_TOKEN else None
+            )
+            self.model = AutoModelForSeq2SeqLM.from_pretrained(
+                self.model_name,
+                trust_remote_code=True,
+                token=HF_TOKEN if HF_TOKEN else None
+            ).to(self.device)
+        except Exception as e:
+            logger.warning(f"Could not load primary Indic-to-English model '{self.model_name}': {e}. Attempting fallback mirror...")
+            fallback_name = "benfranklinms/indictrans2-indic-en-dist-200M"
+            self.model_name = fallback_name
+            self.tokenizer = AutoTokenizer.from_pretrained(
+                fallback_name,
+                trust_remote_code=True
+            )
+            self.model = AutoModelForSeq2SeqLM.from_pretrained(
+                fallback_name,
+                trust_remote_code=True
+            ).to(self.device)
+
+        self.model.eval()
+        self.processor = IndicProcessor(inference=True)
+        self.load_time_sec = time.time() - t0
+        logger.info(
+            f"Indic-to-English model '{self.model_name}' loaded successfully on device='{self.device}' in {self.load_time_sec:.2f}s."
+        )
+
+    def translate_batch(
+        self,
+        texts: List[str],
+        src_lang: str = "hin_Deva",
+        tgt_lang: str = "eng_Latn",
+        num_beams: int = 2
+    ) -> List[str]:
+        if not texts:
+            return []
+
+        results = ["" for _ in texts]
+        uncached_indices: List[int] = []
+        uncached_texts: List[str] = []
+
+        for i, t in enumerate(texts):
+            if not t or not t.strip():
+                continue
+            cleaned = t.strip()
+            cache_key = (_get_text_hash(cleaned), src_lang)
+            if cache_key in _INDIC_TO_EN_CACHE:
+                results[i] = _INDIC_TO_EN_CACHE[cache_key]
+            else:
+                uncached_indices.append(i)
+                uncached_texts.append(cleaned)
+
+        if uncached_texts:
+            batch = self.processor.preprocess_batch(uncached_texts, src_lang=src_lang, tgt_lang=tgt_lang)
+            inputs = self.tokenizer(
+                batch,
+                truncation=True,
+                padding="longest",
+                return_tensors="pt",
+                return_attention_mask=True
+            ).to(self.device)
+
+            with torch.no_grad():
+                generated_tokens = self.model.generate(
+                    **inputs,
+                    use_cache=True,
+                    min_length=0,
+                    max_length=256,
+                    num_beams=num_beams,
+                    num_return_sequences=1
+                )
+
+            decoded = self.tokenizer.batch_decode(
+                generated_tokens,
+                skip_special_tokens=True,
+                clean_up_tokenization_spaces=True
+            )
+            postprocessed = self.processor.postprocess_batch(decoded, lang=tgt_lang)
+
+            for idx, orig_text, trans in zip(uncached_indices, uncached_texts, postprocessed):
+                cache_key = (_get_text_hash(orig_text), src_lang)
+                _INDIC_TO_EN_CACHE[cache_key] = trans
+                results[idx] = trans
+
+        return results
+
+
+_indic_to_en_engine: Optional[IndicToEnEngine] = None
+
+def get_indic_to_en_engine() -> IndicToEnEngine:
+    """Lazily load Indic-to-English translation engine on first request."""
+    global _indic_to_en_engine
+    if _indic_to_en_engine is None:
+        _indic_to_en_engine = IndicToEnEngine()
+    return _indic_to_en_engine
+
+
+def translate_indic_to_en(text: str, src_lang: str = "hi") -> str:
+    """
+    Translates Indic text (Hindi or Tamil) to English on CPU using local IndicTrans2.
+    src_lang can be 'hi', 'hin_Deva', 'ta', or 'tam_Taml'.
+    Cached by text hash. Makes ZERO Gemini calls.
+    """
+    if not text or not text.strip():
+        return ""
+    code = "tam_Taml" if src_lang in ("ta", "tam_Taml") else "hin_Deva"
+    engine = get_indic_to_en_engine()
+    res = engine.translate_batch([text], src_lang=code, tgt_lang="eng_Latn", num_beams=2)
+    return res[0]
+
+
+def translate_indic_to_en_batch(texts: List[str], src_lang: str = "hi") -> List[str]:
+    """Translates a batch of Indic texts to English on CPU. Makes ZERO Gemini calls."""
+    if not texts:
+        return []
+    code = "tam_Taml" if src_lang in ("ta", "tam_Taml") else "hin_Deva"
+    engine = get_indic_to_en_engine()
+    return engine.translate_batch(texts, src_lang=code, tgt_lang="eng_Latn", num_beams=2)
+
 

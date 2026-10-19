@@ -17,13 +17,18 @@ from .schemas import (
     ClientIntakeContext, AnalysisResponse, ChatRequest, ChatResponse
 )
 from .parser import parse_pdf
-from .segmenter import segment_text_into_clauses
+from .segmenter import segment_text_into_clauses, detect_document_language
 from .vector_store import get_vector_store
 from .classifier import (
     classify_and_explain_clause, generate_document_summary, call_gemini_json, genai_client
 )
 from .ranker import rank_flagged_clauses
-from .translator import translate_text_to_hindi, translate_text_to_tamil, get_translator_engine
+from .translator import (
+    translate_text_to_hindi,
+    translate_text_to_tamil,
+    get_translator_engine,
+    translate_indic_to_en
+)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("legal-chatbot")
@@ -138,17 +143,40 @@ async def upload_document(
     if not text or not text.strip():
         raise HTTPException(status_code=422, detail="Could not extract readable text from PDF.")
 
-    clauses = segment_text_into_clauses(text)
+    detected_lang = detect_document_language(text)
+    clauses = segment_text_into_clauses(text, detected_language=detected_lang)
     if not clauses:
         raise HTTPException(status_code=422, detail="No valid clauses detected in document.")
+
+    experimental_notice: Optional[str] = None
+    if detected_lang != "en":
+        experimental_notice = (
+            "Experimental: this document was machine-translated to English before analysis. "
+            "Errors in translation can affect results."
+        )
+        src_code = "tam_Taml" if detected_lang == "ta" else "hin_Deva"
+        for clause in clauses:
+            clause.english_translation = translate_indic_to_en(clause.text, src_lang=src_code)
+            clause.detected_language = detected_lang
 
     vector_store = get_vector_store()
     flagged_clauses = []
 
     for clause in clauses:
-        grounding_examples = vector_store.query_nearest_references(clause.text, top_k=4)
-        flagged = classify_and_explain_clause(clause, grounding_examples)
+        # If document is non-English, ground and classify the English translation
+        analysis_text = clause.english_translation if (detected_lang != "en" and clause.english_translation) else clause.text
+        clause_for_classifier = ClauseItem(
+            clause_id=clause.clause_id,
+            text=analysis_text,
+            english_translation=clause.english_translation,
+            detected_language=detected_lang
+        )
+        grounding_examples = vector_store.query_nearest_references(analysis_text, top_k=4)
+        flagged = classify_and_explain_clause(clause_for_classifier, grounding_examples)
         if flagged:
+            flagged.original_text = clause.text  # Preserve original Indic text for display
+            flagged.english_translation = clause.english_translation
+            flagged.detected_language = detected_lang
             flagged_clauses.append(flagged)
 
     intake_context = ClientIntakeContext(
@@ -158,15 +186,23 @@ async def upload_document(
         income_bracket=income_bracket,
         document_type=document_type
     )
-    
+
     ranked_flags = rank_flagged_clauses(flagged_clauses, intake_context)
-    summary_en, summary_hi, summary_ta = generate_document_summary(text, len(clauses), len(ranked_flags))
+
+    # Document summary: use English translation if non-English
+    summary_input = "\n\n".join(
+        (c.english_translation if (detected_lang != "en" and c.english_translation) else c.text)
+        for c in clauses
+    )
+    summary_en, summary_hi, summary_ta = generate_document_summary(summary_input, len(clauses), len(ranked_flags))
 
     return AnalysisResponse(
         document_summary=summary_en,
         document_summary_hi=summary_hi,
         document_summary_ta=summary_ta,
         parsed_method=parse_method,
+        detected_language=detected_lang,
+        experimental_notice=experimental_notice,
         total_clauses=len(clauses),
         flagged_clauses=ranked_flags,
         all_clauses=clauses,
