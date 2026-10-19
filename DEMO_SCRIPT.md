@@ -1,116 +1,163 @@
 # Legal Document Chatbot — 5-Minute Live Demo Script
 
-This script provides an exact 6-step walkthrough for demonstrating the Legal Document Chatbot, featuring cross-language contract analysis (English, Hindi, and Tamil), client-intake situational ranking, anti-hallucination statutory grounding, and bilingual clause inspection.
+This script provides an exact 6-step walkthrough for presenting the Legal Document Chatbot. Every factual claim, clause number, rank, score, flagged count, and citation status in this script is copied directly from `demo_report.md` and `demo_output/`.
 
 ---
 
-## Pre-Demo Checklist
+## Pre-Demo Checklist (Mandatory)
 
-1. **Verify Demo Contracts** in `sample_pdfs/demo/`:
-   - `demo_rental_en.pdf` (English Residential Lease — One-Sided)
-   - `demo_rental_hi.pdf` (Hindi Residential Lease — One-Sided)
-   - `demo_employment_en.pdf` (English Executive Employment Agreement — One-Sided)
-   - `demo_employment_ta.pdf` (Tamil Employment Agreement — One-Sided)
-   - `demo_loan_en.pdf` (English Commercial Loan Agreement — One-Sided)
-   *(All files contain the mandatory footer: `"SYNTHETIC DEMO DOCUMENT - NOT A REAL CONTRACT"`)*
-2. **Offline Fallback Ready**: If internet or Gemini API quota is unavailable during presentation, present from the committed dated audit reports in `demo_report.md` and `demo_output/`.
-3. **Environment**: Enforce `ALLOW_HEURISTIC_FALLBACK=false` to prove that all evaluations run through the genuine LLM pipeline and local neural translation models.
+Complete these steps on the demo machine before presenting:
+1. **Pre-download both IndicTrans2 models**: Ensure both `ai4bharat/indictrans2-en-indic-dist-200M` and `benfranklinms/indictrans2-indic-en-dist-200M` (or `ai4bharat/indictrans2-indic-en-dist-200M`) are cached locally in Hugging Face cache so no model weights are downloaded live.
+2. **Warm the backend**: Start FastAPI and upload at least one document (`demo_rental_en.pdf` or `demo_rental_hi.pdf`) so ChromaDB embeddings, vector stores, and IndicTrans2 models are resident in memory.
+3. **Confirm Gemini API quota/billing**: Check Google AI Studio to confirm that `GEMINI_MODELS[0]` (`gemini-3.8-flash`) has active quota and is not returning `429 RESOURCE_EXHAUSTED`.
+4. **Full Dry Run**: Execute a complete dry run of all 6 steps on the demo laptop under the same network conditions.
+5. **Offline Fallback Ready**: If the network drops or Gemini API quota is exhausted, switch immediately to presenting the pre-computed dated audit report in `demo_report.md` and JSON files in `demo_output/`.
+
+---
+
+## Latency & Timing Estimates
+
+- **IndicTrans2 Model Initialization (Indic $\rightarrow$ English)**: ~10–12s (one-time on first non-English document upload).
+- **Indic $\rightarrow$ English Clause Translation**: ~3.56s per clause on CPU (Hindi), ~3.16s per clause on CPU (Tamil).
+- **English $\rightarrow$ Hindi/Tamil Output Translation**: ~2–4s per clause on CPU.
+- **Gemini Classification**: ~1.5–3s per clause.
+- **Estimated Step Durations**:
+  - Step 1: ~45s (Upload English Lease, parsing, and classification)
+  - Step 2: ~30s (Intake profile selection and situational re-ranking)
+  - Step 3: ~60s (Inspection of ranked English clauses)
+  - Step 4: ~75s (Upload Hindi Lease, Indic-to-EN translation, and bilingual view)
+  - Step 5: ~60s (Upload Tamil Employment Contract, translation, and glossary check)
+  - Step 6: ~45s (Upload Loan Agreement, unmapped statute discipline)
 
 ---
 
 ## 6-Step Live Demo Walkthrough (5 Minutes)
 
-### Step 1: Upload English High-Risk Contract (45 seconds)
+### Step 1: Upload English High-Risk Contract (~45s)
 * **What to click**:
   - Click **Upload PDF** and select `sample_pdfs/demo/demo_rental_en.pdf`.
 * **What to point out**:
-  - Point out the page footer: `"SYNTHETIC DEMO DOCUMENT - NOT A REAL CONTRACT"`.
-  - Highlight the structural parser: `pdfplumber` extracts text while preserving legal structure; regex boundary segmentation splits clauses by numbering rather than arbitrary token chunks.
+  - Point out the page footer on every page: `"SYNTHETIC DEMO DOCUMENT - NOT A REAL CONTRACT"`.
+  - Point out text extraction via `pdfplumber` and clause segmentation: The document is segmented into **6 clauses** using line-start numbered regex rather than arbitrary token windows.
+  - Initial classification flags **3 out of 6 clauses** as one-sided against our reference set of standard vs one-sided example clauses (synthetic).
 * **Talking point**:
-  > *"Most consumers sign standard form contracts without reading the fine print. Our tool automatically segments the document into discrete legal clauses and compares each section against a verified vector store of standard and one-sided clauses."*
+  > *"We start with a synthetic 6-clause residential lease. The system segments the text by numbered clause boundaries and flags 3 high-risk clauses by comparing them against our reference set of standard vs one-sided example clauses (synthetic)."*
 
 ---
 
-### Step 2: Set Client Intake Context (45 seconds)
+### Step 2: Set Client Intake Context (~30s)
 * **What to enter/select**:
   - **Employment Type**: `Salaried`
-  - **Has Dependents**: `Yes` (Number of dependents: `2`)
+  - **Has Dependents**: `Yes` (Count: `2`)
   - **Income Bracket**: `Medium`
   - **Document Type**: `Rental Agreement`
 * **What to point out**:
-  - Show the intake profile panel.
-  - Explain why legal risk is situational: losing a 10-month rental deposit is inconvenient for a corporation, but financially catastrophic for a salaried tenant with 2 dependents.
+  - Explain why intake context matters: forfeiting a 10-month rental deposit threatens immediate housing and living stability for a salaried tenant with 2 dependents.
+  - Notice the priority scores:
+    - **Clause 2 (Security Deposit)** received a dependent boost of +45.0, resulting in a top priority score of **115.0** (Severity: `High`).
+    - **Clause 3 (Unilateral Eviction)** follows with a priority score of **110.0** (Severity: `High`).
+    - **Clause 4 (Dispute Resolution)** ranks third with a score of **50.0** (Severity: `Medium`).
 * **Talking point**:
-  > *"Our situational ranker weights severity based on client vulnerability. Notice how deposit forfeiture and immediate 24-hour eviction jump to the top of the risk ranking because of the dependent profile."*
+  > *"Our ranker personalizes clause severity. Notice how Clause 2 (deposit forfeiture) and Clause 3 (24-hour eviction) are weighted to the top with priority scores of 115.0 and 110.0 because of the client's dependents profile."*
 
 ---
 
-### Step 3: Inspect Ranked Flagged Clauses (60 seconds)
-* **What to point out**:
-  - **Clause 2 (Security Deposit Absolute Forfeiture — Ranked #1)**:
-    - High priority score (115.0) driven by dependent context boost (+45.0).
-    - Clear explanation and risk warning.
-    - Statutory citation: Cites **ICA-1872-s74** (compensation for breach of contract / liquidated damages vs. penalty) with verbatim statutory text from the official Gazette.
-  - **Clause 3 (Unilateral 24-Hour Eviction — Ranked #2)**:
-    - Deprivation of property rights without judicial due process (cites **COI-art300A**).
-  - **Clause 4 (Singapore Arbitration Seat & Forum Selection — Ranked #3)**:
-    - Procedural unreasonableness for a residential tenant in Bengaluru.
-  - **Balanced Alternatives**: Expand *"How this is typically written"* to show copy-pasteable fair compromise clauses for negotiations.
+### Step 3: Inspect Ranked Flagged Clauses (~60s)
+* **What to review**:
+  - **Rank 1 — Clause 2: Penalty & Liquidated Damages** (Score: 115.0 | High):
+    - *Original Text*: 10-month deposit (INR 350,000) irrevocably forfeited upon 48-hour rent delay without requirement to prove actual loss.
+    - *Explanation & Risk*: Highlights punitive damages without proof of harm.
+    - *Legal Basis*: Shows `"Legal basis unavailable right now"` if Gemini quota was reached, or cites **ICA-1872-s74** with verbatim statutory text audited against official Gazette PDFs with documented cleaning.
+    - *Typical Phrasing*: Expand to show balanced alternatives (e.g. standard 5-day grace period, administrative fee of $50, capped damages).
+  - **Rank 2 — Clause 3: Unilateral Termination** (Score: 110.0 | High):
+    - Landlord right to terminate on 24 hours' notice without cause.
+  - **Rank 3 — Clause 4: Arbitration & Dispute Resolution** (Score: 50.0 | Medium):
+    - Sole arbitrator appointed exclusively by Landlord with seat in Singapore.
+  - **Exact Disclaimer**: Point out the mandatory disclaimer displayed on the card:
+    > *"This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this."*
 
 ---
 
-### Step 4: Upload Hindi Contract & Cross-Language Consistency (60 seconds)
+### Step 4: Upload Hindi Contract & Cross-Language Consistency (~75s)
 * **What to click**:
-  - Click **Start New Document** (or reset).
-  - Upload `sample_pdfs/demo/demo_rental_hi.pdf`.
+  - Click **Start New Document** and upload `sample_pdfs/demo/demo_rental_hi.pdf`.
 * **What to point out**:
-  - **Automatic Language Detection**: System detects Devanagari script share $\rightarrow$ sets document language to `HI`.
-  - **Default Output Language**: The UI automatically sets the output language toggle to **हिंदी (Hindi)**.
-  - **Visible Experimental Notice**:
+  - **Language Detection**: The system calculates Unicode script character shares (`\u0900-\u097F`) and automatically detects document language as **`hi`** (Hindi).
+  - **Default Output Language**: The output language toggle automatically switches to **हिंदी (Hindi)**.
+  - **Prominent Experimental Notice**:
     > *"Experimental: this document was machine-translated to English before analysis. Errors in translation can affect results."*
-  - **Bilingual Clause Display**: Show the card displaying the original Devanagari text (`खंड 2. प्रतिभूति जमा और पूर्ण जब्ती`) alongside the English machine-translation analyzed by the AI.
-  - **Consistency**: Show that the exact same 4 clauses are flagged in Hindi as in the English contract (`demo_rental_en.pdf`).
+  - **Bilingual Clause Card**:
+    - Displays the original Hindi text: `खंड 2. प्रतिभूति जमा और पूर्ण जब्ती`.
+    - Displays the English machine-translation generated locally on CPU: *"The Tenant shall deposit INR 350,000 (representing ten months' rent) as interest-free security deposit..."*
+  - **Actual Consistency Numbers**:
+    - **Rental Consistency (English vs Hindi)**:
+      - **3 Matched** (`penalty`, `termination`, `dispute_resolution`)
+      - **0 Missed**
+      - **0 Extra**
+    - Both English and Hindi documents flagged exactly **3 out of 6 clauses** with identical ranking: Rank 1 (`खंड 2.`, score 115.0), Rank 2 (`खंड 3.`, score 110.0), Rank 3 (`खंड 4.`, score 50.0).
+  - **Glossary Note**: Point out that legal terms use a defined glossary, pending native-speaker review.
 * **Talking point**:
-  > *"Citizens who receive agreements in regional languages are often at an information disadvantage. Here, our Indic input layer translates Devanagari clauses into English on CPU without external API calls, classifies them consistently, and renders the explanation back in Hindi."*
+  > *"When we upload the identical rental lease written in Hindi, the local CPU model translates each clause to English for vector grounding and Gemini classification. As verified in our consistency table, 3 out of 3 flagged clause types matched with 0 missed and 0 extra."*
 
 ---
 
-### Step 5: Upload Tamil Employment Contract (45 seconds)
+### Step 5: Upload Tamil Employment Contract (~60s)
 * **What to click**:
-  - Upload `sample_pdfs/demo/demo_employment_ta.pdf`.
+  - Upload `sample_pdfs/demo/demo_employment_ta.pdf` with intake (`salaried`, `dependents=yes`).
 * **What to point out**:
-  - **Language Detection**: Automatically identifies Tamil script $\rightarrow$ sets document language to `TA`.
-  - **Default Tamil UI**: Interface flips to **தமிழ்**.
-  - **Bilingual Inspection**:
-    - `பிரிவு 2. போட்டித் தடை` (3-year perpetual non-compete) $\rightarrow$ Cites **ICA-1872-s27** (agreements in restraint of trade void).
-    - `பிரிவு 3. வரம்பற்ற இழப்பீட்டுப் பொறுப்பு` (Unlimited indemnity).
-    - `பிரிவு 4. கட்டாயப் பணிப் பத்திரம்` (Service bond with INR 10L penalty) $\rightarrow$ Cites **ICA-1872-s74**.
-    - `பிரிவு 5. சமச்சீரற்ற அறிவிப்புக் காலம்` (6 months vs 0 days notice period disparity).
-* **Talking point**:
-  > *"Notice how the Tamil legal terms—like 'வணிகத் தடை' for restraint of trade and 'இழப்பீட்டுப் பொறுப்பு' for indemnity—strictly conform to reviewed legal glossaries, ensuring terminological consistency."*
+  - **Language Detection**: Detects Tamil Unicode script (`\u0B80-\u0BFF`) $\rightarrow$ sets language to **`ta`** (Tamil).
+  - **Default Tamil UI**: UI defaults to **தமிழ்**.
+  - **Flagged Count**: **4 out of 6 clauses** flagged.
+  - **Actual Consistency Numbers (English vs Tamil)**:
+    - **4 Matched** (`service_bond`, `indemnity`, `non_compete`, `notice_period_garden_leave`)
+    - **0 Missed**
+    - **0 Extra**
+  - **Ranked Clauses in Tamil**:
+    - Rank 1: `பிரிவு 4.` (`service_bond`, Score: 130.0 | High)
+    - Rank 2: `பிரிவு 3.` (`indemnity`, Score: 115.0 | High)
+    - Rank 3: `பிரிவு 2.` (`non_compete`, Score: 100.0 | High)
+    - Rank 4: `பிரிவு 5.` (`notice_period_garden_leave`, Score: 90.0 | High)
+  - **Glossary Wording**: Notice Tamil terminology like `போட்டித் தடை` (non-compete) and `இழப்பீட்டுப் பொறுப்பு` (indemnity), drawn from a defined glossary, pending native-speaker review.
 
 ---
 
-### Step 6: Loan Agreement & Strict Anti-Hallucination Discipline (45 seconds)
+### Step 6: Loan Agreement & Unmapped Statutory Discipline (~45s)
 * **What to click**:
   - Upload `sample_pdfs/demo/demo_loan_en.pdf` with intake (`salaried`, `dependents=yes`).
 * **What to point out**:
-  - **Clause 1 (Penal Interest at 36% p.a.)**: Cites **ICA-1872-s74** and **CPA-2019-s2-46** (unfair contract).
-  - **Clause 2 (Acceleration Without Notice)**: Cites **CPA-2019-s2-46**.
-  - **Clause 6 (Unlimited Continuing Personal Guarantee)**: Elevated in rank due to dependents.
-  - **Clause 5 (Unilateral Discretionary Rate Change)**:
-    - Look at the Legal Basis box: Strictly displays `"No statutory provision retrieved"`.
-    - Point out that because no provision in our verified Gazette corpus covers floating rate discretion, the system admits this rather than inventing non-existent RBI circulars or hallucinating fake sections.
+  - **Flagged Count**: **5 out of 7 clauses** flagged.
+  - **Exact Ranks and Scores from Report**:
+    - Rank 1: `Clause 3.` (`acceleration`, Score: **125.0** | High)
+    - Rank 2: `Clause 6.` (`guarantor_liability`, Score: **125.0** | High)
+    - Rank 3: `Clause 2.` (`penal_interest`, Score: **115.0** | High)
+    - Rank 4: `Clause 4.` (`foreclosure_charges`, Score: **110.0** | High)
+    - Rank 5: `Clause 5.` (`unilateral_interest_change`, Score: **75.0** | High)
+  - **Disciplined Statutory Citations**:
+    - Look at the Legal Basis box for **Clause 3 (Acceleration)**: Displays `"No statutory provision retrieved"`.
+    - Look at the Legal Basis box for **Clause 6 (Guarantor Liability)**: Displays `"No statutory provision retrieved"`.
+    - Look at the Legal Basis box for **Clause 5 (Unilateral Interest Rate Change)**: Displays `"No statutory provision retrieved"`.
+    - *(Similarly, set-off/lien and IP assignment show "No statutory provision retrieved" because they have no verified provisions mapped in our verified gazetted corpus).*
 * **Talking point**:
-  > *"Unlike generic LLMs that invent convincing-sounding citations, our architecture uses strict closed-world statutory grounding. If a statute isn't verified in our official gazetted database, the system cleanly displays 'No statutory provision retrieved'."*
+  > *"Look at Clause 3 (Acceleration), Clause 6 (Guarantor Liability), and Clause 5 (Unilateral Interest Change). Instead of hallucinating non-existent RBI circulars or sections, the system displays 'No statutory provision retrieved'. Every statute citation in our database is audited against official Gazette PDFs with documented cleaning."*
 
 ---
 
-## What to Say If Asked About Limitations & Accuracy
+## Known Issues I'll Mention Proactively
 
-| Topic | Defense / Clarification |
+Be upfront during the presentation by proactively mentioning these known limitations documented in `demo_report.md`:
+1. **Notice Period Ranking Inconsistency (EN vs TA)**: In `demo_employment_en.pdf`, `Clause 5.` (`notice_period_garden_leave`) ranked **#1 with a score of 135.0**, whereas in `demo_employment_ta.pdf` (`பிரிவு 5.`), it ranked **#4 with a score of 90.0**. The machine-translation phrasing caused the ranker's situational multiplier to score lower, though both versions correctly flagged the clause.
+2. **Quota Exhaustion Showing "Legal basis unavailable right now"**: Under the Gemini API free-tier limit (20 requests/day per model), when `GEMINI_MODELS[0]` exhausts its quota, citation generation safely returns `"Legal basis unavailable right now"` rather than guessing with lightweight models.
+3. **Parser Reporting `pdfplumber (partial)` on Indic PDFs**: `demo_rental_hi.pdf` and `demo_employment_ta.pdf` show parse method `pdfplumber (partial)` because font spacing ratios in complex Indic scripts triggered the parser's partial check, even though full text was extracted.
+4. **Machine Translation Nuances**: IndicTrans2 translation from Tamil translated "liquidated damages" literally as "dissolved damages" (*கலைக்கப்பட்ட சேதங்கள்*), illustrating why machine translation without native-speaker legal review remains experimental.
+
+---
+
+## Limitations & Architecture Defense
+
+| Topic | Transparent Answer |
 | :--- | :--- |
-| **"Are the Hindi and Tamil texts legally certified?"** | *"No. The Hindi and Tamil contracts and output translations are machine-generated via local IndicTrans2 models and verified against dictionary glossary rules. They have not undergone individual manual certification by native legal counsel, which is explicitly noted in our limitations notice."* |
-| **"How do you ensure zero hallucination in statute citations?"** | *"Every citation must pass a byte-level provenance audit against official Gazette PDFs published by the Legislative Department of India. If an LLM attempts to reference unretrieved section IDs, the citation validator drops it instantly."* |
-| **"Is this providing legal advice?"** | *"No. LexGuard is an educational contract comprehension tool. Every screen and export includes a prominent statutory disclaimer stating that this does not constitute legal advice and recommending consultation with an advocate enrolled with the Bar Council of India."* |
-| **"What happens when cloud LLM quota runs out?"** | *"The local parser, segmenter, ChromaDB vector store, IndicTrans2 translation models, and all pre-computed audit reports in `demo_output/` run 100% locally on-device without cloud API dependencies."* |
+| **API vs Local Architecture** | *Classification, plain-language explanation, and statutory citations call the Google Gemini API (document clause text is transmitted to Google servers). Document text parsing (`pdfplumber`), semantic vector retrieval (`ChromaDB`), and IndicTrans2 neural translations run 100% locally on-device. Without API quota, the demo presents pre-computed outputs from `demo_output/`.* |
+| **Native Speaker Review** | *The Hindi and Tamil demo contract texts and output translations are machine-generated under automated glossary rules from a defined glossary, pending native-speaker review. They have not been reviewed by a native speaker or certified by legal counsel.* |
+| **Vector Grounding Source** | *Semantic retrieval matches clauses against a reference set of standard vs one-sided example clauses (synthetic), not a comprehensive commercial repository.* |
+| **Statute Provenance** | *Statutory provisions are audited against official Gazette PDFs with documented cleaning (removing OCR footnote artifacts and watermarks). If no verified provision applies, the system strictly outputs "No statutory provision retrieved".* |
+| **Legal Disclaimer** | *Exact text displayed across all screens and cards:*<br>• **EN**: *"This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this."*<br>• **HI**: *"यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।"*<br>• **TA**: *"இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்."* |
