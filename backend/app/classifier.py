@@ -203,7 +203,12 @@ def call_gemini_json(
                     or "RESOURCE_EXHAUSTED" in err_str
                     or "UNAVAILABLE" in err_str
                 ):
-                    pause_s = 4 * (attempt + 1)
+                    if allow_rotation and len(models_to_try) > 1 and attempt >= 1:
+                        logger.info(
+                            f"Model '{mod}' busy or high demand (503/429). Rotating to next model in GEMINI_MODELS..."
+                        )
+                        break
+                    pause_s = 2 * (attempt + 1)
                     logger.info(
                         f"Rate limit / service busy (429/503) on '{mod}'. Pausing {pause_s}s before retry/rotation..."
                     )
