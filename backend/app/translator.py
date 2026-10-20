@@ -11,7 +11,13 @@ import torch
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 from IndicTransToolkit.processor import IndicProcessor
 
-from .config import DATA_DIR, HF_TOKEN, INDICTRANS2_MODEL_NAME, INDICTRANS2_INDIC_EN_MODEL_NAME
+from .config import (
+    DATA_DIR,
+    HF_TOKEN,
+    INDICTRANS2_MODEL_NAME,
+    INDICTRANS2_INDIC_EN_MODEL_NAME,
+    INDICTRANS2_ALLOWLIST,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -299,17 +305,26 @@ class IndicTrans2Engine:
     """
     def __init__(self, model_name: str = INDICTRANS2_MODEL_NAME):
         self.model_name = model_name
+        if self.model_name not in INDICTRANS2_ALLOWLIST:
+            raise ValueError(
+                f"Model repo '{self.model_name}' is not in the approved IndicTrans2 allowlist: {list(INDICTRANS2_ALLOWLIST.keys())}"
+            )
+        self.revision = INDICTRANS2_ALLOWLIST[self.model_name]
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         masked_token = "hf_****" if HF_TOKEN else "None"
-        logger.info(f"Loading IndicTrans2 model '{self.model_name}' on device '{self.device}' (token={masked_token})...")
+        logger.info(
+            f"Loading IndicTrans2 model '{self.model_name}' (revision={self.revision}) on device '{self.device}' (token={masked_token})..."
+        )
         t0 = time.time()
         self.tokenizer = AutoTokenizer.from_pretrained(
             self.model_name,
+            revision=self.revision,
             trust_remote_code=True,
             token=HF_TOKEN if HF_TOKEN else None
         )
         self.model = AutoModelForSeq2SeqLM.from_pretrained(
             self.model_name,
+            revision=self.revision,
             trust_remote_code=True,
             token=HF_TOKEN if HF_TOKEN else None
         ).to(self.device)
@@ -472,41 +487,37 @@ _INDIC_TO_EN_CACHE: Dict[Tuple[str, str], str] = {}
 class IndicToEnEngine:
     """
     Lazy singleton wrapper for Indic -> English translation
-    (ai4bharat/indictrans2-indic-en-dist-200M / benfranklinms/indictrans2-indic-en-dist-200M).
+    (ai4bharat/indictrans2-indic-en-dist-200M).
     Loaded strictly lazily only when a non-English document is processed.
     Runs on CPU with IndicProcessor(inference=True), caching by text hash.
     Makes ZERO Gemini API calls.
     """
     def __init__(self, model_name: str = INDICTRANS2_INDIC_EN_MODEL_NAME):
         self.model_name = model_name
+        if self.model_name not in INDICTRANS2_ALLOWLIST:
+            raise ValueError(
+                f"Model repo '{self.model_name}' is not in the approved IndicTrans2 allowlist: {list(INDICTRANS2_ALLOWLIST.keys())}"
+            )
+        self.revision = INDICTRANS2_ALLOWLIST[self.model_name]
         self.device = "cpu"  # enforce CPU as specified
         masked_token = "hf_****" if HF_TOKEN else "None"
-        logger.info(f"Loading Indic-to-English model '{self.model_name}' on device '{self.device}' (token={masked_token})...")
+        logger.info(
+            f"Loading Indic-to-English model '{self.model_name}' (revision={self.revision}) on device '{self.device}' (token={masked_token})..."
+        )
         t0 = time.time()
         
-        try:
-            self.tokenizer = AutoTokenizer.from_pretrained(
-                self.model_name,
-                trust_remote_code=True,
-                token=HF_TOKEN if HF_TOKEN else None
-            )
-            self.model = AutoModelForSeq2SeqLM.from_pretrained(
-                self.model_name,
-                trust_remote_code=True,
-                token=HF_TOKEN if HF_TOKEN else None
-            ).to(self.device)
-        except Exception as e:
-            logger.warning(f"Could not load primary Indic-to-English model '{self.model_name}': {e}. Attempting fallback mirror...")
-            fallback_name = "benfranklinms/indictrans2-indic-en-dist-200M"
-            self.model_name = fallback_name
-            self.tokenizer = AutoTokenizer.from_pretrained(
-                fallback_name,
-                trust_remote_code=True
-            )
-            self.model = AutoModelForSeq2SeqLM.from_pretrained(
-                fallback_name,
-                trust_remote_code=True
-            ).to(self.device)
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            self.model_name,
+            revision=self.revision,
+            trust_remote_code=True,
+            token=HF_TOKEN if HF_TOKEN else None
+        )
+        self.model = AutoModelForSeq2SeqLM.from_pretrained(
+            self.model_name,
+            revision=self.revision,
+            trust_remote_code=True,
+            token=HF_TOKEN if HF_TOKEN else None
+        ).to(self.device)
 
         self.model.eval()
         self.processor = IndicProcessor(inference=True)

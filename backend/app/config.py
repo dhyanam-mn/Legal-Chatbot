@@ -20,8 +20,17 @@ CHROMA_PERSIST_DIR = BASE_DIR / "chroma_db"
 GEMINI_API_KEY = (os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY") or "").strip()
 HF_TOKEN = (os.getenv("HF_TOKEN") or os.getenv("HUGGINGFACE_TOKEN") or "").strip()
 EMBEDDING_MODEL_NAME = os.getenv("EMBEDDING_MODEL_NAME", "BAAI/bge-small-en-v1.5")
-INDICTRANS2_MODEL_NAME = os.getenv("INDICTRANS2_MODEL_NAME", "ai4bharat/indictrans2-en-indic-dist-200M")
-INDICTRANS2_INDIC_EN_MODEL_NAME = os.getenv("INDICTRANS2_INDIC_EN_MODEL_NAME", "benfranklinms/indictrans2-indic-en-dist-200M")
+INDICTRANS2_EN_INDIC_MODEL_NAME = "ai4bharat/indictrans2-en-indic-dist-200M"
+INDICTRANS2_INDIC_EN_MODEL_NAME = "ai4bharat/indictrans2-indic-en-dist-200M"
+INDICTRANS2_MODEL_NAME = INDICTRANS2_EN_INDIC_MODEL_NAME
+
+INDICTRANS2_EN_INDIC_REVISION = "2cfd0a20057756d756bf3e53528f492afc52f91a"
+INDICTRANS2_INDIC_EN_REVISION = "d66a2122ad6d28184f3dc3797b652bd80ae3f65f"
+
+INDICTRANS2_ALLOWLIST = {
+    INDICTRANS2_EN_INDIC_MODEL_NAME: INDICTRANS2_EN_INDIC_REVISION,
+    INDICTRANS2_INDIC_EN_MODEL_NAME: INDICTRANS2_INDIC_EN_REVISION,
+}
 ALLOW_HEURISTIC_FALLBACK = os.getenv("ALLOW_HEURISTIC_FALLBACK", "false").lower() in ("true", "1", "yes")
 
 # Ordered list of Gemini models for quota rotation (never falls back to heuristic classifier)

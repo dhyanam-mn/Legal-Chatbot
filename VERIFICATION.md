@@ -911,7 +911,7 @@ Relevant pages of official Act PDFs from `data/statutes_raw/` were rendered to h
 
 ### B. Round-Trip Sanity & Benchmark Metrics
 
-Evaluated by translating 3 standard English legal clauses into Hindi and Tamil using `ai4bharat/indictrans2-en-indic-dist-200M`, then translating back to English using `benfranklinms/indictrans2-indic-en-dist-200M` on CPU:
+Evaluated by translating 3 standard English legal clauses into Hindi and Tamil using official `ai4bharat/indictrans2-en-indic-dist-200M` (`revision="2cfd0a20057756d756bf3e53528f492afc52f91a"`), then translating back to English using official `ai4bharat/indictrans2-indic-en-dist-200M` (`revision="d66a2122ad6d28184f3dc3797b652bd80ae3f65f"`) on CPU:
 
 | Clause Tested | Target Script | Machine-Translated Indic Text | Round-Trip English Back-Translation | Similarity Ratio | CPU Latency |
 |---|:---:|---|---|:---:|:---:|
@@ -938,8 +938,27 @@ Full test suite executed via `pytest backend/tests -v`:
 - `test_statute_quarantine_and_citations.py`: 3 passed
 - `test_statute_rag.py`: 3 passed
 - `test_unmapped_provisions.py`: 1 passed
+- `test_model_provenance.py`: 3 passed
 
-**Total: 18 passed, 0 failed in 212.07s.**
+**Total: 21 passed, 0 failed in 152.89s.**
+
+---
+
+## 8. Model Provenance & Hardening (Phase 5 Hardening)
+
+### Model Repositories and Pinned Revisions
+All neural machine translation is strictly restricted to official AI4Bharat models loaded with explicit revision commit hashes:
+
+| Engine | Model Repository ID | Pinned Git Revision SHA | Access Policy |
+|---|---|---|---|
+| **English $\rightarrow$ Indic (Hi/Ta)** | `ai4bharat/indictrans2-en-indic-dist-200M` | `2cfd0a20057756d756bf3e53528f492afc52f91a` | Strict allowlist check; rejects unvetted repos |
+| **Indic (Hi/Ta) $\rightarrow$ English** | `ai4bharat/indictrans2-indic-en-dist-200M` | `d66a2122ad6d28184f3dc3797b652bd80ae3f65f` | Strict allowlist check; gated repo terms accepted |
+
+### Enforcement Mechanisms
+1. **Allowlist in `backend/app/translator.py`**: Both `IndicTrans2Engine` and `IndicToEnEngine` verify the requested `model_name` against `INDICTRANS2_ALLOWLIST` in `config.py`. Any attempt to pass third-party mirror repositories (e.g. `benfranklinms`) or unvetted repo IDs raises `ValueError`.
+2. **Revision Pinning**: `AutoTokenizer` and `AutoModelForSeq2SeqLM` are passed `revision=INDICTRANS2_ALLOWLIST[model_name]` ensuring immutable execution against the exact vetted commit tree.
+3. **Automated Verification**: `backend/tests/test_model_provenance.py` executes three assertions verifying allowlist contents, pinned commit hashes, and negative-control exception handling for non-allowlisted models.
+
 
 
 

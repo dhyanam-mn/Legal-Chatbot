@@ -26,9 +26,9 @@ A multilingual AI-assisted legal document analysis system that inspects contract
    - Falls back safely to `"Legal basis unavailable right now"` if the strongest model is unavailable (rotation to lite models is prohibited).
    - Closed-world citation validation: drops and logs any hallucination attempts (no case law or outside sections).
 4. **Multilingual Translation Layer (Bidirectional)**:
-   - **English -> Hindi/Tamil**: Local `ai4bharat/indictrans2-en-indic-dist-200M` model runs completely on CPU/CUDA with **zero Gemini API calls**.
+   - **English -> Hindi/Tamil**: Local `ai4bharat/indictrans2-en-indic-dist-200M` (pinned revision: `2cfd0a20057756d756bf3e53528f492afc52f91a`) model runs completely on CPU/CUDA with **zero Gemini API calls**.
    - Language-aware legal glossary enforcement (`hi` and `ta`) preserving statutory identifiers, Section numbers, and Act names in English.
-   - **Indic -> English (Phase 5 Input Layer)**: Lazy CPU engine powered by `ai4bharat/indictrans2-indic-en-dist-200M` (`benfranklinms/indictrans2-indic-en-dist-200M`) translating Hindi and Tamil documents into English for semantic vector grounding and classification, with hash-based caching and zero Gemini calls.
+   - **Indic -> English (Phase 5 Input Layer)**: Lazy CPU engine powered exclusively by official `ai4bharat/indictrans2-indic-en-dist-200M` (pinned revision: `d66a2122ad6d28184f3dc3797b652bd80ae3f65f`) translating Hindi and Tamil documents into English for semantic vector grounding and classification, with hash-based caching, strict repository allowlisting, and zero Gemini calls.
 5. **Interactive UI**:
    - React + Tailwind CSS interface with trilingual toggle (**English | हिंदी | தமிழ்**), collapsible "Legal basis" (with verbatim statutory text) and "Typical phrasing" panels, client intake personalization, and experimental machine-translation notice banners for Indic input documents.
 
@@ -84,12 +84,13 @@ A multilingual AI-assisted legal document analysis system that inspects contract
      - **Consumer Protection Act, 2019**: Section 2(46) ("unfair contract")
 2. **Citation Model Pinning & API Free-Tier Quota**:
    - Citation generation requires deep statutory reasoning and is strictly pinned to the strongest configured Gemini model (`GEMINI_MODELS[0]`). Under Google's free-tier rate limits (20 requests per day per model), if the strongest model's daily quota is exhausted, citation generation safely returns `"Legal basis unavailable right now"` rather than guessing with lightweight models.
-3. **Local IndicTrans2 CPU Inference Latency**:
-   - `ai4bharat/indictrans2-en-indic-dist-200M` (English -> Hindi/Tamil): ~5–8 seconds per clause on CPU.
-   - `ai4bharat/indictrans2-indic-en-dist-200M` / `benfranklinms/indictrans2-indic-en-dist-200M` (Indic -> English):
-     - **Hindi -> English**: ~3.56s per clause on CPU (Round-trip similarity: **0.92**)
-     - **Tamil -> English**: ~3.16s per clause on CPU (Round-trip similarity: **0.84**)
-   - Both models run 100% locally on CPU without external API calls or token fees, and are cached in-memory by SHA-256 text hash.
+3. **Local IndicTrans2 CPU Inference Latency & Model Provenance**:
+   - Both models are restricted via strict allowlist in `translator.py` and pinned to specific official commit SHAs:
+     - `ai4bharat/indictrans2-en-indic-dist-200M` (`revision="2cfd0a20057756d756bf3e53528f492afc52f91a"`): ~5–8s per clause on CPU.
+     - `ai4bharat/indictrans2-indic-en-dist-200M` (`revision="d66a2122ad6d28184f3dc3797b652bd80ae3f65f"`):
+       - **Hindi -> English**: ~3.56s per clause on CPU (Round-trip similarity: **0.92**)
+       - **Tamil -> English**: ~3.16s per clause on CPU (Round-trip similarity: **0.84**)
+   - Both models run 100% locally on CPU without external API calls or token fees, and are cached in-memory by SHA-256 text hash. Third-party mirror repositories are strictly prohibited.
 4. **Jurisdictional Scope**:
    - Current statutory knowledge base covers central Indian statutes (Constitution of India, Indian Contract Act 1872, Arbitration and Conciliation Act 1996, Consumer Protection Act 2019). State-specific amendments and foreign legal jurisdictions are outside the current corpus scope.
 5. **Hindi & Tamil Synthetic Contract Wording**:
