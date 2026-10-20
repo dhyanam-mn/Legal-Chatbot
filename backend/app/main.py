@@ -11,10 +11,11 @@ from .config import (
     MANDATORY_DISCLAIMER_HI,
     MANDATORY_DISCLAIMER_TA,
     GEMINI_API_KEY,
-    ALLOW_HEURISTIC_FALLBACK
+    ALLOW_HEURISTIC_FALLBACK,
+    GEMINI_MODELS
 )
 from .schemas import (
-    ClientIntakeContext, AnalysisResponse, ChatRequest, ChatResponse
+    ClientIntakeContext, AnalysisResponse, ChatRequest, ChatResponse, ClauseItem
 )
 from .parser import parse_pdf
 from .segmenter import segment_text_into_clauses, detect_document_language
