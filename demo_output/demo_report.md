@@ -1,5 +1,5 @@
 # Legal Document Chatbot — Multilingual Demonstration & Audit Report
-**Generated:** 2026-10-20 07:30:43 UTC
+**Generated:** 2026-10-20 07:59:24 UTC
 **Configuration:** `ALLOW_HEURISTIC_FALLBACK=false` | Client Intake: `salaried`, `has_dependents=True (count=2)`, `income_bracket=medium`
 
 ## 1. Document Execution Summary Matrix
@@ -260,39 +260,7 @@ application, or complaint before any civil court, rent controller, or consumer f
 - **Tamil (தமிழ்):** இந்த சட்ட ஆவணம் வெர்டெக்ஸ் சாஃப்ட்வேர் டெக்னாலஜிஸ் பிரைவேட் லிமிடெட் மற்றும் ஒரு மூத்த சாஃப்ட்வேர் இன்ஜினியர் பதவிக்கு ஒரு ஊழியருக்கு இடையே நிறுவப்பட்ட ஒரு நிர்வாக வேலைவாய்ப்பு ஒப்பந்தமாகும். அதன் முக்கிய நோக்கம் 36 மாத கட்டாய சேவை பத்திரம், மூன்று ஆண்டு உலகளாவிய போட்டித் தடை கட்டுப்பாடு மற்றும் ஆறு மாத ஊழியர் ராஜினாமா அறிவிப்பு காலம் ஆகியவை நிறுவனத்திற்கு உடனடி ஒப்பந்த முடிவு உரிமைகளுடன் தேவைப்படுகிறது. நிறுவனத்தின் அலட்சியம், முன்கூட்டியே புறப்படுவதற்கான கடுமையான நிதி அபராதங்கள், சமச்சீரற்ற அறிவிப்பு விதிமுறைகள் மற்றும் நிரந்தர தொழில்துறை அளவிலான வர்த்தக கட்டுப்பாடுகள் ஆகியவற்றைப் பொருட்படுத்தாமல் வரம்பற்ற ஊழியர் இழப்பீடு உள்ளிட்ட பல பெரிதும் வளைந்த விதிமுறைகள் காரணமாக ஆபத்து நிலை மிகவும் அதிகமாக உள்ளது.
 
 #### Ranked Flagged Clauses (4 items)
-##### 1. [Clause 5.] Notice Period / Garden Leave Imbalance — Severity: `High` (Priority Score: 135.0)
-**Original Clause Text (EN):**
-> *"Clause 5. Asymmetric Notice Period and Forfeiture
-The Employee must serve a mandatory six (6) months' prior written notice to resign, failing which six months of gross salary
-shall be forfeited. Conversely, the Company reserves the unilateral right to terminate the Employee's employment
-immediately with zero days' prior notice and without severance payment or assigned reason.
-SYNTHETIC DEMO DOCUMENT - NOT A REAL CONTRACT"*
-
-**Plain-Language Explanation & Risk Reason:**
-- **English Explanation:** The clause requires the employee to provide a mandatory six-month written notice prior to resigning, with a penalty of six months' gross salary forfeited upon failure to do so. Conversely, it permits the company to terminate employment immediately with zero notice, no severance, and no assigned reason.
-- **English Risk Reason:** This provision imposes a heavy, asymmetric burden on the employee by enforcing a long notice period and severe financial forfeiture for early departure, while granting the employer the right to terminate instantly without any severance or prior notice.
-- **Hindi Explanation (हिंदी व्याख्या):** खंड के अनुसार कर्मचारी को इस्तीफा देने से पहले छह महीने का एक अनिवार्य लिखित नोटिस देना होता है, जिसमें ऐसा करने में विफल रहने पर छह महीने के सकल वेतन का शास्ति जब्त कर लिया जाता है। इसके विपरीत, यह कंपनी को शून्य नोटिस, कोई अलगाव और बिना किसी निर्धारित कारण के तुरंत नौकरी समाप्त करने की अनुमति देता है।
-- **Hindi Risk Reason (हिंदी जोखिम कारण):** यह प्रावधान कर्मचारी पर एक लंबी सूचना अवधि और जल्दी प्रस्थान के लिए गंभीर वित्तीय ज़ब्ती लागू करके एक भारी, असममित बोझ लगाता है, जबकि नियोक्ता को बिना किसी अलगाव या पूर्व सूचना के तुरंत बर्खास्त करने का अधिकार देता है।
-- **Tamil Explanation (தமிழ் விளக்கம்):** இந்த பிரிவு ஊழியர் ராஜினாமா செய்வதற்கு முன் கட்டாயமாக ஆறு மாத எழுத்துப்பூர்வ அறிவிப்பை வழங்க வேண்டும், அவ்வாறு செய்யத் தவறியால் ஆறு மாத மொத்த சம்பளம் அபராதமாக இழக்கப்பட வேண்டும். மாறாக, இது நிறுவனத்தை பூஜ்ஜிய அறிவிப்பு, பிரிவினை மற்றும் எந்த குறிப்பிட்ட காரணமும் இல்லாமல் உடனடியாக வேலையை நிறுத்த அனுமதிக்கிறது.
-- **Tamil Risk Reason (தமிழ் ஆபத்து காரணம்):** இந்த விதி ஒரு நீண்ட அறிவிப்பு காலத்தை அமல்படுத்துவதன் மூலமும், முன்கூட்டியே புறப்படுவதற்கு கடுமையான நிதி பறிமுதல் செய்வதன் மூலமும் ஊழியர் மீது ஒரு கனமான, சமச்சீரற்ற சுமையை விதிக்கிறது, அதே நேரத்தில் முதலாளிக்கு எந்த பிரிவினை அல்லது முன் அறிவிப்பு இல்லாமல் உடனடியாக ஒப்பந்த முடிவு செய்வதற்கான உரிமையை வழங்குகிறது.
-
-**Legal Basis:**
-- **Status:** Legal basis unavailable right now
-- *Hindi (हिंदी):* कानूनी आधार अभी उपलब्ध नहीं है (Legal basis unavailable right now)
-- *Tamil (தமிழ்):* சட்ட அடிப்படை இப்போது கிடைக்கவில்லை (Legal basis unavailable right now)
-
-**How this is typically written (Typical Balanced Phrasing):**
-1. "Either party may terminate the employment by providing 30 days prior written notice or basic salary in lieu of notice."
-2. "Company may place Employee on paid garden leave during the contractual 30-day notice period while maintaining full salary and contractual benefits."
-3. "Both Employer and Employee agree to a reciprocal 60-day notice period, with option for mutual waiver in writing upon agreement."
-4. "During any garden leave period not exceeding 30 days, Employee shall continue to receive full remuneration and employment perks."
-
-**Mandatory Legal Disclaimer:**
-- **EN:** This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this.
-- **HI:** यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।
-- **TA:** இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்.
-
-##### 2. [Clause 4.] Service Bond / Mandatory Lock-in — Severity: `High` (Priority Score: 130.0)
+##### 1. [Clause 4.] Service Bond / Mandatory Lock-in — Severity: `High` (Priority Score: 130.0)
 **Original Clause Text (EN):**
 > *"Clause 4. Mandatory Service Bond and Financial Lock-in
 The Employee covenants to remain in continuous active employment with the Company for an obligatory minimum term of
@@ -324,7 +292,7 @@ actual training expenditure."*
 - **HI:** यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।
 - **TA:** இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்.
 
-##### 3. [Clause 3.] Indemnity & Hold Harmless — Severity: `High` (Priority Score: 115.0)
+##### 2. [Clause 3.] Indemnity & Hold Harmless — Severity: `High` (Priority Score: 115.0)
 **Original Clause Text (EN):**
 > *"Clause 3. Unlimited Employee Indemnity
 The Employee covenants to unconditionally indemnify, defend, and hold harmless the Company, its directors, officers, and
@@ -356,7 +324,7 @@ operational negligence."*
 - **HI:** यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।
 - **TA:** இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்.
 
-##### 4. [Clause 2.] Non-Compete / Restraint of Trade — Severity: `High` (Priority Score: 100.0)
+##### 3. [Clause 2.] Non-Compete / Restraint of Trade — Severity: `High` (Priority Score: 100.0)
 **Original Clause Text (EN):**
 > *"Clause 2. Non-Compete and Perpetual Trade Restraint
 During employment and for an absolute period of three (3) years immediately following termination or resignation of
@@ -382,6 +350,38 @@ globally."*
 2. "For 1 year following termination, Contractor agrees not to perform identical services for the specific key competitors of Client explicitly listed in Schedule A within the city of operation."
 3. "Employee agrees not to misuse or disclose confidential trade secrets or proprietary customer lists of the Employer following separation."
 4. "The Founder agrees for 12 months after departure not to recruit or solicit any current key executive of the Company."
+
+**Mandatory Legal Disclaimer:**
+- **EN:** This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this.
+- **HI:** यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।
+- **TA:** இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்.
+
+##### 4. [Clause 5.] Notice Period / Garden Leave Imbalance — Severity: `High` (Priority Score: 90.0)
+**Original Clause Text (EN):**
+> *"Clause 5. Asymmetric Notice Period and Forfeiture
+The Employee must serve a mandatory six (6) months' prior written notice to resign, failing which six months of gross salary
+shall be forfeited. Conversely, the Company reserves the unilateral right to terminate the Employee's employment
+immediately with zero days' prior notice and without severance payment or assigned reason.
+SYNTHETIC DEMO DOCUMENT - NOT A REAL CONTRACT"*
+
+**Plain-Language Explanation & Risk Reason:**
+- **English Explanation:** The clause requires the employee to provide a mandatory six-month written notice prior to resigning, with a penalty of six months' gross salary forfeited upon failure to do so. Conversely, it permits the company to terminate employment immediately with zero notice, no severance, and no assigned reason.
+- **English Risk Reason:** This provision imposes a heavy, asymmetric burden on the employee by enforcing a long notice period and severe financial forfeiture for early departure, while granting the employer the right to terminate instantly without any severance or prior notice.
+- **Hindi Explanation (हिंदी व्याख्या):** खंड के अनुसार कर्मचारी को इस्तीफा देने से पहले छह महीने का एक अनिवार्य लिखित नोटिस देना होता है, जिसमें ऐसा करने में विफल रहने पर छह महीने के सकल वेतन का शास्ति जब्त कर लिया जाता है। इसके विपरीत, यह कंपनी को शून्य नोटिस, कोई अलगाव और बिना किसी निर्धारित कारण के तुरंत नौकरी समाप्त करने की अनुमति देता है।
+- **Hindi Risk Reason (हिंदी जोखिम कारण):** यह प्रावधान कर्मचारी पर एक लंबी सूचना अवधि और जल्दी प्रस्थान के लिए गंभीर वित्तीय ज़ब्ती लागू करके एक भारी, असममित बोझ लगाता है, जबकि नियोक्ता को बिना किसी अलगाव या पूर्व सूचना के तुरंत बर्खास्त करने का अधिकार देता है।
+- **Tamil Explanation (தமிழ் விளக்கம்):** இந்த பிரிவு ஊழியர் ராஜினாமா செய்வதற்கு முன் கட்டாயமாக ஆறு மாத எழுத்துப்பூர்வ அறிவிப்பை வழங்க வேண்டும், அவ்வாறு செய்யத் தவறியால் ஆறு மாத மொத்த சம்பளம் அபராதமாக இழக்கப்பட வேண்டும். மாறாக, இது நிறுவனத்தை பூஜ்ஜிய அறிவிப்பு, பிரிவினை மற்றும் எந்த குறிப்பிட்ட காரணமும் இல்லாமல் உடனடியாக வேலையை நிறுத்த அனுமதிக்கிறது.
+- **Tamil Risk Reason (தமிழ் ஆபத்து காரணம்):** இந்த விதி ஒரு நீண்ட அறிவிப்பு காலத்தை அமல்படுத்துவதன் மூலமும், முன்கூட்டியே புறப்படுவதற்கு கடுமையான நிதி பறிமுதல் செய்வதன் மூலமும் ஊழியர் மீது ஒரு கனமான, சமச்சீரற்ற சுமையை விதிக்கிறது, அதே நேரத்தில் முதலாளிக்கு எந்த பிரிவினை அல்லது முன் அறிவிப்பு இல்லாமல் உடனடியாக ஒப்பந்த முடிவு செய்வதற்கான உரிமையை வழங்குகிறது.
+
+**Legal Basis:**
+- **Status:** Legal basis unavailable right now
+- *Hindi (हिंदी):* कानूनी आधार अभी उपलब्ध नहीं है (Legal basis unavailable right now)
+- *Tamil (தமிழ்):* சட்ட அடிப்படை இப்போது கிடைக்கவில்லை (Legal basis unavailable right now)
+
+**How this is typically written (Typical Balanced Phrasing):**
+1. "Either party may terminate the employment by providing 30 days prior written notice or basic salary in lieu of notice."
+2. "Company may place Employee on paid garden leave during the contractual 30-day notice period while maintaining full salary and contractual benefits."
+3. "Both Employer and Employee agree to a reciprocal 60-day notice period, with option for mutual waiver in writing upon agreement."
+4. "During any garden leave period not exceeding 30 days, Employee shall continue to receive full remuneration and employment perks."
 
 **Mandatory Legal Disclaimer:**
 - **EN:** This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this.

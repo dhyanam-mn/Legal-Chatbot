@@ -934,13 +934,14 @@ Evaluated by translating 3 standard English legal clauses into Hindi and Tamil u
 Full test suite executed via `pytest backend/tests -v`:
 - `test_citation_pinning.py`: 3 passed
 - `test_indic_input.py`: 5 passed
+- `test_model_provenance.py`: 3 passed
 - `test_provenance_audit.py`: 3 passed
+- `test_ranker_consistency.py`: 3 passed
 - `test_statute_quarantine_and_citations.py`: 3 passed
 - `test_statute_rag.py`: 3 passed
 - `test_unmapped_provisions.py`: 1 passed
-- `test_model_provenance.py`: 3 passed
 
-**Total: 21 passed, 0 failed in 152.89s.**
+**Total: 24 passed, 0 failed in 151.00s.**
 
 ---
 
@@ -958,6 +959,26 @@ All neural machine translation is strictly restricted to official AI4Bharat mode
 1. **Allowlist in `backend/app/translator.py`**: Both `IndicTrans2Engine` and `IndicToEnEngine` verify the requested `model_name` against `INDICTRANS2_ALLOWLIST` in `config.py`. Any attempt to pass third-party mirror repositories (e.g. `benfranklinms`) or unvetted repo IDs raises `ValueError`.
 2. **Revision Pinning**: `AutoTokenizer` and `AutoModelForSeq2SeqLM` are passed `revision=INDICTRANS2_ALLOWLIST[model_name]` ensuring immutable execution against the exact vetted commit tree.
 3. **Automated Verification**: `backend/tests/test_model_provenance.py` executes three assertions verifying allowlist contents, pinned commit hashes, and negative-control exception handling for non-allowlisted models.
+
+---
+
+## 9. Cross-Language Ranker Consistency Fix
+
+### Defect Analysis & Resolution
+In earlier revisions, `notice_period_garden_leave` in `demo_employment_en.pdf` received a priority score of `135.0` (Rank #1) while in `demo_employment_ta.pdf` it received `90.0` (Rank #4). This divergence was traced to:
+1. Keyword evaluations in `ranker.py` inspecting `original_text` directly rather than the classified English text (`english_translation` for Indic documents).
+2. The dependents deposit/maintenance/forfeiture boost (`+45.0`) being evaluated globally without scoping to penalty/deposit clause types, causing the word `"forfeiture"` in the English employment notice clause to accidentally trigger a deposit boost.
+
+### Applied Fix
+- **Classified English Text Evaluation**: `ranker.py` evaluates keywords exclusively against `clause.english_translation` (for Indic documents) or `clause.original_text` (for English documents).
+- **Type Scoping**: The dependents deposit boost (`+45.0`) is strictly scoped to clauses where `clause_type in ["penalty", "security_deposit"]` **AND** the classified English text matches `["security deposit", "maintenance", "forfeiture"]`. Notice period clauses receive only their legitimate salaried employment score (`90.0`).
+
+### Verified Scores & Ranks (100% Cross-Language Parity)
+Both `demo_employment_en.pdf` and `demo_employment_ta.pdf` now produce identical ranks and priority scores:
+- **Rank 1**: `service_bond` — Score: **130.0** (`High`)
+- **Rank 2**: `indemnity` — Score: **115.0** (`High`)
+- **Rank 3**: `non_compete` — Score: **100.0** (`High`)
+- **Rank 4**: `notice_period_garden_leave` — Score: **90.0** (`High`)
 
 
 

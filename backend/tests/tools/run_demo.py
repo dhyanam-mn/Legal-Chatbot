@@ -38,7 +38,7 @@ from app.classifier import (
     NO_STATUTE_MESSAGE_TA,
 )
 from app.ranker import rank_flagged_clauses
-from app.schemas import ClientIntakeContext, ClauseItem
+from app.schemas import ClientIntakeContext, ClauseItem, FlaggedClause
 from app.translator import translate_indic_to_en
 
 
@@ -113,11 +113,24 @@ def run_demo():
                 with open(json_out_path, "r", encoding="utf-8") as f:
                     saved_doc = json.load(f)
                     if saved_doc.get("flagged_clauses"):
-                        print(f"    [CACHED] Reusing completed document output from: {json_out_path}")
+                        print(f"    [CACHED] Re-ranking completed document output from: {json_out_path}")
+                        intake = ClientIntakeContext(
+                            employment_type="salaried",
+                            has_dependents=True,
+                            dependents_count=2,
+                            income_bracket="medium",
+                            document_type=doc_type,
+                        )
+                        raw_flagged = [FlaggedClause(**c) for c in saved_doc["flagged_clauses"]]
+                        ranked_clauses = rank_flagged_clauses(raw_flagged, intake)
+                        saved_doc["flagged_clauses"] = [serialize_model(c) for c in ranked_clauses]
+                        saved_doc["generation_date"] = generation_date
+                        with open(json_out_path, "w", encoding="utf-8") as fw:
+                            json.dump(saved_doc, fw, indent=2, ensure_ascii=False)
                         all_demo_results[fname] = saved_doc
                         continue
-            except Exception:
-                pass
+            except Exception as e:
+                print(f"    Cache re-ranking error: {e}")
 
         if not pdf_path.exists():
             raise FileNotFoundError(f"Missing demo PDF: {pdf_path}")

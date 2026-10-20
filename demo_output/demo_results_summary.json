@@ -1,8 +1,8 @@
 {
-  "generation_date": "2026-10-20 07:30:43 UTC",
+  "generation_date": "2026-10-20 07:59:24 UTC",
   "documents": {
     "demo_rental_en.pdf": {
-      "generation_date": "2026-10-18 19:07:27 UTC",
+      "generation_date": "2026-10-20 07:59:24 UTC",
       "filename": "demo_rental_en.pdf",
       "document_type": "rental_agreement",
       "document_language": "en",
@@ -388,7 +388,7 @@
       ]
     },
     "demo_rental_hi.pdf": {
-      "generation_date": "2026-10-18 19:25:09 UTC",
+      "generation_date": "2026-10-20 07:59:24 UTC",
       "filename": "demo_rental_hi.pdf",
       "document_type": "rental_agreement",
       "document_language": "hi",
@@ -774,7 +774,7 @@
       ]
     },
     "demo_employment_en.pdf": {
-      "generation_date": "2026-10-18 19:25:09 UTC",
+      "generation_date": "2026-10-20 07:59:24 UTC",
       "filename": "demo_employment_en.pdf",
       "document_type": "employment_contract",
       "document_language": "en",
@@ -794,107 +794,6 @@
         "document_type": "employment_contract"
       },
       "flagged_clauses": [
-        {
-          "clause_id": "Clause 5.",
-          "clause_type": "notice_period_garden_leave",
-          "title": "Notice Period / Garden Leave Imbalance",
-          "original_text": "Clause 5. Asymmetric Notice Period and Forfeiture\nThe Employee must serve a mandatory six (6) months' prior written notice to resign, failing which six months of gross salary\nshall be forfeited. Conversely, the Company reserves the unilateral right to terminate the Employee's employment\nimmediately with zero days' prior notice and without severance payment or assigned reason.\nSYNTHETIC DEMO DOCUMENT - NOT A REAL CONTRACT",
-          "english_translation": null,
-          "detected_language": "en",
-          "classification": "flag-worthy",
-          "explanation": "The clause requires the employee to provide a mandatory six-month written notice prior to resigning, with a penalty of six months' gross salary forfeited upon failure to do so. Conversely, it permits the company to terminate employment immediately with zero notice, no severance, and no assigned reason.",
-          "risk_reason": "This provision imposes a heavy, asymmetric burden on the employee by enforcing a long notice period and severe financial forfeiture for early departure, while granting the employer the right to terminate instantly without any severance or prior notice.",
-          "explanation_hi": "खंड के अनुसार कर्मचारी को इस्तीफा देने से पहले छह महीने का एक अनिवार्य लिखित नोटिस देना होता है, जिसमें ऐसा करने में विफल रहने पर छह महीने के सकल वेतन का शास्ति जब्त कर लिया जाता है। इसके विपरीत, यह कंपनी को शून्य नोटिस, कोई अलगाव और बिना किसी निर्धारित कारण के तुरंत नौकरी समाप्त करने की अनुमति देता है।",
-          "risk_reason_hi": "यह प्रावधान कर्मचारी पर एक लंबी सूचना अवधि और जल्दी प्रस्थान के लिए गंभीर वित्तीय ज़ब्ती लागू करके एक भारी, असममित बोझ लगाता है, जबकि नियोक्ता को बिना किसी अलगाव या पूर्व सूचना के तुरंत बर्खास्त करने का अधिकार देता है।",
-          "explanation_ta": "இந்த பிரிவு ஊழியர் ராஜினாமா செய்வதற்கு முன் கட்டாயமாக ஆறு மாத எழுத்துப்பூர்வ அறிவிப்பை வழங்க வேண்டும், அவ்வாறு செய்யத் தவறியால் ஆறு மாத மொத்த சம்பளம் அபராதமாக இழக்கப்பட வேண்டும். மாறாக, இது நிறுவனத்தை பூஜ்ஜிய அறிவிப்பு, பிரிவினை மற்றும் எந்த குறிப்பிட்ட காரணமும் இல்லாமல் உடனடியாக வேலையை நிறுத்த அனுமதிக்கிறது.",
-          "risk_reason_ta": "இந்த விதி ஒரு நீண்ட அறிவிப்பு காலத்தை அமல்படுத்துவதன் மூலமும், முன்கூட்டியே புறப்படுவதற்கு கடுமையான நிதி பறிமுதல் செய்வதன் மூலமும் ஊழியர் மீது ஒரு கனமான, சமச்சீரற்ற சுமையை விதிக்கிறது, அதே நேரத்தில் முதலாளிக்கு எந்த பிரிவினை அல்லது முன் அறிவிப்பு இல்லாமல் உடனடியாக ஒப்பந்த முடிவு செய்வதற்கான உரிமையை வழங்குகிறது.",
-          "severity": "High",
-          "priority_score": 135.0,
-          "model_used": "gemini-3.5-flash-lite",
-          "citation_model_used": null,
-          "grounding_examples": [
-            {
-              "category": "one_sided",
-              "clause_type": "termination",
-              "text": "Employer may terminate Employee's employment at any time without prior notice or severance pay, whereas Employee must provide 90 days prior written notice and pay a replacement fee.",
-              "distance": 0.19978535175323486
-            },
-            {
-              "category": "one_sided",
-              "clause_type": "notice_period_garden_leave",
-              "text": "Employer may terminate Employee instantly with zero notice or severance, whereas Employee is bound to serve a mandatory 180-day notice period and pay 6 months salary if requesting early release.",
-              "distance": 0.22171294689178467
-            },
-            {
-              "category": "one_sided",
-              "clause_type": "service_bond",
-              "text": "Employee must execute a mandatory 3-year service bond and agrees that leaving for any reason prior to 36 months requires an immediate forfeiture of 1,000,000 as liquidated damages without proof of training cost.",
-              "distance": 0.24693983793258667
-            },
-            {
-              "category": "one_sided",
-              "clause_type": "notice_period_garden_leave",
-              "text": "Employer may dismiss Employee with 24 hours notice without pay, while Employee must give 6 months advance notice and obtain written board approval to separate.",
-              "distance": 0.25185269117355347
-            }
-          ],
-          "statutory_provisions": [
-            {
-              "id": "ICA-1872-s74",
-              "act": "Indian Contract Act, 1872",
-              "section": "Section 74",
-              "title": "Compensation for breach of contract where penalty stipulated for",
-              "text": "74. Compensation for breach of contract where penalty stipulated for.—When a contract has been broken, if a sum is named in the contract as the amount to be paid in case of such breach, or if the contract contains any other stipulation by way of penalty, the party complaining of the breach is entitled, whether or not actual damage or loss is proved to have been caused thereby, to receive from the party who has broken the contract reasonable compensation not exceeding the amount so named or, as the case may be, the penalty stipulated for. Explanation.—A stipulation for increased interest from the date of default may be a stipulation by way of penalty. Exception.—When any person enters into any bail-bond, recognizance or other instrument of the same nature, or, under the provisions of any law, or under the orders of the Central Government or of any State Government, gives any bond for the performance of any public duty or act in which the public are interested, he shall be liable, upon breach of the condition of any such instrument, to pay the whole sum mentioned therein. Explanation.—A person who enters into a contract with Government does not necessarily thereby undertake any public duty, or promise to do an act in which the public are interested.",
-              "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
-              "distance": null,
-              "retrieval_source": "mapped"
-            },
-            {
-              "id": "ACA-1996-s12",
-              "act": "Arbitration and Conciliation Act, 1996",
-              "section": "Section 12",
-              "title": "Grounds for challenge",
-              "text": "12. Grounds for challenge.—(1) When a person is approached in connection with his possible appointment as an arbitrator, he shall disclose in writing any circumstances,— (a) such as the existence either direct or indirect, of any past or present relationship with or interest in any of the parties or in relation to the subject-matter in dispute, whether financial, business, professional or other kind, which is likely to give rise to justifiable doubts as to his independence or impartiality; and (b) which are likely to affect his ability to devote sufficient time to the arbitration and in particular his ability to complete the entire arbitration within a period of twelve months. Explanation 1.—The grounds stated in the Fifth Schedule shall guide in determining whether circumstances exist which give rise to justifiable doubts as to the independence or impartiality of an arbitrator. Explanation 2.—The disclosure shall be made by such person in the form specified in the Sixth Schedule. (2) An arbitrator, from the time of his appointment and throughout the arbitral proceedings, shall, without delay, disclose to the parties in writing any circumstances referred to in sub-section (1) unless they have already been informed of them by him. (3) An arbitrator may be challenged only if— (a) circumstances exist that give rise to justifiable doubts as to his independence or impartiality, or (b) he does not possess the qualifications agreed to by the parties. (4) A party may challenge an arbitrator appointed by him, or in whose appointment he has participated, only for reasons of which he becomes aware after the appointment has been made. (5) Notwithstanding any prior agreement to the contrary, any person whose relationship, with the parties or counsel or the subject-matter of the dispute, falls under any of the categories specified in the Seventh Schedule shall be ineligible to be appointed as an arbitrator: Provided that parties may, subsequent to disputes having arisen between them, waive the applicability of this sub-section by an express agreement in writing.",
-              "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
-              "distance": 0.3327294588088989,
-              "retrieval_source": "semantic"
-            },
-            {
-              "id": "ICA-1872-s39",
-              "act": "Indian Contract Act, 1872",
-              "section": "Section 39",
-              "title": "Effect of refusal of party to perform promise wholly",
-              "text": "39. Effect of refusal of party to perform promise wholly.—When a party to a contract has refused to perform, or disabled himself from performing, his promise in its entirety, the promisee may put an end to the contract, unless he has signified, by words or conduct, his acquiescence in its continuance.",
-              "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
-              "distance": 0.35525232553482056,
-              "retrieval_source": "semantic"
-            },
-            {
-              "id": "ICA-1872-s28",
-              "act": "Indian Contract Act, 1872",
-              "section": "Section 28",
-              "title": "",
-              "text": "28.Agreements in restraint of legal proceedings, void.—Every agreement,— (a) by which any party thereto is restricted absolutely from enforcing his rights under or in respect of any contract, by the usual legal proceedings in the ordinary tribunals, or which limits the time within which he may thus enforce his rights; or (b) which extinguishes the rights of any party thereto, or discharges any party thereto, from any liability, under or in respect of any contract on the expiry of a specified period so as to restrict any party from enforcing his rights, is void to the extent. Exception 1.—Saving of contract to refer to arbitration dispute that may arise.—This section shall not render illegal a contract, by which two or more persons agree that any dispute which may arise between them in respect of any subject or class of subjects shall be referred to arbitration, and that only the amount awarded in such arbitration shall be recoverable in respect of the dispute so referred. Exception 2.—Saving of contract to refer questions that have already arisen.—Nor shall this section render illegal any contract in writing, by which two or more persons agree to refer to arbitration any question between them which has already arisen, or affect any provision of any law in force for the time being as to references to arbitration4. Exception 3.—Saving of a guarantee agreement of a bank or a financial institution.—This section shall not render illegal a contract in writing by which any bank or financial institution stipulate a term in a guarantee or any agreement making a provision for guarantee for extinguishment of the rights or discharge of any party thereto from any liability under or in respect of such guarantee or agreement on the expiry of a specified period which is not less than one year from the date of occurring or non-occurring of a specified event for extinguishment or discharge of such party from the said liability. Explanation.—(i) In Exception 3, the expression \"bank\" means— (a) a \"banking company\" as defined in clause (c) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (b) \"a corresponding new bank\" as defined in clause (da) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (c) \"State Bank of India\" constituted under section 3 of the State Bank of India Act, 1955 (23 of 1955); (d) \"a subsidiary bank\" as defined in clause (k) of section 2 of the State Bank of India (Subsidiary Banks) Act, 1959(38 of 1959); (e) \"a Regional Rural Bank\" established under section 3 of the Regional Rural Banks Act, 1976(21 of 1976); (f) \"a Co-operative Bank\" as defined in clause (cci) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (g) \"a multi-State co-operative bank\" as defined in clause (cciiia) of section 5 of the Banking Regulation Act, 1949(10 of 1949); and (ii) In Exception 3, the expression \"a financial institution\" means any public financial institution within the meaning of section 4A of the Companies Act, 1956(1 of 1956).",
-              "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
-              "distance": 0.3605402112007141,
-              "retrieval_source": "semantic"
-            }
-          ],
-          "statutory_citations": [],
-          "legal_basis_message": "Legal basis unavailable right now",
-          "legal_basis_message_hi": "कानूनी आधार अभी उपलब्ध नहीं है (Legal basis unavailable right now)",
-          "legal_basis_message_ta": "சட்ட அடிப்படை இப்போது கிடைக்கவில்லை (Legal basis unavailable right now)",
-          "typical_phrasing_header": "How this is typically written",
-          "typical_phrasing_disclaimer": "This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this.",
-          "typical_phrasing_disclaimer_hi": "यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।",
-          "typical_phrasing_disclaimer_ta": "இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்.",
-          "standard_alternatives": [
-            "Either party may terminate the employment by providing 30 days prior written notice or basic salary in lieu of notice.",
-            "Company may place Employee on paid garden leave during the contractual 30-day notice period while maintaining full salary and contractual benefits.",
-            "Both Employer and Employee agree to a reciprocal 60-day notice period, with option for mutual waiver in writing upon agreement.",
-            "During any garden leave period not exceeding 30 days, Employee shall continue to receive full remuneration and employment perks."
-          ]
-        },
         {
           "clause_id": "Clause 4.",
           "clause_type": "service_bond",
@@ -1177,11 +1076,112 @@
             "Employee agrees not to misuse or disclose confidential trade secrets or proprietary customer lists of the Employer following separation.",
             "The Founder agrees for 12 months after departure not to recruit or solicit any current key executive of the Company."
           ]
+        },
+        {
+          "clause_id": "Clause 5.",
+          "clause_type": "notice_period_garden_leave",
+          "title": "Notice Period / Garden Leave Imbalance",
+          "original_text": "Clause 5. Asymmetric Notice Period and Forfeiture\nThe Employee must serve a mandatory six (6) months' prior written notice to resign, failing which six months of gross salary\nshall be forfeited. Conversely, the Company reserves the unilateral right to terminate the Employee's employment\nimmediately with zero days' prior notice and without severance payment or assigned reason.\nSYNTHETIC DEMO DOCUMENT - NOT A REAL CONTRACT",
+          "english_translation": null,
+          "detected_language": "en",
+          "classification": "flag-worthy",
+          "explanation": "The clause requires the employee to provide a mandatory six-month written notice prior to resigning, with a penalty of six months' gross salary forfeited upon failure to do so. Conversely, it permits the company to terminate employment immediately with zero notice, no severance, and no assigned reason.",
+          "risk_reason": "This provision imposes a heavy, asymmetric burden on the employee by enforcing a long notice period and severe financial forfeiture for early departure, while granting the employer the right to terminate instantly without any severance or prior notice.",
+          "explanation_hi": "खंड के अनुसार कर्मचारी को इस्तीफा देने से पहले छह महीने का एक अनिवार्य लिखित नोटिस देना होता है, जिसमें ऐसा करने में विफल रहने पर छह महीने के सकल वेतन का शास्ति जब्त कर लिया जाता है। इसके विपरीत, यह कंपनी को शून्य नोटिस, कोई अलगाव और बिना किसी निर्धारित कारण के तुरंत नौकरी समाप्त करने की अनुमति देता है।",
+          "risk_reason_hi": "यह प्रावधान कर्मचारी पर एक लंबी सूचना अवधि और जल्दी प्रस्थान के लिए गंभीर वित्तीय ज़ब्ती लागू करके एक भारी, असममित बोझ लगाता है, जबकि नियोक्ता को बिना किसी अलगाव या पूर्व सूचना के तुरंत बर्खास्त करने का अधिकार देता है।",
+          "explanation_ta": "இந்த பிரிவு ஊழியர் ராஜினாமா செய்வதற்கு முன் கட்டாயமாக ஆறு மாத எழுத்துப்பூர்வ அறிவிப்பை வழங்க வேண்டும், அவ்வாறு செய்யத் தவறியால் ஆறு மாத மொத்த சம்பளம் அபராதமாக இழக்கப்பட வேண்டும். மாறாக, இது நிறுவனத்தை பூஜ்ஜிய அறிவிப்பு, பிரிவினை மற்றும் எந்த குறிப்பிட்ட காரணமும் இல்லாமல் உடனடியாக வேலையை நிறுத்த அனுமதிக்கிறது.",
+          "risk_reason_ta": "இந்த விதி ஒரு நீண்ட அறிவிப்பு காலத்தை அமல்படுத்துவதன் மூலமும், முன்கூட்டியே புறப்படுவதற்கு கடுமையான நிதி பறிமுதல் செய்வதன் மூலமும் ஊழியர் மீது ஒரு கனமான, சமச்சீரற்ற சுமையை விதிக்கிறது, அதே நேரத்தில் முதலாளிக்கு எந்த பிரிவினை அல்லது முன் அறிவிப்பு இல்லாமல் உடனடியாக ஒப்பந்த முடிவு செய்வதற்கான உரிமையை வழங்குகிறது.",
+          "severity": "High",
+          "priority_score": 90.0,
+          "model_used": "gemini-3.5-flash-lite",
+          "citation_model_used": null,
+          "grounding_examples": [
+            {
+              "category": "one_sided",
+              "clause_type": "termination",
+              "text": "Employer may terminate Employee's employment at any time without prior notice or severance pay, whereas Employee must provide 90 days prior written notice and pay a replacement fee.",
+              "distance": 0.19978535175323486
+            },
+            {
+              "category": "one_sided",
+              "clause_type": "notice_period_garden_leave",
+              "text": "Employer may terminate Employee instantly with zero notice or severance, whereas Employee is bound to serve a mandatory 180-day notice period and pay 6 months salary if requesting early release.",
+              "distance": 0.22171294689178467
+            },
+            {
+              "category": "one_sided",
+              "clause_type": "service_bond",
+              "text": "Employee must execute a mandatory 3-year service bond and agrees that leaving for any reason prior to 36 months requires an immediate forfeiture of 1,000,000 as liquidated damages without proof of training cost.",
+              "distance": 0.24693983793258667
+            },
+            {
+              "category": "one_sided",
+              "clause_type": "notice_period_garden_leave",
+              "text": "Employer may dismiss Employee with 24 hours notice without pay, while Employee must give 6 months advance notice and obtain written board approval to separate.",
+              "distance": 0.25185269117355347
+            }
+          ],
+          "statutory_provisions": [
+            {
+              "id": "ICA-1872-s74",
+              "act": "Indian Contract Act, 1872",
+              "section": "Section 74",
+              "title": "Compensation for breach of contract where penalty stipulated for",
+              "text": "74. Compensation for breach of contract where penalty stipulated for.—When a contract has been broken, if a sum is named in the contract as the amount to be paid in case of such breach, or if the contract contains any other stipulation by way of penalty, the party complaining of the breach is entitled, whether or not actual damage or loss is proved to have been caused thereby, to receive from the party who has broken the contract reasonable compensation not exceeding the amount so named or, as the case may be, the penalty stipulated for. Explanation.—A stipulation for increased interest from the date of default may be a stipulation by way of penalty. Exception.—When any person enters into any bail-bond, recognizance or other instrument of the same nature, or, under the provisions of any law, or under the orders of the Central Government or of any State Government, gives any bond for the performance of any public duty or act in which the public are interested, he shall be liable, upon breach of the condition of any such instrument, to pay the whole sum mentioned therein. Explanation.—A person who enters into a contract with Government does not necessarily thereby undertake any public duty, or promise to do an act in which the public are interested.",
+              "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+              "distance": null,
+              "retrieval_source": "mapped"
+            },
+            {
+              "id": "ACA-1996-s12",
+              "act": "Arbitration and Conciliation Act, 1996",
+              "section": "Section 12",
+              "title": "Grounds for challenge",
+              "text": "12. Grounds for challenge.—(1) When a person is approached in connection with his possible appointment as an arbitrator, he shall disclose in writing any circumstances,— (a) such as the existence either direct or indirect, of any past or present relationship with or interest in any of the parties or in relation to the subject-matter in dispute, whether financial, business, professional or other kind, which is likely to give rise to justifiable doubts as to his independence or impartiality; and (b) which are likely to affect his ability to devote sufficient time to the arbitration and in particular his ability to complete the entire arbitration within a period of twelve months. Explanation 1.—The grounds stated in the Fifth Schedule shall guide in determining whether circumstances exist which give rise to justifiable doubts as to the independence or impartiality of an arbitrator. Explanation 2.—The disclosure shall be made by such person in the form specified in the Sixth Schedule. (2) An arbitrator, from the time of his appointment and throughout the arbitral proceedings, shall, without delay, disclose to the parties in writing any circumstances referred to in sub-section (1) unless they have already been informed of them by him. (3) An arbitrator may be challenged only if— (a) circumstances exist that give rise to justifiable doubts as to his independence or impartiality, or (b) he does not possess the qualifications agreed to by the parties. (4) A party may challenge an arbitrator appointed by him, or in whose appointment he has participated, only for reasons of which he becomes aware after the appointment has been made. (5) Notwithstanding any prior agreement to the contrary, any person whose relationship, with the parties or counsel or the subject-matter of the dispute, falls under any of the categories specified in the Seventh Schedule shall be ineligible to be appointed as an arbitrator: Provided that parties may, subsequent to disputes having arisen between them, waive the applicability of this sub-section by an express agreement in writing.",
+              "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
+              "distance": 0.3327294588088989,
+              "retrieval_source": "semantic"
+            },
+            {
+              "id": "ICA-1872-s39",
+              "act": "Indian Contract Act, 1872",
+              "section": "Section 39",
+              "title": "Effect of refusal of party to perform promise wholly",
+              "text": "39. Effect of refusal of party to perform promise wholly.—When a party to a contract has refused to perform, or disabled himself from performing, his promise in its entirety, the promisee may put an end to the contract, unless he has signified, by words or conduct, his acquiescence in its continuance.",
+              "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+              "distance": 0.35525232553482056,
+              "retrieval_source": "semantic"
+            },
+            {
+              "id": "ICA-1872-s28",
+              "act": "Indian Contract Act, 1872",
+              "section": "Section 28",
+              "title": "",
+              "text": "28.Agreements in restraint of legal proceedings, void.—Every agreement,— (a) by which any party thereto is restricted absolutely from enforcing his rights under or in respect of any contract, by the usual legal proceedings in the ordinary tribunals, or which limits the time within which he may thus enforce his rights; or (b) which extinguishes the rights of any party thereto, or discharges any party thereto, from any liability, under or in respect of any contract on the expiry of a specified period so as to restrict any party from enforcing his rights, is void to the extent. Exception 1.—Saving of contract to refer to arbitration dispute that may arise.—This section shall not render illegal a contract, by which two or more persons agree that any dispute which may arise between them in respect of any subject or class of subjects shall be referred to arbitration, and that only the amount awarded in such arbitration shall be recoverable in respect of the dispute so referred. Exception 2.—Saving of contract to refer questions that have already arisen.—Nor shall this section render illegal any contract in writing, by which two or more persons agree to refer to arbitration any question between them which has already arisen, or affect any provision of any law in force for the time being as to references to arbitration4. Exception 3.—Saving of a guarantee agreement of a bank or a financial institution.—This section shall not render illegal a contract in writing by which any bank or financial institution stipulate a term in a guarantee or any agreement making a provision for guarantee for extinguishment of the rights or discharge of any party thereto from any liability under or in respect of such guarantee or agreement on the expiry of a specified period which is not less than one year from the date of occurring or non-occurring of a specified event for extinguishment or discharge of such party from the said liability. Explanation.—(i) In Exception 3, the expression \"bank\" means— (a) a \"banking company\" as defined in clause (c) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (b) \"a corresponding new bank\" as defined in clause (da) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (c) \"State Bank of India\" constituted under section 3 of the State Bank of India Act, 1955 (23 of 1955); (d) \"a subsidiary bank\" as defined in clause (k) of section 2 of the State Bank of India (Subsidiary Banks) Act, 1959(38 of 1959); (e) \"a Regional Rural Bank\" established under section 3 of the Regional Rural Banks Act, 1976(21 of 1976); (f) \"a Co-operative Bank\" as defined in clause (cci) of section 5 of the Banking Regulation Act, 1949(10 of 1949); (g) \"a multi-State co-operative bank\" as defined in clause (cciiia) of section 5 of the Banking Regulation Act, 1949(10 of 1949); and (ii) In Exception 3, the expression \"a financial institution\" means any public financial institution within the meaning of section 4A of the Companies Act, 1956(1 of 1956).",
+              "source_url": "https://www.indiacode.nic.in/bitstream/123456789/2187/2/A187209.pdf",
+              "distance": 0.3605402112007141,
+              "retrieval_source": "semantic"
+            }
+          ],
+          "statutory_citations": [],
+          "legal_basis_message": "Legal basis unavailable right now",
+          "legal_basis_message_hi": "कानूनी आधार अभी उपलब्ध नहीं है (Legal basis unavailable right now)",
+          "legal_basis_message_ta": "சட்ட அடிப்படை இப்போது கிடைக்கவில்லை (Legal basis unavailable right now)",
+          "typical_phrasing_header": "How this is typically written",
+          "typical_phrasing_disclaimer": "This explains what the clause means. It is not legal advice. Consult a lawyer before acting on this.",
+          "typical_phrasing_disclaimer_hi": "यह क्लॉज के अर्थ की व्याख्या करता है। यह कानूनी सलाह नहीं है। इस पर कार्रवाई करने से पहले वकील से परामर्श लें।",
+          "typical_phrasing_disclaimer_ta": "இது இந்தப் பிரிவின் பொருளை விளக்குகிறது. இது சட்ட ஆலோசனை அல்ல. இதன் அடிப்படையில் செயல்படுவதற்கு முன் ஒரு வழக்கறிஞரைக் கலந்தாலோசிக்கவும்.",
+          "standard_alternatives": [
+            "Either party may terminate the employment by providing 30 days prior written notice or basic salary in lieu of notice.",
+            "Company may place Employee on paid garden leave during the contractual 30-day notice period while maintaining full salary and contractual benefits.",
+            "Both Employer and Employee agree to a reciprocal 60-day notice period, with option for mutual waiver in writing upon agreement.",
+            "During any garden leave period not exceeding 30 days, Employee shall continue to receive full remuneration and employment perks."
+          ]
         }
       ]
     },
     "demo_employment_ta.pdf": {
-      "generation_date": "2026-10-18 19:25:09 UTC",
+      "generation_date": "2026-10-20 07:59:24 UTC",
       "filename": "demo_employment_ta.pdf",
       "document_type": "employment_contract",
       "document_language": "ta",
@@ -1598,7 +1598,7 @@
       ]
     },
     "demo_loan_en.pdf": {
-      "generation_date": "2026-10-18 19:25:09 UTC",
+      "generation_date": "2026-10-20 07:59:24 UTC",
       "filename": "demo_loan_en.pdf",
       "document_type": "loan_agreement",
       "document_language": "en",

@@ -22,15 +22,28 @@ def rank_flagged_clauses(
         score = severity_base.get(clause.severity, 20.0)
         c_type = clause.clause_type
 
+        # Keyword checks must use the English text actually classified (english_translation for Indic docs, original_text for English)
+        english_text = (
+            clause.english_translation
+            if (clause.detected_language and clause.detected_language != "en" and clause.english_translation)
+            else (clause.english_translation or clause.original_text or "")
+        )
+        text_to_check = f"{clause.title or ''} {english_text}".lower()
+
         if intake.has_dependents or intake.dependents_count > 0:
             # Substantial boost for direct financial liabilities threatening household stability
-            is_sec_deposit_or_maintenance = any(
-                term in (clause.title or "").lower() or term in (clause.original_text or "").lower()
+            # Scoped strictly to penalty/deposit clauses whose English text matches deposit/maintenance/forfeiture keywords
+            matches_deposit_keywords = any(
+                term in text_to_check
                 for term in ["security deposit", "maintenance", "forfeiture"]
             )
+            is_sec_deposit_or_maintenance = (
+                c_type in ["penalty", "security_deposit"] and matches_deposit_keywords
+            )
+
             if c_type in ["indemnity"]:
                 score += 45.0
-            elif c_type in ["penalty"] or is_sec_deposit_or_maintenance:
+            elif is_sec_deposit_or_maintenance:
                 score += 45.0
             elif c_type in ["guarantor_liability", "acceleration"]:
                 score += 45.0

@@ -61,7 +61,7 @@ A multilingual AI-assisted legal document analysis system that inspects contract
 - **Dependents Boost (`has_dependents=True`)**:
   - High financial liability clauses threatening family stability receive priority boosts:
     - `indemnity`: **+45.0**
-    - `penalty` / Security Deposit Forfeiture: **+45.0**
+    - `penalty` / Security Deposit Forfeiture (scoped strictly to penalty/deposit clause types matching deposit keywords in classified English text): **+45.0**
     - `guarantor_liability` & `acceleration`: **+45.0**
     - `set_off_lien`, `penal_interest`, `foreclosure_charges`: **+35.0**
     - `service_bond`: **+30.0**
