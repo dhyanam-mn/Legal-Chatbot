@@ -237,7 +237,7 @@ Be concise (2-3 paragraphs max).
 
     reply = ""
     if genai_client:
-        models_to_try = ["gemini-3.6-flash"]
+        models_to_try = GEMINI_MODELS if GEMINI_MODELS else ["gemini-3.8-flash", "gemini-3.7-flash", "gemini-3.6-flash"]
         for mod in models_to_try:
             try:
                 if hasattr(genai_client, 'models'):

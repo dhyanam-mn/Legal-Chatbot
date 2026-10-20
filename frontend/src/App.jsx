@@ -144,7 +144,7 @@ export default function App() {
 
         {/* Step 1: Intake Form */}
         {step === 1 && (
-          <IntakeForm onSubmitIntake={handleIntakeSubmit} />
+          <IntakeForm onSubmitIntake={handleIntakeSubmit} language={language} />
         )}
 
         {/* Step 2: File Upload */}
@@ -153,6 +153,7 @@ export default function App() {
             intakeContext={intakeContext}
             onEditIntake={() => setStep(1)}
             onUploadSuccess={handleUploadSuccess}
+            language={language}
           />
         )}
 
