@@ -38,7 +38,8 @@ export default function ChatThread({ documentText, intakeContext, language = 'en
           message: userMsg,
           document_text: documentText || '',
           intake_context: intakeContext,
-          chat_history: messages.map(m => ({ role: m.role, content: m.content }))
+          chat_history: messages.map(m => ({ role: m.role, content: m.content })),
+          language: language || 'en'
         })
       });
 

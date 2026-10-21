@@ -99,6 +99,7 @@ class ChatRequest(BaseModel):
     document_text: str
     intake_context: Optional[ClientIntakeContext] = None
     chat_history: Optional[List[ChatMessage]] = []
+    language: Optional[str] = "en"
 
 class ChatResponse(BaseModel):
     reply: str

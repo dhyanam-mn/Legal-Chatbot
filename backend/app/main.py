@@ -296,6 +296,15 @@ async def chat_document(request: ChatRequest):
     user_msg = request.message
     doc_text = request.document_text[:4000]
     intake = request.intake_context or ClientIntakeContext()
+    target_lang = getattr(request, "language", "en") or "en"
+
+    lang_instruction = ""
+    if target_lang == "hi":
+        lang_instruction = "Respond directly in clear, simple Hindi (हिंदी)."
+    elif target_lang == "ta":
+        lang_instruction = "Respond directly in clear, simple Tamil (தமிழ்)."
+    else:
+        lang_instruction = "Respond in clear, simple plain English."
 
     prompt = f"""You are an assistant explaining a legal document to a user.
 USER PROFILE:
@@ -310,24 +319,30 @@ DOCUMENT EXCERPT:
 USER QUESTION:
 "{user_msg}"
 
-Provide a helpful, plain-English answer explaining the document in simple terms relevant to their profile.
+INSTRUCTION:
+Provide a helpful, plain-language answer explaining the document in simple terms relevant to their profile.
 Be concise (2-3 paragraphs max).
+{lang_instruction}
 """
 
     reply = ""
     if genai_client:
-        models_to_try = GEMINI_MODELS if GEMINI_MODELS else ["gemini-3.8-flash", "gemini-3.7-flash", "gemini-3.6-flash"]
-        for mod in models_to_try:
+        # Prioritize fast, responsive Flash models for interactive chat UX
+        fast_models = ["gemini-3.5-flash", "gemini-3.6-flash", "gemini-3.5-flash-lite"]
+        all_models = fast_models + [m for m in GEMINI_MODELS if m not in fast_models]
+        for mod in all_models:
             try:
                 if hasattr(genai_client, 'models'):
                     res = genai_client.models.generate_content(model=mod, contents=prompt)
                     reply = res.text.strip()
-                    break
+                    if reply:
+                        break
                 else:
                     model = genai_client.GenerativeModel(mod)
                     res = model.generate_content(prompt)
                     reply = res.text.strip()
-                    break
+                    if reply:
+                        break
             except Exception as e:
                 logger.warning(f"Gemini chat with '{mod}' failed: {e}")
 
@@ -339,8 +354,9 @@ Be concise (2-3 paragraphs max).
             f"Based on your profile ({intake.employment_type}), ensure you carefully inspect any clauses restricting post-termination activities or imposing financial penalties."
         )
 
-    reply_hi = translate_text_to_hindi(reply)
-    reply_ta = translate_text_to_tamil(reply)
+    # Fast response without CPU translation blocking
+    reply_hi = reply if target_lang == "hi" else None
+    reply_ta = reply if target_lang == "ta" else None
 
     return ChatResponse(
         reply=reply,
